@@ -15,6 +15,7 @@ group :development, :test do
 	gem "rspec-rails"
 	gem 'cucumber-rails'
 	gem 'cucumber'
+	gem 'cucumber_scaffold'
 	gem 'capybara'
 	gem "autotest"
 	gem 'machinist', '>= 2.0.0.beta1'
