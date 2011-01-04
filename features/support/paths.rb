@@ -10,6 +10,21 @@ module NavigationHelpers
 
     when /the home\s?page/
       '/'
+      when /edit page for that location/
+        raise 'no location' unless @location
+        edit_location_path(@location)
+      when /page for that location/
+        raise 'no location' unless @location
+        location_path(@location)
+      when /edit page for the (\d+)(?:st|nd|rd|th) location/
+        raise 'no locations' unless @locations
+        nth_location = @locations[$1.to_i - 1]
+        edit_location_path(nth_location)
+      when /page for the (\d+)(?:st|nd|rd|th) location/
+        raise 'no locations' unless @locations
+        nth_location = @locations[$1.to_i - 1]
+        location_path(nth_location)
+
       when /edit page for that customer/
         raise 'no customer' unless @customer
         edit_customer_path(@customer)
@@ -44,5 +59,4 @@ module NavigationHelpers
     end
   end
 end
-
 World(NavigationHelpers)

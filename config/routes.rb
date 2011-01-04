@@ -1,4 +1,6 @@
 Nancy::Application.routes.draw do
+  resources :locations
+
   resources :customers
 
   # The priority is based upon order of creation:
