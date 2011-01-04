@@ -178,6 +178,7 @@ PLATFORMS
 
 DEPENDENCIES
   autotest
+  builder (~> 2.1.2)
   capybara
   compass
   cucumber

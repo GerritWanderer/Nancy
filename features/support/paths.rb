@@ -10,6 +10,21 @@ module NavigationHelpers
 
     when /the home\s?page/
       '/'
+      when /edit page for that customer/
+        raise 'no customer' unless @customer
+        edit_customer_path(@customer)
+      when /page for that customer/
+        raise 'no customer' unless @customer
+        customer_path(@customer)
+      when /edit page for the (\d+)(?:st|nd|rd|th) customer/
+        raise 'no customers' unless @customers
+        nth_customer = @customers[$1.to_i - 1]
+        edit_customer_path(nth_customer)
+      when /page for the (\d+)(?:st|nd|rd|th) customer/
+        raise 'no customers' unless @customers
+        nth_customer = @customers[$1.to_i - 1]
+        customer_path(nth_customer)
+
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
