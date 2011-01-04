@@ -1,45 +1,35 @@
 class CustomersController < ApplicationController
+  before_filter :init_customers
+  respond_to :html, :js
 
   def index
-    @customers = Customer.all
-    @customer = Customer.new
-    @location = @customer.locations.build
-    @location.contacts.build
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @customers }
-    end
+    #see before_filter function init_customers
+    respond_with(@customers)
   end
-
 
   def show
-    @customer = Customer.find(params[:id])
-    
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @customer }
+    #see before_filter function init_customers
+    respond_with(@customer) do |format|
+      format.html { render "index" }
     end
   end
-  
 
   def new
-    @customer = Customer.new
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @customer }
+    #see before_filter function init_customers
+    respond_with(@customer) do |format|
+      format.html { render "index" }
     end
   end
-  
 
   def edit
-    @customer = Customer.find(params[:id])
+    #see before_filter function init_customers
+    respond_with(@customer) do |format|
+      format.html { render "index" }
+    end
   end
-
 
   def create
     @customer = Customer.new(params[:customer])
-
     respond_to do |format|
       if @customer.save
         format.html { redirect_to(@customer, :notice => 'Customer was successfully created.') }
@@ -50,11 +40,8 @@ class CustomersController < ApplicationController
       end
     end
   end
-
-
   def update
     @customer = Customer.find(params[:id])
-
     respond_to do |format|
       if @customer.update_attributes(params[:customer])
         format.html { redirect_to(@customer, :notice => 'Customer was successfully updated.') }
@@ -65,8 +52,6 @@ class CustomersController < ApplicationController
       end
     end
   end
-
-
   def destroy
     @customer = Customer.find(params[:id])
     @customer.destroy
@@ -74,6 +59,19 @@ class CustomersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(customers_url) }
       format.xml  { head :ok }
+    end
+  end
+  
+  protected
+  def init_customers
+    @customers = Customer.all
+    params[:id] ? @customer = Customer.find(params[:id]) : @customer = Customer.new
+    if params[:action] == 'edit'
+      @form_customer = @customer
+    else
+      @form_customer = Customer.new
+      @location = @form_customer.locations.build
+      @location.contacts.build
     end
   end
 end

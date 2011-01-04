@@ -1,0 +1,14 @@
+!!!
+%html{ :xmlns => "http://www.w3.org/1999/xhtml", :lang => "en", "xml:lang" => "en"}
+  %head
+    %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}
+    %title Nancy
+    = javascript_include_tag :defaults
+    = csrf_meta_tag
+    = stylesheet_link_tag :all
+  %body
+    - flash.each do |key, value|
+      %div{:class => key}= value
+    = render 'form'
+    = yield
+    = render 'list'

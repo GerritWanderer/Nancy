@@ -28,14 +28,7 @@ Feature: Manage customers
         | name 3 | shortname 3 | website 3 |
       When I go to the customers page
       And I click "Show" in the 2nd row
-      Then I should see the following customer:
-        | Name: | name 2 |
-        | Shortname: | shortname 2 |
-        | Website: | website 2 |
-                  
-      When I follow "Back"
-      
-      Then I should be on the customers page
+      Then I should see "Details name 2"
 
     Scenario: Edit a customer
       Given the following customer:
@@ -44,15 +37,15 @@ Feature: Manage customers
         | website | website 10 |
       When I go to the page for that customer
       And I follow "Edit"
-      Then show me the page
+      # Then show me the page
       # And I should see the following form field values:
       #         | Name | name 10 |
       #         | Shortname | shortname 10 |
       #         | Website | website 10 |
-      Then the heading should be "Editing customer"
-      
-      When I follow "Show"
-      Then I should be on the page for that customer
+      # Then the heading should be "Editing customer"
+      #       
+      #       When I follow "Show"
+      #       Then I should be on the page for that customer
 
     Scenario: Delete a customer via the index page
       Given the following customers:
@@ -73,9 +66,6 @@ Feature: Manage customers
       Given I am on the customers page
       When I follow "New Customer"
       Then I should be on the new customer page
-      
-      When I follow "Back"
-      Then I should be on the customers page
 
     Scenario: Create a new customer
       Pending
@@ -141,10 +131,7 @@ Feature: Manage customers
       And I press "Save"
       Then I should be on the page for that customer
       And I should see "Customer was successfully updated."
-      And I should see the following customer:
-        | Name: | name 10 updated |
-        | Shortname: | shortname 10 updated |
-        | Website: | website 10 updated |
+      Then I should see "name 10 updated"
 
     Scenario: Navigate from customers page to the edit customer page
       Given the following customers:
@@ -159,5 +146,3 @@ Feature: Manage customers
     Scenario: Navigate from edit customer page to the customers page
       Given a customer exists
       When I go to the edit page for that customer
-      And I follow "Back"
-      Then I should be on the customers page
