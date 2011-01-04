@@ -36,5 +36,5 @@ end
 
 def valid_customer_attributes
   # You may want to a factory for this
-  {}
+  { "name" => "customer", "shortname" => "shortname"}
 end
