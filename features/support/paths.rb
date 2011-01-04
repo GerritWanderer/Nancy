@@ -10,6 +10,21 @@ module NavigationHelpers
 
     when /the home\s?page/
       '/'
+      when /edit page for that contact/
+        raise 'no contact' unless @contact
+        edit_contact_path(@contact)
+      when /page for that contact/
+        raise 'no contact' unless @contact
+        contact_path(@contact)
+      when /edit page for the (\d+)(?:st|nd|rd|th) contact/
+        raise 'no contacts' unless @contacts
+        nth_contact = @contacts[$1.to_i - 1]
+        edit_contact_path(nth_contact)
+      when /page for the (\d+)(?:st|nd|rd|th) contact/
+        raise 'no contacts' unless @contacts
+        nth_contact = @contacts[$1.to_i - 1]
+        contact_path(nth_contact)
+
       when /edit page for that location/
         raise 'no location' unless @location
         edit_location_path(@location)
