@@ -12,6 +12,8 @@ gem 'haml-rails'
 gem 'devise', :git => 'git://github.com/plataformatec/devise', :branch => 'master'
 gem 'oa-oauth', :require => 'omniauth/oauth'
 
+gem "will_paginate", "~> 3.0.pre2"
+
 group :development, :test do
 	gem "rspec-rails"
 	gem 'cucumber-rails'
