@@ -1,0 +1,78 @@
+.container {
+	margin-left: auto;
+	margin-right: auto;
+	width: 960px;
+}
+.grid (@grids: 1, @marginLeft: 0, @marginRight: 0, @paddingLeft: 0, @paddingRight: 0) {
+  display: inline;
+  float: left;
+  width: @grids * 10px;
+  margin-left: @marginLeft * 10px;
+  margin-right: @marginRight * 10px;
+  padding-left: @paddingLeft * 10px;
+  padding-right: @paddingRight * 10px;
+}
+.clear {
+clear: both;
+display: block;
+overflow: hidden;
+visibility: hidden;
+width: 0;
+height: 0;
+}
+
+
+* html .clearfix, *:first-child+html .clearfix { zoom: 1; }
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, dialog, figure, footer, header, hgroup, nav, section {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+article, aside, dialog, figure, footer, header, hgroup, nav, section { display:block; }
+body { line-height: 1.5; }
+/* Tables still need 'cellspacing="0"' in the markup. */
+table { border-collapse: separate; border-spacing: 0; }
+caption, th, td { text-align: left; font-weight: normal; }
+table, td, th { vertical-align: middle; }
+/* Remove possible quote marks (") from <q>, <blockquote>. */
+blockquote:before, blockquote:after, q:before, q:after { content: ""; }
+blockquote, q { quotes: "" ""; }
+/* Remove annoying border on linked images and text-decorations. */
+a img { border: none; }
+a, a:visited { text-decoration: none; }
+a:hover, a:active { text-decoration: none; }
+ul { list-style-type: none; }
+
+.rounded (@radius: 10px) {
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+  border-radius: @radius;
+}
+.roundedTop (@radius: 10px) {
+  -moz-border-radius-topleft: @radius;
+  -moz-border-radius-topright: @radius;
+  -webkit-border-top-left-radius: @radius;
+  -webkit-border-top-right-radius: @radius;
+  border-top-left-radius: @radius;
+  border-top-right-radius: @radius;
+}
+.roundedBottom (@radius: 10px) {
+  -moz-border-radius-bottomleft: @radius;
+  -moz-border-radius-bottomright: @radius;
+  -webkit-border-bottom-left-radius: @radius;
+  -webkit-border-bottom-right-radius: @radius;
+  border-bottom-left-radius: @radius;
+  border-bottom-right-radius: @radius;
+}
+.gradient (@from: #ffffff, @to: #000000) {
+	background: @from;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(@from), to(@to));
+	background: -moz-linear-gradient(@from, @to);
+	background: linear-gradient(@from, @to);
+	-pie-background: linear-gradient(@from, @to);
+}
