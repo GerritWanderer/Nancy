@@ -1,4 +1,4 @@
-Feature: Manage customers
+Feature: Manage locations
   In order to [goal]
   [stakeholder]
   wants [behaviour]

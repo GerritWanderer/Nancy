@@ -30,11 +30,8 @@ class ContactsController < ApplicationController
 
   def destroy
     @contact = Contact.find(params[:id])
-    @contact.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(contacts_url) }
-      format.xml  { head :ok }
+    if @contact.destroy
+      redirect_to customer_location_path(@customer, @location)
     end
   end
   
