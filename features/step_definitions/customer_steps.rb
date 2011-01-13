@@ -5,10 +5,31 @@ Given /^a customer exists$/ do
 end
 
 Then /^I should see the following customer:$/ do |expected_table|
+  show_fields_css_query = 'div.customer ul.titleActive li'
   
+  actual_table = tableish(show_fields_css_query, lambda{|label| [label, label.next]})   
+  actual = {}
+  actual_table.each do |form_entry|
+    attr_name = form_entry[0]
+    attr_value = form_entry[1]
+    actual[attr_name] = attr_value
+  end
+  assert_equal actual, expected_table.rows_hash
+end
+Then /^I should see the following customer location:$/ do |expected_table|
+  show_fields_css_query = 'div.customer div.location ul.record li'
   
-  show_fields_css_query = 'body p b'
-  
+  actual_table = tableish(show_fields_css_query, lambda{|label| [label, label.next]})   
+  actual = {}
+  actual_table.each do |form_entry|
+    attr_name = form_entry[0]
+    attr_value = form_entry[1]
+    actual[attr_name] = attr_value
+  end
+  assert_equal actual, expected_table.rows_hash
+end
+Then /^I should see the following customer contact:$/ do |expected_table|
+  show_fields_css_query = 'div.customer div.contacts ul.record li'
   
   actual_table = tableish(show_fields_css_query, lambda{|label| [label, label.next]})   
   actual = {}
@@ -20,8 +41,14 @@ Then /^I should see the following customer:$/ do |expected_table|
   assert_equal actual, expected_table.rows_hash
 end
 
+When /^I click "([^"]*)" in the (\d+)(?:st|nd|rd|th) customer row$/ do |link, pos|
+  within("div.customer:nth-child(#{pos.to_i+2}) ul.titleInactive li.actions") do
+    click_link link
+  end
+end
+
 Then /^I should see the following customers:$/ do |expected_table|
-  expected_table.diff!(tableish('table tr', 'td,th'))
+  expected_table.diff!(tableish('ul.titleInactive', 'li'))
 end
 
 Given /^the following customers:$/ do |table|
@@ -35,6 +62,5 @@ Given /^the following customer:$/ do |table|
 end
 
 def valid_customer_attributes
-  # You may want to a factory for this
   { "name" => "customer", "shortname" => "shortname"}
 end

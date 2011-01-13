@@ -1,76 +1,40 @@
 class LocationsController < ApplicationController
-  # GET /locations
-  # GET /locations.xml
+  before_filter :init_locations
+  
   def index
     @locations = Location.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @locations }
     end
   end
 
-  # GET /locations/1
-  # GET /locations/1.xml
   def show
-    @location = Location.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @location }
-    end
+    render :layout => 'customers', :template => 'customers/show'
   end
 
-  # GET /locations/new
-  # GET /locations/new.xml
   def new
-    @location = Location.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @location }
-    end
+    render :layout => 'customers', :template => 'customers/show'
   end
 
-  # GET /locations/1/edit
   def edit
-    @location = Location.find(params[:id])
+    render :layout => 'customers', :template => 'customers/show'
   end
 
-  # POST /locations
-  # POST /locations.xml
   def create
     @location = Location.new(params[:location])
-
-    respond_to do |format|
-      if @location.save
-        format.html { redirect_to(@location, :notice => 'Location was successfully created.') }
-        format.xml  { render :xml => @location, :status => :created, :location => @location }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @location.errors, :status => :unprocessable_entity }
-      end
+    if @location.save
+      render :layout => 'customers', :template => 'customers/show'
     end
   end
 
-  # PUT /locations/1
-  # PUT /locations/1.xml
   def update
     @location = Location.find(params[:id])
-
-    respond_to do |format|
-      if @location.update_attributes(params[:location])
-        format.html { redirect_to(@location, :notice => 'Location was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @location.errors, :status => :unprocessable_entity }
-      end
+    if @location.update_attributes(params[:location])
+      render :layout => 'customers', :template => 'customers/show'
     end
   end
 
-  # DELETE /locations/1
-  # DELETE /locations/1.xml
   def destroy
     @location = Location.find(params[:id])
     @location.destroy
@@ -78,6 +42,24 @@ class LocationsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(locations_url) }
       format.xml  { head :ok }
+    end
+  end
+  
+  protected
+  def init_locations
+    @customers = Customer.all
+    @customer = Customer.find(params[:customer_id])
+    @locations = @customer.locations
+    params[:id] ? @location = Location.find(params[:id]) : @location = @customer.locations.first
+    @contacts = @location.contacts
+    
+    @form_customer = Customer.new
+    params[:action] == 'edit' ? @location_build = @location : @location_build = @form_customer.locations.build
+    @location_build_temp = @form_customer.locations.build
+    @contact_build = @location_build_temp.contacts.build
+    if params[:action] == 'edit' || params[:action] == 'new'
+      @displayLocationRecord = 'none'
+      @displayLocationForm = 'block'
     end
   end
 end

@@ -1,26 +1,32 @@
-%h1 Listing customers
-
-%table
-  %tr
-    %th Name
-    %th Shortname
-    %th Website
-    %th
-    %th
-    %th
-
-  - @customers.each do |customer|
-    %tr
-      %td= customer.name
-      %td= customer.shortname
-      %td= customer.website
-      %td= link_to 'Show', customer
-      %td= link_to 'Edit', edit_customer_path(customer)
-      %td= link_to 'Destroy', customer, :confirm => 'Are you sure?', :method => :delete
-    - if customer.id == @customer.id
-      %tr
-        %td= "Details #{@customer.name}"
-
-%br
-
-= link_to 'New Customer', new_customer_path
+.toolbar
+  %ul
+    %li Name
+    %li Shortname
+    %li Locations
+-@customers.each do |customer|
+  .customer
+    - if customer.id == @customer.id && "#{params[:controller]}/#{params[:action]}" != 'customers/edit' 
+      %ul.titleActive
+        %li= customer.name
+        %li= customer.shortname
+        %li= customer.locations.count
+        %li.actions
+          = link_to 'C', customers_path
+          = link_to 'E', edit_customer_path(customer)
+          = link_to 'D', customer, :confirm => 'Are you sure?', :method => :delete
+        .clear
+      .nestedRessources
+        = render :partial => 'customers/details/locations'
+        = render :partial => 'customers/details/contacts'
+        .clear
+    - else
+      %ul.titleInactive
+        %li= customer.name
+        %li= customer.shortname
+        %li= customer.locations.count
+        %li.actions
+          = link_to 'O', customer
+          = link_to 'E', edit_customer_path(customer)
+          = link_to 'D', customer, :confirm => 'Are you sure?', :method => :delete
+        .clear
+      .clear

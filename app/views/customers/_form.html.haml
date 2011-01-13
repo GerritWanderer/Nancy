@@ -1,5 +1,5 @@
 .wizard
-  New Customer [open] New Customer [close]
+  %a{:class => 'wizardFormSwitch'}New Customer [open/close]
   -if @customer.errors.any?
     #error_explanation
       %h2= "#{pluralize(@customer.errors.count, "error")} prohibited this contact from being saved:"
@@ -7,16 +7,17 @@
         - @customer.errors.full_messages.each do |msg|
           %li= msg
   %hr/
-  = form_for @form_customer do |f|
+  = form_for(@form_customer, :html => {:style => "display: #{@displayCustomerForm};"}) do |f|
     %fieldset
-      %legend Customer Name
+    %legend Customer Name
+    %dl
       %dt= f.label :shortname
       %dd= f.text_field :shortname
       %dt= f.label :name
       %dd= f.text_field :name
       %dt= f.label :website
       %dd= f.text_field :website
-    -f.fields_for :locations do |l|
+    -f.fields_for :locations, @form_customer.locations.first do |l|
       %fieldset
         %legend Main Location
         %dl
@@ -25,19 +26,21 @@
           %dt= l.label :street
           %dd= l.text_field :street
           %dt= l.label :zip
-          %dd= l.text_field :zip
-          %dd= l.text_field :city
+          %dd
+            = l.text_field :zip, :class => 'zip'
+            = l.text_field :city, :class => 'city'
           %dt= l.label :fon
           %dd= l.text_field :fon
           %dt= l.label :fax
           %dd= l.text_field :fax
-      -l.fields_for :contacts do |c|
+      -l.fields_for :contacts, @form_customer.locations.first.contacts.first do |c|
         %fieldset
           %legend Main Contact
           %dl
             %dt= c.label :salutation
-            %dd= c.text_field :salutation
-            %dd= c.text_field :title
+            %dd
+              =c.text_field :salutation
+              =c.text_field :title
             %dt= c.label :firstname
             %dd= c.text_field :firstname
             %dt= c.label :lastname

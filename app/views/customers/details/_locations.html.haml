@@ -1,0 +1,41 @@
+.location
+  .details{:style => "display: #{@displayLocationRecord || 'block'};"}
+    %h2
+      = "Location #{@locations.index(@location) + 1} of #{@locations.count}"
+      -if (@locations.index(@location) + 1) > 1
+        = link_to "Previous", customer_location_path(@customer, @locations.at(@locations.index(@location) -1))
+      -if (@locations.index(@location) + 1) < @locations.count
+        = link_to "Next", customer_location_path(@customer, @locations.at(@locations.index(@location) +1))
+    %span.actions
+      = link_to 'N', new_customer_location_path(@customer)
+      = link_to 'E', edit_customer_location_path(@customer, @location)
+      = link_to 'D', @location, :confirm => 'Are you sure?', :method => :delete
+    %hr.clear/
+    %ul.record
+      %li= @location.name
+      %li= @location.street
+      %li= "#{@location.zip} #{@location.city}"
+      %li= "Fon: #{@location.fon}"
+      %li= "Fax: #{@location.fax}"
+      .clear
+  = form_for([@customer, @location_build], :html => {:style => "display: #{@displayLocationForm || 'none'};"}) do |f|
+    %fieldset
+      %legend Create Location
+      = link_to 'C', customer_path(@customer)
+      %a{:class => 'recordFormSwitch'}C
+      %hr.clear/
+      %dl
+        %dt= f.label :name
+        %dd= f.text_field :name
+        %dt= f.label :street
+        %dd= f.text_field :street
+        %dt= f.label :zip
+        %dd
+          = f.text_field :zip, :class => 'zip'
+          = f.text_field :city, :class => 'city'
+        %dt= f.label :fon
+        %dd= f.text_field :fon
+        %dt= f.label :fax
+        %dd= f.text_field :fax
+    = f.hidden_field :customer_id, :value => @customer.id
+    = f.submit 'Save Location'

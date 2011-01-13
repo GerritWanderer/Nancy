@@ -23,6 +23,7 @@ class CustomersController < ApplicationController
 
   def edit
     #see before_filter function init_customers
+    @locations = Location.paginate :conditions => ['customer_id = ?', @customer.id], :page => params[:page], :order => 'created_at ASC'
     respond_with(@customer) do |format|
       format.html { render "index" }
     end
@@ -65,13 +66,23 @@ class CustomersController < ApplicationController
   protected
   def init_customers
     @customers = Customer.all
-    params[:id] ? @customer = Customer.find(params[:id]) : @customer = Customer.new
+    if params[:id]
+      @customer = Customer.find(params[:id])
+      @locations = @customer.locations
+      @location = @locations.first
+      @contacts = @location.contacts
+    else
+      @customer = Customer.new
+    end
+    
     if params[:action] == 'edit'
       @form_customer = @customer
     else
       @form_customer = Customer.new
-      @location = @form_customer.locations.build
-      @location.contacts.build
+      @location_build = @form_customer.locations.build
+      @contact_build = @location_build.contacts.build
     end
+    
+    params[:action] == 'edit' ? @displayCustomerForm = 'block' : @displayCustomerForm = 'none'
   end
 end

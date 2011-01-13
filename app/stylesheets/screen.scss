@@ -14,3 +14,7 @@
 @include blueprint;
 
 @include blueprint-scaffolding;
+
+form {
+  display: none;
+}

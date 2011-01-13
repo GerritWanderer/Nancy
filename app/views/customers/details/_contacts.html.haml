@@ -1,0 +1,52 @@
+.contacts
+  .details{:style => "display: #{@displayContactsRecord || 'block'};"}
+    %h2 Contacts
+    %span.actions
+      = link_to 'N', new_customer_location_contact_path(@customer, @location)
+    %hr.clear/
+    %ul.toolbar
+      %li Name
+      %li Department
+      %li Contact
+      .clear
+    - @contacts.each do |contact|
+      %ul.record
+        %li.name= "#{contact.salutation} #{contact.title} #{contact.firstname} #{contact.lastname}"
+        %li= contact.department
+        %li.fon
+          -if !contact.fon.empty?
+            %span= "Fon #{contact.fon}"
+          -if !contact.fax.empty?
+            %span= "Fax #{contact.fax}"
+          -if !contact.mobile.empty?
+            %span= "Mobile #{contact.mobile}"
+        %li.actions
+          = mail_to contact.email, 'M'
+          = link_to 'E', edit_customer_location_contact_path(@customer, @location, contact)
+          = link_to 'D', contact, :confirm => 'Are you sure?', :method => :delete  
+  = form_for([@customer, @location, @contact_build], :html => {:style => "display: #{@displayContactForm || 'none'};"}) do |f|
+    %fieldset
+      %legend Create Contact
+      = link_to 'C', customer_location_path(@customer, @location)
+      %hr.clear/
+      %dl
+        %dt= f.label :salutation
+        %dd
+          =f.text_field :salutation
+          =f.text_field :title
+        %dt= f.label :firstname
+        %dd= f.text_field :firstname
+        %dt= f.label :lastname
+        %dd= f.text_field :lastname
+        %dt= f.label :department
+        %dd= f.text_field :department
+        %dt= f.label :email
+        %dd= f.text_field :email
+        %dt= f.label :fon
+        %dd= f.text_field :fon
+        %dt= f.label :fax
+        %dd= f.text_field :fax
+        %dt= f.label :mobile
+        %dd= f.text_field :mobile
+    = f.hidden_field :location_id, :value => @location.id
+    = f.submit 'Save'

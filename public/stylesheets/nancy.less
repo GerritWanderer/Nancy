@@ -1,11 +1,147 @@
-@redDark: #6A1503;
-@redLight: #BF2400;
-@greyDark: #BFBFBF;
-@greyLight: #EFEFEF;
+@blueLight: #C8D9F4;
+@blueMedium: #94B4E6;
+@blueDark: #112363;
+@grey: #CCCCCC;
 
 @import "_basic";
 body {
-	background-color: @greyDark;
+	background-color: white;
 	font-family: 'Cuprum', verdana, arial;
 	letter-spacing: 0.8px;
+}
+form {
+	display: none;
+}
+div.wizard {
+	.rounded;
+	margin-bottom: 20px;
+	padding: 10px;
+	background-color: @blueMedium;
+	color: @blueDark;
+	dl {
+		background-color: @blueLight;
+		dt {
+			.grid(10);
+			text-align: right;
+		}
+		dd {
+			.grid(20);
+			input { width: 150px; }
+			input.zip { width: 40px; }
+			input.city { width: 90px; }
+		}
+	}
+	form {
+		.rounded;
+		background-color: @blueLight;
+		padding: 10px;
+	}
+}
+div.toolbar {
+	.rounded();
+	background-color: @blueLight;
+	color: blueMedium;
+	height: 30px;
+	padding: 0px 10px;
+	margin-bottom: 5px;
+	li {
+		line-height: 30px;
+		.grid(10);
+	}
+}
+
+
+div.customer {
+	color: blueMedium;
+	margin-bottom: 5px;
+	
+	ul.titleInactive, ul.titleActive, div.contacts, div.locations { padding: 10px; }
+	ul.titleInactive {
+		background-color: @blueLight;
+		.rounded;
+	}
+	ul.titleActive {
+		background-color: @blueMedium;
+		.roundedTop;
+		font-weight: bold;
+	}
+	ul.titleInactive li, ul.titleActive li {
+		line-height: 30px;
+		.grid(20);
+	}
+	hr {
+		width: 100%;
+		visibility: visible;
+	}
+	
+	
+	div.nestedRessources {
+		.roundedBottom;
+		background-color: @blueLight;
+		padding: 20px 0px;
+
+		div.location {
+			.roundedTop;
+			border-top: 5px solid @grey;
+			padding: 10px;
+			
+			.details { ul li { .grid(18); } }
+			form {
+				dl {
+					dt {
+						.grid(10);
+						text-align: right;
+					}
+					dd {
+						.grid(20);
+						input { width: 150px; }
+						input.zip { width: 40px; }
+						input.city { width: 90px; }
+					}
+				}
+			}
+		}
+		div.contacts {
+			.roundedTop;
+			border-top: 5px solid @grey;
+			ul.toolbar {
+				
+			}
+			ul {
+				li { .grid(20); }
+				li.name, li.fon { .grid(30);
+					span { display: block; }
+				}
+				li.actions { .grid(6);	}
+			}
+			form dl {
+				dt {
+					.grid(10);
+					text-align: right;
+				}
+				dd {
+					.grid(20);
+					input { width: 150px; }
+					input.zip { width: 40px; }
+					input.city { width: 90px; }
+				}
+			}
+		}
+		
+		
+		div.details h2, div.details span.actions, form legend {
+			font-weight: bold;
+			font-size: 11px;
+		}
+		div.details h2, form legend { .grid(84) }
+		div.details span.actions, form a {
+			.grid(10);
+			text-align: right;
+		}
+		div.pagination {
+			display: inline;
+			* { display: none; }
+			span.previous_page, a.previous_page, span.next_page, a.next_page { display: inline; }
+		}
+	}
 }
