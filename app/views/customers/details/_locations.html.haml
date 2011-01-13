@@ -9,7 +9,7 @@
     %span.actions
       = link_to 'N', new_customer_location_path(@customer)
       = link_to 'E', edit_customer_location_path(@customer, @location)
-      = link_to 'D', @location, :confirm => 'Are you sure?', :method => :delete
+      = link_to 'D', customer_location_path(@customer, @location), :confirm => 'Are you sure?', :method => :delete
     %hr.clear/
     %ul.record
       %li= @location.name

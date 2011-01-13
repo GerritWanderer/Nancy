@@ -37,11 +37,8 @@ class LocationsController < ApplicationController
 
   def destroy
     @location = Location.find(params[:id])
-    @location.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(locations_url) }
-      format.xml  { head :ok }
+    if @location.destroy
+      redirect_to customer_location_path(@customer, @customer.locations.first)
     end
   end
   

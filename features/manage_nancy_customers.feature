@@ -14,8 +14,8 @@ Feature: Manage customers
       | name 1 | shortname 1 | 0 | O\nE\nD |
       | name 2 | shortname 2 | 0 | O\nE\nD |
       | name 3 | shortname 3 | 0 | O\nE\nD |
-    
-    
+  
+  
   Scenario: View a customer
     Given the following customers:
       | name | shortname | website |
@@ -37,38 +37,6 @@ Feature: Manage customers
     Then I should see "name 2" within "div.customer ul.titleActive li:first-child"
     And I should see "shortname 2" within "div.customer ul.titleActive li:nth-child(2)"
     And I should see "1" within "div.customer ul.titleActive li:nth-child(3)"
-    
-    
-  Scenario: Skip locations
-    Given the following customers:
-      | name | shortname | website |
-      | name 1 | shortname 1 | website 1 |
-    And the following locations:
-      | name | street | zip | city | fon | fax | customer_id | 
-      | location 1 | street 1 | 11 | city 1 | fon 1 | fax 1 | 1 | 
-      | location 2 | street 2 | 12 | city 2 | fon 2 | fax 2 | 1 |
-      | location 3 | street 3 | 13 | city 3 | fon 3 | fax 3 | 1 | 
-    And the following contacts:
-      | salutation | title | firstname | lastname | department | email | fon | mobile | fax | location_id | 
-      | salutation 1 | title 1 | firstname 1 | lastname 1 | department 1 | email 1 | fon 1 | mobile 1 | fax 1 | 1 | 
-      | salutation 2 | title 2 | firstname 2 | lastname 2 | department 2 | email 2 | fon 2 | mobile 2 | fax 2 | 2 |
-      | salutation 3 | title 3 | firstname 3 | lastname 3 | department 3 | email 3 | fon 3 | mobile 3 | fax 3 | 3 | 
-    When I go to the customers page
-    And I click "O" in the 1st customer row
-    Then I should see "location 1" within "div.customer div.location ul.record li:first-child"
-    And I should see "firstname 1 lastname 1" within "div.customer div.contacts ul.record li:first-child"
-    When I follow "Next" within "div.customer div.location h2"
-    Then I should see "location 2" within "div.customer div.location ul.record li:first-child"
-    And I should see "firstname 2 lastname 2" within "div.customer div.contacts ul.record li:first-child"
-    When I follow "Next" within "div.customer div.location h2"
-    Then I should see "location 3" within "div.customer div.location ul.record li:first-child"
-    And I should see "firstname 3 lastname 3" within "div.customer div.contacts ul.record li:first-child"
-    When I follow "Previous" within "div.customer div.location h2"
-    Then I should see "location 2" within "div.customer div.location ul.record li:first-child"
-    And I should see "firstname 2 lastname 2" within "div.customer div.contacts ul.record li:first-child"
-    When I follow "Previous" within "div.customer div.location h2"
-    Then I should see "location 1" within "div.customer div.location ul.record li:first-child"
-    And I should see "firstname 1 lastname 1" within "div.customer div.contacts ul.record li:first-child"
     
     
   Scenario: Create a new customer with Main Location/Contact
