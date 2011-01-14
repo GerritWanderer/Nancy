@@ -2,7 +2,7 @@
   .details{:style => "display: #{@displayContactsRecord || 'block'};"}
     %h2 Contacts
     %span.actions
-      = link_to 'N', new_customer_location_contact_path(@customer, @location)
+      = link_to 'N', new_customer_location_contact_path(@customer, @location, :order => params[:order])
     %hr.clear/
     %ul.toolbar
       %li Name
@@ -22,12 +22,12 @@
             %span= "Mobile: #{contact.mobile}"
         %li.actions
           = mail_to contact.email, 'M'
-          = link_to 'E', edit_customer_location_contact_path(@customer, @location, contact)
-          = link_to 'D', customer_location_contact_path(@customer, @location, contact), :confirm => 'Are you sure?', :method => :delete  
+          = link_to 'E', edit_customer_location_contact_path(@customer, @location, contact, :order => params[:order])
+          = link_to 'D', customer_location_contact_path(@customer, @location, contact, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete  
   = form_for([@customer, @location, @contact_build], :html => {:style => "display: #{@displayContactForm || 'none'};"}) do |f|
     %fieldset
       %legend Create Contact
-      = link_to 'C', customer_location_path(@customer, @location)
+      = link_to 'C', customer_location_path(@customer, @location, :order => params[:order])
       %hr.clear/
       %dl
         %dt= f.label :salutation

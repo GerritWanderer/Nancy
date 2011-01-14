@@ -37,7 +37,7 @@ class ContactsController < ApplicationController
   
   protected
   def init_contacts
-    @customers = Customer.all
+    params[:order] ? @customers = Customer.find(:all, :order => params[:order]) : @customers = Customer.all
     @customer = Customer.find(params[:customer_id])
     @locations = @customer.locations
     @location = Location.find(params[:location_id])

@@ -3,13 +3,13 @@
     %h2
       = "Location #{@locations.index(@location) + 1} of #{@locations.count}"
       -if (@locations.index(@location) + 1) > 1
-        = link_to "Previous", customer_location_path(@customer, @locations.at(@locations.index(@location) -1))
+        = link_to "Previous", customer_location_path(@customer, @locations.at(@locations.index(@location) -1), :order => params[:order])
       -if (@locations.index(@location) + 1) < @locations.count
-        = link_to "Next", customer_location_path(@customer, @locations.at(@locations.index(@location) +1))
+        = link_to "Next", customer_location_path(@customer, @locations.at(@locations.index(@location) +1), :order => params[:order])
     %span.actions
-      = link_to 'N', new_customer_location_path(@customer)
-      = link_to 'E', edit_customer_location_path(@customer, @location)
-      = link_to 'D', customer_location_path(@customer, @location), :confirm => 'Are you sure?', :method => :delete
+      = link_to 'N', new_customer_location_path(@customer, :order => params[:order])
+      = link_to 'E', edit_customer_location_path(@customer, @location, :order => params[:order])
+      = link_to 'D', customer_location_path(@customer, @location, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete
     %hr.clear/
     %ul.record
       %li= @location.name
@@ -21,7 +21,7 @@
   = form_for([@customer, @location_build], :html => {:style => "display: #{@displayLocationForm || 'none'};"}) do |f|
     %fieldset
       %legend Create Location
-      = link_to 'C', customer_path(@customer)
+      = link_to 'C', customer_path(@customer, :order => params[:order])
       %a{:class => 'recordFormSwitch'}C
       %hr.clear/
       %dl

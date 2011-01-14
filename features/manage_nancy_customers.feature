@@ -15,7 +15,34 @@ Feature: Manage customers
       | name 2 | shortname 2 | 0 | O\nE\nD |
       | name 3 | shortname 3 | 0 | O\nE\nD |
   
-  
+  Scenario: Change order of all customers
+    Given the following customers:
+      | name | shortname | website | 
+      | name 1 | shortname 1 | website 1 | 
+      | name 2 | shortname 2 | website 2 | 
+      | name 3 | shortname 3 | website 3 | 
+    When I go to the customers page
+    And I follow "D" within "div.toolbar li:first-child"
+    Then I should see the following customers:
+      | name 3 | shortname 3 | 0 | O\nE\nD |
+      | name 2 | shortname 2 | 0 | O\nE\nD |
+      | name 1 | shortname 1 | 0 | O\nE\nD |
+    When I follow "U" within "div.toolbar li:first-child"
+    Then I should see the following customers:
+      | name 1 | shortname 1 | 0 | O\nE\nD |
+      | name 2 | shortname 2 | 0 | O\nE\nD |
+      | name 3 | shortname 3 | 0 | O\nE\nD |
+    When I follow "D" within "div.toolbar li:nth-child(2)"
+    Then I should see the following customers:
+      | name 3 | shortname 3 | 0 | O\nE\nD |
+      | name 2 | shortname 2 | 0 | O\nE\nD |
+      | name 1 | shortname 1 | 0 | O\nE\nD |  
+    When I follow "U" within "div.toolbar li:nth-child(2)"
+    Then I should see the following customers:
+      | name 1 | shortname 1 | 0 | O\nE\nD |
+      | name 2 | shortname 2 | 0 | O\nE\nD |
+      | name 3 | shortname 3 | 0 | O\nE\nD |
+      
   Scenario: View a customer
     Given the following customers:
       | name | shortname | website |
@@ -76,7 +103,7 @@ Feature: Manage customers
     And I should see the following customer contact:
       | Herr Dr. Max Mustermann | |
       | Web | |
-      | Fon 12345667890\nFax 12345667899\nMobile 12345667899 | |
+      | Fon: 12345667890\nFax: 12345667899\nMobile: 12345667899 | |
       | M\nE\nD | |
       
       

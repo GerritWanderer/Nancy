@@ -65,7 +65,8 @@ class CustomersController < ApplicationController
   
   protected
   def init_customers
-    @customers = Customer.all
+    params[:order] ? @customers = Customer.find(:all, :order => params[:order]) : @customers = Customer.all
+    
     if params[:id]
       @customer = Customer.find(params[:id])
       @locations = @customer.locations
