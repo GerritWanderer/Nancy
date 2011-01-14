@@ -2,12 +2,12 @@
   %ul
     %li
       Name 
-      = link_to "U", customers_path(:order => "name asc")
-      = link_to "D", customers_path(:order => "name desc")
+      = link_to image_tag("/images/icons/order-up.gif"), customers_path(:order => "name asc")
+      = link_to image_tag("/images/icons/order-down.gif"), customers_path(:order => "name desc")
     %li
       Shortname
-      = link_to "U", customers_path(:order => "shortname asc")
-      = link_to "D", customers_path(:order => "shortname desc")
+      = link_to image_tag("/images/icons/order-up.gif"), customers_path(:order => "shortname asc")
+      = link_to image_tag("/images/icons/order-down.gif"), customers_path(:order => "shortname desc")
     %li Locations
 -@customers.each do |customer|
   .customer
@@ -17,9 +17,9 @@
         %li= customer.shortname
         %li= customer.locations.count
         %li.actions
-          = link_to 'C', customers_path(:order => params[:order])
-          = link_to 'E', edit_customer_path(customer, :order => params[:order])
-          = link_to 'D', customer_path(customer, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete
+          = link_to image_tag("/images/icons/container-close.gif"), customers_path(:order => params[:order])
+          = link_to image_tag("/images/icons/edit.gif"), edit_customer_path(customer, :order => params[:order])
+          = link_to image_tag("/images/icons/delete.gif"), customer_path(customer, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete
         .clear
       .nestedRessources
         = render :partial => 'customers/details/locations'
@@ -31,8 +31,8 @@
         %li= customer.shortname
         %li= customer.locations.count
         %li.actions
-          = link_to 'O', customer_path(customer, :order => params[:order])
-          = link_to 'E', edit_customer_path(customer, :order => params[:order])
-          = link_to 'D', customer_path(customer, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete
+          = link_to image_tag("/images/icons/container-open.gif"), customer_path(customer, :order => params[:order])
+          = link_to image_tag("/images/icons/edit.gif"), edit_customer_path(customer, :order => params[:order])
+          = link_to image_tag("/images/icons/delete.gif"), customer_path(customer, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete
         .clear
       .clear

@@ -11,9 +11,9 @@ Feature: Manage customers
       | name 3 | shortname 3 | website 3 | 
     When I go to the customers page
     Then I should see the following customers:
-      | name 1 | shortname 1 | 0 | O\nE\nD |
-      | name 2 | shortname 2 | 0 | O\nE\nD |
-      | name 3 | shortname 3 | 0 | O\nE\nD |
+      | name 1 | shortname 1 | 0 | |
+      | name 2 | shortname 2 | 0 | |
+      | name 3 | shortname 3 | 0 | |
   
   Scenario: Change order of all customers
     Given the following customers:
@@ -22,26 +22,26 @@ Feature: Manage customers
       | name 2 | shortname 2 | website 2 | 
       | name 3 | shortname 3 | website 3 | 
     When I go to the customers page
-    And I follow "D" within "div.toolbar li:first-child"
+    And I follow "Order-down" within "div.toolbar li:first-child"
     Then I should see the following customers:
-      | name 3 | shortname 3 | 0 | O\nE\nD |
-      | name 2 | shortname 2 | 0 | O\nE\nD |
-      | name 1 | shortname 1 | 0 | O\nE\nD |
-    When I follow "U" within "div.toolbar li:first-child"
+      | name 3 | shortname 3 | 0 | |
+      | name 2 | shortname 2 | 0 | |
+      | name 1 | shortname 1 | 0 | |
+    When I follow "Order-up" within "div.toolbar li:first-child"
     Then I should see the following customers:
-      | name 1 | shortname 1 | 0 | O\nE\nD |
-      | name 2 | shortname 2 | 0 | O\nE\nD |
-      | name 3 | shortname 3 | 0 | O\nE\nD |
-    When I follow "D" within "div.toolbar li:nth-child(2)"
+      | name 1 | shortname 1 | 0 | |
+      | name 2 | shortname 2 | 0 | |
+      | name 3 | shortname 3 | 0 | |
+    When I follow "Order-down" within "div.toolbar li:nth-child(2)"
     Then I should see the following customers:
-      | name 3 | shortname 3 | 0 | O\nE\nD |
-      | name 2 | shortname 2 | 0 | O\nE\nD |
-      | name 1 | shortname 1 | 0 | O\nE\nD |  
-    When I follow "U" within "div.toolbar li:nth-child(2)"
+      | name 3 | shortname 3 | 0 | |
+      | name 2 | shortname 2 | 0 | |
+      | name 1 | shortname 1 | 0 | |  
+    When I follow "Order-up" within "div.toolbar li:nth-child(2)"
     Then I should see the following customers:
-      | name 1 | shortname 1 | 0 | O\nE\nD |
-      | name 2 | shortname 2 | 0 | O\nE\nD |
-      | name 3 | shortname 3 | 0 | O\nE\nD |
+      | name 1 | shortname 1 | 0 | |
+      | name 2 | shortname 2 | 0 | |
+      | name 3 | shortname 3 | 0 | |
       
   Scenario: View a customer
     Given the following customers:
@@ -60,7 +60,7 @@ Feature: Manage customers
       | salutation 2 | title 2 | firstname 2 | lastname 2 | department 2 | email 2 | fon 2 | mobile 2 | fax 2 | 2 | 
       | salutation 3 | title 3 | firstname 3 | lastname 3 | department 3 | email 3 | fon 3 | mobile 3 | fax 3 | 3 |
     When I go to the customers page
-    And I click "O" in the 2nd customer row
+    And I click "Container-open" in the 2nd customer row
     Then I should see "name 2" within "div.customer ul.titleActive li:first-child"
     And I should see "shortname 2" within "div.customer ul.titleActive li:nth-child(2)"
     And I should see "1" within "div.customer ul.titleActive li:nth-child(3)"
@@ -93,7 +93,7 @@ Feature: Manage customers
       | customer name | |
       | customer shortname | |
       | 1 | |
-      | C\nE\nD | |
+      | | |
     And I should see the following customer location:
       | location name | |
       | location street | |
@@ -104,7 +104,7 @@ Feature: Manage customers
       | Herr Dr. Max Mustermann | |
       | Web | |
       | Fon: 12345667890\nFax: 12345667899\nMobile: 12345667899 | |
-      | M\nE\nD | |
+      | | |
       
       
   Scenario: Edit a customer
@@ -132,7 +132,7 @@ Feature: Manage customers
       | fax | 1234567890 |
       | location_id | 1 |
     When I go to the customers page
-    And I click "E" in the 1st customer row
+    And I click "Edit" in the 1st customer row
     Then I should be on the edit page for that customer
     #check field values
     
@@ -154,8 +154,8 @@ Feature: Manage customers
         | salutation 2 | title 2 | firstname 2 | lastname 2 | department 2 | email 2 | fon 2 | mobile 2 | fax 2 | 2 | 
         | salutation 3 | title 3 | firstname 3 | lastname 3 | department 3 | email 3 | fon 3 | mobile 3 | fax 3 | 3 |
       When I go to the customers page
-      And I click "D" in the 2nd customer row
+      And I click "Delete" in the 2nd customer row
       Then I should see the following customers:
-        | name 1 | shortname 1 | 1 | O\nE\nD |
-        | name 3 | shortname 3 | 1 | O\nE\nD |
+        | name 1 | shortname 1 | 1 | |
+        | name 3 | shortname 3 | 1 | |
       And I should be on the customers page

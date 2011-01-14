@@ -17,7 +17,7 @@ Feature: Manage contacts
       | Mr. | Dr. Dr. | firstname 2 | lastname 2 | department 2 | email 2 | 12345667899 | 12345667899 | 12345667899| 2 |
       | Mr. | Dr. | firstname 3 | lastname 3 | department 3 | email 3 | 12345667899 | 12345667899 | 12345667899 | 2 |
     When I go to the customers page
-    And I click "O" in the 1st customer row
+    And I click "Container-open" in the 1st customer row
     And I follow "Next" within "div.customer div.location h2"
     Then I should see "location 2" within "div.customer div.location ul.record li:first-child"
     And I should see "Mr. Dr. firstname 3 lastname 3" within "div.customer div.contacts ul.record:last-child li:nth-child(1)"
@@ -40,7 +40,7 @@ Feature: Manage contacts
       | fax | 1234567890 |
       | customer_id | 1 |
     When I go to the customers page
-    And I click "O" in the 1st customer row
+    And I click "Container-open" in the 1st customer row
     And I fill in the form with within "div.customer div.contacts":
       | Salutation | Mr. |
       | contact_title | Dr. |
@@ -56,7 +56,7 @@ Feature: Manage contacts
       | Mr. Dr. contact firstname contact lastname | |
       | contact department | |
       | Fon: 1234567890\nFax: 1234567890\nMobile: 1234567890 | |
-      | M\nE\nD | |
+      | | |
       
       
   Scenario: Edit a contact within a customers location
@@ -84,8 +84,8 @@ Feature: Manage contacts
       | fax | 1234567890 |
       | location_id | 1 |
     When I go to the customers page
-    And I click "O" in the 1st customer row
-    And I follow "E" within "div.customer div.contacts ul.record li.actions"
+    And I click "Container-open" in the 1st customer row
+    And I follow "Edit" within "div.customer div.contacts ul.record li.actions"
     
     
   Scenario: Delete a contact within a customers location
@@ -100,10 +100,10 @@ Feature: Manage contacts
       | Mr. | Dr. | firstname 1 | lastname 1 | department 1 | email 1 | 12345667899 | 12345667899 | 12345667899 | 1 | 
       | Mr. | Dr. Dr. | firstname 2 | lastname 2 | department 2 | email 2 | 12345667899 | 12345667899 | 12345667899| 1 |
     When I go to the customers page
-    And I click "O" in the 1st customer row
-    And I follow "D" within "div.customer div.contacts ul.record:last-child li.actions"
+    And I click "Container-open" in the 1st customer row
+    And I follow "Delete" within "div.customer div.contacts ul.record:last-child li.actions"
     Then I should see the following customer contact:      
       | Mr. Dr. firstname 1 lastname 1 | |
       | department 1 | |
       | Fon: 12345667899\nFax: 12345667899\nMobile: 12345667899 | |
-      | M\nE\nD | |
+      | | |

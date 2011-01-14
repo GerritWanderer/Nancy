@@ -46,7 +46,7 @@ div.toolbar {
 	margin-bottom: 5px;
 	li {
 		line-height: 30px;
-		.grid(10);
+		.grid(20);
 	}
 }
 
@@ -68,6 +68,10 @@ div.customer {
 	ul.titleInactive li, ul.titleActive li {
 		line-height: 30px;
 		.grid(20);
+	}
+	ul.titleInactive li.actions, ul.titleActive li.actions {
+		.grid(10,24);
+		text-align: right;
 	}
 	hr {
 		width: 100%;
@@ -108,12 +112,15 @@ div.customer {
 				
 			}
 			ul {
-				li { .grid(20); }
-				li.name, li.fon { .grid(30);
+				li { .grid(28); }
+				li.name, li.fon {
+					.grid(30);
 					span { display: block; }
 				}
 				li.actions { .grid(6);	}
 			}
+			
+			
 			form dl {
 				dt {
 					.grid(10);
