@@ -44,7 +44,7 @@ class LocationsController < ApplicationController
   
   protected
   def init_locations
-    @customers = Customer.all
+    params[:order] ? @customers = Customer.find(:all, :order => params[:order]) : @customers = Customer.all
     @customer = Customer.find(params[:customer_id])
     @locations = @customer.locations
     params[:id] ? @location = Location.find(params[:id]) : @location = @customer.locations.first
