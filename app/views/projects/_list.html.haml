@@ -1,0 +1,43 @@
+.toolbar
+  %ul
+    %li.nr
+      Nr. 
+      = link_to image_tag("/images/icons/order-up.gif"), projects_path(:order => "id asc")
+      = link_to image_tag("/images/icons/order-down.gif"), projects_path(:order => "id desc")
+    %li
+      Title
+      = link_to image_tag("/images/icons/order-up.gif"), projects_path(:order => "title asc")
+      = link_to image_tag("/images/icons/order-down.gif"), projects_path(:order => "title desc")
+    %li
+      Customer
+      = link_to image_tag("/images/icons/order-up.gif"), projects_path(:order => "customer asc")
+      = link_to image_tag("/images/icons/order-down.gif"), projects_path(:order => "customer desc")
+    %li.date
+      Created at
+      = link_to image_tag("/images/icons/order-up.gif"), projects_path(:order => "created_at asc")
+      = link_to image_tag("/images/icons/order-down.gif"), projects_path(:order => "created_at desc")
+-@projects.each do |project|
+  .project
+    - if project.id == @project.id && "#{params[:controller]}/#{params[:action]}" != 'projects/edit' 
+      %ul.titleActive
+        %li.nr= project.id
+        %li= project.title
+        %li= project.customer.name
+        %li.date= project.created_at.strftime("%Y-%m-%d")
+        %li.actions
+          = link_to image_tag("/images/icons/container-close.gif"), projects_path(:order => params[:order])
+          = link_to image_tag("/images/icons/edit.gif"), edit_project_path(project, :order => params[:order])
+          = link_to image_tag("/images/icons/delete.gif"), project_path(project, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete
+        .clear
+    - else
+      %ul.titleInactive
+        %li.nr= project.id
+        %li= project.title
+        %li= project.customer.name
+        %li.date= project.created_at.strftime("%Y-%m-%d")
+        %li.actions
+          = link_to image_tag("/images/icons/container-open.gif"), project_path(project, :order => params[:order])
+          = link_to image_tag("/images/icons/edit.gif"), edit_project_path(project, :order => params[:order])
+          = link_to image_tag("/images/icons/delete.gif"), project_path(project, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete
+        .clear
+      .clear

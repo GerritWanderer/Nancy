@@ -1,13 +1,10 @@
 class ProjectsController < ApplicationController
-  # GET /projects
-  # GET /projects.xml
-  def index
-    @projects = Project.all
+  before_filter :init_projects
+  respond_to :html, :js
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @projects }
-    end
+  def index
+    #see before_filter function init_customers
+    respond_with(@projects)
   end
 
   # GET /projects/1
@@ -79,5 +76,24 @@ class ProjectsController < ApplicationController
       format.html { redirect_to(projects_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  protected
+  def init_projects
+    params[:order] ? @projects = Project.find(:all, :order => params[:order]) : @projects = Project.all
+    
+    if params[:id]
+      @project = Project.find(params[:id])
+    else
+      @project = Project.new
+    end
+    
+    if params[:action] == 'edit'
+      @form_project = @project
+    else
+      @form_project = Project.new
+    end
+    
+    params[:action] == 'edit' ? @displayProjectForm = 'block' : @displayProjectForm = 'none'
   end
 end

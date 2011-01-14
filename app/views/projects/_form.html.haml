@@ -1,34 +1,25 @@
-= form_for @project do |f|
-  -if @project.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@project.errors.count, "error")} prohibited this project from being saved:"
-      %ul
-        - @project.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :description
-    = f.text_area :description
-  .field
-    = f.label :discount
-    = f.text_field :discount
-  .field
-    = f.label :budget
-    = f.text_field :budget
-  .field
-    = f.label :type
-    = f.text_field :type
-  .field
-    = f.label :closed
-    = f.check_box :closed
-  .field
-    = f.label :customer
-    = f.text_field :customer
-  .field
-    = f.label :contact
-    = f.text_field :contact
-  .actions
-    = f.submit 'Save'
+.wizard
+	%a{:class => 'wizardFormSwitch'}New Project [open/close]
+	-if @project.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(@customer.errors.count, "error")} prohibited this contact from being saved:"
+			%ul
+			- @project.errors.full_messages.each do |msg|
+				%li= msg
+	%hr/
+	= form_for(@form_project, :html => {:style => "display: #{@displayProjectForm};"}) do |f|
+		%fieldset
+			%legend Project information
+			%dl
+				%dt= f.label :title
+				%dd= f.text_field :title
+				%dt= f.label :description
+				%dd= f.text_area :description
+				%dt= f.label :discount
+				%dd= f.text_field :discount
+				%dt= f.label :budget
+				%dd= f.text_field :budget
+		%fieldset
+			%legend Customer
+			%dl
+		= f.submit 'Save'

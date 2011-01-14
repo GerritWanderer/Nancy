@@ -21,7 +21,7 @@ Then /^I should see the following project:$/ do |expected_table|
 end
 
 Then /^I should see the following projects:$/ do |expected_table|
-  expected_table.diff!(tableish('table tr', 'td,th'))
+  expected_table.diff!(tableish('ul.titleInactive', 'li'))
 end
 
 Given /^the following projects:$/ do |table|

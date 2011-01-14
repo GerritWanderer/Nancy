@@ -9,8 +9,17 @@ Feature: Manage customers
       Given the following customers:
         | name | shortname | website | 
         | name 1 | shortname 1 | website 1 | 
-        | name 2 | shortname 2 | website 2 | 
-        | name 3 | shortname 3 | website 3 | 
+        | name 2 | shortname 2 | website 2 |
+			And the following locations:
+        | name | street | zip | city | fon | fax | customer_id | 
+        | location 1 | street 1 | 11 | city 1 | fon 1 | fax 1 | 1 | 
+        | location 2 | street 2 | 12 | city 2 | fon 2 | fax 2 | 1 | 
+        | location 3 | street 3 | 13 | city 3 | fon 3 | fax 3 | 2 |
+			And the following contacts:
+        | salutation | title | firstname | lastname | department | email | fon | mobile | fax | location_id | 
+        | salutation 1 | title 1 | firstname 1 | lastname 1 | department 1 | email 1 | fon 1 | mobile 1 | fax 1 | 1 | 
+        | salutation 2 | title 2 | firstname 2 | lastname 2 | department 2 | email 2 | fon 2 | mobile 2 | fax 2 | 1 | 
+        | salutation 3 | title 3 | firstname 3 | lastname 3 | department 3 | email 3 | fon 3 | mobile 3 | fax 3 | 2 |
       When I go to the customers page
       Then I should see the following customers:
         | Name | Shortname | Website | 
@@ -20,23 +29,23 @@ Feature: Manage customers
       And the heading should be "Listing customers"
       
 
-    Scenario: View a customer
-      Given the following customers:
-        | name | shortname | website |
-        | name 1 | shortname 1 | website 1 | 
-        | name 2 | shortname 2 | website 2 |
-        | name 3 | shortname 3 | website 3 |
-      When I go to the customers page
-      And I click "Show" in the 2nd row
-      Then I should see "Details name 2"
-
-    Scenario: Edit a customer
-      Given the following customer:
-        | name | name 10 |
-        | shortname | shortname 10 |
-        | website | website 10 |
-      When I go to the page for that customer
-      And I follow "Edit"
+    # Scenario: View a customer
+    #   Given the following customers:
+    #     | name | shortname | website |
+    #     | name 1 | shortname 1 | website 1 | 
+    #     | name 2 | shortname 2 | website 2 |
+    #     | name 3 | shortname 3 | website 3 |
+    #   When I go to the customers page
+    #   And I click "Show" in the 2nd row
+    #   Then I should see "Details name 2"
+    # 
+    # Scenario: Edit a customer
+    #   Given the following customer:
+    #     | name | name 10 |
+    #     | shortname | shortname 10 |
+    #     | website | website 10 |
+    #   When I go to the page for that customer
+    #   And I follow "Edit"
       # Then show me the page
       # And I should see the following form field values:
       #         | Name | name 10 |
