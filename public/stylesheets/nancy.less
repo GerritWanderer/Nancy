@@ -152,3 +152,39 @@ div.customer {
 		}
 	}
 }
+
+
+
+
+
+
+div.project {
+	color: blueMedium;
+	margin-bottom: 5px;
+	
+	ul.titleInactive, ul.titleActive, div.contacts, div.locations { padding: 10px; }
+	ul.titleInactive {
+		background-color: @blueLight;
+		.rounded;
+	}
+	ul.titleActive {
+		background-color: @blueMedium;
+		.roundedTop;
+		font-weight: bold;
+	}
+	
+	
+	ul.toolbar li, ul.titleInactive li, ul.titleActive li { .grid(32,0,0,1,1); }
+	ul.toolbar li.nr, ul.titleInactive li.nr, ul.titleActive li.nr { .grid(6); }
+	ul.toolbar li.date, ul.titleInactive li.date, ul.titleActive li.date { .grid(11); }
+	ul.titleInactive li.actions, ul.titleActive li.actions {
+		.grid(8);
+		text-align: right;
+	}
+	
+	
+	hr {
+		width: 100%;
+		visibility: visible;
+	}
+}
