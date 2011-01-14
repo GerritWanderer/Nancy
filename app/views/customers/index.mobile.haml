@@ -1,0 +1,7 @@
+%div{"data-role" => "header"}
+  %h2 Listing Customers
+
+%div{"data-role" => "content"}
+  %ul{"data-role" => "listview"}
+    -@customers.each do |customer|
+      %li= link_to customer.name, customer

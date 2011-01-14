@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
   before_filter :init_customers
-  respond_to :html, :js
+  respond_to :html, :mobile
 
   def index
     #see before_filter function init_customers

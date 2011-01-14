@@ -3,13 +3,18 @@
   %head
     %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}
     %title Nancy
-    %link{:rel => 'stylesheet/less', :type => 'text/css', :href => '/stylesheets/nancy.less'}
+    - if mobile_device?
+      %script{:src => "http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.js"}
+      %link{:rel => "stylesheet", :href => "http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.css"}
+    - else
+      = stylesheet_link_tag :all
+      %link{:rel => 'stylesheet/less', :type => 'text/css', :href => '/stylesheets/nancy.less'}
     = javascript_include_tag :defaults
-    = stylesheet_link_tag :all
     = csrf_meta_tag
   %body
     .container
       - flash.each do |key, value|
         %div{:class => key}= value
+      = yield
       = render 'customers/form'
       = render 'customers/list'
