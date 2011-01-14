@@ -1,4 +1,6 @@
 Nancy::Application.routes.draw do
+  resources :projects
+
   resources :contacts
   resources :locations
   resources :customers do
