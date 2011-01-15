@@ -22,7 +22,7 @@ Then /^I should see the following projects:$/ do |expected_table|
 end
 
 When /^I click "([^"]*)" in the (\d+)(?:st|nd|rd|th) project row$/ do |link, pos|
-  within("div.project:nth-child(#{pos.to_i+2}) ul.title li.actions") do
+  within("div.project:nth-child(#{pos.to_i+3}) ul.title li.actions") do
     click_link link
   end
 end

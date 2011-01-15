@@ -10,14 +10,47 @@ Feature: Manage projects
 	    | Customer 2 | shortname 2 | website 2 |
 	  And the following projects:
 	    | title | description | discount | budget | type | closed | customer_id | contact_id | created_at |
-	    | title 1 | description 1 | 11 | 11 | 11 | true | 1 | 1 | 1970-01-01 20:00:00 |
-	    | title 2 | description 2 | 12 | 12 | 12 | true | 1 | 2 | 1970-01-02 20:00:00 |
-	    | title 3 | description 3 | 13 | 13 | 13 | true | 2 | 3 | 1970-01-03 20:00:00 |
+	    | title 1 | description 1 | 11 | 11 | 11 | 0 | 1 | 1 | 1970-01-01 20:00:00 |
+	    | title 2 | description 2 | 12 | 12 | 12 | 0 | 1 | 2 | 1970-01-02 20:00:00 |
+	    | title 3 | description 3 | 13 | 13 | 13 | 0 | 2 | 3 | 1970-01-03 20:00:00 |
 	  When I go to the projects page
 	  Then I should see the following projects:
 	    | 1 | title 1 | Customer 1 | 1970-01-01 | |
 	    | 2 | title 2 | Customer 1 | 1970-01-02 | |
 	    | 3 | title 3 | Customer 2 | 1970-01-03 | |
+	
+  Scenario: Filter projects by closed status
+		Given the following customers:
+	    | name | shortname | website |
+	    | Customer 1 | shortname 1 | website 1 |
+	    | Customer 2 | shortname 2 | website 2 |
+	  And the following projects:
+	    | title | description | discount | budget | type | closed | customer_id | contact_id | created_at |
+	    | title 1 | description 1 | 11 | 11 | 11 | 0 | 1 | 1 | 1970-01-01 20:00:00 |
+	    | title 2 | description 2 | 12 | 12 | 12 | 0 | 1 | 2 | 1970-01-02 20:00:00 |
+	    | title 3 | description 3 | 13 | 13 | 13 | 0 | 2 | 3 | 1970-01-03 20:00:00 |
+	    | title 4 | description 1 | 11 | 11 | 11 | 1 | 1 | 1 | 1970-01-01 20:00:00 |
+	    | title 5 | description 2 | 12 | 12 | 12 | 1 | 1 | 2 | 1970-01-02 20:00:00 |
+	    | title 6 | description 3 | 13 | 13 | 13 | 1 | 2 | 3 | 1970-01-03 20:00:00 |
+	  When I go to the projects page
+		# And I follow "Active Projects" within "div.filter ul li:nth-child(2)"
+		# 	  And I should see the following projects:
+		# 	    | 1 | title 1 | Customer 1 | 1970-01-01 | |
+		# 	    | 2 | title 2 | Customer 1 | 1970-01-02 | |
+		# 	    | 3 | title 3 | Customer 2 | 1970-01-03 | |
+		# When I follow "Closed Projects" within "div.filter ul li:nth-child(3)"
+		# 	  Then I should see the following projects:
+		# 	    | 4 | title 4 | Customer 1 | 1970-01-01 | |
+		# 	    | 5 | title 5 | Customer 1 | 1970-01-02 | |
+		# 	    | 6 | title 6 | Customer 2 | 1970-01-03 | |
+		When I follow "All Projects" within "div.filter ul li"
+	  Then I should see the following projects:
+	    | 1 | title 1 | Customer 1 | 1970-01-01 | |
+	    | 2 | title 2 | Customer 1 | 1970-01-02 | |
+	    | 3 | title 3 | Customer 2 | 1970-01-03 | |
+	    | 4 | title 4 | Customer 1 | 1970-01-01 | |
+	    | 5 | title 5 | Customer 1 | 1970-01-02 | |
+	    | 6 | title 6 | Customer 2 | 1970-01-03 | |
       
   Scenario: View a projects
     Given the following customers:
@@ -35,12 +68,12 @@ Feature: Manage projects
       | Mr. | Dr. | firstname 3 | lastname 3 | department 3 | email 3 | 12345667899 | 12345667899 | 12345667899 | 2 |
 	  And the following projects:
 	    | title | description | discount | budget | type | closed | customer_id | contact_id | created_at |
-	    | title 1 | description 1 | 11 | 111 | 1 | true | 1 | 1 | 1970-01-01 20:00:00 |
-	    | title 2 | description 2 | 12 | 121 | 1 | true | 1 | 2 | 1970-01-02 20:00:00 |
-	    | title 3 | description 3 | 13 | 131 | 1 | true | 2 | 3 | 1970-01-03 20:00:00 |
+	    | title 1 | description 1 | 11 | 111 | 1 | 0 | 1 | 1 | 1970-01-01 20:00:00 |
+	    | title 2 | description 2 | 12 | 121 | 1 | 0 | 1 | 2 | 1970-01-02 20:00:00 |
+	    | title 3 | description 3 | 13 | 131 | 1 | 0 | 2 | 3 | 1970-01-03 20:00:00 |
     When I go to the projects page
     And I click "Container-open" in the 2nd project row
-    Then I should see "2" within "div.project ul.title#active li:first-child"
+    And I should see "2" within "div.project ul.title#active li:first-child"
     And I should see "title 2" within "div.project ul.title#active li:nth-child(2)"
     And I should see "Customer 1" within "div.project ul.title#active li:nth-child(3)"
 		And I should see "1970-01-02" within "div.project ul.title#active li:nth-child(4)"
@@ -164,7 +197,6 @@ Feature: Manage projects
 	    | title 3 | description 3 | 13 | 13 | 13 | true | 2 | 3 | 1970-01-03 20:00:00 |
     When I go to the projects page
     And I click "Delete" in the 2nd project row
-		Then show me the page
     And I should see the following projects:
 	    | 1 | title 1 | Customer 1 | 1970-01-01 | |
 	    | 3 | title 3 | Customer 2 | 1970-01-03 | |
