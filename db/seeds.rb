@@ -1,11 +1,11 @@
 require 'faker'
 
-3.times do
+6.times do
   new_customer = Customer.create!(:name => Faker::Company.name,
                                   :shortname => Faker::Company.name,
                                   :website => Faker::Internet.domain_name)
   
-  4.times do
+  3.times do
     new_location = Location.create!(:name => Faker::Company.name,
                                     :street => Faker::Address.street_address,
                                     :zip => Faker::Address.zip_code,
@@ -14,7 +14,7 @@ require 'faker'
                                     :fax => Faker::PhoneNumber.phone_number,
                                     :customer_id => new_customer.id)
     
-    2.times do
+    3.times do
       Contact.create!(:salutation => Faker::Name.prefix,
                       :title => Faker::Name.suffix,
                       :firstname => Faker::Name.first_name,
@@ -29,7 +29,7 @@ require 'faker'
   end
 end
 
-10.times do
+12.times do
   contact = Contact.all.shuffle.first
   customer = contact.location.customer
   Project.create!(:title => Faker::Lorem.sentence,
@@ -40,4 +40,23 @@ end
                   :closed => rand(2), 
                   :customer_id => customer.id,
                   :contact_id => contact.id)
+end
+
+
+projects = Project.find_all_by_closed(false)
+workday = Date.today.-(Date.today.cwday - 1)
+5.times do
+  timeStart = Time.parse("#{workday.strftime("%Y-%m-%d")} 09:00")
+  timeEnd = Time.parse("#{workday.strftime("%Y-%m-%d")} 09:00")
+  8.times do
+    timeStart = timeEnd
+    duration = (rand(8)+1)*15
+    timeEnd = timeStart + (duration * 60)
+    Work.create!(:start => timeStart.strftime('%Y-%m-%d %H:%M'),
+                    :end => timeEnd.strftime('%Y-%m-%d %H:%M'),
+                    :duration => duration,
+                    :description => Faker::Lorem.paragraph,
+                    :project_id => projects.shuffle.first.id)
+  end
+  workday = workday.+(1)
 end
