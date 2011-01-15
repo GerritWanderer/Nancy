@@ -1,0 +1,26 @@
+%h2 Contacts
+%hr.clear/
+%ul.toolbar
+	%li.name Name
+	%li.fon Contact
+	%li.location Location
+	.clear
+%ul.record
+	%li.name= "#{@project.contact.salutation} #{@project.contact.title} #{@project.contact.firstname} #{@project.contact.lastname}"
+	%li.fon
+		-if !@project.contact.fon.empty?
+			%span= "Fon: #{@project.contact.fon}"
+		-if !@project.contact.fax.empty?
+			%span= "Fax: #{@project.contact.fax}"
+		-if !@project.contact.mobile.empty?
+			%span= "Mobile: #{@project.contact.mobile}"
+	%li.location
+		%a{:href => customer_location_path(@project.customer, @project.contact.location)}
+			= @project.contact.location.name
+			%br/
+			= @project.contact.location.street
+			%br/
+			= "#{@project.contact.location.zip} #{@project.contact.location.city}"
+	%li.actions
+		= mail_to @project.contact.email, image_tag("/images/icons/mail.gif")
+	.clear

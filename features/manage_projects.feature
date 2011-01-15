@@ -3,173 +3,110 @@ Feature: Manage projects
   [stakeholder]
   wants [behaviour]
 
-    Scenario: List all projects
-			Given the following customers:
-        | name | shortname | website |
-        | Customer 1 | shortname 1 | website 1 |
-        | Customer 2 | shortname 2 | website 2 |
-      Given the following projects:
-        | title | description | discount | budget | type | closed | customer_id | contact_id | created_at |
-        | title 1 | description 1 | 11 | 11 | 11 | true | 1 | 1 | 1970-01-01 20:00:00 |
-        | title 2 | description 2 | 12 | 12 | 12 | true | 1 | 2 | 1970-01-02 20:00:00 |
-        | title 3 | description 3 | 13 | 13 | 13 | true | 2 | 3 | 1970-01-03 20:00:00 |
-      When I go to the projects page
-			Then show me the page
-      And I should see the following projects:
-        | 1 | title 1 | Customer 1 | 1970-01-01 | |
-        | 2 | title 2 | Customer 1 | 1970-01-02 | |
-        | 3 | title 3 | Customer 2 | 1970-01-03 | |
+  Scenario: List all projects
+		Given the following customers:
+	    | name | shortname | website |
+	    | Customer 1 | shortname 1 | website 1 |
+	    | Customer 2 | shortname 2 | website 2 |
+	  And the following projects:
+	    | title | description | discount | budget | type | closed | customer_id | contact_id | created_at |
+	    | title 1 | description 1 | 11 | 11 | 11 | true | 1 | 1 | 1970-01-01 20:00:00 |
+	    | title 2 | description 2 | 12 | 12 | 12 | true | 1 | 2 | 1970-01-02 20:00:00 |
+	    | title 3 | description 3 | 13 | 13 | 13 | true | 2 | 3 | 1970-01-03 20:00:00 |
+	  When I go to the projects page
+	  Then I should see the following projects:
+	    | 1 | title 1 | Customer 1 | 1970-01-01 | |
+	    | 2 | title 2 | Customer 1 | 1970-01-02 | |
+	    | 3 | title 3 | Customer 2 | 1970-01-03 | |
       
-    # Scenario: View a project
-    #   Given the following projects:
-    #     | title | description | discount | budget | type | closed | customer | contact |
-    #     | title 1 | description 1 | 11 | 11 | 11 | true | #<Customer:0x000001052ab448> | #<Contact:0x000001052a4198> | 
-    #     | title 2 | description 2 | 12 | 12 | 12 | true | #<Customer:0x000001052875c0> | #<Contact:0x000001052804f0> |
-    #     | title 3 | description 3 | 13 | 13 | 13 | true | #<Customer:0x0000010526b820> | #<Contact:0x00000105262040> |
-    #   When I go to the projects page
-    #   And I click "Show" in the 2nd row
-    #   Then I should see the following project:
-    #     | Title: | title 2 |
-    #     | Description: | description 2 |
-    #     | Discount: | 12 |
-    #     | Budget: | 12 |
-    #     | Type: | 12 |
-    #     | Closed: | true |
-    #     | Customer: | #<Customer:0x00000105246ef8> |
-    #     | Contact: #<Contact:0x000001052411b0> |
-    #   When I follow "Back"
-    #   Then I should be on the projects page
+  Scenario: View a projects
+    Given the following customers:
+	    | name | shortname | website |
+	    | Customer 1 | shortname 1 | website 1 |
+	    | Customer 2 | shortname 2 | website 2 |
+	  And the following locations:
+      | name | street | zip | city | fon | fax | customer_id | 
+      | location 1 | street 1 | 11111 | city 1 | 12345667899-1 | 12345667899-1 | 1 | 
+      | location 2 | street 2 | 22222 | city 2 | 12345667899-2 | 12345667899-2 | 2 | 
+    And the following contacts:
+      | salutation | title | firstname | lastname | department | email | fon | mobile | fax | location_id | 
+      | Mr. | Dr. | firstname 1 | lastname 1 | department 1 | email 1 | 12345667899 | 12345667899 | 12345667899 | 1 | 
+      | Mr. | Dr. Dr. | firstname 2 | lastname 2 | department 2 | email 2 | 12345667899 | 12345667899 | 12345667899| 1 |
+      | Mr. | Dr. | firstname 3 | lastname 3 | department 3 | email 3 | 12345667899 | 12345667899 | 12345667899 | 2 |
+	  And the following projects:
+	    | title | description | discount | budget | type | closed | customer_id | contact_id | created_at |
+	    | title 1 | description 1 | 11 | 111 | 1 | true | 1 | 1 | 1970-01-01 20:00:00 |
+	    | title 2 | description 2 | 12 | 121 | 1 | true | 1 | 2 | 1970-01-02 20:00:00 |
+	    | title 3 | description 3 | 13 | 131 | 1 | true | 2 | 3 | 1970-01-03 20:00:00 |
+    When I go to the projects page
+    And I click "Container-open" in the 2nd project row
+    Then I should see "2" within "div.project ul.title#active li:first-child"
+    And I should see "title 2" within "div.project ul.title#active li:nth-child(2)"
+    And I should see "Customer 1" within "div.project ul.title#active li:nth-child(3)"
+		And I should see "1970-01-02" within "div.project ul.title#active li:nth-child(4)"
+		And I should see "description 2" within "div.project div.main dl dd.description"
+		And I should see "12" within "div.project div.main dl dd:nth-child(6)"
+		And I should see "121" within "div.project div.main dl dd:nth-child(4)"
+		And I should see "Mr. Dr. Dr. firstname 2 lastname 2" within "div.project div.contacts ul.record li.name"
+		And I should see "Fon: 12345667899 Fax: 12345667899 Mobile: 12345667899" within "div.project div.contacts ul.record li.fon"
+		And I should see "location 1 street 1 11111 city 1" within "div.project div.contacts ul.record li.location"
+    When I follow "Container-close" within "div.project ul.title#active li.actions"
+    Then I should be on the projects page
 
-    # Scenario: Edit a project
-    #   Given the following project:
-    #     | title | title 10 |
-    #     | description | description 10 |
-    #     | discount | 20 |
-    #     | budget | 20 |
-    #     | type | 20 |
-    #     | closed | true |
-    #     | customer | #<Customer:0x00000105238100> |
-    #     | contact | #<Contact:0x0000010522fa50> |
-    #   When I go to the page for that project
-    #   And I follow "Edit"
-    #   Then I should see the following form field values:
-    #     | Title | title 10 |
-    #     | Description | description 10 |
-    #     | Discount | 20 |
-    #     | Budget | 20 |
-    #     | Type | 20 |
-    #     | Closed | [x] |
-    #     | Customer | #<Customer:0x00000105223ef8> |
-    #     | Contact | #<Contact:0x000001051fe810> |
-    #   Then the heading should be "Editing project"
-    #   
-    #   When I follow "Show"
-    #   Then I should be on the page for that project
-    # 
-    # Scenario: Delete a project via the index page
-    #   Given the following projects:
-    #     | title | description | discount | budget | type | closed | customer | contact | 
-    #     | title 1 | description 1 | 11 | 11 | 11 | true | #<Customer:0x000001051da870> | #<Contact:0x000001051cfe70> | 
-    #     | title 2 | description 2 | 12 | 12 | 12 | true | #<Customer:0x0000010515c650> | #<Contact:0x00000105151d40> | 
-    #     | title 3 | description 3 | 13 | 13 | 13 | true | #<Customer:0x000001050ca340> | #<Contact:0x000001050c3ae0> |
-    #   When I go to the projects page
-    #   And I click "Destroy" in the 2nd row
-    #   Then I should see the following projects:
-    #     | Title | Description | Discount | Budget | Type | Closed | Customer | Contact | 
-    #     | title 1 | description 1 | 11 | 11 | 11 | true | #<Customer:0x000001050a35d8> | #<Contact:0x0000010509bbd0> | 
-    #     | title 3 | description 3 | 13 | 13 | 13 | true | #<Customer:0x0000010507c028> | #<Contact:0x00000105071308> |
-    #   And I should be on the projects page
-    #   
-    # 
-    # Scenario: New project page  
-    #   Given I am on the projects page
-    #   When I follow "New Project"
-    #   Then I should be on the new project page
-    #   
-    #   When I follow "Back"
-    #   Then I should be on the projects page
-    # 
-    # Scenario: Create a new project
-    #   Pending
-    #   # Given I am on the new project page
-    #   # When I fill in the form with:
-    #   #   | Title | title 10 |
-    #     # | Description | description 10 |
-    #     # | Discount | 20 |
-    #     # | Budget | 20 |
-    #     # | Type | 20 |
-    #     # | Closed | [x] |
-    #     # | Customer | #<Customer:0x00000105043d68> |
-    #     # | Contact | #<Contact:0x0000010503b7d0> |
-    #   # And I press "Create"
-    #   # Then I should see "Project was successfully created."
-    #   # And I should see the following project:
-    #   #   | Title: | title 10 |
-    #     # | Description: | description 10 |
-    #     # | Discount: | 20 |
-    #     # | Budget: | 20 |
-    #     # | Type: | 20 |
-    #     # | Closed: | true |
-    #     # | Customer: | #<Customer:0x00000105031938> |
-    #     # | Contact: | #<Contact:0x0000010502de00> |
-    # 
-    # Scenario: Attempt to create a new project with invalid input
-    #   Pending
-    #   # You should use this scenario as the basis for scenarios involving ActiveRecord validations, or delete it if it's not required
-    #   # Given I am on the new project page
-    #   # When I fill in the form with:
-    #   #   | Title | title 10 |
-    #     # | Description | description 10 |
-    #     # | Discount | 20 |
-    #     # | Budget | 20 |
-    #     # | Type | 20 |
-    #     # | Closed | [x] |
-    #     # | Customer | #<Customer:0x00000105024b48> |
-    #     # | Contact | #<Contact:0x0000010501bc28> |
-    #   # And I press "Create"
-    #   # Then I should see "1 error prohibited this project from being saved:"
-    #   #
-    #   # [You should add checks for specific errors here. It may be appropriate to add extra scenarios.]
-    #   #
-    #   # And I should see the following form field values:
-    #   #   | Title | title 10 |
-    #     # | Description | description 10 |
-    #     # | Discount | 20 |
-    #     # | Budget | 20 |
-    #     # | Type | 20 |
-    #     # | Closed | [x] |
-    #     # | Customer | #<Customer:0x0000010500ba80> |
-    #     # | Contact | #<Contact:0x0000010387a448> |
-    # 
-    # Scenario: Attempt to update a project with invalid input
-    #   Pending
-    #   # You should use this scenario as the basis for scenarios involving ActiveRecord validations, or delete it if it's not required
-    #   # Given a project exists
-    #   # When I go to the edit page for that project
-    #   # And I fill in the form with:
-    #   #   | Title | title 10 |
-    #     # | Description | description 10 |
-    #     # | Discount | 20 |
-    #     # | Budget | 20 |
-    #     # | Type | 20 |
-    #     # | Closed | [x] |
-    #     # | Customer | #<Customer:0x0000010385de60> |
-    #     # | Contact | #<Contact:0x000001038467d8> |
-    #   # And I press "Update"
-    #   # Then I should see "1 error prohibited this project from being saved:"
-    #   #
-    #   # [You should add checks for specific errors here. It may be appropriate to add extra scenarios.]
-    #   #
-    #   # And I should see the following form field values:
-    #   #   | Title | title 10 |
-    #     # | Description | description 10 |
-    #     # | Discount | 20 |
-    #     # | Budget | 20 |
-    #     # | Type | 20 |
-    #     # | Closed | [x] |
-    #     # | Customer | #<Customer:0x00000103829f98> |
-    #     # | Contact | #<Contact:0x00000103820790> |
-    # 
+
+  Scenario: Create a new project
+		Given the following customers:
+	    | name | shortname | website |
+	    | Customer 1 | shortname 1 | website 1 |
+	    | Customer 2 | shortname 2 | website 2 |
+	  And the following locations:
+      | name | street | zip | city | fon | fax | customer_id | 
+      | location 1 | street 1 | 11111 | city 1 | 12345667899-1 | 12345667899-1 | 1 | 
+      | location 2 | street 2 | 22222 | city 2 | 12345667899-2 | 12345667899-2 | 2 | 
+    And the following contacts:
+      | salutation | title | firstname | lastname | department | email | fon | mobile | fax | location_id | 
+      | Mr. | Dr. | firstname 1 | lastname 1 | department 1 | email 1 | 12345667899 | 12345667899 | 12345667899 | 1 | 
+      | Mr. | Dr. Dr. | firstname 2 | lastname 2 | department 2 | email 2 | 12345667899 | 12345667899 | 12345667899| 1 |
+      | Mr. | Dr. | firstname 3 | lastname 3 | department 3 | email 3 | 12345667899 | 12345667899 | 12345667899 | 2 |
+    And I am on the projects page
+    When I fill in the form with:
+      | Title | Project name |
+      | Description | Lorem Ipsum |
+      | Discount | 5 |
+      | Budget | 100 |
+    And I press "Save"
+    Then I should see "Project was successfully created."
+    And I should see the following project:
+      |1||
+			| Project name | |
+      | Customer 1 | |
+      | 2011-01-15 | |
+			|||
+		
+  Scenario: Edit a project
+		Given the following customers:
+	    | name | shortname | website |
+	    | Customer 1 | shortname 1 | website 1 |
+	    | Customer 2 | shortname 2 | website 2 |
+	  And the following locations:
+	    | name | street | zip | city | fon | fax | customer_id | 
+	    | location 1 | street 1 | 11111 | city 1 | 12345667899-1 | 12345667899-1 | 1 | 
+	    | location 2 | street 2 | 22222 | city 2 | 12345667899-2 | 12345667899-2 | 2 | 
+	  And the following contacts:
+	    | salutation | title | firstname | lastname | department | email | fon | mobile | fax | location_id | 
+	    | Mr. | Dr. | firstname 1 | lastname 1 | department 1 | email 1 | 12345667899 | 12345667899 | 12345667899 | 1 | 
+	    | Mr. | Dr. Dr. | firstname 2 | lastname 2 | department 2 | email 2 | 12345667899 | 12345667899 | 12345667899| 1 |
+	    | Mr. | Dr. | firstname 3 | lastname 3 | department 3 | email 3 | 12345667899 | 12345667899 | 12345667899 | 2 |
+		And the following projects:
+			| title | description | discount | budget | type | closed | customer_id | contact_id | created_at |
+	    | title 1 | description 1 | 11 | 11 | 11 | true | 1 | 1 | 1970-01-01 20:00:00 |
+	    | title 2 | description 2 | 12 | 12 | 12 | true | 1 | 2 | 1970-01-02 20:00:00 |
+	    | title 3 | description 3 | 13 | 13 | 13 | true | 2 | 3 | 1970-01-03 20:00:00 |
+    When I go to the projects page
+    And I click "Edit" in the 1st project row
+    #Then I should be on the edit page for that project
+    #check field values
+		
     # Scenario: Update a project
     #   Given the following project:
     #     | title | title 10 |
@@ -202,19 +139,33 @@ Feature: Manage projects
     #     | Closed: | false |
     #     | Customer: | #<Customer:0x00000101fa0698> |
     #     | Contact: | #<Contact:0x00000101f5d050> |
-    # 
-    # Scenario: Navigate from projects page to the edit project page
-    #   Given the following projects:
-    #     | title | description | discount | budget | type | closed | customer | contact | 
-    #     | title 1 | description 1 | 11 | 11 | 11 | true | #<Customer:0x00000101f53190> | #<Contact:0x00000101f49820> | 
-    #     | title 2 | description 2 | 12 | 12 | 12 | true | #<Customer:0x00000101f33818> | #<Contact:0x00000101f30078> | 
-    #     | title 3 | description 3 | 13 | 13 | 13 | true | #<Customer:0x00000101f205d8> | #<Contact:0x00000101f19dc8> |
-    #   When I go to the projects page
-    #   And I click "Edit" in the 2nd row
-    #   Then I should be on the edit page for the 2nd project
-    # 
-    # Scenario: Navigate from edit project page to the projects page
-    #   Given a project exists
-    #   When I go to the edit page for that project
-    #   And I follow "Back"
-    #   Then I should be on the projects page
+
+
+  Scenario: Delete a project via the index page
+    Given the following customers:
+      | name | shortname | website |
+      | Customer 1 | shortname 1 | website 1 |
+      | Customer 2 | shortname 2 | website 2 |
+      | Customer 3 | shortname 3 | website 3 |
+    And the following locations:
+      | name | street | zip | city | fon | fax | customer_id | 
+      | location 1 | street 1 | 11 | city 1 | fon 1 | fax 1 | 1 | 
+      | location 2 | street 2 | 12 | city 2 | fon 2 | fax 2 | 2 | 
+      | location 3 | street 3 | 13 | city 3 | fon 3 | fax 3 | 3 |
+    And the following contacts:
+      | salutation | title | firstname | lastname | department | email | fon | mobile | fax | location_id | 
+      | salutation 1 | title 1 | firstname 1 | lastname 1 | department 1 | email 1 | fon 1 | mobile 1 | fax 1 | 1 | 
+      | salutation 2 | title 2 | firstname 2 | lastname 2 | department 2 | email 2 | fon 2 | mobile 2 | fax 2 | 2 | 
+      | salutation 3 | title 3 | firstname 3 | lastname 3 | department 3 | email 3 | fon 3 | mobile 3 | fax 3 | 3 |
+		And the following projects:
+			| title | description | discount | budget | type | closed | customer_id | contact_id | created_at |
+	    | title 1 | description 1 | 11 | 11 | 11 | true | 1 | 1 | 1970-01-01 20:00:00 |
+	    | title 2 | description 2 | 12 | 12 | 12 | true | 1 | 2 | 1970-01-02 20:00:00 |
+	    | title 3 | description 3 | 13 | 13 | 13 | true | 2 | 3 | 1970-01-03 20:00:00 |
+    When I go to the projects page
+    And I click "Delete" in the 2nd project row
+		Then show me the page
+    And I should see the following projects:
+	    | 1 | title 1 | Customer 1 | 1970-01-01 | |
+	    | 3 | title 3 | Customer 2 | 1970-01-03 | |
+    And I should be on the projects page

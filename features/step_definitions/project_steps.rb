@@ -5,10 +5,7 @@ Given /^a project exists$/ do
 end
 
 Then /^I should see the following project:$/ do |expected_table|
-  
-  
-  show_fields_css_query = 'body p b'
-  
+  show_fields_css_query = 'div.project ul.title#active li'
   
   actual_table = tableish(show_fields_css_query, lambda{|label| [label, label.next]})   
   actual = {}
@@ -21,7 +18,13 @@ Then /^I should see the following project:$/ do |expected_table|
 end
 
 Then /^I should see the following projects:$/ do |expected_table|
-  expected_table.diff!(tableish('ul.titleInactive', 'li'))
+  expected_table.diff!(tableish('ul.title', 'li'))
+end
+
+When /^I click "([^"]*)" in the (\d+)(?:st|nd|rd|th) project row$/ do |link, pos|
+  within("div.project:nth-child(#{pos.to_i+2}) ul.title li.actions") do
+    click_link link
+  end
 end
 
 Given /^the following projects:$/ do |table|

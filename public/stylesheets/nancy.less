@@ -12,31 +12,8 @@ body {
 form {
 	display: none;
 }
-div.wizard {
-	.rounded;
-	margin-bottom: 20px;
-	padding: 10px;
-	background-color: @blueMedium;
-	color: @blueDark;
-	dl {
-		background-color: @blueLight;
-		dt {
-			.grid(10);
-			text-align: right;
-		}
-		dd {
-			.grid(20);
-			input { width: 150px; }
-			input.zip { width: 40px; }
-			input.city { width: 90px; }
-		}
-	}
-	form {
-		.rounded;
-		background-color: @blueLight;
-		padding: 10px;
-	}
-}
+
+
 div.toolbar {
 	.rounded();
 	background-color: @blueLight;
@@ -52,7 +29,7 @@ div.toolbar {
 
 
 div.customer {
-	color: blueMedium;
+	color: @blueDark;
 	margin-bottom: 5px;
 	
 	ul.titleInactive, ul.titleActive, div.contacts, div.locations { padding: 10px; }
@@ -156,35 +133,125 @@ div.customer {
 
 
 
+div.wizard {
+	.rounded;
+	margin-bottom: 20px;
+	padding: 10px;
+	background-color: @blueMedium;
+	color: @blueDark;
+	dl {
+		background-color: @blueLight;
+		dt {
+			.grid(10);
+			text-align: right;
+		}
+		dd {
+			.grid(20);
+			input { width: 150px; }
+			input.zip { width: 40px; }
+			input.city { width: 90px; }
+		}
+	}
+	form {
+		.rounded;
+		background-color: @blueLight;
+		padding: 10px;
+	}
+}
+div#projectForm {
+	fieldset.project {
+		.grid(60,0,2);
+		dl dt { text-align: left; }
+		dl dt.title {	.grid(8);	}
+		dl dd.title {	.grid(52);	}
+		dl dd.title input { width: 520px; }
+	
+		dl dt.description {	.grid(10,0,50);	}
+		dl dd.description {	.grid(60);	}
+		dl dd.description textarea {
+			height: 60px;
+			width: 600px;
+		}
+	
+		dl dt.small, dl dd.small {	.grid(10);	}
+		dl dd.small input { width: 80px; }
+	}
+	fieldset.customer {
+		.grid(30)
+		dl { margin-top: 15px; }
+		dl dt {	.grid(10,0,2); }
+		dl dd {
+			.grid(18); 
+			margin-bottom: 20px;}
+		dl dd select { width: 180px; }
+	}
+}
+
 
 
 div.project {
-	color: blueMedium;
+	color: @blueDark;
 	margin-bottom: 5px;
 	
-	ul.titleInactive, ul.titleActive, div.contacts, div.locations { padding: 10px; }
-	ul.titleInactive {
+	ul.title, div.content {
 		background-color: @blueLight;
-		.rounded;
+		padding: 10px;
 	}
-	ul.titleActive {
+	ul.title#active {
 		background-color: @blueMedium;
 		.roundedTop;
+		.roundedBottom(0px);
 		font-weight: bold;
 	}
+	ul.title { .rounded; }
+	div.content {
+		.roundedBottom;
+		div.main {
+			dl dt { font-weight: bold; }
+			dl dt, dl dd { .grid(8); }
+			dl dt.description, dl dd.description { .grid(80, 0, 14); margin-bottom: 10px; }
+		}
+		div.contacts {
+			margin-top: 20px;
+			
+			ul.toolbar, ul.record {
+				li.name { .grid(30) }
+				li.fon { .grid(24) }
+				li.location { .grid(32) }
+				li.actions { .grid(8) }
+			}
+		}
+	}
 	
-	
-	ul.toolbar li, ul.titleInactive li, ul.titleActive li { .grid(32,0,0,1,1); }
-	ul.toolbar li.nr, ul.titleInactive li.nr, ul.titleActive li.nr { .grid(6); }
-	ul.toolbar li.date, ul.titleInactive li.date, ul.titleActive li.date { .grid(11); }
-	ul.titleInactive li.actions, ul.titleActive li.actions {
+
+	ul.toolbar li, ul.title li { .grid(32,0,0,1,1); }
+	ul.toolbar li.nr, ul.title li.nr { .grid(6); }
+	ul.toolbar li.date, ul.title li.date { .grid(11); }
+	ul.title li.actions {
 		.grid(8);
 		text-align: right;
 	}
+}
 	
 	
-	hr {
-		width: 100%;
-		visibility: visible;
+	
+div.project {
+	// GLOBALS
+	div.content {
+		hr {
+			width: 100%;
+			visibility: visible;
+		}
+		h2, span.actions, form legend { font-weight: bold; }
+		h2, form legend { .grid(84) }
+		span.actions, form a {
+			.grid(10);
+			text-align: right;
+		}
+		
+		ul.toolbar {
+			border-bottom: 2px dotted grey;
+			li { color: grey; }
+		}
 	}
 }

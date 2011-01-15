@@ -1,4 +1,4 @@
-.wizard
+#projectForm.wizard
 	%a{:class => 'wizardFormSwitch'}New Project [open/close]
 	-if @project.errors.any?
 		#error_explanation
@@ -8,18 +8,29 @@
 				%li= msg
 	%hr/
 	= form_for(@form_project, :html => {:style => "display: #{@displayProjectForm};"}) do |f|
-		%fieldset
+		%fieldset.project
 			%legend Project information
 			%dl
-				%dt= f.label :title
-				%dd= f.text_field :title
-				%dt= f.label :description
-				%dd= f.text_area :description
-				%dt= f.label :discount
-				%dd= f.text_field :discount
-				%dt= f.label :budget
-				%dd= f.text_field :budget
-		%fieldset
-			%legend Customer
+				%dt.title= f.label :title
+				%dd.title= f.text_field :title
+				%dt.description= f.label :description
+				%dd.description= f.text_area :description
+				%dt.small= f.label :discount
+				%dd.small= f.text_field :discount
+				%dt.small= f.label :budget
+				%dd.small= f.text_field :budget
+				.clear
+		%fieldset.customer
 			%dl
+				%dt Customer
+				%dd
+					= select("project", "customer_id", Customer.all.collect {|s| [ s.name, s.id ] })
+				%dt Location
+				%dd
+					%select
+				%dt Main Contact
+				%dd
+					= select("project", "contact_id", Contact.all.collect {|s| [ s.firstname+" "+s.lastname, s.id ] })
+				.clear
+		%hr.clear/
 		= f.submit 'Save'
