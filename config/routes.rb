@@ -11,5 +11,5 @@ Nancy::Application.routes.draw do
     end
   end
   
-  root :to => "customers#index"
+  root :to => "works#index"
 end
