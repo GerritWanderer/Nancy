@@ -67,8 +67,7 @@ class ProjectsController < ApplicationController
   
   protected
   def init_projects
-    params[:order] ? @projects = Project.find(:all, :order => params[:order]) : @projects = Project.all
-    
+    params[:closed] ? @projects = Project.isClosed(params[:closed]).order(params[:order]) : @projects = Project.order(params[:order])
     if params[:id]
       @project = Project.find(params[:id])
     else
