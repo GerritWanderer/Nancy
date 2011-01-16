@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$("a.wizardFormSwitch").click(function() {
-		$(this).nextAll("form").slideToggle();
+		$(this).nextAll("div").children("div").children("form").slideToggle();
 	});
 	
 	$("a.recordFormSwitch").click(function() {
