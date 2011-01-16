@@ -61,9 +61,9 @@ Feature: Manage customers
       | salutation 3 | title 3 | firstname 3 | lastname 3 | department 3 | email 3 | fon 3 | mobile 3 | fax 3 | 3 |
     When I go to the customers page
     And I click "Container-open" in the 2nd customer row
-    Then I should see "name 2" within "div.customer ul.titleActive li:first-child"
-    And I should see "shortname 2" within "div.customer ul.titleActive li:nth-child(2)"
-    And I should see "1" within "div.customer ul.titleActive li:nth-child(3)"
+    Then I should see "name 2" within "div.customer ul.title#active li:first-child"
+    And I should see "shortname 2" within "div.customer ul.title#active li:nth-child(2)"
+    And I should see "1" within "div.customer ul.title#active li:nth-child(3)"
     
     
   Scenario: Create a new customer with Main Location/Contact

@@ -5,7 +5,7 @@ Given /^a customer exists$/ do
 end
 
 Then /^I should see the following customer:$/ do |expected_table|
-  show_fields_css_query = 'div.customer ul.titleActive li'
+  show_fields_css_query = 'div.customer ul.title#active li'
   
   actual_table = tableish(show_fields_css_query, lambda{|label| [label, label.next]})   
   actual = {}
@@ -42,13 +42,13 @@ Then /^I should see the following customer contact:$/ do |expected_table|
 end
 
 When /^I click "([^"]*)" in the (\d+)(?:st|nd|rd|th) customer row$/ do |link, pos|
-  within("div.customer:nth-child(#{pos.to_i+2}) ul.titleInactive li.actions") do
+  within("div.customer:nth-child(#{pos.to_i+2}) ul.title li.actions") do
     click_link link
   end
 end
 
 Then /^I should see the following customers:$/ do |expected_table|
-  expected_table.diff!(tableish('ul.titleInactive', 'li'))
+  expected_table.diff!(tableish('ul.title', 'li'))
 end
 
 Given /^the following customers:$/ do |table|
