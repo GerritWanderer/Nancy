@@ -1,0 +1,60 @@
+@import "_basic";
+
+body#projects { 
+	form { display: none; }
+	div.toolbar li, ul.title li { .grid(32,0,0,1,1); }
+	div.toolbar li.nr, ul.title li.nr { .grid(6); }
+	div.toolbar li.date, ul.title li.date { .grid(12); }
+	ul.title li.actions {
+		.grid(8);
+		text-align: right;
+	}
+}
+
+
+div.project {
+	color: @blueDark;
+	margin-bottom: 5px;
+	
+
+	div.content {
+		.roundedBottom;
+		div.main {
+			dl dt { font-weight: bold; }
+			dl dt, dl dd { .grid(8); }
+			dl dt.description, dl dd.description { .grid(80, 0, 14); margin-bottom: 10px; }
+		}
+		div.contacts {
+			margin-top: 20px;
+			
+			ul.toolbar, ul.record {
+				li.name { .grid(30) }
+				li.fon { .grid(24) }
+				li.location { .grid(32) }
+				li.actions { .grid(8) }
+			}
+		}
+	}
+}
+
+
+div.project {
+	// GLOBALS
+	div.content {
+		hr {
+			width: 100%;
+			visibility: visible;
+		}
+		h2, span.actions, form legend { font-weight: bold; }
+		h2, form legend { .grid(84) }
+		span.actions, form a {
+			.grid(10);
+			text-align: right;
+		}
+		
+		ul.toolbar {
+			border-bottom: 2px dotted grey;
+			li { color: grey; }
+		}
+	}
+}

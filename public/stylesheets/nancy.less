@@ -1,9 +1,5 @@
-@blueLight: #C8D9F4;
-@blueMedium: #94B4E6;
-@blueDark: #112363;
-@grey: #CCCCCC;
-
 @import "_basic";
+
 body {
 	background-color: white;
 	font-family: 'Cuprum', verdana, arial;
@@ -113,114 +109,6 @@ div#customerForm {
 
 
 
-
-body#customers { 
-	form { display: none; }
-	div.toolbar li,  ul.title li { .grid(28); }
-	ul.title li.actions {
-		.grid(10);
-		text-align: right;
-	}
-}
-body#projects { 
-	form { display: none; }
-	div.toolbar li, ul.title li { .grid(32,0,0,1,1); }
-	div.toolbar li.nr, ul.title li.nr { .grid(6); }
-	div.toolbar li.date, ul.title li.date { .grid(12); }
-	ul.title li.actions {
-		.grid(8);
-		text-align: right;
-	}
-}
-
-
-
-
-div.customer {
-	color: @blueDark;
-	margin-bottom: 5px;
-	
-	div.nestedRessources {
-		.roundedBottom;
-		background-color: @blueLight;
-		padding: 20px 0px;
-
-		div.location {
-			.roundedTop;
-			border-top: 5px solid @grey;
-			padding: 10px;
-			
-			.details { ul li { .grid(18); } }
-			form {
-				dl {
-					dt {
-						.grid(10);
-						text-align: right;
-					}
-					dd {
-						.grid(20);
-						input { width: 150px; }
-						input.zip { width: 40px; }
-						input.city { width: 90px; }
-					}
-				}
-			}
-		}
-		div.contacts {
-			.roundedTop;
-			border-top: 5px solid @grey;
-			ul.toolbar {
-				
-			}
-			ul {
-				li { .grid(28); }
-				li.name, li.fon {
-					.grid(30);
-					span { display: block; }
-				}
-				li.actions { .grid(6);	}
-			}
-			
-			
-			form dl {
-				dt {
-					.grid(10);
-					text-align: right;
-				}
-				dd {
-					.grid(20);
-					input { width: 150px; }
-					input.zip { width: 40px; }
-					input.city { width: 90px; }
-				}
-			}
-		}
-		
-		
-		div.details h2, div.details span.actions, form legend {
-			font-weight: bold;
-			font-size: 11px;
-		}
-		div.details h2, form legend { .grid(84) }
-		div.details span.actions, form a {
-			.grid(10);
-			text-align: right;
-		}
-		div.pagination {
-			display: inline;
-			* { display: none; }
-			span.previous_page, a.previous_page, span.next_page, a.next_page { display: inline; }
-		}
-	}
-}
-
-
-
-
-
-
-
-
 div.filter {
 	margin-left: 20px;
 	li {
@@ -229,53 +117,5 @@ div.filter {
 		background-color: @blueLight;
 		line-height: 30px;
 		text-align: center;
-	}
-}
-
-div.project {
-	color: @blueDark;
-	margin-bottom: 5px;
-	
-
-	div.content {
-		.roundedBottom;
-		div.main {
-			dl dt { font-weight: bold; }
-			dl dt, dl dd { .grid(8); }
-			dl dt.description, dl dd.description { .grid(80, 0, 14); margin-bottom: 10px; }
-		}
-		div.contacts {
-			margin-top: 20px;
-			
-			ul.toolbar, ul.record {
-				li.name { .grid(30) }
-				li.fon { .grid(24) }
-				li.location { .grid(32) }
-				li.actions { .grid(8) }
-			}
-		}
-	}
-}
-	
-	
-	
-div.project {
-	// GLOBALS
-	div.content {
-		hr {
-			width: 100%;
-			visibility: visible;
-		}
-		h2, span.actions, form legend { font-weight: bold; }
-		h2, form legend { .grid(84) }
-		span.actions, form a {
-			.grid(10);
-			text-align: right;
-		}
-		
-		ul.toolbar {
-			border-bottom: 2px dotted grey;
-			li { color: grey; }
-		}
 	}
 }
