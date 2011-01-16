@@ -12,7 +12,7 @@
 -@customers.each do |customer|
   .customer
     - if customer.id == @customer.id && "#{params[:controller]}/#{params[:action]}" != 'customers/edit' 
-      %ul.titleActive
+      %ul.title#active
         %li= customer.name
         %li= customer.shortname
         %li= customer.locations.count
@@ -26,7 +26,7 @@
         = render :partial => 'customers/details/contacts'
         .clear
     - else
-      %ul.titleInactive
+      %ul.title
         %li= customer.name
         %li= customer.shortname
         %li= customer.locations.count

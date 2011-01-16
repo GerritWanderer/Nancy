@@ -1,27 +1,30 @@
-%h1 Listing works
-
-%table
-  %tr
-    %th Start
-    %th End
-    %th Duration
-    %th Description
-    %th Project
-    %th
-    %th
-    %th
-
-  - @works.each do |work|
-    %tr
-      %td= work.start
-      %td= work.end
-      %td= work.duration
-      %td= work.description
-      %td= work.project
-      %td= link_to 'Show', work
-      %td= link_to 'Edit', edit_work_path(work)
-      %td= link_to 'Destroy', work, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Work', new_work_path
+= render :partial => "calendar"
+#formWrapper
+	#createTimeWrapper
+		= form_for(@work, :remote => false) do |f|
+			#errorExplanation
+			%dl
+				%dt.time= f.label :starttime, "Start:"
+				%dd.time= f.text_field :starttime, :size => 4
+				%dt.time= f.label :endtime, "End:"
+				%dd.time= f.text_field :endtime, :size => 4
+				%dd.description= f.text_area :description
+				%dt.submit
+					= f.hidden_field :project_id, :value => @projects.first.id
+					= f.hidden_field :day, :value => @daySelected.strftime("%Y-%m-%d")
+					= f.submit "Save time"
+	#selectWrapper
+		%dl
+			%dt Customer
+			%dd= render :partial => "customerlist"
+			%dt Project
+			%dd= render :partial => "projectlist"
+	.clear
+%ul.toolbar
+	%li.time Time
+	%li.duration Duration
+	%li.project Project
+	%li.customer Customer
+	%li.description Description
+#works
+	= render :partial => "worklist"

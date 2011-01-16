@@ -1,0 +1,83 @@
+@blueLight: #C8D9F4;
+@blueMedium: #94B4E6;
+@blueDark: #112363;
+@grey: #CCCCCC;
+
+@import "_basic";
+
+div#navigation {
+	height: 50px;
+	background-color: @blueDark;
+	margin-bottom: 20px;
+	ul {
+		padding-top: 10px;
+		li {
+			.grid(15,0,1);
+			.roundedTop;
+			line-height: 40px;
+			font-size: 16px;
+			text-align: center;
+			background-color: @blueLight;
+		}
+	}
+}
+div#content {
+	.rounded;
+	background-color: white;
+	
+	h2#calendarYear {
+		.grid(16,68,10);
+		.roundedTop;
+		background-color: @blueMedium;
+	}
+	ul#calendar {
+		.roundedTop;
+		background-color: @blueMedium;
+		padding: 15px 15px 0px 15px;
+		border-bottom: 5px solid orange;
+		li {
+			.grid(8,0,1,1,1);
+			.roundedTop;
+			background-color: white;
+			line-height: 22px;
+			
+		}
+		li#calendarWeek {
+			.grid(16);
+			background-color: @blueMedium;
+		}
+	}
+	
+	
+	div#formWrapper {
+		background-color: @blueLight;
+		.roundedBottom;
+		div#createTimeWrapper {
+			.grid(60,0,2);
+			dl dt.time { .grid(4); }
+			dl dd.time { .grid(5); }
+			dl dd.description textarea {
+				height: 60px;
+				width: 600px;
+			}
+		}
+		div#selectWrapper {.grid(34); }
+	}
+	
+	ul.toolbar, ul.record {
+		.rounded;
+		background-color: @blueMedium;
+		height: 30px;
+		margin: 20px 0px;
+		li { line-height: 30px; }
+		li.time { .grid(12) }
+		li.duration { .grid(8) }
+		li.project { .grid(20) }
+		li.customer { .grid(20) }
+		li.description { .grid(32) }
+		li.actions { .grid(4) }
+	}
+	ul.record {
+		height: auto;
+	}
+}

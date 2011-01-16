@@ -14,8 +14,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def new
-    @project = Project.find(params[:id])
+  def new  
     respond_with(@project) do |format|
       format.html { render "index" }
     end
@@ -67,7 +66,7 @@ class ProjectsController < ApplicationController
   
   protected
   def init_projects
-    params[:closed] ? @projects = Project.isClosed(params[:closed]).order(params[:order]) : @projects = Project.order(params[:order])
+    params[:closed] ? @projects = Project.isClosed(params[:closed]).joins(:customer).order(params[:order]) : @projects = Project.joins(:customer).order(params[:order])
     if params[:id]
       @project = Project.find(params[:id])
     else
@@ -79,7 +78,9 @@ class ProjectsController < ApplicationController
     else
       @form_project = Project.new
     end
+    @form_customers = Customer.all
+    params[:customer_id] ? @form_contacts = Contact.find_by_customer_id(params[:customer_id]) : @form_contacts = Contact.find_by_customer_id(@form_customers.first.id)
     
-    params[:action] == 'edit' ? @displayProjectForm = 'block' : @displayProjectForm = 'none'
+    params[:action] == 'edit' || params[:action] == 'new' ? @displayProjectForm = 'block' : @displayProjectForm = 'none'
   end
 end

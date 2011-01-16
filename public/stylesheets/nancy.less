@@ -9,52 +9,136 @@ body {
 	font-family: 'Cuprum', verdana, arial;
 	letter-spacing: 0.8px;
 }
-form {
-	display: none;
-}
 
-
-div.toolbar {
-	.rounded();
-	background-color: @blueLight;
-	color: blueMedium;
-	height: 30px;
-	padding: 0px 10px;
-	margin-bottom: 5px;
-	li {
-		line-height: 30px;
-		.grid(20);
+div#navigation {
+	height: 50px;
+	background-color: @blueDark;
+	margin-bottom: 20px;
+	ul {
+		padding-top: 10px;
+		li {
+			.grid(15,0,1);
+			.roundedTop;
+			line-height: 40px;
+			font-size: 16px;
+			text-align: center;
+			background-color: @blueLight;
+		}
 	}
 }
+
+// ALLGEMEINE CONTENT ELEMENTE //
+div#content {
+	div.wizard {
+		.rounded;
+		margin-bottom: 20px;
+		padding: 10px;
+		background-color: @blueMedium;
+		color: @blueDark;
+	}
+	form {
+		.rounded;
+		background-color: @blueLight;
+		padding: 10px;
+	}
+
+	div.toolbar {
+		.rounded();
+		background-color: @blueLight;
+		color: blueMedium;
+		padding: 0px 10px;
+		margin-bottom: 5px;
+		height: 30px;
+		li { line-height: 30px; }
+	}
+	
+	ul.title, div.content {
+		background-color: @blueLight;
+		padding: 10px;
+	}
+	ul.title#active {
+		background-color: @blueMedium;
+		.roundedTop;
+		.roundedBottom(0px);
+		font-weight: bold;
+	}
+	ul.title { .rounded; }
+}
+
+
+// SPEZIELLE FORMULAR ELEMENTE //
+div#projectForm {
+	fieldset.project {
+		.grid(60,0,2);
+		dl dt { text-align: left; }
+		dl dt.title {	.grid(8);	}
+		dl dd.title {	.grid(52);	}
+		dl dd.title input { width: 520px; }
+	
+		dl dt.description {	.grid(10,0,50);	}
+		dl dd.description {	.grid(60);	}
+		dl dd.description textarea {
+			height: 60px;
+			width: 600px;
+		}
+	
+		dl dt.small, dl dd.small {	.grid(10);	}
+		dl dd.small input { width: 80px; }
+	}
+	fieldset.customer {
+		.grid(30)
+		dl { margin-top: 15px; }
+		dl dt {	.grid(10,0,2); }
+		dl dd {
+			.grid(18); 
+			margin-bottom: 20px;}
+		dl dd select { width: 180px; }
+	}
+}
+div#customerForm {
+	dl {
+		background-color: @blueLight;
+		dt {
+			.grid(10);
+			text-align: right;
+		}
+		dd {
+			.grid(20);
+			input { width: 150px; }
+			input.zip { width: 40px; }
+			input.city { width: 90px; }
+		}
+	}
+}
+
+
+
+
+body#customers { 
+	form { display: none; }
+	div.toolbar li,  ul.title li { .grid(28); }
+	ul.title li.actions {
+		.grid(10);
+		text-align: right;
+	}
+}
+body#projects { 
+	form { display: none; }
+	div.toolbar li, ul.title li { .grid(32,0,0,1,1); }
+	div.toolbar li.nr, ul.title li.nr { .grid(6); }
+	div.toolbar li.date, ul.title li.date { .grid(12); }
+	ul.title li.actions {
+		.grid(8);
+		text-align: right;
+	}
+}
+
+
 
 
 div.customer {
 	color: @blueDark;
 	margin-bottom: 5px;
-	
-	ul.titleInactive, ul.titleActive, div.contacts, div.locations { padding: 10px; }
-	ul.titleInactive {
-		background-color: @blueLight;
-		.rounded;
-	}
-	ul.titleActive {
-		background-color: @blueMedium;
-		.roundedTop;
-		font-weight: bold;
-	}
-	ul.titleInactive li, ul.titleActive li {
-		line-height: 30px;
-		.grid(20);
-	}
-	ul.titleInactive li.actions, ul.titleActive li.actions {
-		.grid(10,24);
-		text-align: right;
-	}
-	hr {
-		width: 100%;
-		visibility: visible;
-	}
-	
 	
 	div.nestedRessources {
 		.roundedBottom;
@@ -133,59 +217,8 @@ div.customer {
 
 
 
-div.wizard {
-	.rounded;
-	margin-bottom: 20px;
-	padding: 10px;
-	background-color: @blueMedium;
-	color: @blueDark;
-	dl {
-		background-color: @blueLight;
-		dt {
-			.grid(10);
-			text-align: right;
-		}
-		dd {
-			.grid(20);
-			input { width: 150px; }
-			input.zip { width: 40px; }
-			input.city { width: 90px; }
-		}
-	}
-	form {
-		.rounded;
-		background-color: @blueLight;
-		padding: 10px;
-	}
-}
-div#projectForm {
-	fieldset.project {
-		.grid(60,0,2);
-		dl dt { text-align: left; }
-		dl dt.title {	.grid(8);	}
-		dl dd.title {	.grid(52);	}
-		dl dd.title input { width: 520px; }
-	
-		dl dt.description {	.grid(10,0,50);	}
-		dl dd.description {	.grid(60);	}
-		dl dd.description textarea {
-			height: 60px;
-			width: 600px;
-		}
-	
-		dl dt.small, dl dd.small {	.grid(10);	}
-		dl dd.small input { width: 80px; }
-	}
-	fieldset.customer {
-		.grid(30)
-		dl { margin-top: 15px; }
-		dl dt {	.grid(10,0,2); }
-		dl dd {
-			.grid(18); 
-			margin-bottom: 20px;}
-		dl dd select { width: 180px; }
-	}
-}
+
+
 
 
 div.filter {
@@ -203,17 +236,7 @@ div.project {
 	color: @blueDark;
 	margin-bottom: 5px;
 	
-	ul.title, div.content {
-		background-color: @blueLight;
-		padding: 10px;
-	}
-	ul.title#active {
-		background-color: @blueMedium;
-		.roundedTop;
-		.roundedBottom(0px);
-		font-weight: bold;
-	}
-	ul.title { .rounded; }
+
 	div.content {
 		.roundedBottom;
 		div.main {
@@ -231,15 +254,6 @@ div.project {
 				li.actions { .grid(8) }
 			}
 		}
-	}
-	
-
-	ul.toolbar li, ul.title li { .grid(32,0,0,1,1); }
-	ul.toolbar li.nr, ul.title li.nr { .grid(6); }
-	ul.toolbar li.date, ul.title li.date { .grid(11); }
-	ul.title li.actions {
-		.grid(8);
-		text-align: right;
 	}
 }
 	

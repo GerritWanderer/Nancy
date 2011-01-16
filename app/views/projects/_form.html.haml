@@ -4,8 +4,8 @@
 		#error_explanation
 			%h2= "#{pluralize(@customer.errors.count, "error")} prohibited this contact from being saved:"
 			%ul
-			- @project.errors.full_messages.each do |msg|
-				%li= msg
+				- @project.errors.full_messages.each do |msg|
+					%li= msg
 	%hr/
 	= form_for(@form_project, :html => {:style => "display: #{@displayProjectForm};"}) do |f|
 		%fieldset.project
@@ -20,17 +20,21 @@
 				%dt.small= f.label :budget
 				%dd.small= f.text_field :budget
 				.clear
+		= f.hidden_field :customer_id, :value => params[:customer_id] || @form_customers.first.id
+		= f.hidden_field :contact_id, :value => @form_contacts.first.id
+		= f.submit 'Save'
+	-form_tag new_project_path, :method => :get, :remote => false do
 		%fieldset.customer
 			%dl
 				%dt Customer
 				%dd
-					= select("project", "customer_id", Customer.all.collect {|s| [ s.name, s.id ] })
-				%dt Location
-				%dd
-					%select
+					= select_tag(:customer_id, options_for_select(@form_customers.map {|c| [c.name, c.id]}, params[:customer_id].to_i), {:onchange => "this.form.customerSubmit.click();"})
+					%input{:type=>"submit", :value=>"submit", :name=>"customerSubmit", :style=>"display:none"}
+	-form_tag new_project_path, :method => :get, :remote => false do
+		%fieldset.contact
+			%dl
 				%dt Main Contact
 				%dd
-					= select("project", "contact_id", Contact.all.collect {|s| [ s.firstname+" "+s.lastname, s.id ] })
+					= select_tag(:contact_id, options_for_select(@form_contacts.map {|c| [c.firstname, c.id]}), {:onchange => "$('input#project_contact_id').val(this.value)"})
 				.clear
-		%hr.clear/
-		= f.submit 'Save'
+	.clear

@@ -16,8 +16,8 @@
 			= link_to image_tag("/images/icons/order-down.gif"), projects_path(:order => "title desc", :closed => params[:closed])
 		%li
 			Customer
-			= link_to image_tag("/images/icons/order-up.gif"), projects_path(:order => "customer asc", :closed => params[:closed])
-			= link_to image_tag("/images/icons/order-down.gif"), projects_path(:order => "customer desc", :closed => params[:closed])
+			= link_to image_tag("/images/icons/order-up.gif"), projects_path(:order => "name asc", :closed => params[:closed])
+			= link_to image_tag("/images/icons/order-down.gif"), projects_path(:order => "name desc", :closed => params[:closed])
 		%li.date
 			Created at
 			= link_to image_tag("/images/icons/order-up.gif"), projects_path(:order => "created_at asc", :closed => params[:closed])
