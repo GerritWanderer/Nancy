@@ -53,6 +53,14 @@ class ProjectsController < ApplicationController
       end
     end
   end
+  
+  def switch
+    @project = Project.find(params[:id])
+    @project.closed == 0 ? @project.closed = 1 : @project.closed = 0
+    if @project.save
+      redirect_to(@project, :notice => 'Project status was successfully switched.')
+    end
+  end
 
   def destroy
     @project = Project.find(params[:id])

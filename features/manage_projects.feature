@@ -8,6 +8,12 @@ Feature: Manage projects
 	    | name | shortname | website |
 	    | Customer 1 | shortname 1 | website 1 |
 	    | Customer 2 | shortname 2 | website 2 |
+	  And the following locations:
+      | name | street | zip | city | fon | fax | customer_id | 
+      | location 1 | street 1 | 11111 | city 1 | 12345667899-1 | 12345667899-1 | 1 | 
+    And the following contacts:
+      | salutation | title | firstname | lastname | department | email | fon | mobile | fax | location_id | 
+      | Mr. | Dr. | firstname 1 | lastname 1 | department 1 | email 1 | 12345667899 | 12345667899 | 12345667899 | 1 |
 	  And the following projects:
 	    | title | description | discount | budget | type | closed | customer_id | contact_id | created_at |
 	    | title 1 | description 1 | 11 | 11 | 11 | 0 | 1 | 1 | 1970-01-01 20:00:00 |
@@ -24,6 +30,12 @@ Feature: Manage projects
 	    | name | shortname | website |
 	    | Customer 1 | shortname 1 | website 1 |
 	    | Customer 2 | shortname 2 | website 2 |
+	  And the following locations:
+      | name | street | zip | city | fon | fax | customer_id | 
+      | location 1 | street 1 | 11111 | city 1 | 12345667899-1 | 12345667899-1 | 1 | 
+    And the following contacts:
+      | salutation | title | firstname | lastname | department | email | fon | mobile | fax | location_id | 
+      | Mr. | Dr. | firstname 1 | lastname 1 | department 1 | email 1 | 12345667899 | 12345667899 | 12345667899 | 1 |
 	  And the following projects:
 	    | title | description | discount | budget | type | closed | customer_id | contact_id | created_at |
 	    | title 1 | description 1 | 11 | 11 | 11 | 0 | 1 | 1 | 1970-01-01 20:00:00 |
@@ -54,6 +66,40 @@ Feature: Manage projects
       
   Scenario: View a projects
     Given the following customers:
+      | name | shortname | website |
+      | Customer 1 | shortname 1 | website 1 |
+      | Customer 2 | shortname 2 | website 2 |
+    And the following locations:
+      | name | street | zip | city | fon | fax | customer_id | 
+      | location 1 | street 1 | 11111 | city 1 | 12345667899-1 | 12345667899-1 | 1 | 
+      | location 2 | street 2 | 22222 | city 2 | 12345667899-2 | 12345667899-2 | 2 | 
+    And the following contacts:
+      | salutation | title | firstname | lastname | department | email | fon | mobile | fax | location_id | 
+      | Mr. | Dr. | firstname 1 | lastname 1 | department 1 | email 1 | 12345667899 | 12345667899 | 12345667899 | 1 | 
+      | Mr. | Dr. Dr. | firstname 2 | lastname 2 | department 2 | email 2 | 12345667899 | 12345667899 | 12345667899| 1 |
+      | Mr. | Dr. | firstname 3 | lastname 3 | department 3 | email 3 | 12345667899 | 12345667899 | 12345667899 | 2 |
+    And the following projects:
+      | title | description | discount | budget | type | closed | customer_id | contact_id | created_at |
+      | title 1 | description 1 | 11 | 111 | 1 | 0 | 1 | 1 | 1970-01-01 20:00:00 |
+      | title 2 | description 2 | 12 | 121 | 1 | 0 | 1 | 2 | 1970-01-02 20:00:00 |
+      | title 3 | description 3 | 13 | 131 | 1 | 0 | 2 | 3 | 1970-01-03 20:00:00 |
+    When I go to the projects page
+    And I click "Container-open" in the 2nd project row
+    And I should see "2" within "div.project ul.title#active li:first-child"
+    And I should see "title 2" within "div.project ul.title#active li:nth-child(2)"
+    And I should see "Customer 1" within "div.project ul.title#active li:nth-child(3)"
+		And I should see "1970-01-02" within "div.project ul.title#active li:nth-child(4)"
+		And I should see "description 2" within "div.project div.main dl dd.description"
+		And I should see "12" within "div.project div.main dl dd:nth-child(6)"
+		And I should see "121" within "div.project div.main dl dd:nth-child(4)"
+		And I should see "Mr. Dr. Dr. firstname 2 lastname 2" within "div.project div.contacts ul.record li.name"
+		And I should see "Fon: 12345667899 Fax: 12345667899 Mobile: 12345667899" within "div.project div.contacts ul.record li.fon"
+		And I should see "location 1 street 1 11111 city 1" within "div.project div.contacts ul.record li.location"
+    When I follow "Container-close" within "div.project ul.title#active li.actions"
+    Then I should be on the projects page
+    
+  Scenario: Switch closed status of a project
+    Given the following customers:
 	    | name | shortname | website |
 	    | Customer 1 | shortname 1 | website 1 |
 	    | Customer 2 | shortname 2 | website 2 |
@@ -73,19 +119,8 @@ Feature: Manage projects
 	    | title 3 | description 3 | 13 | 131 | 1 | 0 | 2 | 3 | 1970-01-03 20:00:00 |
     When I go to the projects page
     And I click "Container-open" in the 2nd project row
-    And I should see "2" within "div.project ul.title#active li:first-child"
-    And I should see "title 2" within "div.project ul.title#active li:nth-child(2)"
-    And I should see "Customer 1" within "div.project ul.title#active li:nth-child(3)"
-		And I should see "1970-01-02" within "div.project ul.title#active li:nth-child(4)"
-		And I should see "description 2" within "div.project div.main dl dd.description"
-		And I should see "12" within "div.project div.main dl dd:nth-child(6)"
-		And I should see "121" within "div.project div.main dl dd:nth-child(4)"
-		And I should see "Mr. Dr. Dr. firstname 2 lastname 2" within "div.project div.contacts ul.record li.name"
-		And I should see "Fon: 12345667899 Fax: 12345667899 Mobile: 12345667899" within "div.project div.contacts ul.record li.fon"
-		And I should see "location 1 street 1 11111 city 1" within "div.project div.contacts ul.record li.location"
-    When I follow "Container-close" within "div.project ul.title#active li.actions"
-    Then I should be on the projects page
-
+    When I follow "Project-close" within "div.project div.main span.actions"
+    Then I should see "Project status was successfully switched."
 
   Scenario: Create a new project
 		Given the following customers:
@@ -113,7 +148,7 @@ Feature: Manage projects
       |1||
 			| Project name | |
       | Customer 1 | |
-      | 2011-01-15 | |
+      | 2011-01-17 | |
 			|||
 		
   Scenario: Edit a project
