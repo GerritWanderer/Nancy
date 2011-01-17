@@ -1,0 +1,7 @@
+%div{"data-role" => "header"}
+  %h2 Listing Projects
+
+%div{"data-role" => "content"}
+  %ul{"data-role" => "listview"}
+    -@projects.each do |project|
+      %li= link_to "#{project.id} | #{project.title}", project

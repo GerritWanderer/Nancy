@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_filter :init_projects
-  respond_to :html, :js
+  respond_to :html, :mobile
 
   def index
     #see before_filter function init_customers
