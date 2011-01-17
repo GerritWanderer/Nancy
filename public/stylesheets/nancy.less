@@ -1,23 +1,70 @@
-@blueLight: #C8D9F4;
-@blueMedium: #94B4E6;
-@blueDark: #112363;
-@grey: #CCCCCC;
-
 @import "_basic";
+
 body {
 	background-color: white;
 	font-family: 'Cuprum', verdana, arial;
 	letter-spacing: 0.8px;
 }
-form {
-	display: none;
-}
-div.wizard {
-	.rounded;
+
+div#navigation {
+	height: 50px;
+	background-color: @blueDark;
 	margin-bottom: 20px;
-	padding: 10px;
-	background-color: @blueMedium;
-	color: @blueDark;
+	ul {
+		padding-top: 10px;
+		li {
+			.grid(15,0,1);
+			.roundedTop;
+			line-height: 40px;
+			font-size: 16px;
+			text-align: center;
+			background-color: @blueLight;
+		}
+	}
+}
+
+// ALLGEMEINE CONTENT ELEMENTE //
+div#content {
+	div.wizard {
+		.rounded;
+		margin-bottom: 20px;
+		padding: 10px;
+		background-color: @blueMedium;
+		color: @blueDark;
+	}
+	form {
+		.rounded;
+		background-color: @blueLight;
+		padding: 10px;
+	}
+
+	div.toolbar {
+		.rounded();
+		background-color: @blueLight;
+		color: blueMedium;
+		padding: 0px 10px;
+		margin-bottom: 5px;
+		height: 30px;
+		li { line-height: 30px; }
+	}
+	
+	ul.title, div.content {
+		background-color: @blueLight;
+		padding: 10px;
+	}
+	ul.title#active {
+		background-color: @blueMedium;
+		.roundedTop;
+		.roundedBottom(0px);
+		font-weight: bold;
+	}
+	ul.title { .rounded; }
+}
+
+
+// SPEZIELLE FORMULAR ELEMENTE //
+
+div#customerForm {
 	dl {
 		background-color: @blueLight;
 		dt {
@@ -31,124 +78,17 @@ div.wizard {
 			input.city { width: 90px; }
 		}
 	}
-	form {
-		.rounded;
-		background-color: @blueLight;
-		padding: 10px;
-	}
 }
-div.toolbar {
-	.rounded();
-	background-color: @blueLight;
-	color: blueMedium;
-	height: 30px;
-	padding: 0px 10px;
-	margin-bottom: 5px;
+
+
+
+div.filter {
+	margin-left: 20px;
 	li {
-		line-height: 30px;
-		.grid(20);
-	}
-}
-
-
-div.customer {
-	color: blueMedium;
-	margin-bottom: 5px;
-	
-	ul.titleInactive, ul.titleActive, div.contacts, div.locations { padding: 10px; }
-	ul.titleInactive {
-		background-color: @blueLight;
-		.rounded;
-	}
-	ul.titleActive {
-		background-color: @blueMedium;
+		.grid(13,0,1);
 		.roundedTop;
-		font-weight: bold;
-	}
-	ul.titleInactive li, ul.titleActive li {
-		line-height: 30px;
-		.grid(20);
-	}
-	ul.titleInactive li.actions, ul.titleActive li.actions {
-		.grid(10,24);
-		text-align: right;
-	}
-	hr {
-		width: 100%;
-		visibility: visible;
-	}
-	
-	
-	div.nestedRessources {
-		.roundedBottom;
 		background-color: @blueLight;
-		padding: 20px 0px;
-
-		div.location {
-			.roundedTop;
-			border-top: 5px solid @grey;
-			padding: 10px;
-			
-			.details { ul li { .grid(18); } }
-			form {
-				dl {
-					dt {
-						.grid(10);
-						text-align: right;
-					}
-					dd {
-						.grid(20);
-						input { width: 150px; }
-						input.zip { width: 40px; }
-						input.city { width: 90px; }
-					}
-				}
-			}
-		}
-		div.contacts {
-			.roundedTop;
-			border-top: 5px solid @grey;
-			ul.toolbar {
-				
-			}
-			ul {
-				li { .grid(28); }
-				li.name, li.fon {
-					.grid(30);
-					span { display: block; }
-				}
-				li.actions { .grid(6);	}
-			}
-			
-			
-			form dl {
-				dt {
-					.grid(10);
-					text-align: right;
-				}
-				dd {
-					.grid(20);
-					input { width: 150px; }
-					input.zip { width: 40px; }
-					input.city { width: 90px; }
-				}
-			}
-		}
-		
-		
-		div.details h2, div.details span.actions, form legend {
-			font-weight: bold;
-			font-size: 11px;
-		}
-		div.details h2, form legend { .grid(84) }
-		div.details span.actions, form a {
-			.grid(10);
-			text-align: right;
-		}
-		div.pagination {
-			display: inline;
-			* { display: none; }
-			span.previous_page, a.previous_page, span.next_page, a.next_page { display: inline; }
-		}
+		line-height: 30px;
+		text-align: center;
 	}
 }

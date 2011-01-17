@@ -1,0 +1,71 @@
+.filter
+	%ul
+		%li.active= link_to "All Projects", projects_path(:order => params[:order])
+		%li.active= link_to "Active Projects", projects_path(:order => params[:order], :closed => 0)
+		%li.active= link_to "Closed Projects", projects_path(:order => params[:order], :closed => 1)
+		.clear
+.toolbar
+	%ul
+		%li.nr
+			Nr. 
+			= link_to image_tag("/images/icons/order-up.gif"), projects_path(:order => "id asc"), :closed => params[:closed]
+			= link_to image_tag("/images/icons/order-down.gif"), projects_path(:order => "id desc", :closed => params[:closed])
+		%li
+			Title
+			= link_to image_tag("/images/icons/order-up.gif"), projects_path(:order => "title asc", :closed => params[:closed])
+			= link_to image_tag("/images/icons/order-down.gif"), projects_path(:order => "title desc", :closed => params[:closed])
+		%li
+			Customer
+			= link_to image_tag("/images/icons/order-up.gif"), projects_path(:order => "name asc", :closed => params[:closed])
+			= link_to image_tag("/images/icons/order-down.gif"), projects_path(:order => "name desc", :closed => params[:closed])
+		%li.date
+			Created at
+			= link_to image_tag("/images/icons/order-up.gif"), projects_path(:order => "created_at asc", :closed => params[:closed])
+			= link_to image_tag("/images/icons/order-down.gif"), projects_path(:order => "created_at desc", :closed => params[:closed])
+-@projects.each do |project|
+	.project
+		- if project.id == @project.id && "#{params[:controller]}/#{params[:action]}" != 'projects/edit' 
+			%ul.title#active
+				%li.nr= project.id
+				%li= project.title
+				%li= project.customer.name
+				%li.date= project.created_at.strftime("%Y-%m-%d")
+				%li.actions
+					= link_to image_tag("/images/icons/container-close.gif"), projects_path(:order => params[:order], :closed => params[:closed])
+					= link_to image_tag("/images/icons/edit.gif"), edit_project_path(project, :order => params[:order], :closed => params[:closed])
+					= link_to image_tag("/images/icons/delete.gif"), project_path(project, :order => params[:order], :closed => params[:closed]), :confirm => 'Are you sure?', :method => :delete
+				.clear
+			.content
+				.main
+					%h2 Project information
+					%span.actions
+						= link_to image_tag("/images/icons/project-report.gif"), report_project_path(project)
+						-if project.closed == 0
+							= link_to image_tag("/images/icons/project-open.gif"), switch_project_path(project, :order => params[:order], :closed => params[:closed])
+						-else
+							= link_to image_tag("/images/icons/project-close.gif"), switch_project_path(project, :order => params[:order], :closed => params[:closed])
+					%hr.clear/
+					%dl
+						%dt.description Description:
+						%dd.description= project.description
+						%dt Budget:
+						%dd= "#{project.budget} (h)"
+						%dt Discount:
+						%dd= "#{project.discount} %"
+						%dt Type:
+						%dd= project.type
+						.clear
+				.contacts
+					= render :partial => 'projects/details/contacts'
+			.clear
+		- else
+			%ul.title
+				%li.nr= project.id
+				%li= project.title
+				%li= project.customer.name
+				%li.date= project.created_at.strftime("%Y-%m-%d")
+				%li.actions
+					= link_to image_tag("/images/icons/container-open.gif"), project_path(project, :order => params[:order], :closed => params[:closed])
+					= link_to image_tag("/images/icons/edit.gif"), edit_project_path(project, :order => params[:order], :closed => params[:closed])
+					= link_to image_tag("/images/icons/delete.gif"), project_path(project, :order => params[:order], :closed => params[:closed]), :confirm => 'Are you sure?', :method => :delete
+				.clear

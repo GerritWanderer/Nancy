@@ -1,0 +1,30 @@
+= render :partial => "calendar"
+#formWrapper
+	#createTimeWrapper
+		= form_for(@work, :remote => false) do |f|
+			#errorExplanation
+			%dl
+				%dt.time= f.label :starttime, "Start:"
+				%dd.time= f.text_field :starttime, :size => 4
+				%dt.time= f.label :endtime, "End:"
+				%dd.time= f.text_field :endtime, :size => 4
+				%dd.description= f.text_area :description
+				%dt.submit
+					= f.hidden_field :project_id, :value => @projects.first.id
+					= f.hidden_field :day, :value => @daySelected.strftime("%Y-%m-%d")
+					= f.submit "Save time"
+	#selectWrapper
+		%dl
+			%dt Customer
+			%dd= render :partial => "customerlist"
+			%dt Project
+			%dd= render :partial => "projectlist"
+	.clear
+%ul.toolbar
+	%li.time Time
+	%li.duration Duration
+	%li.project Project
+	%li.customer Customer
+	%li.description Description
+#works
+	= render :partial => "worklist"

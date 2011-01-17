@@ -10,6 +10,21 @@ module NavigationHelpers
 
     when /the home\s?page/
       '/'
+      when /edit page for that project/
+        raise 'no project' unless @project
+        edit_project_path(@project)
+      when /page for that project/
+        raise 'no project' unless @project
+        project_path(@project)
+      when /edit page for the (\d+)(?:st|nd|rd|th) project/
+        raise 'no projects' unless @projects
+        nth_project = @projects[$1.to_i - 1]
+        edit_project_path(nth_project)
+      when /page for the (\d+)(?:st|nd|rd|th) project/
+        raise 'no projects' unless @projects
+        nth_project = @projects[$1.to_i - 1]
+        project_path(nth_project)
+
       when /edit page for that contact/
         raise 'no contact' unless @contact
         edit_contact_path(@contact)

@@ -1,11 +1,16 @@
 Nancy::Application.routes.draw do
-  resources :contacts
-  resources :locations
+  resources :works
   resources :customers do
     resources :locations do
       resources :contacts
     end
   end
+  resources :projects do
+    member do
+      get 'switch'
+      get 'report'
+    end
+  end
   
-  root :to => "customers#index"
+  root :to => "works#index"
 end

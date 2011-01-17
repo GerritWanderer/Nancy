@@ -1,0 +1,44 @@
+#projectForm.wizard
+	%a{:class => 'wizardFormSwitch'}New Project [open/close]
+	-if @project.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(@customer.errors.count, "error")} prohibited this contact from being saved:"
+			%ul
+				- @project.errors.full_messages.each do |msg|
+					%li= msg
+	%hr/
+	.wrapper
+		#createProject
+			= form_for(@form_project, :html => {:style => "display: #{@displayProjectForm};"}) do |f|
+				%fieldset.project
+					%legend Project information
+					%dl
+						%dt.title= f.label :title
+						%dd.title= f.text_field :title
+						%dt.description= f.label :description
+						%dd.description= f.text_area :description
+						.clear
+						%dt.small= f.label :discount
+						%dd.small= f.text_field :discount
+						%dt.small= f.label :budget
+						%dd.small= f.text_field :budget
+						.clear
+				= f.hidden_field :customer_id, :value => params[:customer_id] || @form_customers.first.id
+				= f.hidden_field :contact_id, :value => @form_contacts.first.id
+				= f.submit 'Save'
+		#selectCustomer
+			-form_tag new_project_path, :method => :get, :remote => false do
+				%fieldset.customer
+					%dl
+						%dt Customer
+						%dd
+							= select_tag(:customer_id, options_for_select(@form_customers.map {|c| [c.name, c.id]}, params[:customer_id].to_i), {:onchange => "this.form.customerSubmit.click();"})
+							%input{:type=>"submit", :value=>"submit", :name=>"customerSubmit", :style=>"display:none"}
+			-form_tag new_project_path, :method => :get, :remote => false do
+				%fieldset.contact
+					%dl
+						%dt Main Contact
+						%dd
+							= select_tag(:contact_id, options_for_select(@form_contacts.map {|c| [c.firstname, c.id]}), {:onchange => "$('input#project_contact_id').val(this.value)"})
+						.clear
+		.clear
