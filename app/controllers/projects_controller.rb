@@ -13,6 +13,11 @@ class ProjectsController < ApplicationController
       format.html { render "index" }
     end
   end
+  
+  def report
+    @project = Project.find(params[:id])
+    render :layout => false, :template => 'projects/report'
+  end
 
   def new  
     respond_with(@project) do |format|

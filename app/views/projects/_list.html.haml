@@ -39,6 +39,7 @@
 				.main
 					%h2 Project information
 					%span.actions
+						= link_to image_tag("/images/icons/project-report.gif"), report_project_path(project)
 						-if project.closed == 0
 							= link_to image_tag("/images/icons/project-open.gif"), switch_project_path(project, :order => params[:order], :closed => params[:closed])
 						-else

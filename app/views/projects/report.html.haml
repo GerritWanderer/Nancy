@@ -1,0 +1,17 @@
+-@project.works.each do |work|
+  %ul{:class=>"record", :id=>"work#{work.id}"}
+    %li.time= "#{work.start.strftime('%H:%M')} to #{work.end.strftime('%H:%M')}"
+    %li.duration= "#{work.duration} min."
+    %li.customer= @project.customer.name
+    %li.description= work.description
+    .clear 
+%hr/
+%dl
+  %dt Duration
+  %dd
+    = @project.works.sum("duration").to_f / 60
+    hours
+  %dt Calculated
+  %dd
+    = @project.budget
+    hours
