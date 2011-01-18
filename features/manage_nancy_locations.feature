@@ -4,7 +4,8 @@ Feature: Manage locations
   wants [behaviour]
   
   Scenario: View a customers location
-    Given the following customers:
+    Given I sign up as user
+		And the following customers:
       | name | shortname | website |
       | name 1 | shortname 1 | website 1 |
     And the following locations:
@@ -23,7 +24,8 @@ Feature: Manage locations
     And I should see "Fax: 12345667899" within "div.customer div.location ul.record li:nth-child(5)"
     
   Scenario: Skip locations
-    Given the following customers:
+    Given I sign up as user
+		And the following customers:
       | name | shortname | website |
       | name 1 | shortname 1 | website 1 |
     And the following locations:
@@ -54,7 +56,8 @@ Feature: Manage locations
     And I should see "firstname 1 lastname 1" within "div.customer div.contacts ul.record li:first-child"
   
   Scenario: Create a Location within a customer
-    Given the following customer:
+    Given I sign up as user
+		And the following customer:
       | name | customer name |
       | shortname | shortname shortname |
       | website | www.example.org |
@@ -95,7 +98,8 @@ Feature: Manage locations
       | Fax: 12345667899-2 | |
       
   Scenario: Edit a Location within a customer
-    Given the following customer:
+    Given I sign up as user
+		And the following customer:
       | name | customer name |
       | shortname | shortname shortname |
       | website | www.example.org |
@@ -125,7 +129,8 @@ Feature: Manage locations
     
     
   Scenario: Delete location within customer
-    Given the following customers:
+    Given I sign up as user
+		And the following customers:
       | name | shortname | website |
       | name 1 | shortname 1 | website 1 |
     And the following locations:

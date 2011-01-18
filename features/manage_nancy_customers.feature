@@ -4,19 +4,22 @@ Feature: Manage customers
   wants [behaviour]
   
   Scenario: List all customers
-    Given the following customers:
+    Given I sign up as user
+    And the following customers:
       | name | shortname | website | 
       | name 1 | shortname 1 | website 1 | 
       | name 2 | shortname 2 | website 2 | 
       | name 3 | shortname 3 | website 3 | 
     When I go to the customers page
-    Then I should see the following customers:
+    Then show me the page
+    And I should see the following customers:
       | name 1 | shortname 1 | 0 | |
       | name 2 | shortname 2 | 0 | |
       | name 3 | shortname 3 | 0 | |
   
   Scenario: Change order of all customers
-    Given the following customers:
+    Given I sign up as user
+    And the following customers:
       | name | shortname | website | 
       | name 1 | shortname 1 | website 1 | 
       | name 2 | shortname 2 | website 2 | 
@@ -44,7 +47,8 @@ Feature: Manage customers
       | name 3 | shortname 3 | 0 | |
       
   Scenario: View a customer
-    Given the following customers:
+    Given I sign up as user
+    And the following customers:
       | name | shortname | website |
       | name 1 | shortname 1 | website 1 |
       | name 2 | shortname 2 | website 2 |
@@ -67,7 +71,8 @@ Feature: Manage customers
     
     
   Scenario: Create a new customer with Main Location/Contact
-    Given I am on the customers page
+    Given I sign up as user
+    And I am on the customers page
     When I fill in the form with:
       | Name | customer name |
       | Shortname | customer shortname |
@@ -108,7 +113,8 @@ Feature: Manage customers
       
       
   Scenario: Edit a customer
-    Given the following customer:
+    Given I sign up as user
+    And the following customer:
       | name | customer name |
       | shortname | shortname shortname |
       | website | www.example.org |
@@ -138,7 +144,8 @@ Feature: Manage customers
     
     
     Scenario: Delete a customer via the index page
-      Given the following customers:
+      Given I sign up as user
+      And the following customers:
         | name | shortname | website |
         | name 1 | shortname 1 | website 1 |
         | name 2 | shortname 2 | website 2 |

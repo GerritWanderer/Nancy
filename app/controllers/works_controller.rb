@@ -19,7 +19,7 @@ class WorksController < ApplicationController
     if !@customers.empty?
       params[:customer_id] ? @projects = Project.by_customer_isClosed(params[:customer_id], 0) : @projects = Project.by_customer_isClosed(@customers.first.id, 0)
     else
-      flash[:notice]  = "To create a work, you'll need at first to create customers and projects"
+      flash.now[:notice]  = "To create a work, you'll need at first to create customers and projects"
       render :layout => 'errors', :template => "errors/show"
     end
     @work = Work.new

@@ -87,7 +87,7 @@ class ProjectsController < ApplicationController
     if !@form_customers.empty?
       @form_contacts = params[:customer_id] ? Contact.find_by_customer_id(params[:customer_id]) : Contact.find_by_customer_id(@form_customers.first.id)
     else
-      flash[:notice]  = "To create a project, you'll need at first to create customers"
+      flash.now[:notice]  = "To create a project, you'll need at first to create customers"
       render :layout => 'errors', :template => "errors/show"
     end
     

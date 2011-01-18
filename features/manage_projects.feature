@@ -4,7 +4,8 @@ Feature: Manage projects
   wants [behaviour]
 
   Scenario: List all projects
-		Given the following customers:
+		Given I sign up as user
+		And the following customers:
 	    | name | shortname | website |
 	    | Customer 1 | shortname 1 | website 1 |
 	    | Customer 2 | shortname 2 | website 2 |
@@ -26,7 +27,8 @@ Feature: Manage projects
 	    | 3 | title 3 | Customer 2 | 1970-01-03 | |
 	
   Scenario: Filter projects by closed status
-		Given the following customers:
+		Given I sign up as user
+		And the following customers:
 	    | name | shortname | website |
 	    | Customer 1 | shortname 1 | website 1 |
 	    | Customer 2 | shortname 2 | website 2 |
@@ -65,7 +67,8 @@ Feature: Manage projects
 	    | 6 | title 6 | Customer 2 | 1970-01-03 | |
       
   Scenario: View a projects
-    Given the following customers:
+    Given I sign up as user
+		And the following customers:
       | name | shortname | website |
       | Customer 1 | shortname 1 | website 1 |
       | Customer 2 | shortname 2 | website 2 |
@@ -99,7 +102,8 @@ Feature: Manage projects
     Then I should be on the projects page
     
   Scenario: Switch closed status of a project
-    Given the following customers:
+    Given I sign up as user
+		And the following customers:
 	    | name | shortname | website |
 	    | Customer 1 | shortname 1 | website 1 |
 	    | Customer 2 | shortname 2 | website 2 |
@@ -123,7 +127,8 @@ Feature: Manage projects
     Then I should see "Project status was successfully switched."
 
   Scenario: Create a new project
-		Given the following customers:
+		Given I sign up as user
+		And the following customers:
 	    | name | shortname | website |
 	    | Customer 1 | shortname 1 | website 1 |
 	    | Customer 2 | shortname 2 | website 2 |
@@ -152,7 +157,8 @@ Feature: Manage projects
 			|||
 		
   Scenario: Edit a project
-		Given the following customers:
+		Given I sign up as user
+		And the following customers:
 	    | name | shortname | website |
 	    | Customer 1 | shortname 1 | website 1 |
 	    | Customer 2 | shortname 2 | website 2 |
@@ -210,7 +216,8 @@ Feature: Manage projects
 
 
   Scenario: Delete a project via the index page
-    Given the following customers:
+    Given I sign up as user
+		And the following customers:
       | name | shortname | website |
       | Customer 1 | shortname 1 | website 1 |
       | Customer 2 | shortname 2 | website 2 |

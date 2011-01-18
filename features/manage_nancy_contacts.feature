@@ -4,7 +4,8 @@ Feature: Manage contacts
   wants [behaviour]
   
   Scenario: View contacts within a customers location
-    Given the following customers:
+    Given I sign up as user
+		And the following customers:
       | name | shortname | website |
       | name 1 | shortname 1 | website 1 |
     And the following locations:
@@ -27,7 +28,8 @@ Feature: Manage contacts
     And I should see "Mobile: 12345667899" within "div.customer div.contacts ul.record:last-child li span:nth-child(3)"
     
   Scenario: Create a contact within a customers location
-    Given the following customer:
+    Given I sign up as user
+		And the following customer:
       | name | customer name |
       | shortname | shortname shortname |
       | website | www.example.org |
@@ -60,7 +62,8 @@ Feature: Manage contacts
       
       
   Scenario: Edit a contact within a customers location
-    Given the following customer:
+    Given I sign up as user
+		And the following customer:
       | name | customer name |
       | shortname | shortname shortname |
       | website | www.example.org |
@@ -89,7 +92,8 @@ Feature: Manage contacts
     
     
   Scenario: Delete a contact within a customers location
-    Given the following customers:
+    Given I sign up as user
+		And the following customers:
       | name | shortname | website |
       | name 1 | shortname 1 | website 1 |
     And the following locations:
