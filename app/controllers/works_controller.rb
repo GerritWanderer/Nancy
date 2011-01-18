@@ -1,5 +1,5 @@
 class WorksController < ApplicationController
-  #before_filter :authenticate_user!
+  before_filter :authenticate_user!
 
   # Use Session-Date when request is nonXHR and Param:date is not found
   # Create Selected Date with param or current Date
@@ -16,8 +16,12 @@ class WorksController < ApplicationController
     @jumping_links = Work.selectJumpingLinks(@dayCalendar)
 
     @customers = Customer.with_active_projects.joins(:projects).uniq
-    params[:customer_id] ? @projects = Project.by_customer_isClosed(params[:customer_id], 0) : @projects = Project.by_customer_isClosed(@customers.first.id, 0)
-
+    if !@customers.empty?
+      params[:customer_id] ? @projects = Project.by_customer_isClosed(params[:customer_id], 0) : @projects = Project.by_customer_isClosed(@customers.first.id, 0)
+    else
+      flash[:notice]  = "To create a work, you'll need at first to create customers and projects"
+      render :layout => 'errors', :template => "errors/show"
+    end
     @work = Work.new
     #@works = Work.from_day_by_user("%"+@daySelected.strftime("%Y-%m-%d")+"%", current_user.id)
     @works = Work.from_day("%"+@daySelected.strftime("%Y-%m-%d")+"%").order("start ASC")

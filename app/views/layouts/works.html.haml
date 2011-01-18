@@ -14,7 +14,9 @@
 			%ul
 				%li.active= link_to 'Works', works_path()
 				%li= link_to 'Customers', customers_path()
-				%li= link_to 'Projects', customers_path()
+				%li= link_to 'Projects', projects_path()
 	.container#content
+		- flash.each do |key, value|
+			%div{:class => key}= value
 		= yield
 	.clear

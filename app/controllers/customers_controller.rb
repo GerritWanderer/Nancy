@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  before_filter :init_customers
+  before_filter :authenticate_user!, :init_customers
   respond_to :html, :js
 
   def index
@@ -65,7 +65,7 @@ class CustomersController < ApplicationController
   
   protected
   def init_customers
-    params[:order] ? @customers = Customer.find(:all, :order => params[:order]) : @customers = Customer.all
+    @customers = params[:order] ? Customer.find(:all, :order => params[:order]) : Customer.all
     
     if params[:id]
       @customer = Customer.find(params[:id])
@@ -84,6 +84,6 @@ class CustomersController < ApplicationController
       @contact_build = @location_build.contacts.build
     end
     
-    params[:action] == 'edit' ? @displayCustomerForm = 'block' : @displayCustomerForm = 'none'
+    @displayCustomerForm = params[:action] == 'edit' ? 'block' : 'none'
   end
 end

@@ -1,5 +1,5 @@
 class ContactsController < ApplicationController
-  before_filter :init_contacts
+  before_filter :authenticate_user!, :init_contacts
   
   def show
     render :layout => 'customers', :template => 'customers/show'

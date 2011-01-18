@@ -1,5 +1,5 @@
 class LocationsController < ApplicationController
-  before_filter :init_locations
+  before_filter :authenticate_user!, :init_locations
   
   def index
     @locations = Location.all

@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_filter :init_projects
+  before_filter :authenticate_user!, :init_projects
   respond_to :html, :js
 
   def index
@@ -79,21 +79,18 @@ class ProjectsController < ApplicationController
   
   protected
   def init_projects
-    params[:closed] ? @projects = Project.isClosed(params[:closed]).joins(:customer).order(params[:order]) : @projects = Project.joins(:customer).order(params[:order])
-    if params[:id]
-      @project = Project.find(params[:id])
-    else
-      @project = Project.new
-    end
+    @projects = params[:closed] ? Project.isClosed(params[:closed]).joins(:customer).order(params[:order]) : Project.joins(:customer).order(params[:order])
+    @project = params[:id] ? Project.find(params[:id]) : Project.new
     
-    if params[:action] == 'edit'
-      @form_project = @project
-    else
-      @form_project = Project.new
-    end
+    @form_project = params[:action] == 'edit' ? @project : Project.new
     @form_customers = Customer.all
-    params[:customer_id] ? @form_contacts = Contact.find_by_customer_id(params[:customer_id]) : @form_contacts = Contact.find_by_customer_id(@form_customers.first.id)
+    if !@form_customers.empty?
+      @form_contacts = params[:customer_id] ? Contact.find_by_customer_id(params[:customer_id]) : Contact.find_by_customer_id(@form_customers.first.id)
+    else
+      flash[:notice]  = "To create a project, you'll need at first to create customers"
+      render :layout => 'errors', :template => "errors/show"
+    end
     
-    params[:action] == 'edit' || params[:action] == 'new' ? @displayProjectForm = 'block' : @displayProjectForm = 'none'
+    @displayProjectForm = params[:action] == 'edit' || params[:action] == 'new' ? 'block' : 'none'
   end
 end
