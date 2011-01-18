@@ -1,5 +1,13 @@
 require 'faker'
 
+user = User.create!(:firstname => Faker::Name.first_name,
+             :lastname => Faker::Name.last_name,
+             :email => "admin@wildner-designer.de",
+             :password => "test123")
+user.sign_in_count = 1
+user.confirmed_at = "2011-01-18 12:10:00"
+user.save
+
 6.times do
   new_customer = Customer.create!(:name => Faker::Company.name,
                                   :shortname => Faker::Company.name,
