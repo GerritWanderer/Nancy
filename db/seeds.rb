@@ -63,7 +63,7 @@ workday = Date.today.-(Date.today.cwday - 1)
     Work.create!(:start => timeStart.strftime('%Y-%m-%d %H:%M'),
                     :end => timeEnd.strftime('%Y-%m-%d %H:%M'),
                     :duration => duration,
-                    :description => Faker::Lorem.paragraph,
+                    :description => Faker::Lorem.sentence,
                     :project_id => projects.shuffle.first.id)
   end
   workday = workday.+(1)

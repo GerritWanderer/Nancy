@@ -11,7 +11,6 @@ Feature: Manage customers
       | name 2 | shortname 2 | website 2 | 
       | name 3 | shortname 3 | website 3 | 
     When I go to the customers page
-    Then show me the page
     And I should see the following customers:
       | name 1 | shortname 1 | 0 | |
       | name 2 | shortname 2 | 0 | |

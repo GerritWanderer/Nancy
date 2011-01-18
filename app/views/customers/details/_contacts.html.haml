@@ -24,7 +24,7 @@
           = mail_to contact.email, image_tag("/images/icons/mail.gif")
           = link_to image_tag("/images/icons/edit.gif"), edit_customer_location_contact_path(@customer, @location, contact, :order => params[:order])
           = link_to image_tag("/images/icons/delete.gif"), customer_location_contact_path(@customer, @location, contact, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete  
-  = form_for([@customer, @location, @contact_build], :html => {:style => "display: #{@displayContactForm || 'none'};"}) do |f|
+  = form_for([@customer, @location, @form_contact], :html => {:style => "display: #{@displayContactForm || 'none'};"}) do |f|
     %fieldset
       %legend Create Contact
       = link_to image_tag("/images/icons/container-close.gif"), customer_location_path(@customer, @location, :order => params[:order])

@@ -19,7 +19,7 @@
       %li= "Fon: #{@location.fon}"
       %li= "Fax: #{@location.fax}"
       .clear
-  = form_for([@customer, @location_build], :html => {:style => "display: #{@displayLocationForm || 'none'};"}) do |f|
+  = form_for([@customer, @form_location], :html => {:style => "display: #{@displayLocationForm || 'none'};"}) do |f|
     %fieldset
       %legend Create Location
       = link_to image_tag("/images/icons/container-close.gif"), customer_path(@customer, :order => params[:order])

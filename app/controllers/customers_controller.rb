@@ -1,72 +1,55 @@
 class CustomersController < ApplicationController
   before_filter :authenticate_user!, :init_customers
-  respond_to :html, :js
+  before_filter :render_filter, :only => [:index, :show, :new, :edit]
+  respond_to :html
 
-  def index
-    #see before_filter function init_customers
-    respond_with(@customers)
+  def index #empty method? I should be doing a something more then in init_locations
   end
 
-  def show
-    #see before_filter function init_customers
-    respond_with(@customer) do |format|
-      format.html { render "index" }
-    end
+  def show #empty method? I should be doing a something more then in init_locations
   end
 
-  def new
-    #see before_filter function init_customers
-    respond_with(@customer) do |format|
-      format.html { render "index" }
-    end
+  def new #empty method? I should be doing a something more then in init_locations
   end
 
   def edit
-    #see before_filter function init_customers
-    @locations = Location.paginate :conditions => ['customer_id = ?', @customer.id], :page => params[:page], :order => 'created_at ASC'
-    respond_with(@customer) do |format|
-      format.html { render "index" }
-    end
+    #We will edit customer, first location and contact within one nested form
+    @locations = Location.where('customer_id = ?', @customer.id),order('created_at ASC')
   end
 
   def create
     @customer = Customer.new(params[:customer])
-    respond_to do |format|
-      if @customer.save
-        format.html { redirect_to(@customer, :notice => 'Customer was successfully created.') }
-        format.xml  { render :xml => @customer, :status => :created, :location => @customer }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @customer.errors, :status => :unprocessable_entity }
-      end
+    if @customer.save
+      flash[:notice] = 'Customer was successfully created.'
+      respond_with(@customer)
+    else
+      @form_customer = @customer
+      render "index"
     end
   end
   def update
     @customer = Customer.find(params[:id])
-    respond_to do |format|
-      if @customer.update_attributes(params[:customer])
-        format.html { redirect_to(@customer, :notice => 'Customer was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @customer.errors, :status => :unprocessable_entity }
-      end
+    if @customer.update_attributes(params[:customer])
+      flash[:notice] = 'Customer was successfully updated.'
+      respond_with(@customer)
+    else
+      @form_customer = @customer
+      render "index"
     end
   end
   def destroy
     @customer = Customer.find(params[:id])
-    @customer.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(customers_url) }
-      format.xml  { head :ok }
+    if @customer.destroy
+      flash[:notice] = 'Customer was successfully deleted.'
+    else
+      flash[:alert] = 'Customer was not deleted.'
     end
+    redirect_to(customers_url)
   end
   
   protected
   def init_customers
-    @customers = params[:order] ? Customer.find(:all, :order => params[:order]) : Customer.all
-    
+    @customers = Customer.order(params[:order])
     if params[:id]
       @customer = Customer.find(params[:id])
       @locations = @customer.locations
@@ -80,10 +63,16 @@ class CustomersController < ApplicationController
       @form_customer = @customer
     else
       @form_customer = Customer.new
-      @location_build = @form_customer.locations.build
-      @contact_build = @location_build.contacts.build
+      @form_location = @form_customer.locations.build
+      @form_contact = @form_location.contacts.build
     end
     
-    @displayCustomerForm = params[:action] == 'edit' ? 'block' : 'none'
+    @displayCustomerForm = params[:action] == 'edit' || params[:action] == 'create' || params[:action] == 'update'? 'block' : 'none'
+  end
+  
+  def render_filter
+    respond_with(@customer) do |format|
+      format.html { render "index" }
+    end
   end
 end

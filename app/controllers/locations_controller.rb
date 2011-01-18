@@ -1,24 +1,16 @@
 class LocationsController < ApplicationController
   before_filter :authenticate_user!, :init_locations
+  before_filter :render_filter, :only => [:show, :new, :edit]
   
-  def index
-    @locations = Location.all
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @locations }
-    end
+  #mhh, index method is not used
+
+  def show #empty method? I should be doing a something more then in init_locations
   end
 
-  def show
-    render :layout => 'customers', :template => 'customers/show'
+  def new #empty method? I should be doing a something more then in init_locations
   end
 
-  def new
-    render :layout => 'customers', :template => 'customers/show'
-  end
-
-  def edit
-    render :layout => 'customers', :template => 'customers/show'
+  def edit #empty method? I should be doing a something more then in init_locations
   end
 
   def create
@@ -44,19 +36,23 @@ class LocationsController < ApplicationController
   
   protected
   def init_locations
-    params[:order] ? @customers = Customer.find(:all, :order => params[:order]) : @customers = Customer.all
+    @customers = Customer.order(params[:order])
     @customer = Customer.find(params[:customer_id])
     @locations = @customer.locations
-    params[:id] ? @location = Location.find(params[:id]) : @location = @customer.locations.first
+    @location = params[:id] ? Location.find(params[:id]) : @customer.locations.first
     @contacts = @location.contacts
     
     @form_customer = Customer.new
-    params[:action] == 'edit' ? @location_build = @location : @location_build = @form_customer.locations.build
-    @location_build_temp = @form_customer.locations.build
-    @contact_build = @location_build_temp.contacts.build
+    @form_location = params[:action] == 'edit' ? @location : @form_customer.locations.build
+    @form_location_temp = @form_customer.locations.build
+    @form_contact = @form_location_temp.contacts.build
     if params[:action] == 'edit' || params[:action] == 'new'
       @displayLocationRecord = 'none'
       @displayLocationForm = 'block'
     end
+  end
+  
+  def render_filter
+    render :layout => 'customers', :template => 'customers/show'
   end
 end
