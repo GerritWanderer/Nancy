@@ -3,13 +3,13 @@ class CustomersController < ApplicationController
   before_filter :render_filter, :only => [:index, :show, :new, :edit]
   respond_to :html
 
-  def index #empty method? I should be doing a something more then in init_locations
+  def index #empty method? I should be doing a something more then in init_customers
   end
 
-  def show #empty method? I should be doing a something more then in init_locations
+  def show #empty method? I should be doing a something more then in init_customers
   end
 
-  def new #empty method? I should be doing a something more then in init_locations
+  def new #empty method? I should be doing a something more then in init_customers
   end
 
   def edit
@@ -27,6 +27,7 @@ class CustomersController < ApplicationController
       render "index"
     end
   end
+  
   def update
     @customer = Customer.find(params[:id])
     if @customer.update_attributes(params[:customer])
@@ -37,6 +38,7 @@ class CustomersController < ApplicationController
       render "index"
     end
   end
+  
   def destroy
     @customer = Customer.find(params[:id])
     if @customer.destroy
