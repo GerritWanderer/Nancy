@@ -16,15 +16,27 @@ class LocationsController < ApplicationController
   def create
     @location = Location.new(params[:location])
     if @location.save
-      render :layout => 'customers', :template => 'customers/show'
+      flash.now[:notice] = 'Location was successfully created.'
+    else
+      @form_location = @location
+      @location = @customer.locations.first
+      @displayLocationRecord = 'none'
+      @displayLocationForm = 'block'
     end
+    render :layout => 'customers', :template => 'customers/index'
   end
 
   def update
     @location = Location.find(params[:id])
     if @location.update_attributes(params[:location])
-      render :layout => 'customers', :template => 'customers/show'
+      flash.now[:notice] = 'Location was successfully updated.'
+    else
+      @form_location = @location
+      @location = @customer.locations.first
+      @displayLocationRecord = 'none'
+      @displayLocationForm = 'block'
     end
+    render :layout => 'customers', :template => 'customers/index'
   end
 
   def destroy
@@ -53,6 +65,6 @@ class LocationsController < ApplicationController
   end
   
   def render_filter
-    render :layout => 'customers', :template => 'customers/show'
+    render :layout => 'customers', :template => 'customers/index'
   end
 end
