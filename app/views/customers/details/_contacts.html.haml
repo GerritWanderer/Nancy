@@ -26,6 +26,12 @@
           = link_to image_tag("/images/icons/delete.gif"), customer_location_contact_path(@customer, @location, contact, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete  
   = form_for([@customer, @location, @form_contact], :html => {:style => "display: #{@displayContactForm || 'none'};"}) do |f|
     %fieldset
+      -if @form_contact.errors.any?
+        #error_explanation
+          %h2= "#{pluralize(@form_contact.errors.count, "error")} prohibited this contact from being saved:"
+          %ul
+            - @form_contact.errors.full_messages.each do |msg|
+              %li= msg
       %legend Create Contact
       = link_to image_tag("/images/icons/container-close.gif"), customer_location_path(@customer, @location, :order => params[:order])
       %hr.clear/

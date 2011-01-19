@@ -17,15 +17,25 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(params[:contact])
     if @contact.save
-      render :layout => 'customers', :template => 'customers/show'
+      flash.now[:notice] = 'Contact was successfully created.'
+    else
+      @form_contact = @contact
+      @displayContactsRecord = 'none'
+      @displayContactsForm = 'block'
     end
+    render :layout => 'customers', :template => 'customers/index'
   end
 
   def update
     @contact = Contact.find(params[:id])
     if @contact.update_attributes(params[:contact])
-      render :layout => 'customers', :template => 'customers/show'
+      flash.now[:notice] = 'Contact was successfully updated.'
+    else
+      @form_contact = @contact
+      @displayContactsRecord = 'none'
+      @displayContactsForm = 'block'
     end
+    render :layout => 'customers', :template => 'customers/index'
   end
 
   def destroy
@@ -56,6 +66,6 @@ class ContactsController < ApplicationController
   end
   
   def render_filter
-    render :layout => 'customers', :template => 'customers/show'
+    render :layout => 'customers', :template => 'customers/index'
   end
 end

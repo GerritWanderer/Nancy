@@ -9,7 +9,6 @@ Feature: Manage locations
 		And 3 customers exist
     When I go to the customers page
     And I click "Container-open" in the 2nd customer row
-		Then show me the page
 		Then I should see the 1st location from 2nd customer
   
   Scenario: Skip locations
