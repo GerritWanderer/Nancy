@@ -38,3 +38,22 @@ def valid_contact_attributes
   # You may want to a factory for this
   {}
 end
+
+
+
+
+Then(/^I should see the (\d+)(?:st|nd|rd|th) location from (\d+)(?:st|nd|rd|th) customer$/) do |location, customer|
+	locations = find_models("location", "customer_id: #{customer}")
+	location = locations[location.to_i - 1]
+	contacts = find_models("contact", "location_id: #{location.id}")
+	
+	counter = 0
+  contacts.each do |contact|
+		counter+=1
+    Then %{I should see "#{contact.salutation} #{contact.title} #{contact.firstname} #{contact.lastname}" within "div.customer div.contacts ul.record li:first-child"}
+  	Then %{I should see "#{contact.department}" within "div.customer div.contacts ul.record li:nth-child(2)"}
+  	Then %{I should see "Fon: #{contact.fon}" within "div.customer div.contacts ul.record li:nth-child(3) span:first-child"}
+  	Then %{I should see "Fon: #{contact.fax}" within "div.customer div.contacts ul.record li:nth-child(3) span:nth-child(2)"}
+  	Then %{I should see "Fon: #{contact.mobile}" within "div.customer div.contacts ul.record li:nth-child(3) span:first-child(3)"}
+	end
+end

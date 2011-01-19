@@ -11,11 +11,6 @@ Feature: Manage locations
     And I click "Container-open" in the 2nd customer row
 		Then show me the page
 		Then I should see the 1st location from 2nd customer
-    # Then I should see "location 1" within "div.customer div.location ul.record li:first-child"
-    # And I should see "street 1" within "div.customer div.location ul.record li:nth-child(2)"
-    # And I should see "11 city 1" within "div.customer div.location ul.record li:nth-child(3)"
-    # And I should see "Fon: 12345667899" within "div.customer div.location ul.record li:nth-child(4)"
-    # And I should see "Fax: 12345667899" within "div.customer div.location ul.record li:nth-child(5)"
   
   Scenario: Skip locations
 	  Given I sign up as user
