@@ -7,7 +7,7 @@ Feature: Manage customers
 		Given I sign up as user
 		And 3 customers exist
 		When I go to the customers page
-		And I should see all customers
+		Then I should see all customers
 
 	Scenario: Change order of all customers
 		Given I sign up as user
@@ -77,17 +77,17 @@ Feature: Manage customers
 		And 3 customers exist
 		When I go to the customers page
 		And I click "Edit" in the 2nd customer row
-		When I fill in the customer form with valid values
+		And I fill in the customer form with valid values
 		And I press "Save"
 		Then I should see "Customer was successfully updated."
 		#And I should be on the page for that customer
 		
-	Scenario: Update a customer with valid fields
+	Scenario: Update a customer with invalid fields
 		Given I sign up as user
 		And 3 customers exist
 		When I go to the customers page
 		And I click "Edit" in the 2nd customer row
-		When I fill in the customer form with invalid values
+		And I fill in the customer form with invalid values
 		And I press "Save"
 		Then I should see "errors prohibited this contact from being saved:"
 		#And I should be on the page for that customer
