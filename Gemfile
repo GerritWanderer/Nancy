@@ -24,7 +24,8 @@ group :development, :test do
 	gem 'cucumber_scaffold'
 	gem 'capybara'
 	gem "autotest"
-	gem 'machinist', '>= 2.0.0.beta1'
+	gem 'factory_girl_rails'
+	gem 'pickle'
 	gem 'email_spec'
 	gem 'launchy'
 	gem 'database_cleaner'
