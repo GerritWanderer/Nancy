@@ -4,7 +4,7 @@
     #error_explanation
       %h2= "#{pluralize(@customer.errors.count, "error")} prohibited this contact from being saved:"
       %ul
-        - @customer.errors.full_messages.each do |msg|
+        = @customer.errors.full_messages.each do |msg|
           %li= msg
   %hr/
   .wrapper
@@ -19,7 +19,7 @@
           %dd= f.text_field :name
           %dt= f.label :website
           %dd= f.text_field :website
-        -f.fields_for :locations, @form_customer.locations.first do |l|
+        = f.fields_for :locations, @form_customer.locations.first do |l|
           %fieldset
             %legend Main Location
             %dl
@@ -35,7 +35,7 @@
               %dd= l.text_field :fon
               %dt= l.label :fax
               %dd= l.text_field :fax
-          -l.fields_for :contacts, @form_customer.locations.first.contacts.first do |c|
+          = l.fields_for :contacts, @form_customer.locations.first.contacts.first do |c|
             %fieldset
               %legend Main Contact
               %dl

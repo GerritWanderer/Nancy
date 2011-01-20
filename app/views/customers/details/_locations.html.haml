@@ -24,7 +24,7 @@
       #error_explanation
         %h2= "#{pluralize(@form_location.errors.count, "error")} prohibited this contact from being saved:"
         %ul
-          - @form_location.errors.full_messages.each do |msg|
+          = @form_location.errors.full_messages.each do |msg|
             %li= msg
     %fieldset
       %legend Create Location
