@@ -28,3 +28,17 @@ Factory.define :contact do |f|
 	f.mobile {Faker::PhoneNumber.phone_number}
 	f.fax {Faker::PhoneNumber.phone_number}
 end
+
+Factory.define :project do |f|
+	Rails.logger.info Contact.all.inspect
+	#contact = Contact.all.shuffle.first
+  #customer = contact.location.customer
+
+	f.title {Faker::Company.name}
+	f.description {Faker::Lorem.paragraph}
+	f.discount {rand(20)}
+	f.budget {rand(500)}
+	f.closed {rand(2)}
+	f.customer_id {"1"}
+	f.contact_id {"2"}
+end
