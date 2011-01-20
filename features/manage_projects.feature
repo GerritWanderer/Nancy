@@ -1,7 +1,7 @@
 Feature: Manage projects
-  In order to [goal]
-  [stakeholder]
-  wants [behaviour]
+	In order to manage projects
+	As a user
+	I want to perform serveral project operations
 
 	Scenario: List all projects
 		Given I sign up as user
