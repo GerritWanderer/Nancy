@@ -42,9 +42,18 @@ Feature: Manage work
 		And 10 projects exist
 		And 6 works exist
 		When I go to the works page
-		Then show me the page
 		Then I should see all my work of the current weekday
 		#improve
+		
+	@wip
+	Scenario: Switch Customer within form
+		Given I sign up as user
+		And 3 customers exist
+		And 10 projects exist
+		And 6 works exist
+		When I go to the works page
+		And I select the 2nd customer
+		Then the 2nd customer is selected 
 		
 	Scenario: Create a valid Work
 		Given I sign up as user
@@ -67,6 +76,12 @@ Feature: Manage work
 		And I press "Save"
 		Then I should see "errors prohibited this work from being saved:"
 		
-	@wip
-	Scenario: Attemp to create a new Work with invalid fields
-		pending
+	Scenario: Delete a work
+		Given I sign up as user
+		And 3 customers exist
+		And 10 projects exist
+		And 6 works exist
+		When I go to the works page
+		And I click "Delete" in the 2nd work row
+		Then work should not exist with id: 2
+		And I should be on the works page

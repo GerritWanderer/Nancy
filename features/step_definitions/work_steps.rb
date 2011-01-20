@@ -34,6 +34,21 @@ Then(/^I should see all my work of the current weekday$/) do
 	end
 end
 
+When /^I click "([^"]*)" in the (\d+)(?:st|nd|rd|th) work row$/ do |link, pos|
+	within("div#works ul.record:nth-child(#{pos.to_i}) li.actions") do
+    click_link link
+  end
+end
+When /^I select the (\d+)(?:st|nd|rd|th) customer$/ do |pos|
+	customer_name = Customer.with_active_projects.joins(:projects).uniq[pos.to_i].name
+  When %{I select "#{customer_name}" from "customer_id"}
+end
+Then /^the (\d+)(?:st|nd|rd|th) customer is selected$/ do |pos|
+	customers = Customer.with_active_projects.joins(:projects).uniq
+	customer_name = customers[pos.to_i].name
+  Then %{the "customer_id" field should contain "#{customer_name}"}
+end
+
 When /^I fill in the work form with valid values$/ do	
 	work_selector = "work_"
 	work = Factory.attributes_for(:work)

@@ -6,6 +6,6 @@ class Project < ActiveRecord::Base
   validates_presence_of :title, :message => "can't be blank"
   validates_presence_of :description, :message => "can't be blank"
   
-  scope :by_customer_isClosed, proc {|customer, status| where(:customer_id => customer, :closed => status) }
+  scope :by_customer_isClosed, proc {|customer, status| where(:customer_id => customer, :closed => status).order('title ASC') }
   scope :isClosed, lambda {|status| {:conditions => {:closed => status}}}
 end

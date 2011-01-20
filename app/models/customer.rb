@@ -6,7 +6,7 @@ class Customer < ActiveRecord::Base
   validates_presence_of :name, :message => "can't be blank"
   validates_presence_of :shortname, :message => "can't be blank"
   
-  scope :with_active_projects, where("closed = ?", 0)
+  scope :with_active_projects, where("closed = ?", 0).order("name ASC")
   def self.find_previous_customer(customer_id)
     hit = false
     previous_customer = 0
