@@ -24,7 +24,7 @@ Then(/^I should see all projects(?: ordered "([^"]*)" "([^"]*)")?(?: with closed
 end
 
 When /^I click "([^"]*)" in the (\d+)(?:st|nd|rd|th) project row$/ do |link, pos|
-  within("div.project:nth-child(#{pos.to_i+3}) ul.title li.actions") do
+	within("div.project:nth-child(#{pos.to_i+3}) ul.title li.actions") do
     click_link link
   end
 end

@@ -35,3 +35,38 @@ Feature: Manage work
 		When I follow "Calendarweek-prev" within "ul#calendar li#calendarWeek"
 		And I follow "Calendarweek-prev" within "ul#calendar li#calendarWeek"
 		Then I should see the "previous" calendarweek
+	
+	Scenario: List my work of the current day
+		Given I sign up as user
+		And 3 customers exist
+		And 10 projects exist
+		And 6 works exist
+		When I go to the works page
+		Then show me the page
+		Then I should see all my work of the current weekday
+		#improve
+		
+	Scenario: Create a valid Work
+		Given I sign up as user
+		And 3 customers exist
+		And 10 projects exist
+		And 6 works exist
+		When I go to the works page
+		When I fill in the work form with valid values
+		And I press "Save"
+		Then I should see "Work was successfully created."
+		#improve
+		
+	Scenario: Attemp to create a new Work with invalid fields
+		Given I sign up as user
+		And 3 customers exist
+		And 10 projects exist
+		And 6 works exist
+		When I go to the works page
+		When I fill in the work form with invalid values
+		And I press "Save"
+		Then I should see "errors prohibited this work from being saved:"
+		
+	@wip
+	Scenario: Attemp to create a new Work with invalid fields
+		pending

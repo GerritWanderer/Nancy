@@ -37,17 +37,25 @@ class WorksController < ApplicationController
   # Else select Work-Entries from User of the previous selected Dates and Create Statistics
   def create
     #params[:work][:user_id] = current_user.id
-    timeStart = Time.parse(params[:work][:day]+" "+params[:work][:starttime])
-    timeEnd = Time.parse(params[:work][:day]+" "+params[:work][:endtime])
+    timeStart = Time.parse(params[:work][:day]+" "+params[:work][:start])
+    timeEnd = Time.parse(params[:work][:day]+" "+params[:work][:end])
     params[:work][:duration] = (timeEnd - timeStart) / 60
     params[:work][:start] = timeStart.strftime("%Y-%m-%d %H:%M")
     params[:work][:end] = timeEnd.strftime("%Y-%m-%d %H:%M")
     @work = Work.new(params[:work])
     if @work.save
-      redirect_to works_path(:date => params[:work][:day]), :notice => 'Time created.' unless request.xhr?
+      redirect_to works_path(:date => params[:work][:day]), :notice => 'Work was successfully created.' unless request.xhr?
       #@works = Work.from_day_by_user("%"+params[:work][:day]+"%", current_user.id)
-      @works = Work.from_day("%"+params[:work][:day]+"%")
+      #@works = Work.from_day("%"+params[:work][:day]+"%")
       #@statistics = Work.calculateStatistics(@works, current_user.hours)
+    else
+			@daySelected = Date.parse(params[:work][:day])
+	    @dayCalendar = @daySelected.-(@daySelected.cwday - 1)
+			@jumping_links = Work.selectJumpingLinks(@dayCalendar)
+			@customers = Customer.with_active_projects.joins(:projects).uniq
+			@projects = Project.where(:customer_id => Project.find(params[:work][:project_id]).customer.id)
+			@works = Work.from_day("%"+@daySelected.strftime("%Y-%m-%d")+"%").order("start ASC")
+      render 'index'
     end
   end
 

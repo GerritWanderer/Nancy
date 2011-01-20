@@ -7,6 +7,13 @@ user = User.create!(:firstname => Faker::Name.first_name,
 user.sign_in_count = 1
 user.confirmed_at = "2011-01-18 12:10:00"
 user.save
+user = User.create!(:firstname => Faker::Name.first_name,
+             :lastname => Faker::Name.last_name,
+             :email => "gw@wildner-designer.de",
+             :password => "test123")
+user.sign_in_count = 1
+user.confirmed_at = "2011-01-18 12:10:00"
+user.save
 
 6.times do
   new_customer = Customer.create!(:name => Faker::Company.name,
@@ -52,19 +59,22 @@ end
 
 
 projects = Project.find_all_by_closed(false)
-workday = Date.today.-(Date.today.cwday - 1)
-5.times do
-  timeStart = Time.parse("#{workday.strftime("%Y-%m-%d")} 09:00")
-  timeEnd = Time.parse("#{workday.strftime("%Y-%m-%d")} 09:00")
-  8.times do
-    timeStart = timeEnd
-    duration = (rand(8)+1)*15
-    timeEnd = timeStart + (duration * 60)
-    Work.create!(:start => timeStart.strftime('%Y-%m-%d %H:%M'),
-                    :end => timeEnd.strftime('%Y-%m-%d %H:%M'),
-                    :duration => duration,
-                    :description => Faker::Lorem.sentence,
-                    :project_id => projects.shuffle.first.id)
-  end
-  workday = workday.+(1)
+User.all.each do |user|
+	workday = Date.today.-(Date.today.cwday - 1)
+	5.times do
+	  timeStart = Time.parse("#{workday.strftime("%Y-%m-%d")} 09:00")
+	  timeEnd = Time.parse("#{workday.strftime("%Y-%m-%d")} 09:00")
+	  8.times do
+	    timeStart = timeEnd
+	    duration = (rand(8)+1)*15
+	    timeEnd = timeStart + (duration * 60)
+	    Work.create!(:start => timeStart.strftime('%Y-%m-%d %H:%M'),
+	                    :end => timeEnd.strftime('%Y-%m-%d %H:%M'),
+	                    :duration => duration,
+	                    :description => Faker::Lorem.sentence,
+	                    :project_id => projects.shuffle.first.id,
+											:user_id => user.id)
+	  end
+	  workday = workday.+(1)
+	end
 end

@@ -39,7 +39,7 @@ Feature: Manage projects
 		Then I should see all projects with closed status "true"
 		And I follow "All Projects" within "div.filter li:first-child"
 		Then I should see all projects
-
+	@test
 	Scenario: View a project
 		Given I sign up as user
 		And 3 customers exist

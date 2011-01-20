@@ -30,15 +30,23 @@ Factory.define :contact do |f|
 end
 
 Factory.define :project do |f|
-	Rails.logger.info Contact.all.inspect
-	#contact = Contact.all.shuffle.first
-  #customer = contact.location.customer
-
 	f.title {Faker::Company.name}
 	f.description {Faker::Lorem.paragraph}
 	f.discount {rand(20)}
 	f.budget {rand(500)}
 	f.closed {rand(2)}
-	f.customer_id {"1"}
-	f.contact_id {"2"}
+	f.customer_id {2}
+	f.contact_id {rand(9)+9}
 end
+
+Factory.define :work do |f|
+	f.start { Time.parse("#{Date.today.strftime("%Y-%m-%d")} #{Factory.next(:startTime)}:00") }
+	f.end { Time.parse("#{Date.today.strftime("%Y-%m-%d")} #{Factory.next(:endTime)}:00") }
+	f.duration {45}
+	f.description {Faker::Lorem.paragraph}
+	f.user_id {1}
+	f.project_id {rand(10)+1}
+end
+
+Factory.sequence :startTime do |s| "#{s + 7}" end
+Factory.sequence :endTime do |e| "#{e + 8}" end
