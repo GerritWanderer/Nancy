@@ -13,7 +13,7 @@ Given /^I sign up as user$/ do
   firstname = 'Max'
   lastname = 'Mustermann'
   email = 'admin@wildner-designer.de'
-  password = 'secretpass'
+  password = 'test123'
 
   When %{I go to the the registration page}
   And %{I fill in "user_firstname" with "#{firstname}"}

@@ -54,3 +54,18 @@ Feature: Use auth. from devise
     When I go to the projects page
     Then I should not see "You need to sign in or sign up before continuing."
     And I am on the projects page
+
+  Scenario: Update Profile as authenticated User successfully
+		Given I sign up as user
+		And 3 customers exist
+		And 10 projects exist
+		And 6 works exist
+		When I go to the works page
+		And I follow "profile" within "div#navigation ul li.small"
+    And I fill in "user_firstname" with "Lucky"
+    And I fill in "user_lastname" with "Luke"
+		And I fill in "user_current_password" with "test123"
+    And I press "Update"
+    Then I should see "You updated your account successfully."
+		And I should see "Lucky Luke" within "div#navigation ul li.user"
+		And I should be on the root page
