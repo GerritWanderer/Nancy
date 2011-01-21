@@ -39,7 +39,7 @@ Feature: Manage projects
 		Then I should see all projects with closed status "true"
 		And I follow "All Projects" within "div.filter li:first-child"
 		Then I should see all projects
-	@test
+
 	Scenario: View a project
 		Given I sign up as user
 		And 3 customers exist
@@ -135,3 +135,15 @@ Feature: Manage projects
 		And I click "Container-open" in the 2nd project row
     When I follow "Project-close" within "div.project div.main span.actions"
     Then I should see "Project status was successfully switched."
+
+	@test
+  Scenario: Open Work-Report of a project
+		Given I sign up as user
+		And 3 customers exist
+		And 10 projects exist
+		And 10 works exist
+		When I go to the projects page
+		And I click "Container-open" in the 2nd project row
+    When I follow "Project-report" within "div.project div.main span.actions"
+    Then I should see all works for the 2nd project
+		#And I should be on the projects page

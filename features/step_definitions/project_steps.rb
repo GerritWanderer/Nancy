@@ -53,3 +53,15 @@ When /^I fill in the project form with invalid values$/ do
 		And %{I fill in "#{project_selector}#{key}" with ""} if key.to_s != "contact_id" && key.to_s != "customer_id" && key.to_s != "closed" && key.to_s != "type" && key.to_s != "description"
 	}
 end
+
+Then(/^I should see all works for the (\d+)(?:st|nd|rd|th) project$/) do |project|
+	works = find_models("work", "project_id: #{project}")
+	works = works.sort_by { |w| w["start"] }
+	counter = 0
+  works.each do |work|
+		counter+=1
+		Then %{I should see "#{work.start.strftime('%Y-%m-%d')} #{work.start.strftime('%H:%M')} to #{work.end.strftime('%H:%M')} #{User.find(work.user_id).firstname} #{User.find(work.user_id).lastname}" within "div#works ul.record:nth-child(#{counter}) li:first-child"}
+		Then %{I should see "#{work.description}" within "div#works ul.record:nth-child(#{counter}) li:nth-child(2)"}
+		Then %{I should see "#{work.duration} min." within "div#works ul.record:nth-child(#{counter}) li:nth-child(3)"}
+	end
+end
