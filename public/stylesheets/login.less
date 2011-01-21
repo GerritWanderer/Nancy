@@ -11,16 +11,32 @@
 		margin: 100px auto 0px auto;
 	}
 
-	h2 { margin: 10px 0px 20px 0px; }
+	h2 {
+		margin: 10px 0px 20px 0px;
+		color: grey;
+	}
 	form {
 		background-color: transparent !important;
-		dl dt { .grid(10,0,1); }
+		dl dt { .grid(12,0,1); }
 		dl dt label { display: block; }
 		dl dd { .grid(20); }
+		.current_password { margin-top: 20px; font-size: 12px; }
 	}
 	
 	ul.links li {
+		margin-top: 20px;
 		float: left;
 		margin-right: 20px;
+	}
+	
+	div.alert{
+		background-color: #FF6F6F;
+		border: 2px solid darkred;
+		clear: both;
+		color: white;
+		display: block;
+		margin: 25px 25px 0px 25px;
+		padding: 10px;
+		.rounded;
 	}
 }

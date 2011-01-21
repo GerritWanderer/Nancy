@@ -18,10 +18,12 @@ class ContactsController < ApplicationController
     @contact = Contact.new(params[:contact])
     if @contact.save
       flash.now[:notice] = 'Contact was successfully created.'
+			logger.info "Hat geklappt"
     else
       @form_contact = @contact
       @displayContactsRecord = 'none'
       @displayContactsForm = 'block'
+			logger.info "Hat nicht geklappt"
     end
     render :layout => 'customers', :template => 'customers/index'
   end

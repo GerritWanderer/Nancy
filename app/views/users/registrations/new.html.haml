@@ -12,8 +12,8 @@
     %dt= f.label :password
     %dd= f.password_field :password
     %dt= f.label :password_confirmation, "Confirmation"
-    %dt= f.password_field :password_confirmation
+    %dd= f.password_field :password_confirmation
     %dt &nbsp;
-    %dt= f.submit "Sign up"
+    %dd= f.submit "Sign up", :class => "submit"
   .clear
   = render :partial => "users/shared/links"

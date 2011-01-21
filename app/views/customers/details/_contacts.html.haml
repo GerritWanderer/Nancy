@@ -9,7 +9,7 @@
       %li Department
       %li.fon Contact
       .clear
-    = @contacts.each do |contact|
+    - @contacts.each do |contact|
       %ul.record
         %li.name= "#{contact.salutation} #{contact.title} #{contact.firstname} #{contact.lastname}"
         %li= contact.department
@@ -23,7 +23,8 @@
         %li.actions
           = mail_to contact.email, image_tag("/images/icons/mail.gif")
           = link_to image_tag("/images/icons/edit.gif"), edit_customer_location_contact_path(@customer, @location, contact, :order => params[:order])
-          = link_to image_tag("/images/icons/delete.gif"), customer_location_contact_path(@customer, @location, contact, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete  
+          = link_to image_tag("/images/icons/delete.gif"), customer_location_contact_path(@customer, @location, contact, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete
+        .clear
   = form_for([@customer, @location, @form_contact], :html => {:style => "display: #{@displayContactForm || 'none'};"}) do |f|
     %fieldset
       -if @form_contact.errors.any?
@@ -38,8 +39,8 @@
       %dl
         %dt= f.label :salutation
         %dd
-          =f.text_field :salutation
-          =f.text_field :title
+          = f.select(:salutation, options_for_select(["Mr.", "Ms."]))
+          =f.text_field :title, :class => "title"
         %dt= f.label :firstname
         %dd= f.text_field :firstname
         %dt= f.label :lastname
@@ -54,5 +55,6 @@
         %dd= f.text_field :fax
         %dt= f.label :mobile
         %dd= f.text_field :mobile
-    = f.hidden_field :location_id, :value => @location.id
-    = f.submit 'Save Contact'
+        %dt.submit
+          = f.hidden_field :location_id, :value => @location.id
+          = f.submit 'Save Contact', :class => "submit"

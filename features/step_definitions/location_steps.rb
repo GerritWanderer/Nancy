@@ -2,10 +2,8 @@ Then(/^I should see the (\d+)(?:st|nd|rd|th) location from (\d+)(?:st|nd|rd|th) 
 	locations = find_models("location", "customer_id: #{customer}")
 	location = locations[pos.to_i - 1]
 	Then %{I should see "#{location.name}" within "div.customer div.location ul.record li:first-child"}
-	Then %{I should see "#{location.street}" within "div.customer div.location ul.record li:nth-child(2)"}
-	Then %{I should see "#{location.zip} #{location.city}" within "div.customer div.location ul.record li:nth-child(3)"}
-	Then %{I should see "Fon: #{location.fon}" within "div.customer div.location ul.record li:nth-child(4)"}
-	Then %{I should see "Fax: #{location.fax}" within "div.customer div.location ul.record li:nth-child(5)"}
+	Then %{I should see "#{location.street} #{location.zip} #{location.city}" within "div.customer div.location ul.record li:nth-child(2)"}
+	Then %{I should see "Fon: #{location.fon} Fax: #{location.fax}" within "div.customer div.location ul.record li:nth-child(3)"}
 end
 
 When /^I fill in the location form with valid values$/ do	

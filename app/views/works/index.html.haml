@@ -17,7 +17,7 @@
 				%dt.submit
 					= f.hidden_field :project_id, :value => @projects.first.id
 					= f.hidden_field :day, :value => @daySelected.strftime("%Y-%m-%d")
-					= f.submit "Save time"
+					= f.submit "Save time", :class => "submit"
 	#selectWrapper
 		%dl
 			%dt Customer

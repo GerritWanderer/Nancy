@@ -12,16 +12,23 @@ body {
 div#navigation {
 	height: 50px;
 	background-color: @blueDark;
-	margin-bottom: 20px;
+	margin-bottom: 40px;
 	ul {
 		padding-top: 10px;
 		li {
 			.grid(15,0,1);
 			.roundedTop;
+			.gradient(#1D88D8, #005DAA);
+			a { color: white; }
 			line-height: 40px;
 			font-size: 16px;
 			text-align: center;
-			background-color: @blueLight;
+			background-color: #E2EBF5;
+		}
+		li.active {
+			.gradient(transparent, transparent);
+			background-color: #E2EBF5;
+			a { color: orange; }
 		}
 		li.small {
 			.grid(8,0,1);
@@ -30,8 +37,9 @@ div#navigation {
 			margin-top: 22px;
 		}
 		li.user {
-			border: none;
+			.gradient(transparent, transparent);
 			.grid(15,0,1);
+			border: none;
 			font-size: 12px;
 			line-height: 22px;
 			background-color: transparent;
@@ -43,6 +51,10 @@ div#navigation {
 
 // ALLGEMEINE CONTENT ELEMENTE //
 div#content {
+	.rounded;
+	background-color: white;
+	padding: 30px;
+	width: 900px;
 	div.wizard {
 		.rounded;
 		margin-bottom: 20px;
@@ -54,6 +66,14 @@ div#content {
 		.rounded;
 		background-color: @blueLight;
 		padding: 10px;
+		input.submit {
+		    background: url("/images/submit.gif") no-repeat scroll center top transparent;
+		    border: 0 none;
+		    color: white;
+		    height: 22px;
+		    width: 165px;
+				margin: 10px 0px;
+		}
 	}
 
 	div.toolbar {
