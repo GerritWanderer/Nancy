@@ -12,6 +12,9 @@ Nancy::Application.routes.draw do
   
   resources :works
   resources :customers do
+    collection do
+      get 'first'
+    end
     resources :locations do
       resources :contacts
     end

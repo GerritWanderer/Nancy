@@ -11,7 +11,6 @@ Feature: Use auth. from devise
 		And I fill in "user_password" with "test123"
 		And I fill in "user_password_confirmation" with "test123"
     When I press "Sign up"
-    #Then show me the page
     #Then I should see "You have signed up successfully"
     And I should be on the login page
     And I should receive an email
@@ -19,7 +18,15 @@ Feature: Use auth. from devise
     Then I should see "Welcome admin@wildner-designer.de!" in the email body
     When they click the first link in the email
     #Then I should see "Your account was successfully confirmed"
-		Then I should be on the root page
+	  #And I should be on the customer wizard page
+	  When I fill in "customer_name" with "Max"
+	  And I fill in "customer_website" with "Mustermann"
+	  And I fill in "customer_locations_attributes_0_name" with "Musterfirma"
+	  And I fill in "customer_locations_attributes_0_street" with "Musterstr."
+	  And I fill in "customer_locations_attributes_0_zip" with "12345"
+	  And I fill in "customer_locations_attributes_0_city" with "Musterstadt"
+	  And I press "Save"
+		Then I should be on the works page
 		
   Scenario: Sign in successfully
     Given I sign up as user

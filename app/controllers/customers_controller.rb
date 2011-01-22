@@ -20,8 +20,14 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(params[:customer])
     if @customer.save
-      flash[:notice] = 'Customer was successfully created.'
-      respond_with(@customer)
+      if Customer.count == 1
+        project = Project.new({:title => "Nancy: First look", :description => "Setup Nancy and try out the features", :customer_id => @customer.id, :contact_id => @customer.locations.first.contacts.first.id, :closed => 0}).save
+        flash[:notice] = 'Great, you finished the setup...Nancy is now ready for use - have phun!'
+        redirect_to :controller => 'works', :action => 'index'
+      else
+        flash[:notice] = 'Customer was successfully created.'
+        respond_with(@customer)
+      end
     else
       @form_customer = @customer
       render "index"
@@ -47,6 +53,13 @@ class CustomersController < ApplicationController
       flash[:alert] = 'Customer was not deleted.'
     end
     redirect_to(customers_url)
+  end
+  
+  def first
+    @form_customer = Customer.new
+    @form_location = @form_customer.locations.build
+    @form_contact = @form_location.contacts.build
+    render :layout => "users", :action => "customers/_form_for_first"
   end
   
   protected

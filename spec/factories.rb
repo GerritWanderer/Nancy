@@ -40,8 +40,8 @@ Factory.define :project do |f|
 end
 
 Factory.define :work do |f|
-	f.start { Time.parse("#{Date.today.strftime("%Y-%m-%d")} #{Factory.next(:startTime)}:00") }
-	f.end { Time.parse("#{Date.today.strftime("%Y-%m-%d")} #{Factory.next(:endTime)}:00") }
+	f.start { Time.parse("#{Date.today.strftime("%Y-%m-%d")} 09:00") }
+	f.end { Time.parse("#{Date.today.strftime("%Y-%m-%d")} 10:00") }
 	f.duration {45}
 	f.description {Faker::Lorem.paragraph}
 	f.user_id {1}

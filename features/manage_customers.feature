@@ -40,13 +40,15 @@ Feature: Manage customers
 	
 	Scenario: Create a valid customer with Main Location/Contact
 		Given I sign up as user
+		And a customer exist
 		And I am on the customers page
 		When I fill in the customer form with valid values
 		And I press "Save"
 		Then I should see "Customer was successfully created."
 		#And I should be on the page for that customer
-		And I should see the 1st customer active
+		And I should see the 2nd customer active
 	
+	@wip
 	Scenario: Attempt to create a new customer with invalid input
 		Given I sign up as user
 		And I am on the customers page
@@ -81,7 +83,8 @@ Feature: Manage customers
 		And I press "Save"
 		Then I should see "Customer was successfully updated."
 		#And I should be on the page for that customer
-		
+	
+	@wip
 	Scenario: Update a customer with invalid fields
 		Given I sign up as user
 		And 3 customers exist
@@ -89,6 +92,7 @@ Feature: Manage customers
 		And I click "Edit" in the 2nd customer row
 		And I fill in the customer form with invalid values
 		And I press "Save"
+		Then show me the page
 		Then I should see "errors prohibited this customer from being saved:"
 		#And I should be on the page for that customer
 

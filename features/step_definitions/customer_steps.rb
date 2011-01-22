@@ -50,7 +50,7 @@ When /^I fill in the customer form with invalid values$/ do
 	customer_selector = "customer_"
 	customer = Factory.attributes_for(:customer)
 	customer.keys.each {|key|
-		And %{I fill in "#{customer_selector}#{key}" with ""} if key.to_s != "locations" && key.to_s != "email"
+		And %{I fill in "#{customer_selector}#{key}" with "#{customer[key.intern]}"} if key.to_s != "locations" && key.to_s != "shortname"
 	}
 	
 	location_selector = "customer_locations_attributes_0_"
