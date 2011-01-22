@@ -1,7 +1,6 @@
 @import "_basic";
 
 body#projects { 
-	form { display: none; }
 	div#projectForm {
 		div.wrapper {
 			.rounded;
@@ -10,7 +9,9 @@ body#projects {
 	
 		div#createProject {
 			.grid(52,0,2);
-			dl dt { text-align: left; }
+			legend 
+			dl dt { text-align: left;}
+			dl dd, dl dt, legend { margin-bottom: 10px;}
 			dl dt.title {	.grid(8);	}
 			dl dd.title {	.grid(42);	}
 			dl dd.title input { width: 420px; }
@@ -21,21 +22,22 @@ body#projects {
 				height: 60px;
 				width: 500px;
 			}
-			dl dt.small, dl dd.small {	.grid(10);	}
-			dl dd.small input { width: 80px; }
+			dl dt.small {	.grid(11);	}
+			dl dd.small {	.grid(6);	}
+			dl dd.small input { width: 40px; }
+			dl dt.submit {.grid(16)}
+			dl dt.submit input.submit {margin:0px;}
 		}
 		div#selectCustomer {
-			.grid(40);
-			dl { margin-top: 15px; }
+			fieldset.customer { margin-top: 27px; }
+			.grid(34);
 			dl dt {	.grid(10,0,2); }
-			dl dd {
-				.grid(18); 
-				margin-bottom: 20px;}
+			dl dd {.grid(18);}
 			dl dd select { width: 180px; }
 		}
 	}	
 	
-	div.toolbar li, ul.title li { .grid(32,0,0,1,1); }
+	div.toolbar li, ul.title li { .grid(29,0,0,1,1); }
 	div.toolbar li.nr, ul.title li.nr { .grid(6); }
 	div.toolbar li.date, ul.title li.date { .grid(12); }
 	ul.title li.actions {
@@ -59,12 +61,15 @@ div.project {
 		}
 		div.contacts {
 			margin-top: 20px;
-			
+			ul.record li span {
+				display: block;
+			}
+			li.actions {
+				text-align: right;
+			}
 			ul.toolbar, ul.record {
-				li.name { .grid(30) }
-				li.fon { .grid(24) }
-				li.location { .grid(32) }
-				li.actions { .grid(8) }
+				li { .grid(27) }
+				li.actions { .grid(7) }
 			}
 		}
 	}
@@ -79,7 +84,7 @@ div.project {
 			visibility: visible;
 		}
 		h2, span.actions, form legend { font-weight: bold; }
-		h2, form legend { .grid(84) }
+		h2, form legend { .grid(78) }
 		span.actions, form a {
 			.grid(10);
 			text-align: right;

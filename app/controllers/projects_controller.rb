@@ -75,7 +75,7 @@ class ProjectsController < ApplicationController
       render :layout => 'errors', :template => "errors/show"
     end
     
-    @displayProjectForm = params[:action] == 'edit' || params[:action] == 'new' ? 'block' : 'none'
+    @displayProjectForm = params[:action] == 'new' || params[:action] == 'edit' || params[:action] == 'create' || params[:action] == 'update' ? 'block' : 'none'
   end
   
   def render_filter

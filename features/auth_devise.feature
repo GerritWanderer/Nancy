@@ -19,7 +19,7 @@ Feature: Use auth. from devise
     Then I should see "Welcome admin@wildner-designer.de!" in the email body
     When they click the first link in the email
     #Then I should see "Your account was successfully confirmed"
-		Then I should be on the start page
+		Then I should be on the root page
 		
   Scenario: Sign in successfully
     Given I sign up as user
@@ -29,7 +29,7 @@ Feature: Use auth. from devise
     And I fill in "user_password" with "secretpass"
     And I press "Sign in"
     #And I should see "Signed in successfully."
-		And I should be on the start page
+		And I should be on the login page
 		
   Scenario: Visit proztected Pages unsuccessfully as guest
     Given I am not authenticated

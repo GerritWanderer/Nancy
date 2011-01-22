@@ -42,7 +42,7 @@ When /^I fill in the customer form with valid values$/ do
 	contact_selector = "customer_locations_attributes_0_contacts_attributes_0_"
 	contact = Factory.attributes_for(:contact)
 	contact.keys.each {|key|
-		And %{I fill in "#{contact_selector}#{key}" with "#{contact[key.intern]}"}
+		And %{I fill in "#{contact_selector}#{key}" with "#{contact[key.intern]}"} if key.to_s != "salutation"
 	}
 end
 
@@ -62,6 +62,6 @@ When /^I fill in the customer form with invalid values$/ do
 	contact_selector = "customer_locations_attributes_0_contacts_attributes_0_"
 	contact = Factory.attributes_for(:contact)
 	contact.keys.each {|key|
-		And %{I fill in "#{contact_selector}#{key}" with "#{contact[key.intern]}"}
+		And %{I fill in "#{contact_selector}#{key}" with "#{contact[key.intern]}"} if key.to_s != "salutation"
 	}
 end

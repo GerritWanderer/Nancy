@@ -1,15 +1,18 @@
 #customerForm.wizard
-  %a{:class => 'wizardFormSwitch'}New Customer [open/close]
-  -if @customer.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@customer.errors.count, "error")} prohibited this contact from being saved:"
-      %ul
-        = @customer.errors.full_messages.each do |msg|
-          %li= msg
+  -if params[:action] == 'new' || params[:action] == 'edit' || params[:action] == 'create' || params[:action] == 'update'
+    = link_to "Close Customer Form", customers_path, :class => 'wizardFormSwitch'
+  -else
+    = link_to "Open Customer Form", new_customer_path, :class => 'wizardFormSwitch'
   %hr/
-  .wrapper
+  .wrapper{:style => "display: #{@displayCustomerForm || 'none'};"}
+    -if @customer.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@customer.errors.count, "error")} prohibited this customer from being saved:"
+        %ul
+          - @customer.errors.full_messages.each do |msg|
+            %li= msg
     #createCustomer
-      = form_for(@form_customer, :html => {:style => "display: #{@displayCustomerForm};"}) do |f|
+      = form_for(@form_customer) do |f|
         %fieldset
         %legend Customer Name
         %dl
@@ -27,7 +30,7 @@
               %dd= l.text_field :name
               %dt= l.label :street
               %dd= l.text_field :street
-              %dt= l.label :zip
+              %dt= l.label :zip, "Zip / City"
               %dd
                 = l.text_field :zip, :class => 'zip'
                 = l.text_field :city, :class => 'city'
@@ -41,8 +44,8 @@
               %dl
                 %dt= c.label :salutation
                 %dd
-                  =c.text_field :salutation
-                  =c.text_field :title
+                  = c.select(:salutation, options_for_select(["Mr.", "Ms."]))
+                  = c.text_field :title, :class => "title"
                 %dt= c.label :firstname
                 %dd= c.text_field :firstname
                 %dt= c.label :lastname
@@ -57,4 +60,4 @@
                 %dd= c.text_field :fax
                 %dt= c.label :mobile
                 %dd= c.text_field :mobile
-        = f.submit 'Save'
+        = f.submit 'Save', :class => "submit"

@@ -50,7 +50,6 @@ Feature: Manage work
 		Given I sign up as user
 		And 3 customers exist
 		And 10 projects exist
-		And 6 works exist
 		When I go to the works page
 		And I select the 2nd customer
 		Then the 2nd customer is selected 
@@ -59,7 +58,7 @@ Feature: Manage work
 		Given I sign up as user
 		And 3 customers exist
 		And 10 projects exist
-		And 6 works exist
+		And a work exist
 		When I go to the works page
 		When I fill in the work form with valid values
 		And I press "Save"
@@ -70,7 +69,7 @@ Feature: Manage work
 		Given I sign up as user
 		And 3 customers exist
 		And 10 projects exist
-		And 6 works exist
+		And a work exist
 		When I go to the works page
 		When I fill in the work form with invalid values
 		And I press "Save"
@@ -80,7 +79,7 @@ Feature: Manage work
 		Given I sign up as user
 		And 3 customers exist
 		And 10 projects exist
-		And 6 works exist
+		And 4 works exist
 		When I go to the works page
 		And I click "Delete" in the 2nd work row
 		Then work should not exist with id: 2

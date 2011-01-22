@@ -1,7 +1,6 @@
 @import "_basic";
 
 body#customers { 
-	form { display: none; }
 	div.toolbar li,  ul.title li { .grid(26); }
 	ul.title li.actions {
 		.grid(10);
@@ -9,6 +8,25 @@ body#customers {
 	}
 }
 
+div#customerForm {
+	dl {
+		background-color: @blueLight;
+		dt {
+			.grid(12,0,1);
+			text-align: right;
+			margin-bottom: 10px;
+		}
+		dd {
+			margin-bottom: 10px;
+			.grid(15);
+			input { width: 150px; }
+			input.zip { width: 40px; }
+			input.city { width: 90px; }
+			input.title { width: 82px; }
+		}
+	}
+	input.submit { margin-left: 680px !important}
+}
 
 div.customer {
 	color: @blueDark;

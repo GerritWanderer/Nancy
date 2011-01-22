@@ -69,7 +69,7 @@ class CustomersController < ApplicationController
       @form_contact = @form_location.contacts.build
     end
     
-    @displayCustomerForm = params[:action] == 'edit' || params[:action] == 'create' || params[:action] == 'update'? 'block' : 'none'
+    @displayCustomerForm = params[:action] == 'new' || params[:action] == 'edit' || params[:action] == 'create' || params[:action] == 'update'? 'block' : 'none'
   end
   
   def render_filter
