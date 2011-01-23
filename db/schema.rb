@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(:version => 20110120205208) do
     t.text     "description"
     t.float    "discount"
     t.float    "budget"
-    t.integer  "type"
     t.integer  "closed"
     t.integer  "customer_id"
     t.integer  "contact_id"

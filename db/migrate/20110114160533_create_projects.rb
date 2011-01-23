@@ -5,8 +5,7 @@ class CreateProjects < ActiveRecord::Migration
       t.text :description
       t.float :discount
       t.float :budget
-      t.integer :type
-      t.boolean :closed
+      t.integer :closed
       t.references :customer
       t.references :contact
 
