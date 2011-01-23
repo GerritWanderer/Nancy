@@ -2,15 +2,8 @@ require 'faker'
 
 user = User.create!(:firstname => Faker::Name.first_name,
              :lastname => Faker::Name.last_name,
-             :email => "admin@wildner-designer.de",
-             :password => "test123")
-user.sign_in_count = 1
-user.confirmed_at = "2011-01-18 12:10:00"
-user.save
-user = User.create!(:firstname => Faker::Name.first_name,
-             :lastname => Faker::Name.last_name,
-             :email => "gw@wildner-designer.de",
-             :password => "test123")
+             :email => "admin@example.org",
+             :password => "yourpassword")
 user.sign_in_count = 1
 user.confirmed_at = "2011-01-18 12:10:00"
 user.save
@@ -19,7 +12,6 @@ user.save
   new_customer = Customer.create!(:name => Faker::Company.name,
                                   :shortname => Faker::Company.name,
                                   :website => Faker::Internet.domain_name)
-  
   3.times do
     new_location = Location.create!(:name => Faker::Company.name,
                                     :street => Faker::Address.street_address,
@@ -28,7 +20,6 @@ user.save
                                     :fon => Faker::PhoneNumber.phone_number,
                                     :fax => Faker::PhoneNumber.phone_number,
                                     :customer_id => new_customer.id)
-    
     3.times do
       Contact.create!(:salutation => Faker::Name.prefix,
                       :title => Faker::Name.suffix,
@@ -57,13 +48,12 @@ end
                   :contact_id => contact.id)
 end
 
-
 projects = Project.find_all_by_closed(false)
 User.all.each do |user|
 	workday = Date.today.-(Date.today.cwday - 1)
 	5.times do
-	  timeStart = Time.parse("#{workday.strftime("%Y-%m-%d")} 09:00")
-	  timeEnd = Time.parse("#{workday.strftime("%Y-%m-%d")} 09:00")
+	  timeStart = Time.parse("#{workday.strftime("%Y-%m-%d")} 08:00")
+	  timeEnd = Time.parse("#{workday.strftime("%Y-%m-%d")} 08:45")
 	  8.times do
 	    timeStart = timeEnd
 	    duration = (rand(8)+1)*15
@@ -73,7 +63,7 @@ User.all.each do |user|
 	                    :duration => duration,
 	                    :description => Faker::Lorem.sentence,
 	                    :project_id => projects.shuffle.first.id,
-											:user_id => user.id)
+                      :user_id => user.id)
 	  end
 	  workday = workday.+(1)
 	end

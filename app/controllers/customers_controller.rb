@@ -13,7 +13,6 @@ class CustomersController < ApplicationController
   end
 
   def edit
-    #We will edit customer, first location and contact within one nested form
     @locations = Location.where('customer_id = ?', @customer.id),order('created_at ASC')
   end
 

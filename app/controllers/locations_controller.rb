@@ -1,16 +1,14 @@
 class LocationsController < ApplicationController
   before_filter :authenticate_user!, :init_locations
   before_filter :render_filter, :only => [:show, :new, :edit]
-  
-  #mhh, index method is not used
 
-  def show #empty method? I should be doing a something more then in init_locations
+  def show #empty method? I should be doing something more then in init_locations
   end
 
-  def new #empty method? I should be doing a something more then in init_locations
+  def new #empty method? I should be doing something more then in init_locations
   end
 
-  def edit #empty method? I should be doing a something more then in init_locations
+  def edit #empty method? I should be doing something more then in init_locations
   end
 
   def create

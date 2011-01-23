@@ -3,12 +3,7 @@ class WorksController < ApplicationController
 
   def index
     @customers = Customer.with_active_projects.joins(:projects).uniq
-    if !@customers.empty?
-       @projects = params[:customer_id] ? Project.by_customer_isClosed(params[:customer_id], 0) : Project.by_customer_isClosed(@customers.first.id, 0)
-    else
-      flash.now[:notice]  = "To create a work, you'll need at first to create customers and projects"
-      render :layout => 'errors', :template => "errors/show"
-    end
+    @projects = params[:customer_id] ? Project.by_customer_isClosed(params[:customer_id], 0) : Project.by_customer_isClosed(@customers.first.id, 0)
   end
 
   def create

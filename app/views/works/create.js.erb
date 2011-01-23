@@ -1,6 +1,0 @@
-<% if @work.errors.any? %>
-  $("#errorExplanation").html("<%= escape_javascript(render "shared/error_messages", :target => @work) %>");
-<% else %>
-  $("#errorExplanation").empty();
-  $("#works").html("<%= escape_javascript(render :partial => "worklist") %>");
-<% end %>

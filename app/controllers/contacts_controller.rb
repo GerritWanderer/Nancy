@@ -2,28 +2,26 @@ class ContactsController < ApplicationController
   before_filter :authenticate_user!, :init_contacts
   before_filter :render_filter, :only => [:index, :show, :new, :edit]
   
-  def index #empty method? I should be doing a something more then in init_contacts
+  def index #empty method? I should be doing something more then in init_contacts
   end
   
-  def show #empty method? I should be doing a something more then in init_contacts
+  def show #empty method? I should be doing something more then in init_contacts
   end
 
-  def new #empty method? I should be doing a something more then in init_contacts
+  def new #empty method? I should be doing something more then in init_contacts
   end
 
-  def edit #empty method? I should be doing a something more then in init_contacts
+  def edit #empty method? I should be doing something more then in init_contacts
   end
 
   def create
     @contact = Contact.new(params[:contact])
     if @contact.save
       flash.now[:notice] = 'Contact was successfully created.'
-			logger.info "Hat geklappt"
     else
       @form_contact = @contact
       @displayContactsRecord = 'none'
       @displayContactsForm = 'block'
-			logger.info "Hat nicht geklappt"
     end
     render :layout => 'customers', :template => 'customers/index'
   end
