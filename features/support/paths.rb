@@ -10,6 +10,15 @@ module NavigationHelpers
 
     when /the home\s?page/
       '/'
+      when /the login page/
+        new_user_session_path
+      when /the logout page/
+        destroy_user_session_path
+      when /the registration page/
+        new_user_registration_path
+      when /the start page/
+        root_path
+        
       when /edit page for that project/
         raise 'no project' unless @project
         edit_project_path(@project)

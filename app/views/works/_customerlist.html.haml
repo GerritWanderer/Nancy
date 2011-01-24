@@ -1,3 +1,3 @@
--form_tag works_path, :method => :get, :remote => false do
+= form_tag works_path, :method => :get, :remote => false do
 	= select_tag(:customer_id, options_for_select(@customers.map {|c| [c.name, c.id]}, params[:customer_id].to_i), {:onchange => "this.form.customerSubmit.click();"})
 	%input{:type=>"submit", :value=>"submit", :name=>"customerSubmit", :style=>"display:none"}

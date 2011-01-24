@@ -1,72 +1,69 @@
 class CustomersController < ApplicationController
-  before_filter :init_customers
+  before_filter :authenticate_user!, :init_customers
+	before_filter :render_filter, :only => [:index, :show, :new, :edit]
   respond_to :html, :mobile
 
-  def index
-    #see before_filter function init_customers
-    respond_with(@customers)
+  def index #empty method? I should be doing a something more then in init_customers
   end
 
-  def show
-    #see before_filter function init_customers
-    respond_with(@customer) do |format|
-      format.html { render "index" }
-    end
+  def show #empty method? I should be doing a something more then in init_customers
   end
 
-  def new
-    #see before_filter function init_customers
-    respond_with(@customer) do |format|
-      format.html { render "index" }
-    end
+  def new #empty method? I should be doing a something more then in init_customers
   end
 
   def edit
-    #see before_filter function init_customers
-    @locations = Location.paginate :conditions => ['customer_id = ?', @customer.id], :page => params[:page], :order => 'created_at ASC'
-    respond_with(@customer) do |format|
-      format.html { render "index" }
-    end
+    @locations = Location.where('customer_id = ?', @customer.id),order('created_at ASC')
   end
 
   def create
     @customer = Customer.new(params[:customer])
-    respond_to do |format|
-      if @customer.save
-        format.html { redirect_to(@customer, :notice => 'Customer was successfully created.') }
-        format.xml  { render :xml => @customer, :status => :created, :location => @customer }
+    if @customer.save
+      if Customer.count == 1
+        project = Project.new({:title => "Nancy: First look", :description => "Setup Nancy and try out the features", :customer_id => @customer.id, :contact_id => @customer.locations.first.contacts.first.id, :closed => 0}).save
+        flash[:notice] = 'Great, you finished the setup...Nancy is now ready for use - have phun!'
+        redirect_to :controller => 'works', :action => 'index'
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @customer.errors, :status => :unprocessable_entity }
+        flash[:notice] = 'Customer was successfully created.'
+        respond_with(@customer)
       end
+    else
+      @form_customer = @customer
+      render "index"
     end
   end
+  
   def update
     @customer = Customer.find(params[:id])
-    respond_to do |format|
-      if @customer.update_attributes(params[:customer])
-        format.html { redirect_to(@customer, :notice => 'Customer was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @customer.errors, :status => :unprocessable_entity }
-      end
+    if @customer.update_attributes(params[:customer])
+      flash[:notice] = 'Customer was successfully updated.'
+      respond_with(@customer)
+    else
+      @form_customer = @customer
+      render "index"
     end
   end
+  
   def destroy
     @customer = Customer.find(params[:id])
-    @customer.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(customers_url) }
-      format.xml  { head :ok }
+    if @customer.destroy
+      flash[:notice] = 'Customer was successfully deleted.'
+    else
+      flash[:alert] = 'Customer was not deleted.'
     end
+    redirect_to(customers_url)
+  end
+  
+  def first
+    @form_customer = Customer.new
+    @form_location = @form_customer.locations.build
+    @form_contact = @form_location.contacts.build
+    render :layout => "users", :action => "customers/_form_for_first"
   end
   
   protected
   def init_customers
-    params[:order] ? @customers = Customer.find(:all, :order => params[:order]) : @customers = Customer.all
-    
+    @customers = Customer.order(params[:order])
     if params[:id]
       @customer = Customer.find(params[:id])
       @locations = @customer.locations
@@ -80,10 +77,16 @@ class CustomersController < ApplicationController
       @form_customer = @customer
     else
       @form_customer = Customer.new
-      @location_build = @form_customer.locations.build
-      @contact_build = @location_build.contacts.build
+      @form_location = @form_customer.locations.build
+      @form_contact = @form_location.contacts.build
     end
     
-    params[:action] == 'edit' ? @displayCustomerForm = 'block' : @displayCustomerForm = 'none'
+    @displayCustomerForm = params[:action] == 'new' || params[:action] == 'edit' || params[:action] == 'create' || params[:action] == 'update'? 'block' : 'none'
+  end
+  
+  def render_filter
+    respond_with(@customer) do |format|
+      format.html { render "index" }
+    end
   end
 end

@@ -1,9 +1,0 @@
-<% if (params[:date] rescue nil) %>
-  $("#calendarContainer").html("<%= escape_javascript(render :partial => "calendar") %>");
-  $('#work_day').val('<%= @daySelected.strftime("%Y-%m-%d") %>');
-  $("#works").html("<%= escape_javascript(render :partial => "worklist") %>");
-<% end  %>
-<% if (params[:customer_id] rescue nil) %>
-  $("#projects").html("<%= escape_javascript(render :partial => "projectlist") %>");
-  $('#work_project_id').val(<%= @projects.first.id %>);
-<% end %>

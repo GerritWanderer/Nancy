@@ -1,45 +1,36 @@
 @import "_basic";
 
-div#navigation {
-	height: 50px;
-	background-color: @blueDark;
-	margin-bottom: 20px;
-	ul {
-		padding-top: 10px;
-		li {
-			.grid(15,0,1);
-			.roundedTop;
-			line-height: 40px;
-			font-size: 16px;
-			text-align: center;
-			background-color: @blueLight;
-		}
-	}
-}
-div#content {
-	.rounded;
-	background-color: white;
-	
+div#content {	
 	h2#calendarYear {
-		.grid(16,68,10);
+		.grid(16,72,2);
 		.roundedTop;
 		background-color: @blueMedium;
+		font-size: 16px;
+		text-align: center;
+		line-height: 33px;
 	}
 	ul#calendar {
 		.roundedTop;
 		background-color: @blueMedium;
 		padding: 15px 15px 0px 15px;
-		border-bottom: 5px solid orange;
+		border-bottom: 5px solid @orange;
 		li {
-			.grid(8,0,1,1,1);
+			.grid(8,0,1,0.5,0.5);
 			.roundedTop;
+			a { color: @blueDark; }
 			background-color: white;
-			line-height: 22px;
-			
+			text-align: center;
+			line-height: 30px;
+			font-size: 11px;
+		}
+		li#active {
+			background-color: @orange;
+			a { color: white; }
 		}
 		li#calendarWeek {
 			.grid(16);
 			background-color: @blueMedium;
+			font-size: 12px;
 		}
 	}
 	
@@ -48,31 +39,45 @@ div#content {
 		background-color: @blueLight;
 		.roundedBottom;
 		div#createTimeWrapper {
-			.grid(60,0,2);
+			.grid(56,2);
 			dl dt.time { .grid(4); }
 			dl dd.time { .grid(5); }
 			dl dd.description textarea {
 				height: 60px;
-				width: 600px;
+				width: 500px;
+			}
+			dl dt input.submit {
+				margin-left: 335px;
 			}
 		}
-		div#selectWrapper {.grid(34); }
+		div#selectWrapper {
+			form { padding: 0px; }
+			.grid(28);
+			dt { .grid(8,0,1); margin-top: 25px; text-align: right; }
+			dd { .grid(19); margin-top: 25px; }
+			select { width: 200px; }
+		}
 	}
 	
 	ul.toolbar, ul.record {
 		.rounded;
-		background-color: @blueMedium;
 		height: 30px;
-		margin: 20px 0px;
 		li { line-height: 30px; }
-		li.time { .grid(12) }
-		li.duration { .grid(8) }
-		li.project { .grid(20) }
-		li.customer { .grid(20) }
-		li.description { .grid(32) }
-		li.actions { .grid(4) }
+		li.time { .grid(12,0,0,1) }
+		li.duration { .grid(7,0,0,1) }
+		li.project { .grid(18) }
+		li.customer { .grid(18) }
+		li.description { .grid(30) }
+		li.actions { .grid(2,0,0,0,1) }
+	}
+	ul.toolbar {
+		background-color: @blueLight;
+		margin: 20px 0px;
+		
 	}
 	ul.record {
 		height: auto;
+		background-color: @blueMedium;
+		margin-bottom: 5px;
 	}
 }

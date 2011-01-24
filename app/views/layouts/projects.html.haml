@@ -15,9 +15,14 @@
 				%li= link_to 'Works', works_path()
 				%li= link_to 'Customers', customers_path()
 				%li.active= link_to 'Projects', projects_path()
-	.container#content
+				%li.small= link_to 'profile', edit_user_registration_path()
+				%li.small= link_to 'logout', destroy_user_session_path()
+				%li.user
+					%span= "#{current_user.firstname} #{current_user.lastname}"
+	.container#flash
 		- flash.each do |key, value|
 			%div{:class => key}= value
+	.container#content
 		= render 'projects/form'
 		= render 'projects/list'
 	.clear

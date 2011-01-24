@@ -14,12 +14,22 @@
     %hr.clear/
     %ul.record
       %li= @location.name
-      %li= @location.street
-      %li= "#{@location.zip} #{@location.city}"
-      %li= "Fon: #{@location.fon}"
-      %li= "Fax: #{@location.fax}"
+      %li
+        = @location.street
+        %br/
+        = "#{@location.zip} #{@location.city}"
+      %li
+        = "Fon: #{@location.fon}"
+        %br/
+        = "Fax: #{@location.fax}"
       .clear
-  = form_for([@customer, @location_build], :html => {:style => "display: #{@displayLocationForm || 'none'};"}) do |f|
+  = form_for([@customer, @form_location], :html => {:style => "display: #{@displayLocationForm || 'none'};"}) do |f|
+    -if @form_location.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@form_location.errors.count, "error")} prohibited this contact from being saved:"
+        %ul
+          = @form_location.errors.full_messages.each do |msg|
+            %li= msg
     %fieldset
       %legend Create Location
       = link_to image_tag("/images/icons/container-close.gif"), customer_path(@customer, :order => params[:order])
@@ -37,5 +47,6 @@
         %dd= f.text_field :fon
         %dt= f.label :fax
         %dd= f.text_field :fax
+        %dt.submit= f.submit 'Save Location', :class =>"submit"
     = f.hidden_field :customer_id, :value => @customer.id
-    = f.submit 'Save Location'
+    

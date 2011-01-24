@@ -1,18 +1,23 @@
 = render :partial => "calendar"
 #formWrapper
+	-if @work.errors.any?
+		#error_explanation
+			%h2= "#{pluralize(@work.errors.count, "error")} prohibited this work from being saved:"
+			%ul
+				- @work.errors.full_messages.each do |msg|
+					%li= msg
 	#createTimeWrapper
 		= form_for(@work, :remote => false) do |f|
-			#errorExplanation
 			%dl
-				%dt.time= f.label :starttime, "Start:"
-				%dd.time= f.text_field :starttime, :size => 4
-				%dt.time= f.label :endtime, "End:"
-				%dd.time= f.text_field :endtime, :size => 4
+				%dt.time= f.label :start, "Start:"
+				%dd.time= f.text_field :start, :size => 4, :value => "08:00"
+				%dt.time= f.label :end, "End:"
+				%dd.time= f.text_field :end, :size => 4, :value => "09:00"
 				%dd.description= f.text_area :description
 				%dt.submit
 					= f.hidden_field :project_id, :value => @projects.first.id
 					= f.hidden_field :day, :value => @daySelected.strftime("%Y-%m-%d")
-					= f.submit "Save time"
+					= f.submit "Save time", :class => "submit"
 	#selectWrapper
 		%dl
 			%dt Customer

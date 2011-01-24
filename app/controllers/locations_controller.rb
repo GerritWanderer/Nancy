@@ -1,38 +1,40 @@
 class LocationsController < ApplicationController
-  before_filter :init_locations
-  
-  def index
-    @locations = Location.all
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @locations }
-    end
+  before_filter :authenticate_user!, :init_locations
+  before_filter :render_filter, :only => [:show, :new, :edit]
+
+  def show #empty method? I should be doing something more then in init_locations
   end
 
-  def show
-    render :layout => 'customers', :template => 'customers/show'
+  def new #empty method? I should be doing something more then in init_locations
   end
 
-  def new
-    render :layout => 'customers', :template => 'customers/show'
-  end
-
-  def edit
-    render :layout => 'customers', :template => 'customers/show'
+  def edit #empty method? I should be doing something more then in init_locations
   end
 
   def create
     @location = Location.new(params[:location])
     if @location.save
-      render :layout => 'customers', :template => 'customers/show'
+      flash.now[:notice] = 'Location was successfully created.'
+    else
+      @form_location = @location
+      @location = @customer.locations.first
+      @displayLocationRecord = 'none'
+      @displayLocationForm = 'block'
     end
+    render :layout => 'customers', :template => 'customers/index'
   end
 
   def update
     @location = Location.find(params[:id])
     if @location.update_attributes(params[:location])
-      render :layout => 'customers', :template => 'customers/show'
+      flash.now[:notice] = 'Location was successfully updated.'
+    else
+      @form_location = @location
+      @location = @customer.locations.first
+      @displayLocationRecord = 'none'
+      @displayLocationForm = 'block'
     end
+    render :layout => 'customers', :template => 'customers/index'
   end
 
   def destroy
@@ -44,19 +46,23 @@ class LocationsController < ApplicationController
   
   protected
   def init_locations
-    params[:order] ? @customers = Customer.find(:all, :order => params[:order]) : @customers = Customer.all
+    @customers = Customer.order(params[:order])
     @customer = Customer.find(params[:customer_id])
     @locations = @customer.locations
-    params[:id] ? @location = Location.find(params[:id]) : @location = @customer.locations.first
+    @location = params[:id] ? Location.find(params[:id]) : @customer.locations.first
     @contacts = @location.contacts
     
     @form_customer = Customer.new
-    params[:action] == 'edit' ? @location_build = @location : @location_build = @form_customer.locations.build
-    @location_build_temp = @form_customer.locations.build
-    @contact_build = @location_build_temp.contacts.build
+    @form_location = params[:action] == 'edit' ? @location : @form_customer.locations.build
+    @form_location_temp = @form_customer.locations.build
+    @form_contact = @form_location_temp.contacts.build
     if params[:action] == 'edit' || params[:action] == 'new'
       @displayLocationRecord = 'none'
       @displayLocationForm = 'block'
     end
+  end
+  
+  def render_filter
+    render :layout => 'customers', :template => 'customers/index'
   end
 end

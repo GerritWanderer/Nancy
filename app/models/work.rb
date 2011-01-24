@@ -7,8 +7,7 @@ class Work < ActiveRecord::Base
   #validates :start, :presence => true, :worktime_format => true
   #validates :end, :presence => true, :worktime_format => true  
   
-  #scope :from_day_by_user, proc {|day, user| where("start LIKE ?", day) }
-  scope :from_day, proc {|day| where("start LIKE ?", day) }
+  scope :from_day_by_user, lambda { |day, user| where(:user_id => user).where("start LIKE ?", day) }
 
   def self.selectJumpingLinks(date)
     #Return Hash with Elements (4 Dates)

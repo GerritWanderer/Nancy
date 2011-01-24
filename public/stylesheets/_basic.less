@@ -2,6 +2,7 @@
 @blueMedium: #94B4E6;
 @blueDark: #112363;
 @grey: #CCCCCC;
+@orange: #FF6800;
 
 .container {
 	margin-left: auto;
@@ -75,9 +76,9 @@ ul { list-style-type: none; }
   border-bottom-right-radius: @radius;
 }
 .gradient (@from: #ffffff, @to: #000000) {
-	background: @from;
+	background: @to;
 	background: -webkit-gradient(linear, 0 0, 0 bottom, from(@from), to(@to));
-	background: -moz-linear-gradient(@from, @to);
+	background: -moz-linear-gradient(@from, @to 80%);
 	background: linear-gradient(@from, @to);
 	-pie-background: linear-gradient(@from, @to);
 }
