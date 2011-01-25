@@ -10,3 +10,12 @@
 	%body
 		%div{"data-role" => "page"}
 			= yield
+			%div{"data-role" => "footer"}
+				%div{"data-role" => "navbar"}
+					%ul
+						%li
+							%a.ui-btn-active{"data-icon" => "refresh", :href => works_path} Works
+						%li
+							%a{"data-icon" => "grid", :href => customers_path} Customers
+						%li
+							%a{"data-icon" => "gear", :href => projects_path} Projects

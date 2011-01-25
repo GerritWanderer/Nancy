@@ -1,0 +1,18 @@
+.clear
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+  %h2 Sign up
+  = devise_error_messages!
+  %dl
+    %dt= f.label :firstname
+    %dd= f.email_field :firstname
+    %dt= f.label :lastname
+    %dd= f.email_field :lastname
+    %dt= f.label :email
+    %dd= f.email_field :email
+    %dt= f.label :password
+    %dd= f.password_field :password
+    %dt= f.label :password_confirmation, "Confirmation"
+    %dd= f.password_field :password_confirmation
+    %dt &nbsp;
+    %dd= f.submit "Sign up", :class => "submit"
+  .clear

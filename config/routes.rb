@@ -1,7 +1,7 @@
 Nancy::Application.routes.draw do
-  devise_for :users, :skip => [:registration, :sessions] do
-    get '/login' => 'devise/sessions#new', :as => :new_user_session
-    post '/login' => 'devise/sessions#create', :as => :user_session
+  devise_for :users, :skip => [:registration], :controllers => { :sessions => "sessions" } do
+		get '/login' => 'sessions#new', :as => :new_user_session
+    post '/login' => 'sessions#create', :as => :user_session
     get '/registration' => 'devise/registrations#new', :as => :new_user_registration
     post '/registration' => 'devise/registrations#create', :as => :user_registration
     put '/registration' => 'devise/registrations#update'
