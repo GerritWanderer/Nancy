@@ -1,4 +1,6 @@
 Nancy::Application.routes.draw do
+  get "settings/index", :as => :settings
+
   devise_for :users, :skip => [:registration, :sessions] do
     get '/login' => 'devise/sessions#new', :as => :new_user_session
     post '/login' => 'devise/sessions#create', :as => :user_session
