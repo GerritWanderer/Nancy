@@ -1,2 +1,40 @@
-%h1 Settings#index
-%p Find me in app/views/settings/index.html.haml
+.halfContainer#users
+	%h2 Manage User
+	- if @user.new_record?
+		= form_for @user, :url => user_admin_index_path do |f|
+			- render :partial => "user/form", :locals => { :f => f }
+	- else
+		= form_for @user, :url => user_admin_path(@user) do |f|
+			- render :partial => "user/form", :locals => { :f => f }
+		.clear
+	%ul.fieldbar
+		%li Name / E-mail
+		%li.small Hldy.
+		%li.small Hrs.
+		%li.small Actions
+		.clear
+	.records
+		- @users.each do |user|
+			%ul.record
+				%li
+					= "#{user.firstname} #{user.lastname}"
+					= user.email
+				%li.small= user.holidays
+				%li.small= user.hours
+				%li.actions
+					= link_to "E", edit_user_admin_path(user)
+					= link_to "D", user_admin_path(user), :confirm => 'Are you sure?', :method => :delete
+				.clear
+.halfContainer#holidays
+	%h2 Manage Holidays
+	%dl
+		- @users.each do |user|
+			%dt= "#{user.firstname} #{user.firstname}"
+			%dd= user.email
+			%dd.small= user.holidays
+			%dd.small= user.hours
+			%dd.actions
+				= link_to "Edit", edit_user_admin_path(user)
+				= link_to "Delete", user_admin_path(user), :confirm => 'Are you sure?', :method => :delete
+		.clear
+.clear

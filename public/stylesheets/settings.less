@@ -1,0 +1,32 @@
+@import "_basic";
+
+div.halfContainer {
+	.grid(42,0,0,1,1);
+	.rounded;
+	background-color: @blueLight;
+	form { background-color: transparent ;}
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+div.halfContainer#users {
+	margin-right: 10px;
+	form {
+		padding: 0px;
+		ul li { .grid(17,0,2); margin-bottom: 10px; }
+		label { display: block; }
+		input { .grid(16) }
+		input.small { .grid(7,0,0.9); }
+	}
+	
+	 ul.fieldbar {
+		border-bottom: 1px dotted grey;
+		margin-bottom: 5px;
+		li { color: grey; }
+	}
+	ul.record { margin-bottom: 10px; }
+	ul.record li, ul.fieldbar li { .grid(23); }
+	ul.record li.small, ul.record li.actions, ul.fieldbar li.small { .grid(6) }
+}
+div.halfContainer#holidays {
+	margin-left: 10px;
+}
