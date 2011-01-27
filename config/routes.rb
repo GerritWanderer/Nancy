@@ -1,6 +1,7 @@
 Nancy::Application.routes.draw do
   get "settings/index", :as => :settings
-
+	
+	resources :day_sequences
 	resources :user_admin, :controller => "user"
   devise_for :users, :skip => [:registration, :sessions] do
     get '/login' => 'devise/sessions#new', :as => :new_user_session
