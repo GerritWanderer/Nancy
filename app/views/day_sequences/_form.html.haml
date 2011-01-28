@@ -1,0 +1,20 @@
+-if @day_sequence.errors.any?
+	#error_explanation
+		%h2= "#{pluralize(@day_sequence.errors.count, "error")} prohibited this user from being saved:"
+		%ul
+			- @day_sequence.errors.full_messages.each do |msg|
+				%li= msg
+%ul
+	%li.third
+		= f.label :date, "Sequence Type"
+		= select_tag(:type, options_for_select([["Holiday", "1"], ["Vacation", "2"], ["Absence", "3"]]), :class => "half")
+	%li.third
+		= f.label :date, "Date from"
+		= f.text_field :date_from
+	%li.third
+		= f.label :date, "Date to"
+		= f.text_field :date_to
+	%li
+		= f.label :user_id, "User (unless holiday)"
+		= select_tag(:user_id, options_for_select(@users.map {|u| ["#{u.firstname.first}. #{u.lastname}", u.id] }))
+	%li= f.submit "Save Day", :class => "submit"

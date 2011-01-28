@@ -1,5 +1,7 @@
 Nancy::Application.routes.draw do
   get "settings/index", :as => :settings
+	get "settings/user", :as => :user_settings
+	get "settings/holiday", :as => :holiday_settings
 	
 	resources :day_sequences
 	resources :user_admin, :controller => "user"

@@ -11,12 +11,19 @@ class UserController < ApplicationController
 	end
 	
 	def create
+		@user = User.create(params[:user])
+		if @user.save
+			redirect_to user_settings_path
+		else
+			@users = User.all
+			render :layout => 'settings', :template => 'settings/user'
+		end
   end
 
   def edit
 		@users = User.all
 		@user = User.find(params[:id])
-		render :layout => 'settings', :template => 'settings/index'
+		render :layout => 'settings', :template => 'settings/user'
   end
 
   def update
@@ -28,10 +35,10 @@ class UserController < ApplicationController
 		
 		if @user.update_attributes(params[:user])
 			flash[:notice] = 'User was successfully updated.'
-			redirect_to settings_path
+			redirect_to user_settings_path
 	  else
 			@users = User.all
-			render :layout => 'settings', :template => 'settings/index'
+			render :layout => 'settings', :template => 'settings/user'
 		end
   end
 
@@ -42,6 +49,6 @@ class UserController < ApplicationController
     else
 			flash[:alert] = 'An error occured while deleting your selected User.'
 		end
-		redirect_to settings_path
+		redirect_to user_settings_path
   end
 end

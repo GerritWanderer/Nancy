@@ -1,21 +1,51 @@
 @import "_basic";
 
-div.halfContainer {
-	.grid(42,0,0,1,1);
+div#userForm form {
+	.grid(88,0,0,1,1);
 	.rounded;
 	background-color: @blueLight;
 	form { background-color: transparent ;}
 	padding-top: 10px;
 	padding-bottom: 10px;
+	margin-bottom: 20px;
+	
+	h2 { color: @orange; margin-bottom: 10px;}
+	label { margin-bottom: 5px; }
+	dl {
+		background-color: @blueLight;
+		dt {
+			.grid(12,0,1);
+			text-align: left;
+			margin-bottom: 10px;
+		}
+		dd {
+			margin-bottom: 10px;
+			.grid(12,0,3);
+			input { width: 115px; }
+			input.small { width: 50px; }
+		}
+	}
 }
-div.halfContainer#users {
-	margin-right: 10px;
+div#users { 
+	div.toolbar li,  ul.title li { .grid(22); }
+	ul.title li.actions {
+		.grid(10);
+		text-align: right;
+	}
+}
+
+div#daySequenceForm {
+	margin-left: 10px;
 	form {
 		padding: 0px;
-		ul li { .grid(17,0,2); margin-bottom: 10px; }
+		ul li { .grid(19,0,2); margin-bottom: 10px; }
+		ul li.third {
+			.grid(13,0,1);
+			input, select { .grid(12) }
+		}
 		label { display: block; }
-		input { .grid(16) }
-		input.small { .grid(7,0,0.9); }
+		input.choice { .grid(16) }
+		select { width: 180px; }
 	}
 	
 	 ul.fieldbar {
@@ -26,7 +56,4 @@ div.halfContainer#users {
 	ul.record { margin-bottom: 10px; }
 	ul.record li, ul.fieldbar li { .grid(23); }
 	ul.record li.small, ul.record li.actions, ul.fieldbar li.small { .grid(6) }
-}
-div.halfContainer#holidays {
-	margin-left: 10px;
 }

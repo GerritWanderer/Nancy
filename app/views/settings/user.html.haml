@@ -1,0 +1,31 @@
+.filter
+	%ul
+		%li.active= link_to "Manage Users", user_settings_path
+		%li= link_to "Managae Holidays", holiday_settings_path
+		%li= link_to "Manage Templates", ""
+		.clear
+#userForm
+	- if @user.new_record?
+		= form_for @user, :url => user_admin_index_path do |f|
+			- render :partial => "user/form", :locals => { :f => f }
+	- else
+		= form_for @user, :url => user_admin_path(@user) do |f|
+			- render :partial => "user/form", :locals => { :f => f }
+	.clear
+
+#users
+	.toolbar
+		%ul
+			%li Name 
+			%li Email
+			%li Hours p.Day / Holidays
+	- @users.each do |user|
+		.user
+			%ul.title
+				%li= "#{user.firstname} #{user.lastname}"
+				%li= mail_to user.email, user.email
+				%li= "#{user.hours} / #{user.holidays}"
+				%li.actions
+					= link_to "E", edit_user_admin_path(user)
+					= link_to "D", user_admin_path(user), :confirm => 'Are you sure?', :method => :delete
+				.clear

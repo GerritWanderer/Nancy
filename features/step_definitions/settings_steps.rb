@@ -4,14 +4,14 @@ Then(/^I should see all users in nancy$/) do
 	counter = 0
   users.each do |user|
 		counter+=1
-		Then %{I should see "#{user.firstname} #{user.lastname} #{user.email}" within "div#users div.records ul.record:nth-child(#{counter}) li:first-child"}
-		Then %{I should see "#{user.holidays}" within "div#users div.records ul.record:nth-child(#{counter}) li:nth-child(2)"}
-		Then %{I should see "#{user.hours}" within "div#users div.records ul.record:nth-child(#{counter}) li:nth-child(3)"}
+		Then %{I should see "#{user.firstname} #{user.lastname}" within "div#users div.user:nth-child(#{counter+1}) ul.title li:first-child"}
+		Then %{I should see "#{user.email}" within "div#users div.user:nth-child(#{counter+1}) ul.title li:nth-child(2)"}
+		Then %{I should see "#{user.hours} / #{user.holidays}" within "div#users div.user:nth-child(#{counter+1}) ul.title li:nth-child(3)"}
 	end
 end
 
 When /^I follow "([^"]*)" in the (\d+)(?:st|nd|rd|th) user row$/ do |link, pos|
-	within("div#users div.records ul.record:nth-child(#{pos.to_i}) li.actions") do
+	within("div#users div.user:nth-child(#{pos.to_i+1}) ul.title li.actions") do
     click_link link
   end
 end
