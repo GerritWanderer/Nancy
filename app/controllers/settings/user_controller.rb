@@ -1,4 +1,4 @@
-class UserController < ApplicationController
+class Settings::UserController < ApplicationController
 	before_filter :authenticate_user!
   
 	def index

@@ -3,8 +3,9 @@ Nancy::Application.routes.draw do
 	get "settings/user", :as => :user_settings
 	get "settings/holiday", :as => :holiday_settings
 	
-	resources :day_sequences
-	resources :user_admin, :controller => "user"
+	resources :day_sequences, :controller => "settings/day_sequences"
+	resources :user_admin, :controller => "settings/user"
+	
   devise_for :users, :skip => [:registration, :sessions] do
     get '/login' => 'devise/sessions#new', :as => :new_user_session
     post '/login' => 'devise/sessions#create', :as => :user_session

@@ -16,5 +16,5 @@
 		= f.text_field :date_to
 	%li
 		= f.label :user_id, "User (unless holiday)"
-		= select_tag(:user_id, options_for_select(@users.map {|u| ["#{u.firstname.first}. #{u.lastname}", u.id] }))
+		= select_tag(:user_id, options_for_select(User.all.map {|u| ["#{u.firstname.first}. #{u.lastname}", u.id] }))
 	%li= f.submit "Save Day", :class => "submit"

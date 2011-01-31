@@ -1,4 +1,4 @@
-class DaySequencesController < ApplicationController
+class Settings::DaySequencesController < ApplicationController
   def create
   end
 

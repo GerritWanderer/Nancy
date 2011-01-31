@@ -9,10 +9,10 @@
 		%h2 Manage User
 		- if @user.new_record?
 			= form_for @user, :url => user_admin_index_path do |f|
-				- render :partial => "user/form", :locals => { :f => f }
+				- render :partial => "settings/user/form", :locals => { :f => f }
 		- else
 			= form_for @user, :url => user_admin_path(@user) do |f|
-				- render :partial => "user/form", :locals => { :f => f }
+				- render :partial => "settings/user/form", :locals => { :f => f }
 		.clear
 
 	#daySequenceForm
