@@ -23,30 +23,4 @@
         %br/
         = "Fax: #{@location.fax}"
       .clear
-  = form_for([@customer, @form_location], :html => {:style => "display: #{@displayLocationForm || 'none'};"}) do |f|
-    -if @form_location.errors.any?
-      #error_explanation
-        %h2= "#{pluralize(@form_location.errors.count, "error")} prohibited this contact from being saved:"
-        %ul
-          = @form_location.errors.full_messages.each do |msg|
-            %li= msg
-    %fieldset
-      %legend Create Location
-      = link_to image_tag("/images/icons/container-close.gif"), customer_path(@customer, :order => params[:order])
-      %hr.clear/
-      %dl
-        %dt= f.label :name
-        %dd= f.text_field :name
-        %dt= f.label :street
-        %dd= f.text_field :street
-        %dt= f.label :zip
-        %dd
-          = f.text_field :zip, :class => 'zip'
-          = f.text_field :city, :class => 'city'
-        %dt= f.label :fon
-        %dd= f.text_field :fon
-        %dt= f.label :fax
-        %dd= f.text_field :fax
-        %dt.submit= f.submit 'Save Location', :class =>"submit"
-    = f.hidden_field :customer_id, :value => @customer.id
-    
+  = render :partial => 'customers/locations/form'

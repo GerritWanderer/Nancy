@@ -22,8 +22,8 @@
           = link_to image_tag("/images/icons/delete.gif"), customer_path(customer, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete
         .clear
       .nestedRessources
-        = render :partial => 'customers/details/locations'
-        = render :partial => 'customers/details/contacts'
+        = render :partial => 'customers/locations/show'
+        = render :partial => 'customers/contacts/list'
         .clear
     - else
       %ul.title

@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/plataformatec/devise
-  revision: 7ff0231ab723df2d75f5300524708dc85126ddac
+  revision: 68f699bfd4d027e77fd8b8f8969cf951d9f3f550
   branch: master
   specs:
     devise (1.2.rc)
@@ -43,7 +43,7 @@ GEM
     arel (2.0.6)
     autotest (4.4.6)
       ZenTest (>= 4.4.1)
-    bcrypt-ruby (2.1.3)
+    bcrypt-ruby (2.1.4)
     builder (2.1.2)
     capybara (0.4.0)
       celerity (>= 0.7.9)
@@ -126,7 +126,7 @@ GEM
     oauth2 (0.1.0)
       faraday (~> 0.5.0)
       multi_json (~> 0.0.4)
-    orm_adapter (0.0.3)
+    orm_adapter (0.0.4)
     pickle (0.4.4)
       cucumber (>= 0.8)
       rake

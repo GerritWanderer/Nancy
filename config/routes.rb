@@ -21,8 +21,8 @@ Nancy::Application.routes.draw do
     collection do
       get 'first'
     end
-    resources :locations do
-      resources :contacts
+    resources :locations, :controller => "customers/locations" do
+      resources :contacts, :controller => "customers/contacts"
     end
   end
   resources :projects do
