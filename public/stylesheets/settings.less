@@ -34,26 +34,36 @@ div#users {
 	}
 }
 
-div#daySequenceForm {
-	margin-left: 10px;
-	form {
-		padding: 0px;
-		ul li { .grid(19,0,2); margin-bottom: 10px; }
-		ul li.third {
-			.grid(13,0,1);
-			input, select { .grid(12) }
-		}
-		label { display: block; }
-		input.choice { .grid(16) }
-		select { width: 180px; }
-	}
+div#holidayForm form {
+	.grid(88,0,0,1,1);
+	.rounded;
+	background-color: @blueLight;
+	form { background-color: transparent ;}
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-bottom: 20px;
 	
-	 ul.fieldbar {
-		border-bottom: 1px dotted grey;
-		margin-bottom: 5px;
-		li { color: grey; }
+	h2 { color: @orange; margin-bottom: 10px;}
+	label { margin-bottom: 5px; }
+	dl {
+		background-color: @blueLight;
+		dt {
+			.grid(13,0,1);
+			text-align: left;
+			margin-bottom: 10px;
+		}
+		dt.small { .grid(8,0,1); text-align: right; }
+		dd.small { .grid(8,0,1); input { width: 70px; } }
+		dd {
+			margin-bottom: 10px;
+			.grid(13,0,3);
+			input { width: 115px; }
+			input.small { width: 50px; }
+			input.radio { width: 12px; }
+		}
 	}
-	ul.record { margin-bottom: 10px; }
-	ul.record li, ul.fieldbar li { .grid(23); }
-	ul.record li.small, ul.record li.actions, ul.fieldbar li.small { .grid(6) }
+}
+div#sequences {
+	div#holidays ul.title li { .grid(22); }
+	div.user, div#holidays { margin-bottom: 2px; }
 }
