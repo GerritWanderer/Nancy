@@ -2,6 +2,9 @@ class Settings::UserController < ApplicationController
 	before_filter :authenticate_user!
   
 	def index
+		@users = User.all
+		@user = User.new
+		render :layout => 'settings'
 	end
 	
 	def show
@@ -13,17 +16,17 @@ class Settings::UserController < ApplicationController
 	def create
 		@user = User.create(params[:user])
 		if @user.save
-			redirect_to user_settings_path
+			redirect_to settings_user_admin_index_path
 		else
 			@users = User.all
-			render :layout => 'settings', :template => 'settings/user'
+			render :layout => 'settings', :template => 'settings/user/index'
 		end
   end
 
   def edit
 		@users = User.all
 		@user = User.find(params[:id])
-		render :layout => 'settings', :template => 'settings/user'
+		render :layout => 'settings', :template => 'settings/user/index'
   end
 
   def update
@@ -35,10 +38,10 @@ class Settings::UserController < ApplicationController
 		
 		if @user.update_attributes(params[:user])
 			flash[:notice] = 'User was successfully updated.'
-			redirect_to user_settings_path
+			redirect_to settings_user_admin_index_path
 	  else
 			@users = User.all
-			render :layout => 'settings', :template => 'settings/user'
+			render :layout => 'settings', :template => 'settings/user/index'
 		end
   end
 
@@ -49,6 +52,6 @@ class Settings::UserController < ApplicationController
     else
 			flash[:alert] = 'An error occured while deleting your selected User.'
 		end
-		redirect_to user_settings_path
+		redirect_to settings_user_admin_index_path
   end
 end

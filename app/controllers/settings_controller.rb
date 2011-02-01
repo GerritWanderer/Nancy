@@ -12,5 +12,7 @@ class SettingsController < ApplicationController
 	
 	def holiday
 		@day_sequence = DaySequence.new
+		@holidays_current_year = DaySequence.find_holidays_by_year(Date.today.year)
+		@holiday_upcoming = DaySequence.find_upcoming_holiday("2011-02-11")
 	end
 end

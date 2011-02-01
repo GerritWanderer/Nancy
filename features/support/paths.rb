@@ -19,8 +19,8 @@ module NavigationHelpers
       when /the start page/
         root_path
 
-			when /the settings user page/
-        settings_user_path
+			when /the settings page/
+        settings_user_admin_index_path
         
       when /edit page for that project/
         raise 'no project' unless @project
