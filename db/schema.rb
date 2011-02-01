@@ -36,8 +36,9 @@ ActiveRecord::Schema.define(:version => 20110127115513) do
   end
 
   create_table "day_sequences", :force => true do |t|
-    t.date     "date"
-    t.integer  "type"
+    t.date     "date_from"
+    t.date     "date_to"
+    t.integer  "type_of_sequence"
     t.integer  "verified"
     t.integer  "user_id"
     t.datetime "created_at"

@@ -1,8 +1,9 @@
 class CreateDaySequences < ActiveRecord::Migration
   def self.up
     create_table :day_sequences do |t|
-      t.date :date
-      t.integer :type
+      t.date :date_from
+			t.date :date_to
+      t.integer :type_of_sequence
       t.integer :verified
       t.references :user
 

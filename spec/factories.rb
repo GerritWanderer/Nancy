@@ -58,4 +58,13 @@ Factory.define :user do |f|
 	f.password {"#{Faker::Name.first_name}#{Faker::Name.last_name}"}
 	f.sign_in_count {1}
 	f.confirmed_at {Date.today.strftime("%Y-%m-%d 09:00")}
+	f.day_sequences { [Factory.create(:day_sequence), Factory.create(:day_sequence), Factory.create(:day_sequence)] } 
+end
+
+Factory.define :day_sequence do |f|
+	date_from = Date.parse("#{Date.today.year}-#{rand(12)+1}-#{rand(28)+1}")
+	date_to = date_from.+rand(3)
+	f.date_from {date_from.strftime("%Y-%m-%d")}
+	f.date_to {date_to.strftime("%Y-%m-%d")}
+	f.type_of_sequence {rand(2)+2}
 end
