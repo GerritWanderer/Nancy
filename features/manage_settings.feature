@@ -120,13 +120,12 @@ Feature: Manage settings
 		And a customer exist
 		And a day_sequence exist with type_of_sequence: 2, user_id: 1, date_from: "2011-01-01"
 		And a day_sequence exist with type_of_sequence: 2, user_id: 1, date_from: "2011-01-02"
-		And a day_sequence exist with type_of_sequence: 3, user_id: 1, date_from: "2011-01-04"
-		And a day_sequence exist with type_of_sequence: 3, user_id: 1, date_from: "2011-01-03"
+		And a day_sequence exist with type_of_sequence: 3, user_id: 1, date_from: "2011-02-04"
+		And a day_sequence exist with type_of_sequence: 3, user_id: 1, date_from: "2011-02-03"
 		When I go to the settings page
 		And I follow "Managae Holidays"
 		And I follow "Container-open" in the 1st user holidays row
 		And I follow "Delete" within "div.user#active div.record dl dd:nth-child(3)"
 		Then I should not see "2011-01-02" within "div.user#active div.record"
 		When I follow "Delete" within "div.user#active div.record dl dd:nth-child(5)"
-		Then show me the page
 		Then I should not see "2011-01-04" within "div.user#active div.record"
