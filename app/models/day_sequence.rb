@@ -10,8 +10,9 @@ class DaySequence < ActiveRecord::Base
 	scope :by_type_within_date, lambda {|sequence_type, from, to| where(:type_of_sequence => sequence_type, :date_from => from, :date_to => to) }
 	scope :find_upcoming_holiday, lambda {|date| where("date_from > ?", date).order('date_from ASC').limit(1) }
 	scope :find_type_by_user_and_year, lambda {|sequence_type, user, year| where(:type_of_sequence => sequence_type, :user_id => user).where("date_from LIKE '%#{year}%'").where("date_to LIKE '%#{year}%'") }
+	scope :find_holidays_by_year, lambda {|year| where(:type_of_sequence => 1).where("date_from LIKE '%#{year}%'").where("date_to LIKE '%#{year}%'").order('date_from ASC') }
 	
-	def self.find_holidays_by_year(year)
+	def self.count_holidays_by_year(year)
 		holiday_records = DaySequence.where(:type_of_sequence => 1).where("date_from LIKE '%#{year}%'").where("date_to LIKE '%#{year}%'")
 		
 		holidays = 0

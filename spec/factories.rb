@@ -63,7 +63,7 @@ end
 
 Factory.define :day_sequence do |f|
 	f.date_from { Date.parse("#{Date.today.year}-#{rand(12)+1}-#{rand(28)+1}").strftime("%Y-%m-%d") }
-	f.type_of_sequence rand(2)+2
+	f.type_of_sequence {rand(2)+2}
 	f.after_build do |day_sequence|
 		day_sequence.date_to = day_sequence.date_from.+rand(10)
 	end

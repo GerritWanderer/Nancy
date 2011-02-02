@@ -26,13 +26,8 @@ div#userForm form {
 		}
 	}
 }
-div#users { 
-	div.toolbar li,  ul.title li { .grid(22); }
-	ul.title li.actions {
-		.grid(10);
-		text-align: right;
-	}
-}
+
+
 
 div#holidayForm form {
 	.grid(88,0,0,1,1);
@@ -63,7 +58,28 @@ div#holidayForm form {
 		}
 	}
 }
+
+
 div#sequences {
-	div#holidays ul.title li { .grid(22); }
-	div.user, div#holidays { margin-bottom: 2px; }
+	
+	div.holidays ul.title li, div.toolbar li, div.user ul.title li { .grid(21); }
+	div.user ul.title li.actions, div.holidays ul.title li.actions {
+		.grid(4);
+		text-align: right;
+	}
+	div.holidays ul.title li.actions { .grid(4,42); }
+	
+	div.user, div.holidays {
+		margin-bottom: 3px;
+		div.record {
+			background-color: @blueLight;
+			.roundedBottom;
+			padding: 10px;
+			dd {
+				.grid(24,0,1);
+				padding: 10px 0px;
+			}
+			dt { font-weight: bold; }
+		}
+	}
 }
