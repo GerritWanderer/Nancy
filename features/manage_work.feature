@@ -36,14 +36,12 @@ Feature: Manage work
 		And I follow "Calendarweek-prev" within "ul#calendar li#calendarWeek"
 		Then I should see the "previous" calendarweek
 	
-	@test
 	Scenario: List my work of the current day
 		Given I sign up as user
 		And 3 customers exist
 		And 10 projects exist
 		And 6 works exist
 		When I go to the works page
-		Then show me the page
 		Then I should see all my work of the current weekday
 		#improve
 		

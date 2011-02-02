@@ -1,7 +1,7 @@
 %h2 Add Holiday, Vacation and Absence
 -if @day_sequence.errors.any?
 	#error_explanation
-		%h2= "#{pluralize(@day_sequence.errors.count, "error")} prohibited this user from being saved:"
+		%h2= "#{pluralize(@day_sequence.errors.count, "error")} prohibited this sequence from being saved:"
 		%ul
 			- @day_sequence.errors.full_messages.each do |msg|
 				%li= msg

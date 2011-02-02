@@ -15,7 +15,7 @@ Feature: Manage settings
 		And 4 users exist
 		And a customer exist
 		When I go to the settings page
-		And I follow "E" in the 2nd user row
+		And I follow "Edit" in the 2nd user row
 		#Then I should be on the edit user page
 		When I fill in the user form with valid values
 		And I press "Save User"
@@ -28,18 +28,34 @@ Feature: Manage settings
 		And 4 users exist
 		And a customer exist
 		When I go to the settings page
-		And I follow "E" in the 2nd user row
+		And I follow "Edit" in the 2nd user row
 		#Then I should be on the edit user page
 		When I fill in the user form with invalid values
 		And I press "Save User"
 		Then I should see "error prohibited this user from being saved:"
+		
+	Scenario: Create a User with valid values
+		Given I sign up as user
+		And a customer exist
+		When I go to the settings page
+		And I fill in the user form with valid values
+		And I press "Save User"
+		#Then I should see User was created
+		
+	Scenario: Create a User with valid values
+		Given I sign up as user
+		And a customer exist
+		When I go to the settings page
+		And I fill in the user form with invalid values
+		And I press "Save User"
+		Then I should see "errors prohibited this user from being saved:" 
 		
 	Scenario: Delete a user
 		Given I sign up as user
 		And 4 users exist
 		And a customer exist
 		When I go to the settings page
-		And I follow "D" in the 3rd user row
+		And I follow "Delete" in the 3rd user row
 		#Then I should be on the edit user page
 		Then user should not exist with id: 3
 		And I should see "User was successfully deleted."
@@ -79,23 +95,38 @@ Feature: Manage settings
 		And I follow "Container-open" in the 2nd user holidays row
 		Then I should see all vacations and absences of the 2nd user
 		
-	@wip	
 	Scenario: Create Holiday with valid values
+		Given I sign up as user
+		And a customer exist
+		And 4 users exist
+		When I go to the settings page
+		And I follow "Managae Holidays"
+		And I fill in the holiday form with valid values
+		And I press "Save Sequence"
+		Then I should see "Holidays this year: 1"
 		
-	@wip
 	Scenario: Attemp to create a holiday with invalid values
+		Given I sign up as user
+		And a customer exist
+		And 4 users exist
+		When I go to the settings page
+		And I follow "Managae Holidays"
+		And I fill in the holiday form with invalid values
+		And I press "Save Sequence"
+		Then I should see "errors prohibited this sequence from being saved:"
 	
 	Scenario: Delete a holiday, vacation and absence
 		Given I sign up as user
 		And a customer exist
-		And a day_sequence exist with type_of_sequence: 2, user_id: 1, date_from: "2011-01-01", date_to: "2011-01-02"
-		And a day_sequence exist with type_of_sequence: 2, user_id: 1, date_from: "2011-01-03", date_to: "2011-01-03"
-		And a day_sequence exist with type_of_sequence: 3, user_id: 1, date_from: "2011-01-04", date_to: "2011-01-04"
-		And a day_sequence exist with type_of_sequence: 3, user_id: 1, date_from: "2011-01-05", date_to: "2011-01-06"
+		And a day_sequence exist with type_of_sequence: 2, user_id: 1, date_from: "2011-01-01"
+		And a day_sequence exist with type_of_sequence: 2, user_id: 1, date_from: "2011-01-02"
+		And a day_sequence exist with type_of_sequence: 3, user_id: 1, date_from: "2011-01-04"
+		And a day_sequence exist with type_of_sequence: 3, user_id: 1, date_from: "2011-01-03"
 		When I go to the settings page
 		And I follow "Managae Holidays"
 		And I follow "Container-open" in the 1st user holidays row
 		And I follow "Delete" within "div.user#active div.record dl dd:nth-child(3)"
-		Then I should not see "2011-01-03" within "div.user#active div.record"
+		Then I should not see "2011-01-02" within "div.user#active div.record"
 		When I follow "Delete" within "div.user#active div.record dl dd:nth-child(5)"
-		Then I should not see "2011-01-05 to 2011-01-06" within "div.user#active div.record"
+		Then show me the page
+		Then I should not see "2011-01-04" within "div.user#active div.record"

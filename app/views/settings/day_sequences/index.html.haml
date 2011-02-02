@@ -16,7 +16,7 @@
 	.holidays{:id => "#{'active' unless @holidays.nil?}"}
 		%ul.title
 			%li= "Holidays this year: #{@holidays_current_year}"
-			%li= "Next Holiday: #{@holiday_upcoming.first.date_from unless @holidays.nil?}"
+			%li= "Next Holiday: #{@holiday_upcoming.first.date_from unless @holiday_upcoming.empty?}"
 			%li.actions
 				- unless @holidays.nil?
 					= link_to image_tag("/images/icons/container-close.gif"), settings_day_sequences_path

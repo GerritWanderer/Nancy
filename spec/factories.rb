@@ -40,7 +40,7 @@ Factory.define :project do |f|
 end
 
 Factory.define :work do |f|
-	f.start { Time.parse("#{Date.today.strftime("%Y-%m-%d")} #{Factory.next(:startTime)}:00") }
+	f.start { Time.parse("#{Date.today.strftime("%Y-%m-%d")} 09:00") }
 	f.duration {(rand(8)+1)*15}
 	f.description {Faker::Lorem.paragraph}
 	f.user_id {1}
@@ -49,7 +49,6 @@ Factory.define :work do |f|
 		work.end = work.start.+(work.duration*60)
 	end
 end
-Factory.sequence :startTime do |s| "#{s+1}" end
 	
 Factory.define :user do |f|
 	f.firstname {Faker::Name.first_name}

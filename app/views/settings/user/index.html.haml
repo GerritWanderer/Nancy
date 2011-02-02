@@ -25,6 +25,6 @@
 				%li= mail_to user.email, user.email
 				%li= "#{user.hours} / #{user.holidays}"
 				%li.actions
-					= link_to "E", edit_settings_user_admin_path(user)
-					= link_to "D", settings_user_admin_path(user), :confirm => 'Are you sure?', :method => :delete
+					= link_to image_tag("/images/icons/edit.gif"), edit_settings_user_admin_path(user)
+					= link_to image_tag("/images/icons/delete.gif"), settings_user_admin_path(user), :confirm => 'Are you sure?', :method => :delete
 				.clear

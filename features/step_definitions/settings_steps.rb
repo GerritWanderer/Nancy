@@ -19,17 +19,36 @@ end
 When /^I fill in the user form with valid values$/ do	
 	user_selector = "user_"
 	user = Factory.attributes_for(:user)
-	user_ignore_keys = [:confirmed_at, :sign_in_count, :password, :day_sequences]
+	user_ignore_keys = [:confirmed_at, :sign_in_count, :day_sequences]
 	user.keys.each {|key|
 		And %{I fill in "#{user_selector}#{key}" with "#{user[key.intern]}"} unless user_ignore_keys.index(key)
 	}
+	And %{I fill in "#{user_selector}password_confirmation" with "#{user[:password]}"}
 end
 
 When /^I fill in the user form with invalid values$/ do	
 	user_selector = "user_"
 	user = Factory.attributes_for(:user)
 	user.keys.each {|key|
-		And %{I fill in "#{user_selector}#{key}" with ""} if key.to_s == "email"
+		And %{I fill in "#{user_selector}email" with ""} if key.to_s == "email"
+	}
+end
+
+When /^I fill in the holiday form with valid values$/ do	
+	day_sequence_selector = "day_sequence_"
+	day_sequence = Factory.attributes_for(:holiday)
+	day_sequence_ignore_keys = [:type_of_sequence, :verified, :user_id]
+	day_sequence.keys.each {|key|
+		And %{I fill in "#{day_sequence_selector}#{key}" with "#{day_sequence[key.intern]}"} unless day_sequence_ignore_keys.index(key)
+	}
+	And %{I fill in "#{day_sequence_selector}date_to" with "#{day_sequence[:date_from]}"}
+end
+When /^I fill in the holiday form with invalid values$/ do	
+	day_sequence_selector = "day_sequence_"
+	day_sequence = Factory.attributes_for(:holiday)
+	day_sequence_ignore_keys = [:type_of_sequence, :verified, :user_id]
+	day_sequence.keys.each {|key|
+		And %{I fill in "#{day_sequence_selector}#{key}" with "#{day_sequence[key.intern]}"} if !day_sequence_ignore_keys.index(key) && key.to_s == "date_to"
 	}
 end
 
