@@ -22,6 +22,7 @@ end
 
 Then(/^I should see all my work of the current weekday$/) do
 	works = find_models("work")
+	works = works.sort_by { |w| w["start"] }
 	Rails.logger.info works
 	counter = 0
   works.each do |work|

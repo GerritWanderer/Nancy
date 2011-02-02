@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110120205208) do
+ActiveRecord::Schema.define(:version => 20110127115513) do
 
   create_table "contacts", :force => true do |t|
     t.string   "salutation"
@@ -31,6 +31,16 @@ ActiveRecord::Schema.define(:version => 20110120205208) do
     t.string   "name"
     t.string   "shortname"
     t.string   "website"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "day_sequences", :force => true do |t|
+    t.date     "date_from"
+    t.date     "date_to"
+    t.integer  "type_of_sequence"
+    t.integer  "verified"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

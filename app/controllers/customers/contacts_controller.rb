@@ -1,4 +1,4 @@
-class ContactsController < ApplicationController
+class Customers::ContactsController < ApplicationController
   before_filter :authenticate_user!, :init_contacts
   before_filter :render_filter, :only => [:index, :show, :new, :edit]
   

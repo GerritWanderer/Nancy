@@ -1,0 +1,41 @@
+.filter
+	%ul
+		%li= link_to "Manage Users", settings_user_admin_index_path
+		%li.active= link_to "Managae Holidays", settings_day_sequences_path
+		.clear
+#holidayForm
+	- if @day_sequence.new_record?
+		= form_for @day_sequence, :url => settings_day_sequences_path do |f|
+			= render :partial => "form", :locals => { :f => f }
+	- else
+		= form_for @day_sequence, :url => settings_day_sequence_path(@day_sequence) do |f|
+			= render :partial => "form", :locals => { :f => f }
+	.clear
+
+#sequences
+	.holidays{:id => "#{'active' unless @holidays.nil?}"}
+		%ul.title
+			%li= "Holidays this year: #{@holidays_current_year}"
+			%li= "Next Holiday: #{@holiday_upcoming.first.date_from unless @holiday_upcoming.empty?}"
+			%li.actions
+				- unless @holidays.nil?
+					= link_to image_tag("/images/icons/container-close.gif"), settings_day_sequences_path
+				- else
+					= link_to image_tag("/images/icons/container-open.gif"), settings_day_sequence_path(Date.today.year)
+			.clear
+		!= "#{render :partial => 'show' unless @holidays.nil?}"
+	#users
+		- User.all.each do |user|
+			.user{:id => "#{'active' if !@user.nil? && user.id == @user.id}"}
+				%ul.title
+					%li= "#{user.firstname} #{user.lastname}"
+					%li= "Vacation available: #{user.holidays}"
+					%li= "Vacation taken: #{DaySequence.find_type_by_user_and_year(2, user.id, Date.today.year).count}"
+					%li= "Days of Absence: #{DaySequence.find_type_by_user_and_year(3, user.id, Date.today.year).count}"
+					%li.actions
+						- if !@user.nil? && user.id == @user.id
+							= link_to image_tag("/images/icons/container-close.gif"), settings_day_sequences_path
+						- else
+							= link_to image_tag("/images/icons/container-open.gif"), settings_day_sequence_path(Date.today.year, :user_id => user.id)
+					.clear
+				!= "#{render :partial => 'show' if !@user.nil? && user.id == @user.id}"

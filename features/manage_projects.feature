@@ -136,7 +136,6 @@ Feature: Manage projects
     When I follow "Project-close" within "div.project div.main span.actions"
     Then I should see "Project status was successfully switched."
 
-	@test
   Scenario: Open Work-Report of a project
 		Given I sign up as user
 		And 3 customers exist

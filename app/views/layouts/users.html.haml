@@ -17,6 +17,7 @@
 					%li= link_to 'Customers', customers_path()
 					%li= link_to 'Projects', projects_path()
 					%li.small= link_to 'profile', edit_user_registration_path()
+					%li.small= link_to 'settings', settings_user_admin_index_path()
 					%li.small= link_to 'logout', destroy_user_session_path()
 					%li.user
 						%span= "#{current_user.firstname} #{current_user.lastname}"

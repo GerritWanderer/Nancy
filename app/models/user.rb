@@ -6,4 +6,6 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :firstname, :lastname, :hours, :holidays, :password, :password_confirmation, :remember_me
+
+	has_many :day_sequences
 end

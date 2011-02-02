@@ -41,12 +41,37 @@ end
 
 Factory.define :work do |f|
 	f.start { Time.parse("#{Date.today.strftime("%Y-%m-%d")} 09:00") }
-	f.end { Time.parse("#{Date.today.strftime("%Y-%m-%d")} 10:00") }
-	f.duration {45}
+	f.duration {(rand(8)+1)*15}
 	f.description {Faker::Lorem.paragraph}
 	f.user_id {1}
 	f.project_id {rand(10)+1}
+	f.after_build do |work|
+		work.end = work.start.+(work.duration*60)
+	end
+end
+	
+Factory.define :user do |f|
+	f.firstname {Faker::Name.first_name}
+	f.lastname {Faker::Name.last_name}
+	f.email {Faker::Internet.email}
+	f.password {"#{Faker::Name.first_name}#{Faker::Name.last_name}"}
+	f.sign_in_count {1}
+	f.confirmed_at {Date.today.strftime("%Y-%m-%d 09:00")}
+	f.day_sequences { [Factory.create(:day_sequence), Factory.create(:day_sequence), Factory.create(:day_sequence)] } 
 end
 
-Factory.sequence :startTime do |s| "#{s + 7}" end
-Factory.sequence :endTime do |e| "#{e + 8}" end
+Factory.define :day_sequence do |f|
+	f.date_from { Date.parse("#{Date.today.year}-#{rand(12)+1}-#{rand(28)+1}").strftime("%Y-%m-%d") }
+	f.type_of_sequence {rand(2)+2}
+	f.after_build do |day_sequence|
+		day_sequence.date_to = day_sequence.date_from.+rand(10)
+	end
+end
+
+Factory.define :holiday, :class => DaySequence do |f|
+	f.date_from { Date.parse("#{Date.today.year}-#{rand(12)+1}-#{rand(28)+1}").strftime("%Y-%m-%d") }
+	f.type_of_sequence 1
+	f.after_build do |holiday|
+		holiday.date_to = holiday.date_from.+rand(3)
+	end
+end

@@ -1,0 +1,33 @@
+= form_for([@customer, @location, @form_contact], :html => {:style => "display: #{@displayContactForm || 'none'};"}) do |f|
+  %fieldset
+    -if @form_contact.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@form_contact.errors.count, "error")} prohibited this contact from being saved:"
+        %ul
+          = @form_contact.errors.full_messages.each do |msg|
+            %li= msg
+    %legend Create Contact
+    = link_to image_tag("/images/icons/container-close.gif"), customer_location_path(@customer, @location, :order => params[:order])
+    %hr.clear/
+    %dl
+      %dt= f.label :salutation
+      %dd
+        = f.select(:salutation, options_for_select(["Mr.", "Ms."]))
+        =f.text_field :title, :class => "title"
+      %dt= f.label :firstname
+      %dd= f.text_field :firstname
+      %dt= f.label :lastname
+      %dd= f.text_field :lastname
+      %dt= f.label :department
+      %dd= f.text_field :department
+      %dt= f.label :email
+      %dd= f.text_field :email
+      %dt= f.label :fon
+      %dd= f.text_field :fon
+      %dt= f.label :fax
+      %dd= f.text_field :fax
+      %dt= f.label :mobile
+      %dd= f.text_field :mobile
+      %dt.submit
+        = f.hidden_field :location_id, :value => @location.id
+        = f.submit 'Save Contact', :class => "submit"

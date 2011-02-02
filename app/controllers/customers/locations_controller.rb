@@ -1,4 +1,4 @@
-class LocationsController < ApplicationController
+class Customers::LocationsController < ApplicationController
   before_filter :authenticate_user!, :init_locations
   before_filter :render_filter, :only => [:show, :new, :edit]
 
