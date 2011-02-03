@@ -1,28 +1,28 @@
 !!!
 %html{ :xmlns => "http://www.w3.org/1999/xhtml", :lang => "en", "xml:lang" => "en"}
 %head
-	%meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}
-	%title Nancy
-	%link{:rel => 'stylesheet/less', :type => 'text/css', :href => '/stylesheets/nancy.less'}
-	%link{:rel => 'stylesheet/less', :type => 'text/css', :href => '/stylesheets/works.less'}
-	= javascript_include_tag :defaults
-	= stylesheet_link_tag :all
-	= csrf_meta_tag
+  %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}
+  %title Nancy
+  %link{:rel => 'stylesheet/less', :type => 'text/css', :href => '/stylesheets/nancy.less'}
+  %link{:rel => 'stylesheet/less', :type => 'text/css', :href => '/stylesheets/works.less'}
+  = javascript_include_tag :defaults
+  = stylesheet_link_tag :all
+  = csrf_meta_tag
 %body
-	#navigation
-		.container
-			%ul
-				%li.active= link_to 'Works', works_path()
-				%li= link_to 'Customers', customers_path()
-				%li= link_to 'Projects', projects_path()
-				%li.small= link_to 'profile', edit_user_registration_path()
-				%li.small= link_to 'settings', settings_user_admin_index_path()
-				%li.small= link_to 'logout', destroy_user_session_path()
-				%li.user
-					%span= "#{current_user.firstname} #{current_user.lastname}"
-	.container#flash
-		- flash.each do |key, value|
-			%div{:class => key}= value	
-	.container#content
-		= yield
-	.clear
+  #navigation
+    .container
+      %ul
+        %li.active= link_to 'Works', works_path()
+        %li= link_to 'Customers', customers_path()
+        %li= link_to 'Projects', projects_path()
+        %li.small= link_to 'profile', edit_user_registration_path()
+        %li.small= link_to 'settings', settings_user_admin_index_path()
+        %li.small= link_to 'logout', destroy_user_session_path()
+        %li.user
+          %span= "#{current_user.firstname} #{current_user.lastname}"
+  .container#flash
+    - flash.each do |key, value|
+      %div{:class => key}= value  
+  .container#content
+    = yield
+  .clear

@@ -1,35 +1,35 @@
 = render :partial => "calendar"
 #formWrapper
-	-if @work.errors.any?
-		#error_explanation
-			%h2= "#{pluralize(@work.errors.count, "error")} prohibited this work from being saved:"
-			%ul
-				- @work.errors.full_messages.each do |msg|
-					%li= msg
-	#createTimeWrapper
-		= form_for(@work, :remote => false) do |f|
-			%dl
-				%dt.time= f.label :start, "Start:"
-				%dd.time= f.text_field :start, :size => 4, :value => "08:00"
-				%dt.time= f.label :end, "End:"
-				%dd.time= f.text_field :end, :size => 4, :value => "09:00"
-				%dd.description= f.text_area :description
-				%dt.submit
-					= f.hidden_field :project_id, :value => @projects.first.id
-					= f.hidden_field :day, :value => @daySelected.strftime("%Y-%m-%d")
-					= f.submit "Save time", :class => "submit"
-	#selectWrapper
-		%dl
-			%dt Customer
-			%dd= render :partial => "customerlist"
-			%dt Project
-			%dd= render :partial => "projectlist"
-	.clear
+  -if @work.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@work.errors.count, "error")} prohibited this work from being saved:"
+      %ul
+        - @work.errors.full_messages.each do |msg|
+          %li= msg
+  #createTimeWrapper
+    = form_for(@work, :remote => false) do |f|
+      %dl
+        %dt.time= f.label :start, "Start:"
+        %dd.time= f.text_field :start, :size => 4, :value => "08:00"
+        %dt.time= f.label :end, "End:"
+        %dd.time= f.text_field :end, :size => 4, :value => "09:00"
+        %dd.description= f.text_area :description
+        %dt.submit
+          = f.hidden_field :project_id, :value => @projects.first.id
+          = f.hidden_field :day, :value => @daySelected.strftime("%Y-%m-%d")
+          = f.submit "Save time", :class => "submit"
+  #selectWrapper
+    %dl
+      %dt Customer
+      %dd= render :partial => "customerlist"
+      %dt Project
+      %dd= render :partial => "projectlist"
+  .clear
 %ul.toolbar
-	%li.time Time
-	%li.duration Duration
-	%li.project Project
-	%li.customer Customer
-	%li.description Description
+  %li.time Time
+  %li.duration Duration
+  %li.project Project
+  %li.customer Customer
+  %li.description Description
 #works
-	= render :partial => "worklist"
+  = render :partial => "worklist"

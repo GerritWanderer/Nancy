@@ -1,13 +1,13 @@
 %h2#calendarYear Year #{@daySelected.year}
 .clear
 %ul#calendar
-	-7.times do
-		%li{:class=>"wday#{@dayCalendar.wday}", :id => "#{'active' if @daySelected == @dayCalendar}" }= link_to @dayCalendar.strftime("%a. %d.%m."), { :controller => :works, :action => :index, :date => @dayCalendar.strftime("%Y-%m-%d") }, :remote => false
-		-@dayCalendar = @dayCalendar.+(1)
-	%li#calendarWeek
-		= link_to image_tag("/images/icons/calendarweek-prev10.gif"), works_path(:date => @jumping_links.[]("prev10")), :remote => false
-		= link_to image_tag("/images/icons/calendarweek-prev.gif"), works_path(:date => @jumping_links.[]("prev")), :remote => false
-		%span Calendarweek #{@daySelected.-(1).cweek}
-		= link_to image_tag("/images/icons/calendarweek-next.gif"), works_path(:date => @jumping_links.[]("next")), :remote => false
-		= link_to image_tag("/images/icons/calendarweek-next10.gif"), works_path(:date => @jumping_links.[]("next10")), :remote => false
-	.clear
+  -7.times do
+    %li{:class=>"wday#{@dayCalendar.wday}", :id => "#{'active' if @daySelected == @dayCalendar}" }= link_to @dayCalendar.strftime("%a. %d.%m."), { :controller => :works, :action => :index, :date => @dayCalendar.strftime("%Y-%m-%d") }, :remote => false
+    -@dayCalendar = @dayCalendar.+(1)
+  %li#calendarWeek
+    = link_to image_tag("/images/icons/calendarweek-prev10.gif"), works_path(:date => @jumping_links.[]("prev10")), :remote => false
+    = link_to image_tag("/images/icons/calendarweek-prev.gif"), works_path(:date => @jumping_links.[]("prev")), :remote => false
+    %span Calendarweek #{@daySelected.-(1).cweek}
+    = link_to image_tag("/images/icons/calendarweek-next.gif"), works_path(:date => @jumping_links.[]("next")), :remote => false
+    = link_to image_tag("/images/icons/calendarweek-next10.gif"), works_path(:date => @jumping_links.[]("next10")), :remote => false
+  .clear

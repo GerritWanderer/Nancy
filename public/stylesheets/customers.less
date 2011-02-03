@@ -1,129 +1,129 @@
 @import "_basic";
 
 body#customers { 
-	div.toolbar li,  ul.title li { .grid(26); }
-	ul.title li.actions {
-		.grid(10);
-		text-align: right;
-	}
+  div.toolbar li,  ul.title li { .grid(26); }
+  ul.title li.actions {
+    .grid(10);
+    text-align: right;
+  }
 }
 
 div#customerForm {
-	dl {
-		background-color: @blueLight;
-		dt {
-			.grid(12,0,1);
-			text-align: right;
-			margin-bottom: 10px;
-		}
-		dd {
-			margin-bottom: 10px;
-			.grid(15);
-			input { width: 150px; }
-			input.zip { width: 40px; }
-			input.city { width: 90px; }
-			input.title { width: 82px; }
-		}
-	}
-	input.submit { margin-left: 680px !important}
+  dl {
+    background-color: @blueLight;
+    dt {
+      .grid(12,0,1);
+      text-align: right;
+      margin-bottom: 10px;
+    }
+    dd {
+      margin-bottom: 10px;
+      .grid(15);
+      input { width: 150px; }
+      input.zip { width: 40px; }
+      input.city { width: 90px; }
+      input.title { width: 82px; }
+    }
+  }
+  input.submit { margin-left: 680px !important}
 }
 
 div.customer {
-	color: @blueDark;
-	margin-bottom: 5px;
-	
-	div.nestedRessources {
-		.roundedBottom;
-		background-color: @blueLight;
-		padding: 20px 0px;
+  color: @blueDark;
+  margin-bottom: 5px;
+  
+  div.nestedRessources {
+    .roundedBottom;
+    background-color: @blueLight;
+    padding: 20px 0px;
 
-		div.location {
-			.roundedTop;
-			border-top: 5px solid @grey;
-			padding: 10px;
-			
-			.details {
-				ul li { .grid(24); }
-			
-			}
-			form {
-				padding: 0px !important;
-				dl {
-					dt {
-						.grid(10);
-						margin-bottom: 10px;
-						text-align: right;
-					}
-					dd {
-						.grid(18);
-						margin-bottom: 10px;
-						input { width: 150px; }
-						input.zip { width: 40px; }
-						input.city { width: 90px; }
-					}
-					dt.submit {
-						margin-left: 82px;
-						input.submit { margin: 0px !important; }
-					}
-				}
-			}
-		}
-		div.contacts {
-			.roundedTop;
-			padding: 10px;
-			border-top: 5px solid @grey;
-			ul {
-				li { .grid(26); }
-				li.name, li.fon {
-					.grid(28);
-					span { display: block; }
-				}
-				li.actions { .grid(6);	}
-			}
-			ul.toolbar {
-				color: grey;
-				border-bottom: 2px dotted grey;
-				margin-bottom: 20px;
-			}
-			ul.record { margin-bottom: 10px; }
-			form {
-				padding: 0px !important;
-				dl {
-					dt {
-						.grid(9);
-						margin-bottom: 10px;
-						text-align: right;
-					}
-					dd {
-						.grid(20);
-						margin-bottom: 10px;
-						input { width: 150px; }
-						input.title { width: 89px; }
-						input.zip { width: 40px; }
-						input.city { width: 90px; }
-					}
-					dt.submit {
-						margin-left: 82px;
-						input.submit { margin: 0px !important; }
-					}
-				}
-			}
-		}
-		
-		
-		div.details h2, div.details span.actions, form legend {
-			font-weight: bold;
-			font-size: 11px;
-		}
-		div.details h2, form legend { .grid(78) }
-		div.details span.actions, form a {
-			.grid(10);
-			text-align: right;
-		}
-		div.pagination {
-			display: inline;
-			* { display: none; }
-			span.previous_page, a.previous_page, span.next_page, a.next_page { display: inline; }
-		}
-	}
+    div.location {
+      .roundedTop;
+      border-top: 5px solid @grey;
+      padding: 10px;
+      
+      .details {
+        ul li { .grid(24); }
+      
+      }
+      form {
+        padding: 0px !important;
+        dl {
+          dt {
+            .grid(10);
+            margin-bottom: 10px;
+            text-align: right;
+          }
+          dd {
+            .grid(18);
+            margin-bottom: 10px;
+            input { width: 150px; }
+            input.zip { width: 40px; }
+            input.city { width: 90px; }
+          }
+          dt.submit {
+            margin-left: 82px;
+            input.submit { margin: 0px !important; }
+          }
+        }
+      }
+    }
+    div.contacts {
+      .roundedTop;
+      padding: 10px;
+      border-top: 5px solid @grey;
+      ul {
+        li { .grid(26); }
+        li.name, li.fon {
+          .grid(28);
+          span { display: block; }
+        }
+        li.actions { .grid(6);  }
+      }
+      ul.toolbar {
+        color: grey;
+        border-bottom: 2px dotted grey;
+        margin-bottom: 20px;
+      }
+      ul.record { margin-bottom: 10px; }
+      form {
+        padding: 0px !important;
+        dl {
+          dt {
+            .grid(9);
+            margin-bottom: 10px;
+            text-align: right;
+          }
+          dd {
+            .grid(20);
+            margin-bottom: 10px;
+            input { width: 150px; }
+            input.title { width: 89px; }
+            input.zip { width: 40px; }
+            input.city { width: 90px; }
+          }
+          dt.submit {
+            margin-left: 82px;
+            input.submit { margin: 0px !important; }
+          }
+        }
+      }
+    }
+    
+    
+    div.details h2, div.details span.actions, form legend {
+      font-weight: bold;
+      font-size: 11px;
+    }
+    div.details h2, form legend { .grid(78) }
+    div.details span.actions, form a {
+      .grid(10);
+      text-align: right;
+    }
+    div.pagination {
+      display: inline;
+      * { display: none; }
+      span.previous_page, a.previous_page, span.next_page, a.next_page { display: inline; }
+    }
+  }
 }

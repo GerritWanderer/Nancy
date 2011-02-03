@@ -1,11 +1,11 @@
 @import "_basic";
 html { height: 100% ;}
 body {
-	background-color: white;
-	letter-spacing: 0.8px;
-	.gradient(#EFF6FF, #4A6A83);
-	min-height: 100%;
-	height: 100%;
+  background-color: white;
+  letter-spacing: 0.8px;
+  .gradient(#EFF6FF, #4A6A83);
+  min-height: 100%;
+  height: 100%;
 }
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
@@ -13,105 +13,105 @@ body, p, ol, ul, td {
   line-height: 18px;
 }
 div#navigation {
-	height: 50px;
-	background-color: @blueDark;
-	margin-bottom: 40px;
-	ul {
-		padding-top: 10px;
-		li {
-			.grid(15,0,1);
-			.roundedTop;
-			.gradient(#1D88D8, #005DAA);
-			a { color: white; }
-			line-height: 40px;
-			font-size: 16px;
-			text-align: center;
-			background-color: #E2EBF5;
-		}
-		li.active {
-			.gradient(transparent, transparent);
-			background-color: #E2EBF5;
-			a { color: @orange; }
-		}
-		li.small {
-			.grid(8,0,1);
-			font-size: 12px;
-			line-height: 18px;
-			margin-top: 22px;
-		}
-		li.user {
-			.gradient(transparent, transparent);
-			.grid(15,0,1);
-			border: none;
-			font-size: 12px;
-			line-height: 22px;
-			background-color: transparent;
-			color: white;
-			margin-top: 18px;
-		}
-	}
+  height: 50px;
+  background-color: @blueDark;
+  margin-bottom: 40px;
+  ul {
+    padding-top: 10px;
+    li {
+      .grid(15,0,1);
+      .roundedTop;
+      .gradient(#1D88D8, #005DAA);
+      a { color: white; }
+      line-height: 40px;
+      font-size: 16px;
+      text-align: center;
+      background-color: #E2EBF5;
+    }
+    li.active {
+      .gradient(transparent, transparent);
+      background-color: #E2EBF5;
+      a { color: @orange; }
+    }
+    li.small {
+      .grid(8,0,1);
+      font-size: 12px;
+      line-height: 18px;
+      margin-top: 22px;
+    }
+    li.user {
+      .gradient(transparent, transparent);
+      .grid(15,0,1);
+      border: none;
+      font-size: 12px;
+      line-height: 22px;
+      background-color: transparent;
+      color: white;
+      margin-top: 18px;
+    }
+  }
 }
 
 // ALLGEMEINE CONTENT ELEMENTE //
 div#content {
-	.rounded;
-	background-color: white;
-	padding: 30px;
-	width: 900px;
-	div.wizard {
-		.rounded;
-		margin-bottom: 20px;
-		padding: 10px;
-		background-color: @blueMedium;
-		color: @blueDark;
-	}
-	form {
-		.rounded;
-		background-color: @blueLight;
-		padding: 10px;
-		input.submit {
-		    background: url("/images/submit.gif") no-repeat scroll center top transparent;
-		    border: 0 none;
-		    color: white;
-		    height: 22px;
-		    width: 165px;
-				margin: 10px 0px;
-		}
-	}
+  .rounded;
+  background-color: white;
+  padding: 30px;
+  width: 900px;
+  div.wizard {
+    .rounded;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: @blueMedium;
+    color: @blueDark;
+  }
+  form {
+    .rounded;
+    background-color: @blueLight;
+    padding: 10px;
+    input.submit {
+        background: url("/images/submit.gif") no-repeat scroll center top transparent;
+        border: 0 none;
+        color: white;
+        height: 22px;
+        width: 165px;
+        margin: 10px 0px;
+    }
+  }
 
-	div.toolbar {
-		.rounded();
-		background-color: @blueLight;
-		color: blueMedium;
-		padding: 0px 10px;
-		margin-bottom: 5px;
-		height: 30px;
-		li { line-height: 30px; }
-	}
-	
-	ul.title, div.content {
-		background-color: @blueLight;
-		padding: 10px;
-	}
-	ul.title#active {
-		background-color: @blueMedium;
-		.roundedTop;
-		.roundedBottom(0px);
-		font-weight: bold;
-	}
-	ul.title { .rounded; }
+  div.toolbar {
+    .rounded();
+    background-color: @blueLight;
+    color: blueMedium;
+    padding: 0px 10px;
+    margin-bottom: 5px;
+    height: 30px;
+    li { line-height: 30px; }
+  }
+  
+  ul.title, div.content {
+    background-color: @blueLight;
+    padding: 10px;
+  }
+  ul.title#active {
+    background-color: @blueMedium;
+    .roundedTop;
+    .roundedBottom(0px);
+    font-weight: bold;
+  }
+  ul.title { .rounded; }
 }
 
 div.filter {
-	margin-left: 20px;
-	li {
-		.grid(15,0,1);
-		.roundedTop;
-		background-color: @blueMedium;
-		line-height: 30px;
-		text-align: center;
-	}
-	li.active { background-color: @blueLight; }
+  margin-left: 20px;
+  li {
+    .grid(15,0,1);
+    .roundedTop;
+    background-color: @blueMedium;
+    line-height: 30px;
+    text-align: center;
+  }
+  li.active { background-color: @blueLight; }
 }
 
 
@@ -140,13 +140,13 @@ div.field, div.actions {
 
 .field_with_errors { display: inline; }
 .field_with_errors input {
-	border: 1px solid darkred;
+  border: 1px solid darkred;
   background-color: #FF6F6F;
 }
 
 #error_explanation {
-	.rounded;
-	border: 2px solid darkred;
+  .rounded;
+  border: 2px solid darkred;
   padding: 7px;
   padding-bottom: 0;
   margin-bottom: 20px;
@@ -164,28 +164,28 @@ div.field, div.actions {
   color: darkred;
 }
 #error_explanation ul {
-	margin-left: 20px !important;
+  margin-left: 20px !important;
 }
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
 }
 div#flash div {
-	display: inline;
-	padding: 10px 10px 0px;
-	margin-left: 40px;
+  display: inline;
+  padding: 10px 10px 0px;
+  margin-left: 40px;
 }
 div#flash div.notice { 
-	.roundedTop;
-	border-top: 2px solid #77FF6F;
-	border-left: 2px solid #77FF6F;
-	border-right: 2px solid #77FF6F;
-	background-color: #B3FFAF;
+  .roundedTop;
+  border-top: 2px solid #77FF6F;
+  border-left: 2px solid #77FF6F;
+  border-right: 2px solid #77FF6F;
+  background-color: #B3FFAF;
 }
 div#flash div.alert { 
-	.roundedTop;
-	border-top: 2px solid darkred;
-	border-left: 2px solid darkred;
-	border-right: 2px solid darkred;
-	background-color: #FF6F6F;
+  .roundedTop;
+  border-top: 2px solid darkred;
+  border-left: 2px solid darkred;
+  border-right: 2px solid darkred;
+  background-color: #FF6F6F;
 }

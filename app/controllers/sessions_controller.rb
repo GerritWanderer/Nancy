@@ -1,8 +1,8 @@
 class SessionsController < Devise::SessionsController
   prepend_before_filter :require_no_authentication, :only => [ :new, :create ]
   include Devise::Controllers::InternalHelpers
-	respond_to :html, :mobile
-	
+  respond_to :html, :mobile
+  
   # GET /resource/sign_in
   def new
     clean_up_passwords(build_resource)
@@ -14,11 +14,11 @@ class SessionsController < Devise::SessionsController
     resource = warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#new")
     set_flash_message(:notice, :signed_in) if is_navigational_format?
     sign_in(resource_name, resource)
-		if mobile_device? 
-			redirect_to works_path
-		else
-    	respond_with resource, :location => redirect_location(resource_name, resource)
-		end
+    if mobile_device? 
+      redirect_to works_path
+    else
+      respond_with resource, :location => redirect_location(resource_name, resource)
+    end
   end
 
   # GET /resource/sign_out

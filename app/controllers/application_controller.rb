@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :prepare_for_mobile
-	before_filter :check_for_first_customer, :except => [:first] 
+  before_filter :check_for_first_customer, :except => [:first] 
   layout :layout_by_resource
   
   private
@@ -17,9 +17,9 @@ class ApplicationController < ActionController::Base
   def prepare_for_mobile
     session[:mobile_param] = params[:mobile] if params[:mobile]
     request.format = :mobile if mobile_device?
-	end
-	
-	def check_for_first_customer
+  end
+  
+  def check_for_first_customer
     if user_signed_in? && Customer.count == 0 && params[:controller]+"/"+params[:action] != "devise/sessions/destroy" && params[:controller]+"/"+params[:action] != "customers/create"
         redirect_to :controller => 'customers', :action => 'first'
     end

@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
-	before_filter :authenticate_user!, :init_projects
-	before_filter :render_filter, :only => [:index, :show, :new, :edit]
+  before_filter :authenticate_user!, :init_projects
+  before_filter :render_filter, :only => [:index, :show, :new, :edit]
   respond_to :html, :mobile
 
   def index #empty method? I should be doing a something more then in init_projects

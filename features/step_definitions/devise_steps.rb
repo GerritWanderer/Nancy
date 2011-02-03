@@ -32,7 +32,7 @@ Given /^I sign up as user with customer wizard$/ do
   lastname = 'Mustermann'
   email = 'admin@wildner-designer.de'
   password = 'test123'
-	location = 'Company'
+  location = 'Company'
   street = 'Musterstr. 11'
   zip = '12345'
   city = 'Musterstadt'

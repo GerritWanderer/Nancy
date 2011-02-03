@@ -1,98 +1,98 @@
 @import "_basic";
 
 body#projects { 
-	div#projectForm {
-		div.wrapper {
-			.rounded;
-			background-color: @blueLight;
-		}
-	
-		div#createProject {
-			.grid(52,0,2);
-			legend 
-			dl dt { text-align: left;}
-			dl dd, dl dt, legend { margin-bottom: 10px;}
-			dl dt.title {	.grid(8);	}
-			dl dd.title {	.grid(42);	}
-			dl dd.title input { width: 420px; }
+  div#projectForm {
+    div.wrapper {
+      .rounded;
+      background-color: @blueLight;
+    }
+  
+    div#createProject {
+      .grid(52,0,2);
+      legend 
+      dl dt { text-align: left;}
+      dl dd, dl dt, legend { margin-bottom: 10px;}
+      dl dt.title { .grid(8); }
+      dl dd.title { .grid(42);  }
+      dl dd.title input { width: 420px; }
 
-			dl dt.description {	.grid(10,0,40);	}
-			dl dd.description {	.grid(50);	}
-			dl dd.description textarea {
-				height: 60px;
-				width: 500px;
-			}
-			dl dt.small {	.grid(11);	}
-			dl dd.small {	.grid(6);	}
-			dl dd.small input { width: 40px; }
-			dl dt.submit {.grid(16)}
-			dl dt.submit input.submit {margin:0px;}
-		}
-		div#selectCustomer {
-			fieldset.customer { margin-top: 27px; }
-			.grid(34);
-			dl dt {	.grid(10,0,2); }
-			dl dd {.grid(18);}
-			dl dd select { width: 180px; }
-		}
-	}	
-	
-	div.toolbar li, ul.title li { .grid(29,0,0,1,1); }
-	div.toolbar li.nr, ul.title li.nr { .grid(6); }
-	div.toolbar li.date, ul.title li.date { .grid(12); }
-	ul.title li.actions {
-		.grid(8);
-		text-align: right;
-	}
+      dl dt.description { .grid(10,0,40); }
+      dl dd.description { .grid(50);  }
+      dl dd.description textarea {
+        height: 60px;
+        width: 500px;
+      }
+      dl dt.small { .grid(11);  }
+      dl dd.small { .grid(6); }
+      dl dd.small input { width: 40px; }
+      dl dt.submit {.grid(16)}
+      dl dt.submit input.submit {margin:0px;}
+    }
+    div#selectCustomer {
+      fieldset.customer { margin-top: 27px; }
+      .grid(34);
+      dl dt { .grid(10,0,2); }
+      dl dd {.grid(18);}
+      dl dd select { width: 180px; }
+    }
+  } 
+  
+  div.toolbar li, ul.title li { .grid(29,0,0,1,1); }
+  div.toolbar li.nr, ul.title li.nr { .grid(6); }
+  div.toolbar li.date, ul.title li.date { .grid(12); }
+  ul.title li.actions {
+    .grid(8);
+    text-align: right;
+  }
 }
 
 
 div.project {
-	color: @blueDark;
-	margin-bottom: 5px;
-	
+  color: @blueDark;
+  margin-bottom: 5px;
+  
 
-	div.content {
-		.roundedBottom;
-		div.main {
-			dl dt { font-weight: bold; }
-			dl dt, dl dd { .grid(8); }
-			dl dt.description, dl dd.description { .grid(80, 0, 14); margin-bottom: 10px; }
-		}
-		div.contacts {
-			margin-top: 20px;
-			ul.record li span {
-				display: block;
-			}
-			li.actions {
-				text-align: right;
-			}
-			ul.toolbar, ul.record {
-				li { .grid(27) }
-				li.actions { .grid(7) }
-			}
-		}
-	}
+  div.content {
+    .roundedBottom;
+    div.main {
+      dl dt { font-weight: bold; }
+      dl dt, dl dd { .grid(8); }
+      dl dt.description, dl dd.description { .grid(80, 0, 14); margin-bottom: 10px; }
+    }
+    div.contacts {
+      margin-top: 20px;
+      ul.record li span {
+        display: block;
+      }
+      li.actions {
+        text-align: right;
+      }
+      ul.toolbar, ul.record {
+        li { .grid(27) }
+        li.actions { .grid(7) }
+      }
+    }
+  }
 }
 
 
 div.project {
-	// GLOBALS
-	div.content {
-		hr {
-			width: 100%;
-			visibility: visible;
-		}
-		h2, span.actions, form legend { font-weight: bold; }
-		h2, form legend { .grid(78) }
-		span.actions, form a {
-			.grid(10);
-			text-align: right;
-		}
-		
-		ul.toolbar {
-			border-bottom: 2px dotted grey;
-			li { color: grey; }
-		}
-	}
+  // GLOBALS
+  div.content {
+    hr {
+      width: 100%;
+      visibility: visible;
+    }
+    h2, span.actions, form legend { font-weight: bold; }
+    h2, form legend { .grid(78) }
+    span.actions, form a {
+      .grid(10);
+      text-align: right;
+    }
+    
+    ul.toolbar {
+      border-bottom: 2px dotted grey;
+      li { color: grey; }
+    }
+  }
 }

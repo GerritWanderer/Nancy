@@ -22,8 +22,8 @@ class WorksController < ApplicationController
       params[:project_id] = params[:work][:project_id]
       params[:customer_id] = Project.find(params[:work][:project_id]).customer.id
       @customers = Customer.with_active_projects.joins(:projects).uniq
-  		@projects = Project.by_customer_isClosed(params[:customer_id], 0)
-  		render 'index'
+      @projects = Project.by_customer_isClosed(params[:customer_id], 0)
+      render 'index'
     end
   end
 
@@ -46,10 +46,10 @@ class WorksController < ApplicationController
       @daySelected = Date.today
     end
     @dayCalendar = @daySelected.-(@daySelected.cwday - 1)
-		@jumping_links = Work.selectJumpingLinks(@dayCalendar)
-		
-		@works = Work.from_day_by_user("%"+@daySelected.strftime("%Y-%m-%d")+"%", current_user.id).order("start ASC")
-		@work = Work.new
+    @jumping_links = Work.selectJumpingLinks(@dayCalendar)
+    
+    @works = Work.from_day_by_user("%"+@daySelected.strftime("%Y-%m-%d")+"%", current_user.id).order("start ASC")
+    @work = Work.new
     @statistics = Work.calculateStatistics(@works, current_user.hours)
   end
 end
