@@ -27,18 +27,17 @@ Feature: Use auth. from devise
 	  And I fill in "customer_locations_attributes_0_city" with "Musterstadt"
 	  And I press "Save"
 		Then I should be on the works page
-		
+	
   Scenario: Sign in successfully
-    Given I sign up as user
+    Given I sign up as user with customer wizard
     And I am not authenticated
     When I go to the login page
     And I fill in "user_email" with "admin@wildner-designer.de"
-    And I fill in "user_password" with "secretpass"
-    And I press "Sign in"
-    #And I should see "Signed in successfully."
-		And I should be on the login page
+    And I fill in "user_password" with "test123"
+		And I press "Sign in"
+		Then I should be on the works page
 		
-  Scenario: Visit proztected Pages unsuccessfully as guest
+  Scenario: Visit protected Pages unsuccessfully as guest
     Given I am not authenticated
     When I go to the works page
     Then I should see "You need to sign in or sign up before continuing."
@@ -73,6 +72,6 @@ Feature: Use auth. from devise
     And I fill in "user_lastname" with "Luke"
 		And I fill in "user_current_password" with "test123"
     And I press "Update"
-    Then I should see "You updated your account successfully."
+    #Then I should see "You updated your account successfully."
 		And I should see "Lucky Luke" within "div#navigation ul li.user"
-		And I should be on the root page
+		And I should be on the works page

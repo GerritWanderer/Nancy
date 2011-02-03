@@ -14,10 +14,6 @@ Given /^I sign up as user$/ do
   lastname = 'Mustermann'
   email = 'admin@wildner-designer.de'
   password = 'test123'
-  location = 'Company'
-  street = 'Musterstr. 11'
-  zip = '12345'
-  city = 'Musterstadt'
   
   When %{I go to the the registration page}
   And %{I fill in "user_firstname" with "#{firstname}"}
@@ -36,6 +32,10 @@ Given /^I sign up as user with customer wizard$/ do
   lastname = 'Mustermann'
   email = 'admin@wildner-designer.de'
   password = 'test123'
+	location = 'Company'
+  street = 'Musterstr. 11'
+  zip = '12345'
+  city = 'Musterstadt'
 
   When %{I go to the the registration page}
   And %{I fill in "user_firstname" with "#{firstname}"}
@@ -47,7 +47,6 @@ Given /^I sign up as user with customer wizard$/ do
   Then %{I should receive an email}
   When %{I open the email}
   And %{they click the first link in the email}
-  #Then %{I should be on the customer wizard page}
   When %{I fill in "customer_name" with "#{firstname}"}
   And %{I fill in "customer_website" with "#{firstname}"}
   And %{I fill in "customer_locations_attributes_0_name" with "#{location}"}
