@@ -57,6 +57,14 @@ When /^I fill in the work form with valid values$/ do
   And %{I fill in "work_start" with "19:00"}
   And %{I fill in "work_end" with "20:00"}
 end
+When /^I submit the work form with values from "([^"]*)" to "([^"]*)"$/ do |start_time, end_time|
+  work_selector = "work_"
+  work = Factory.attributes_for(:work)
+  And %{I fill in "work_description" with "#{work[:description]}"}
+  And %{I fill in "work_start" with "#{start_time}"}
+  And %{I fill in "work_end" with "#{end_time}"}
+  And %{I press "Save"}
+end
 
 When /^I fill in the work form with invalid values$/ do 
   work_selector = "work_"

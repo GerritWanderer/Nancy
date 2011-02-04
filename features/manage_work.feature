@@ -62,17 +62,44 @@ Feature: Manage work
     When I fill in the work form with valid values
     And I press "Save"
     Then I should see "Work was successfully created."
-    #improve
     
-  Scenario: Attemp to create a new Work with invalid fields
+  @test
+  Scenario: Attemp to create a new Work without description
     Given I sign up as user
     And 3 customers exist
     And 10 projects exist
-    And 6 works exist
     When I go to the works page
-    When I fill in the work form with invalid values
+    When I fill in "work_description" with ""
     And I press "Save"
-    Then I should see "errors prohibited this work from being saved:"
+    Then I should see "Description is too short"
+    
+  @test
+  Scenario: Attemp to create a new Work with a higher Start than End time
+    Given I sign up as user
+    And 3 customers exist
+    And 10 projects exist
+    When I go to the works page  
+    When I fill in "work_start" with "09:00"
+    And I fill in "work_end" with "08:00"
+    And I press "Save"
+    Then I should see "End time must be higher then Start time"
+    
+  @test
+  Scenario: Attemp to create a new Work with various times within a existing record
+    Given I sign up as user
+    And 3 customers exist
+    And 10 projects exist
+    When I go to the works page  
+    When I submit the work form with values from "09:00" to "10:00"
+    Then I should see "Work was successfully created."
+    When I submit the work form with values from "08:30" to "10:15"
+    Then I should see "A record already exist within your given time."
+    When I submit the work form with values from "08:30" to "09:15"
+    Then I should see "A record already exist within your given time."
+    When I submit the work form with values from "09:15" to "09:45"
+    Then I should see "A record already exist within your given time."
+    When I submit the work form with values from "09:30" to "10:15"
+    Then I should see "A record already exist within your given time."
     
   Scenario: Delete a work
     Given I sign up as user

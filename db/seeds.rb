@@ -68,9 +68,8 @@ User.all.each do |user|
 	    timeStart = timeEnd
 	    duration = (rand(8)+1)*15
 	    timeEnd = timeStart + (duration * 60)
-	    Work.create!(:start => timeStart.strftime('%Y-%m-%d %H:%M'),
-	                    :end => timeEnd.strftime('%Y-%m-%d %H:%M'),
-	                    :duration => duration,
+	    Work.create!(:start_datetime => timeStart.strftime('%Y-%m-%d %H:%M'),
+	                    :end_datetime => timeEnd.strftime('%Y-%m-%d %H:%M'),
 	                    :description => Faker::Lorem.sentence,
 	                    :project_id => projects.shuffle.first.id,
                       :user_id => user.id)
