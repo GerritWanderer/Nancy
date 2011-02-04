@@ -40,7 +40,7 @@ Feature: Manage work
     Given I sign up as user
     And 3 customers exist
     And 10 projects exist
-    And 6 works exist
+    And 3 works exist
     When I go to the works page
     Then I should see all my work of the current weekday
     
@@ -57,13 +57,11 @@ Feature: Manage work
     Given I sign up as user
     And 3 customers exist
     And 10 projects exist
-    And 6 works exist
     When I go to the works page
     When I fill in the work form with valid values
     And I press "Save"
     Then I should see "Work was successfully created."
     
-  @test
   Scenario: Attemp to create a new Work without description
     Given I sign up as user
     And 3 customers exist
@@ -73,7 +71,6 @@ Feature: Manage work
     And I press "Save"
     Then I should see "Description is too short"
     
-  @test
   Scenario: Attemp to create a new Work with a higher Start than End time
     Given I sign up as user
     And 3 customers exist
@@ -84,7 +81,6 @@ Feature: Manage work
     And I press "Save"
     Then I should see "End time must be higher then Start time"
     
-  @test
   Scenario: Attemp to create a new Work with various times within a existing record
     Given I sign up as user
     And 3 customers exist

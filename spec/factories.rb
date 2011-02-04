@@ -1,5 +1,4 @@
 require 'Faker'
-
 Factory.define :customer do |f|
 	f.name {Faker::Company.name}
 	f.shortname {Faker::Company.name}
@@ -40,17 +39,14 @@ Factory.define :project do |f|
 end
 
 Factory.define :work do |f|
-	f.start_datetime { Time.parse("#{Date.today.strftime("%Y-%m-%d")} #{Factory.next(:starttime)}:00") }
-	f.duration {(rand(4)+1)*15}
+	f.sequence(:start_datetime) { |n| Time.parse("#{Date.today.strftime("%Y-%m-%d")} #{n}:00") }
+	f.duration {15}
 	f.description {Faker::Lorem.paragraph}
 	f.user_id {1}
 	f.project_id {rand(10)+1}
 	f.after_build do |work|
 		work.end_datetime = work.start_datetime.+(work.duration*60)
 	end
-end
-Factory.sequence :starttime do |n|
-  n
 end
 
 	

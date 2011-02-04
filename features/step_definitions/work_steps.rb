@@ -52,10 +52,12 @@ end
 
 When /^I fill in the work form with valid values$/ do 
   work_selector = "work_"
+	start_time = Time.parse("#{Date.today.strftime("%Y-%m-%d")} #{rand(24)}:#{rand(60)}")
+	end_time = start_time.+(15*60)
   work = Factory.attributes_for(:work)
   And %{I fill in "work_description" with "#{work[:description]}"}
-  And %{I fill in "work_start" with "19:00"}
-  And %{I fill in "work_end" with "20:00"}
+  And %{I fill in "work_start" with "#{start_time.strftime('%H:%M')}"}
+  And %{I fill in "work_end" with "#{end_time.strftime('%H:%M')}"}
 end
 When /^I submit the work form with values from "([^"]*)" to "([^"]*)"$/ do |start_time, end_time|
   work_selector = "work_"

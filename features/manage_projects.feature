@@ -137,7 +137,7 @@ Feature: Manage projects
     Given I sign up as user
     And 3 customers exist
     And 10 projects exist
-    And 10 works exist
+    And 3 works exist
     When I go to the projects page
     And I click "Container-open" in the 2nd project row
     When I follow "Project-report" within "div.project div.main span.actions"

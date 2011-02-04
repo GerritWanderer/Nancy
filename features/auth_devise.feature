@@ -33,7 +33,6 @@ Feature: Use auth. from devise
     Given I sign up as user
     And 3 customers exist
     And 10 projects exist
-    And 6 works exist
     When I go to the works page
     And I follow "profile" within "div#navigation ul li.small"
     And I fill in "user_firstname" with "Lucky"
