@@ -7,9 +7,16 @@ module NavigationHelpers
   #
   def path_to(page_name)
     case page_name
-
+      
     when /the home\s?page/
       '/'
+      
+      # pickle generated path's
+      when /the show page for (.+)/
+        polymorphic_path(model($1))
+      when /the edit page for that (.+)/
+        polymorphic_path(model($1))
+      
       when /the login page/
         new_user_session_path
       when /the logout page/
@@ -18,9 +25,11 @@ module NavigationHelpers
         new_user_registration_path
       when /the start page/
         root_path
-
-			when /the settings page/
+        
+      when /the settings page/
         settings_user_admin_index_path
+      when /the customer wizard page/
+        first_customers_path
         
       when /edit page for that project/
         raise 'no project' unless @project
@@ -36,10 +45,12 @@ module NavigationHelpers
         raise 'no projects' unless @projects
         nth_project = @projects[$1.to_i - 1]
         project_path(nth_project)
-
+        
       when /edit page for that contact/
         raise 'no contact' unless @contact
         edit_contact_path(@contact)
+      when /create contact page/
+        new_customer_location_contact_path
       when /page for that contact/
         raise 'no contact' unless @contact
         contact_path(@contact)
@@ -51,7 +62,7 @@ module NavigationHelpers
         raise 'no contacts' unless @contacts
         nth_contact = @contacts[$1.to_i - 1]
         contact_path(nth_contact)
-
+        
       when /edit page for that location/
         raise 'no location' unless @location
         edit_location_path(@location)
@@ -66,7 +77,7 @@ module NavigationHelpers
         raise 'no locations' unless @locations
         nth_location = @locations[$1.to_i - 1]
         location_path(nth_location)
-
+        
       when /edit page for that customer/
         raise 'no customer' unless @customer
         edit_customer_path(@customer)
@@ -81,14 +92,13 @@ module NavigationHelpers
         raise 'no customers' unless @customers
         nth_customer = @customers[$1.to_i - 1]
         customer_path(nth_customer)
-
-
+        
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
-
+    
     else
       begin
         page_name =~ /the (.*) page/

@@ -21,11 +21,10 @@ Feature: Manage contacts
     And I click "Container-open" in the 2nd customer row
     And I follow "Next" within "div.customer div.location h2"
     And I follow "Contact-create" within "div.customer div.contacts span.actions"
-    #Then I should be on the create location page
+    # Then I should be on the customer's location's contact's create page
     When I fill in the contact form with valid values
     And I press "Save Contact"
     Then I should see "Contact was successfully created."
-    #And I should be on the page for that customer
     And I should see all the contacts from 2nd location and 2nd customer
     
   Scenario: Attempt to create a new location with invalid input within a customer
@@ -35,11 +34,10 @@ Feature: Manage contacts
     And I click "Container-open" in the 2nd customer row
     And I follow "Next" within "div.customer div.location h2"
     And I follow "Contact-create" within "div.customer div.contacts span.actions"
-    #Then I should be on the create location page
+    # Then I should be on the customer's location's contact's create page
     When I fill in the contact form with invalid values
     And I press "Save Contact"
     Then I should see "errors prohibited this contact from being saved:"
-    #And I should be on the page for that customer
 
   Scenario: Update a contact from a loaction with valid fields
     Given I sign up as user
@@ -48,12 +46,11 @@ Feature: Manage contacts
     And I click "Container-open" in the 2nd customer row
     And I follow "Next" within "div.customer div.location h2"
     And I follow "Edit" within "div.customer div.contacts ul.record:last-child li.actions"
-    #Then I should be on the create location page
+    # Then I should be on the customer's location's contact's edit page
     And I fill in the contact form with valid values
     And I press "Save Contact"
     Then I should see "Contact was successfully updated."
     And I should see all the contacts from 2nd location and 2nd customer
-    #And I should be on the page for that customer
   
   Scenario: Attempt to update a contact with invalid input from a location
     Given I sign up as user
@@ -62,12 +59,11 @@ Feature: Manage contacts
     And I click "Container-open" in the 2nd customer row
     And I follow "Next" within "div.customer div.location h2"
     And I follow "Edit" within "div.customer div.contacts ul.record:last-child li.actions"
-    #Then I should be on the create location page
+    # Then I should be on the customer's location's contact's edit page
     And I fill in the contact form with invalid values
     And I press "Save Contact"
     Then I should see "errors prohibited this contact from being saved:"
     And I should see all the contacts from 2nd location and 2nd customer
-    #And I should be on the page for that customer
     
     Scenario: Delete a contact
     Given I sign up as user

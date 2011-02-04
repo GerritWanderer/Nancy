@@ -8,11 +8,8 @@ class WorksController < ApplicationController
 
   def create
     params[:work][:user_id] = current_user.id
-    timeStart = Time.parse(params[:work][:day]+" "+params[:work][:start])
-    timeEnd = Time.parse(params[:work][:day]+" "+params[:work][:end])
-    params[:work][:duration] = (timeEnd - timeStart) / 60
-    params[:work][:start] = timeStart.strftime("%Y-%m-%d %H:%M")
-    params[:work][:end] = timeEnd.strftime("%Y-%m-%d %H:%M")
+    params[:work][:start_datetime] = params[:work][:day]+" "+params[:work][:start]
+    params[:work][:end_datetime] = params[:work][:day]+" "+params[:work][:end]
     @work = Work.new(params[:work])
     if @work.save
       redirect_to works_path(:date => params[:work][:day]), :notice => 'Work was successfully created.' unless request.xhr?

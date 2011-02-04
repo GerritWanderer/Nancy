@@ -53,15 +53,16 @@ end
 When /^I fill in the work form with valid values$/ do 
   work_selector = "work_"
   work = Factory.attributes_for(:work)
-  work.keys.each {|key|
-    And %{I fill in "#{work_selector}#{key}" with "#{work[key.intern]}"} if key.to_s != "user_id" && key.to_s != "project_id" && key.to_s != "duration"
-  }
+  And %{I fill in "work_description" with "#{work[:description]}"}
+  And %{I fill in "work_start" with "19:00"}
+  And %{I fill in "work_end" with "20:00"}
 end
 
 When /^I fill in the work form with invalid values$/ do 
   work_selector = "work_"
   work = Factory.attributes_for(:work)
+  work_ignore_keys = [:start_datetime, :end_datetime, :user_id, :project_id, :duration, :description]
   work.keys.each {|key|
-    And %{I fill in "#{work_selector}#{key}" with "#{work[key.intern]}"} if key.to_s != "user_id" && key.to_s != "project_id" && key.to_s != "start" && key.to_s != "duration" && key.to_s != "description"
+    And %{I fill in "#{work_selector}#{key}" with "#{work[key.intern]}"} unless work_ignore_keys.index(key)
   }
 end

@@ -65,7 +65,6 @@ Feature: Manage projects
     When I fill in the project form with valid values
     And I press "Save"
     Then I should see "Project was successfully created."
-    #And I should be on the page for that customer
     And I should see the 1st project active
 
   Scenario: Attempt to create a new project with invalid input
@@ -75,7 +74,6 @@ Feature: Manage projects
     When I fill in the project form with invalid values
     And I press "Save"
     Then I should see "errors prohibited this project from being saved:"
-    #And I should be on the page for that customer
 
   @wip
   Scenario: Navigate from projects page to the edit project page
@@ -105,7 +103,7 @@ Feature: Manage projects
     And I fill in the project form with valid values
     And I press "Save"
     Then I should see "Project was successfully updated."
-    #And I should be on the page for that customer
+    And I should see the 2nd project active
 
   Scenario: Attemp to update a project with invalid fields
     Given I sign up as user
@@ -115,8 +113,7 @@ Feature: Manage projects
     And I click "Edit" in the 2nd project row
     And I fill in the project form with invalid values
     And I press "Save"
-    Then I should see "error prohibited this project from being saved:"
-    #And I should be on the page for that customer
+    Then I should see "errors prohibited this project from being saved:"
 
   Scenario: Delete a customer
     Given I sign up as user
@@ -125,7 +122,7 @@ Feature: Manage projects
     When I go to the projects page
     And I click "Delete" in the 2nd project row
     Then project should not exist with id: 2
-    And I should be on the projects page
+    And I should see all projects
  
   Scenario: Switch closed status of a project
     Given I sign up as user
@@ -145,4 +142,3 @@ Feature: Manage projects
     And I click "Container-open" in the 2nd project row
     When I follow "Project-report" within "div.project div.main span.actions"
     Then I should see all works for the 2nd project
-    #And I should be on the projects page

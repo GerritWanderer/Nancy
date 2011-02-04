@@ -45,17 +45,16 @@ Feature: Manage customers
     When I fill in the customer form with valid values
     And I press "Save"
     Then I should see "Customer was successfully created."
-    #And I should be on the page for that customer
     And I should see the 2nd customer active
   
-  @wip
   Scenario: Attempt to create a new customer with invalid input
     Given I sign up as user
+    And a customer exist
     And I am on the customers page
     When I fill in the customer form with invalid values
     And I press "Save"
     Then I should see "errors prohibited this customer from being saved:"
-    #And I should be on the page for that customer
+    And I should be on the customers page
     
   @wip
   Scenario: Navigate from customers page to the edit customer page
@@ -63,7 +62,7 @@ Feature: Manage customers
     And 3 customers exist
     When I go to the customers page
     And I click "Edit" in the 2nd customer row
-    #Then I should be on the edit page for the 2nd customer
+    Then I should be on the edit page for the 2nd customer
     
   @wip
   Scenario: Navigate from customer view page to the edit customer page
@@ -82,9 +81,8 @@ Feature: Manage customers
     And I fill in the customer form with valid values
     And I press "Save"
     Then I should see "Customer was successfully updated."
-    #And I should be on the page for that customer
+    And I should see the 2nd customer active
   
-  @wip
   Scenario: Update a customer with invalid fields
     Given I sign up as user
     And 3 customers exist
@@ -92,9 +90,7 @@ Feature: Manage customers
     And I click "Edit" in the 2nd customer row
     And I fill in the customer form with invalid values
     And I press "Save"
-    Then show me the page
     Then I should see "errors prohibited this customer from being saved:"
-    #And I should be on the page for that customer
 
   Scenario: Delete a customer
     Given I sign up as user

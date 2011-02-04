@@ -3,11 +3,10 @@ class Location < ActiveRecord::Base
   has_many :contacts
   accepts_nested_attributes_for :contacts, :allow_destroy => true
   
-  validates_presence_of :name, :message => "can't be blank"
-  validates_presence_of :street, :message => "can't be blank"
-  validates_presence_of :zip, :message => "can't be blank"
-  validates_presence_of :city, :message => "can't be blank"
-  #validates_presence_of :customer_id, :message => "can't be blank"
+  validates :name, :presence => true, :length => {:minimum => 3, :maximum => 254}
+  validates :street, :presence => true, :length => {:minimum => 3, :maximum => 254}
+  validates :zip, :presence => true, :length => {:minimum => 3, :maximum => 10}
+  validates :city, :presence => true, :length => {:minimum => 3, :maximum => 254}
   
   cattr_reader :per_page
   @@per_page = 1

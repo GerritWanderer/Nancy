@@ -5,7 +5,7 @@ end
 Given /^I am authenticated$/ do
   When %{I go to the login page}
   And %{I fill in "user_email" with "admin@wildner-designer.de"}
-  And %{I fill in "user_password" with "secretpass"}
+  And %{I fill in "user_password" with "test123"}
   And %{I press "Sign in"}
 end
 
@@ -32,7 +32,8 @@ Given /^I sign up as user with customer wizard$/ do
   lastname = 'Mustermann'
   email = 'admin@wildner-designer.de'
   password = 'test123'
-  location = 'Company'
+  customer = 'Company'
+  location = 'location'
   street = 'Musterstr. 11'
   zip = '12345'
   city = 'Musterstadt'
@@ -47,9 +48,8 @@ Given /^I sign up as user with customer wizard$/ do
   Then %{I should receive an email}
   When %{I open the email}
   And %{they click the first link in the email}
-  When %{I fill in "customer_name" with "#{firstname}"}
-  And %{I fill in "customer_website" with "#{firstname}"}
-  And %{I fill in "customer_locations_attributes_0_name" with "#{location}"}
+  And %{I should be on the customer wizard page}
+  When %{I fill in "customer_name" with "#{customer}"}
   And %{I fill in "customer_locations_attributes_0_street" with "#{street}"}
   And %{I fill in "customer_locations_attributes_0_zip" with "#{zip}"}
   And %{I fill in "customer_locations_attributes_0_city" with "#{city}"}

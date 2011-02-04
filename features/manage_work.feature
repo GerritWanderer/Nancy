@@ -43,7 +43,6 @@ Feature: Manage work
     And 6 works exist
     When I go to the works page
     Then I should see all my work of the current weekday
-    #improve
     
   @wip
   Scenario: Switch Customer within form
@@ -79,8 +78,8 @@ Feature: Manage work
     Given I sign up as user
     And 3 customers exist
     And 10 projects exist
-    And 6 works exist
+    And a work exist
     When I go to the works page
-    And I click "Delete" in the 2nd work row
+    And I click "Delete" in the 1st work row
     Then work should not exist with id: 2
     And I should be on the works page

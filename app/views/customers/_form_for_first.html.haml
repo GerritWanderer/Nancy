@@ -37,7 +37,7 @@
             %dd= l.text_field :fon
             %dt= l.label :fax
             %dd= l.text_field :fax
-            = l.hidden_field :name, :value => "."
+            = l.hidden_field :name, :value => "Main location"
         = l.fields_for :contacts, @form_customer.locations.first.contacts.first do |c|
           %fieldset{:style => "display: none"}
             %legend Contact
@@ -60,5 +60,5 @@
               %dd= c.text_field :fax
               %dt= c.label :mobile
               %dd= c.text_field :mobile
-      = f.hidden_field :shortname, :value => "."
+      = f.hidden_field :shortname, :value => "Initiator"
       = f.submit 'Save', :class => "submit"
