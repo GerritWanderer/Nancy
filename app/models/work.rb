@@ -9,7 +9,7 @@ class Work < ActiveRecord::Base
   validates :description, :presence => true, :length => {:minimum => 3, :maximum => 1020}
   validates_with WorkValidator
   
-  scope :from_day_by_user, lambda { |day, user| where(:user_id => user, :start => day) }
+  scope :from_day_by_user, lambda { |day, user| where(:user_id => user).where("start BETWEEN ? AND ?", day+" 00:00", day+" 23:59") }
 
   def self.selectJumpingLinks(date)
     #Return Hash with Elements (4 Dates)

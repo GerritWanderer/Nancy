@@ -17,7 +17,11 @@ Nancy::Application.routes.draw do
       get '/logout' => 'devise/sessions#destroy', :as => :destroy_user_session
     end
   
-  resources :works
+  resources :works do
+    collection do
+      post 'switch_customer'
+    end
+  end
   resources :customers do
     collection do
       get 'first'

@@ -1,0 +1,2 @@
+$("form#projects").html("<%= escape_javascript(render(:partial => "projectlist")) %>");
+$("input#work_project_id").attr("value", <%= @projects.first.id %>)

@@ -10,14 +10,14 @@ Then(/^I should see the "([^"]*)" calendarweek$/) do |pos|
   counter = 0
   7.times do
     counter+=1
-    Then %{I should see "#{day.strftime("%a. %d.%m.")}" within "ul#calendar li:nth-child(#{counter})"}
+    Then %{I should see "#{day.strftime("%a. %d.%m.")}" within "ul#calendarWeek li:nth-child(#{counter})"}
     day = day.+(1)
   end
 end
 
 Then(/^I should see the (\d+)(?:st|nd|rd|th) weekday active$/) do |day|
   day = Date.today.-(Date.today.cwday - 1).+(day.to_i-1)
-  Then %{I should see "#{day.strftime("%a. %d.%m.")}" within "ul#calendar li#active"}
+  Then %{I should see "#{day.strftime("%a. %d.%m.")}" within "ul#calendarWeek li#active"}
 end
 
 Then(/^I should see all my work of the current weekday$/) do
