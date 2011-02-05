@@ -1,24 +1,24 @@
-@import "_basic";
+@import "partials/base";
 
 body#customers { 
-  div.toolbar li,  ul.title li { .grid(26); }
+  div.toolbar li,  ul.title li { @include grid(26); }
   ul.title li.actions {
-    .grid(10);
+    @include grid(10);
     text-align: right;
   }
 }
 
 div#customerForm {
   dl {
-    background-color: @blueLight;
+    background-color: $blueLight;
     dt {
-      .grid(12,0,1);
+      @include grid(12,0,1);
       text-align: right;
       margin-bottom: 10px;
     }
     dd {
       margin-bottom: 10px;
-      .grid(15);
+      @include grid(15);
       input { width: 150px; }
       input.zip { width: 40px; }
       input.city { width: 90px; }
@@ -29,33 +29,33 @@ div#customerForm {
 }
 
 div.customer {
-  color: @blueDark;
+  color: $blueDark;
   margin-bottom: 5px;
   
   div.nestedRessources {
-    .roundedBottom;
-    background-color: @blueLight;
+    @include roundedBottom;
+    background-color: $blueLight;
     padding: 20px 0px;
 
     div.location {
-      .roundedTop;
-      border-top: 5px solid @grey;
+      @include roundedTop;
+      border-top: 5px solid $grey;
       padding: 10px;
       
       .details {
-        ul li { .grid(24); }
+        ul li { @include grid(24); }
       
       }
       form {
         padding: 0px !important;
         dl {
           dt {
-            .grid(10);
+            @include grid(10);
             margin-bottom: 10px;
             text-align: right;
           }
           dd {
-            .grid(18);
+            @include grid(18);
             margin-bottom: 10px;
             input { width: 150px; }
             input.zip { width: 40px; }
@@ -69,16 +69,16 @@ div.customer {
       }
     }
     div.contacts {
-      .roundedTop;
+      @include roundedTop;
       padding: 10px;
-      border-top: 5px solid @grey;
+      border-top: 5px solid $grey;
       ul {
-        li { .grid(26); }
+        li { @include grid(26); }
         li.name, li.fon {
-          .grid(28);
+          @include grid(28);
           span { display: block; }
         }
-        li.actions { .grid(6);  }
+        li.actions { @include grid(6);  }
       }
       ul.toolbar {
         color: grey;
@@ -90,12 +90,12 @@ div.customer {
         padding: 0px !important;
         dl {
           dt {
-            .grid(9);
+            @include grid(9);
             margin-bottom: 10px;
             text-align: right;
           }
           dd {
-            .grid(20);
+            @include grid(20);
             margin-bottom: 10px;
             input { width: 150px; }
             input.title { width: 89px; }
@@ -115,9 +115,9 @@ div.customer {
       font-weight: bold;
       font-size: 11px;
     }
-    div.details h2, form legend { .grid(78) }
+    div.details h2, form legend { @include grid(78) }
     div.details span.actions, form a {
-      .grid(10);
+      @include grid(10);
       text-align: right;
     }
     div.pagination {

@@ -1,0 +1,84 @@
+@import "partials/base";
+
+div#content {
+  div#calendar {
+    h2#calendarYear {
+      @include grid(16,72,2);
+      @include roundedTop;
+      background-color: $blueMedium;
+      font-size: 16px;
+      text-align: center;
+      line-height: 33px;
+    }
+    ul#calendarWeek {
+      @include roundedTop;
+      background-color: $blueMedium;
+      padding: 15px 15px 0px 15px;
+      border-bottom: 5px solid $orange;
+      li {
+        @include grid(8,0,1,0.5,0.5);
+        @include roundedTop;
+        a { color: $blueDark; }
+        background-color: white;
+        text-align: center;
+        line-height: 30px;
+        font-size: 11px;
+      }
+      li#active {
+        background-color: $orange;
+        a { color: white; }
+      }
+      li#calendarNavigation {
+        @include grid(16);
+        background-color: $blueMedium;
+        font-size: 12px;
+      }
+    }
+  }
+  
+  div#formWrapper {
+    background-color: $blueLight;
+    @include roundedBottom;
+    div#createTimeWrapper {
+      @include grid(56,2);
+      dl dt.time { @include grid(4); }
+      dl dd.time { @include grid(5); }
+      dl dd.description textarea {
+        height: 60px;
+        width: 500px;
+      }
+      dl dt input.submit {
+        margin-left: 335px;
+      }
+    }
+    div#selectWrapper {
+      form { padding: 0px; }
+      @include grid(28);
+      dt { @include grid(8,0,1); margin-top: 25px; text-align: right; }
+      dd { @include grid(19); margin-top: 25px; }
+      select { width: 200px; }
+    }
+  }
+  
+  ul.toolbar, ul.record {
+    @include rounded;
+    height: 30px;
+    li { line-height: 30px; }
+    li.time { @include grid(12,0,0,1) }
+    li.duration { @include grid(7,0,0,1) }
+    li.project { @include grid(18) }
+    li.customer { @include grid(18) }
+    li.description { @include grid(30) }
+    li.actions { @include grid(2,0,0,0,1) }
+  }
+  ul.toolbar {
+    background-color: $blueLight;
+    margin: 20px 0px;
+    
+  }
+  ul.record {
+    height: auto;
+    background-color: $blueMedium;
+    margin-bottom: 5px;
+  }
+}

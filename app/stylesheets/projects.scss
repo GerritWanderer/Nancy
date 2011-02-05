@@ -1,63 +1,63 @@
-@import "_basic";
+@import "partials/base";
 
 body#projects { 
   div#projectForm {
     div.wrapper {
-      .rounded;
-      background-color: @blueLight;
+      @include rounded;
+      background-color: $blueLight;
     }
   
     div#createProject {
-      .grid(52,0,2);
+      @include grid(52,0,2);
       legend 
       dl dt { text-align: left;}
       dl dd, dl dt, legend { margin-bottom: 10px;}
-      dl dt.title { .grid(8); }
-      dl dd.title { .grid(42);  }
+      dl dt.title { @include grid(8); }
+      dl dd.title { @include grid(42);  }
       dl dd.title input { width: 420px; }
 
-      dl dt.description { .grid(10,0,40); }
-      dl dd.description { .grid(50);  }
+      dl dt.description { @include grid(10,0,40); }
+      dl dd.description { @include grid(50);  }
       dl dd.description textarea {
         height: 60px;
         width: 500px;
       }
-      dl dt.small { .grid(11);  }
-      dl dd.small { .grid(6); }
+      dl dt.small { @include grid(11);  }
+      dl dd.small { @include grid(6); }
       dl dd.small input { width: 40px; }
-      dl dt.submit {.grid(16)}
+      dl dt.submit {@include grid(16)}
       dl dt.submit input.submit {margin:0px;}
     }
     div#selectCustomer {
       fieldset.customer { margin-top: 27px; }
-      .grid(34);
-      dl dt { .grid(10,0,2); }
-      dl dd {.grid(18);}
+      @include grid(34);
+      dl dt { @include grid(10,0,2); }
+      dl dd {@include grid(18);}
       dl dd select { width: 180px; }
     }
   } 
   
-  div.toolbar li, ul.title li { .grid(29,0,0,1,1); }
-  div.toolbar li.nr, ul.title li.nr { .grid(6); }
-  div.toolbar li.date, ul.title li.date { .grid(12); }
+  div.toolbar li, ul.title li { @include grid(29,0,0,1,1); }
+  div.toolbar li.nr, ul.title li.nr { @include grid(6); }
+  div.toolbar li.date, ul.title li.date { @include grid(12); }
   ul.title li.actions {
-    .grid(8);
+    @include grid(8);
     text-align: right;
   }
 }
 
 
 div.project {
-  color: @blueDark;
+  color: $blueDark;
   margin-bottom: 5px;
   
 
   div.content {
-    .roundedBottom;
+    @include roundedBottom;
     div.main {
       dl dt { font-weight: bold; }
-      dl dt, dl dd { .grid(8); }
-      dl dt.description, dl dd.description { .grid(80, 0, 14); margin-bottom: 10px; }
+      dl dt, dl dd { @include grid(8); }
+      dl dt.description, dl dd.description { @include grid(80, 0, 14); margin-bottom: 10px; }
     }
     div.contacts {
       margin-top: 20px;
@@ -68,8 +68,8 @@ div.project {
         text-align: right;
       }
       ul.toolbar, ul.record {
-        li { .grid(27) }
-        li.actions { .grid(7) }
+        li { @include grid(27) }
+        li.actions { @include grid(7) }
       }
     }
   }
@@ -84,9 +84,9 @@ div.project {
       visibility: visible;
     }
     h2, span.actions, form legend { font-weight: bold; }
-    h2, form legend { .grid(78) }
+    h2, form legend { @include grid(78) }
     span.actions, form a {
-      .grid(10);
+      @include grid(10);
       text-align: right;
     }
     

@@ -1,10 +1,59 @@
-// Here is where you can define your constants for your application and to configure the blueprint framework.
-// Feel free to delete these if you want keep the defaults:
-
 $blueprint-grid-columns: 96;
-$blueprint-grid-width: 10px;
+$blueprint-container-size: 960px;
 $blueprint-grid-margin: 0px;
+$blueprint-grid-width: ($blueprint-container-size + $blueprint-grid-margin) / $blueprint-grid-columns - $blueprint-grid-margin;
 
-// If you change your grid column dimensions
-// you can make a new grid background image from the command line like this:
-// compass grid-img 30+10x16
+$blueLight: #C8D9F4;
+$blueMedium: #94B4E6;
+$blueDark: #112363;
+$grey: #CCCCCC;
+$orange: #FF6800;
+
+@mixin container {
+	margin-left: auto;
+	margin-right: auto;
+	width: $blueprint-container-size;
+}
+@mixin grid($grids: 1, $marginLeft: 0, $marginRight: 0, $paddingLeft: 0, $paddingRight: 0) {
+  display: inline;
+  float: left;
+  width: $grids * 10px;
+  margin-left: $marginLeft * 10px;
+  margin-right: $marginRight * 10px;
+  padding-left: $paddingLeft * 10px;
+  padding-right: $paddingRight * 10px;
+}
+
+@mixin rounded ($radius: 10px) {
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin roundedTop ($radius: 10px) {
+  -moz-border-radius-topleft: $radius;
+  -moz-border-radius-topright: $radius;
+  -webkit-border-top-left-radius: $radius;
+  -webkit-border-top-right-radius: $radius;
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+}
+@mixin roundedBottom ($radius: 10px) {
+  -moz-border-radius-bottomleft: $radius;
+  -moz-border-radius-bottomright: $radius;
+  -webkit-border-bottom-left-radius: $radius;
+  -webkit-border-bottom-right-radius: $radius;
+  border-bottom-left-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
+
+@mixin gradient ($from: #ffffff, $to: #000000) {
+	background: $from;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from($from), to($to));
+	background: -moz-linear-gradient($from, $to);
+	background: linear-gradient($from, $to);
+}
+@mixin shadow($color: #000000, $blur: 5px, $x: 0, $y: 0) {
+	-webkit-box-shadow: $x $y $blur $color;
+	-moz-box-shadow: $x $y $blur $color;
+	box-shadow: $x $y $blur $color;
+}
