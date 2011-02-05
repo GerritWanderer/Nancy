@@ -39,6 +39,10 @@ module Nancy
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
     
+    # Set output for heroku logger
+    config.logger    = Logger.new(STDOUT)
+    config.log_level = :info
+
     config.action_mailer.default_url_options = { :host => ENV['DEfAULT_URL_OPTIONS'] || 'localhost:3000' }
   end
 end
