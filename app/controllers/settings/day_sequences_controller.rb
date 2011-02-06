@@ -3,7 +3,6 @@ class Settings::DaySequencesController < ApplicationController
     @day_sequence = DaySequence.new
     @holidays_current_year = DaySequence.count_holidays_by_year(Date.today.year)
     @holiday_upcoming = DaySequence.find_upcoming_holiday(Date.today.strftime("%Y-%m-%d"))
-    render :layout => 'settings'
   end
   
   def show
@@ -18,7 +17,7 @@ class Settings::DaySequencesController < ApplicationController
     @day_sequence = DaySequence.new
     @holidays_current_year = DaySequence.count_holidays_by_year(Date.today.year)
     @holiday_upcoming = DaySequence.find_upcoming_holiday(Date.today.strftime("%Y-%m-%d"))
-    render :layout => 'settings', :template => 'settings/day_sequences/index'
+    render :template => 'settings/day_sequences/index'
   end
   
   def create
@@ -28,7 +27,7 @@ class Settings::DaySequencesController < ApplicationController
     else
       @holidays_current_year = DaySequence.count_holidays_by_year(Date.today.year)
       @holiday_upcoming = DaySequence.find_upcoming_holiday(Date.today.strftime("%Y-%m-%d"))
-      render :layout => 'settings', :template => 'settings/day_sequences/index'
+      render :template => 'settings/day_sequences/index'
     end
   end
 

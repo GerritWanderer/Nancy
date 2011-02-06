@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_filter :prepare_for_mobile
   before_filter :check_for_first_customer, :except => [:first] 
   layout :layout_by_resource
+  include ApplicationHelper
   
   private
   def mobile_device?

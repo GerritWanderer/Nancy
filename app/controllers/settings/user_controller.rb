@@ -4,7 +4,6 @@ class Settings::UserController < ApplicationController
   def index
     @users = User.all
     @user = User.new
-    render :layout => 'settings'
   end
   
   def show
@@ -19,14 +18,14 @@ class Settings::UserController < ApplicationController
       redirect_to settings_user_admin_index_path
     else
       @users = User.all
-      render :layout => 'settings', :template => 'settings/user/index'
+      render :template => 'settings/user/index'
     end
   end
 
   def edit
     @users = User.all
     @user = User.find(params[:id])
-    render :layout => 'settings', :template => 'settings/user/index'
+    render :template => 'settings/user/index'
   end
 
   def update
@@ -41,7 +40,7 @@ class Settings::UserController < ApplicationController
       redirect_to settings_user_admin_index_path
     else
       @users = User.all
-      render :layout => 'settings', :template => 'settings/user/index'
+      render :template => 'settings/user/index'
     end
   end
 

@@ -23,7 +23,7 @@ class Customers::ContactsController < ApplicationController
       @displayContactsRecord = 'none'
       @displayContactsForm = 'block'
     end
-    render :layout => 'customers', :template => 'customers/index'
+    render :template => 'customers/index'
   end
 
   def update
@@ -35,7 +35,7 @@ class Customers::ContactsController < ApplicationController
       @displayContactsRecord = 'none'
       @displayContactsForm = 'block'
     end
-    render :layout => 'customers', :template => 'customers/index'
+    render :template => 'customers/index'
   end
 
   def destroy
@@ -66,6 +66,6 @@ class Customers::ContactsController < ApplicationController
   end
   
   def render_filter
-    render :layout => 'customers', :template => 'customers/index'
+    render :template => 'customers/index'
   end
 end

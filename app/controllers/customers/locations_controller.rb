@@ -21,7 +21,7 @@ class Customers::LocationsController < ApplicationController
       @displayLocationRecord = 'none'
       @displayLocationForm = 'block'
     end
-    render :layout => 'customers', :template => 'customers/index'
+    render :template => 'customers/index'
   end
 
   def update
@@ -34,7 +34,7 @@ class Customers::LocationsController < ApplicationController
       @displayLocationRecord = 'none'
       @displayLocationForm = 'block'
     end
-    render :layout => 'customers', :template => 'customers/index'
+    render :template => 'customers/index'
   end
 
   def destroy
@@ -63,6 +63,6 @@ class Customers::LocationsController < ApplicationController
   end
   
   def render_filter
-    render :layout => 'customers', :template => 'customers/index'
+    render :template => 'customers/index'
   end
 end
