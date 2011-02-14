@@ -9,9 +9,8 @@
 
 html { height: 100% ;}
 body {
-  background-color: white;
+  background-color: #4A6A83 !important;
   letter-spacing: 0.8px;
-  @include gradient(#EFF6FF, #4A6A83);
   min-height: 100%;
   height: 100%;
 }
@@ -19,6 +18,11 @@ body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size:   13px;
   line-height: 18px;
+}
+div#bodyGradient {
+  @include gradient(#EFF6FF, #4A6A83);
+  min-height: 100%;
+  height: 100%;
 }
 div#navigation {
   div.container { @include container; }
@@ -62,6 +66,12 @@ div#navigation {
 }
 
 // ALLGEMEINE CONTENT ELEMENTE //
+a.wizardFormSwitch {
+  font-weight: bold;
+  margin-bottom: 10px;
+  border-bottom: 1px dotted;
+  display: block;
+}
 div#content {
   @include container;
   @include rounded;
@@ -123,10 +133,6 @@ div.filter {
   }
   li.active { background-color: $blueLight; }
 }
-
-
-
-
 
 
 body { background-color: #fff; color: #333; }

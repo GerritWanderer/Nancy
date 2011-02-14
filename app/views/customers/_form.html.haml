@@ -3,7 +3,6 @@
     = link_to "Close Customer Form", customers_path, :class => 'wizardFormSwitch'
   -else
     = link_to "Open Customer Form", new_customer_path, :class => 'wizardFormSwitch'
-  %hr/
   .wrapper{:style => "display: #{@displayCustomerForm || 'none'};"}
     -if @customer.errors.any?
       #error_explanation

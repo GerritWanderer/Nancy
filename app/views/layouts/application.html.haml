@@ -9,12 +9,13 @@
     = stylesheet_link_tag :all
     = csrf_meta_tag
   %body{:id => "#{@controller.controller_name}"}
-    #navigation
-      .container
-        = display_navigation(@controller.controller_name) if user_signed_in?
-    .container#flash
-      - flash.each do |key, value|
-        %div{:class => key}= value  
-    .container#content
-      = yield
-    .clear
+    #bodyGradient
+      #navigation
+        .container
+          = display_navigation(@controller.controller_name) if user_signed_in?
+      .container#flash
+        - flash.each do |key, value|
+          %div{:class => key}= value  
+      .container#content
+        = yield
+      .clear

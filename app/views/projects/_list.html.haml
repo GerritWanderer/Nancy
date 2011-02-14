@@ -1,8 +1,8 @@
 .filter
   %ul
-    %li.active= link_to "All Projects", projects_path(:order => params[:order])
-    %li.active= link_to "Active Projects", projects_path(:order => params[:order], :closed => 0)
-    %li.active= link_to "Closed Projects", projects_path(:order => params[:order], :closed => 1)
+    %li{:class => "#{'active' if params[:closed].nil?}"}= link_to "All Projects", projects_path(:order => params[:order])
+    %li{:class => "#{'active' if params[:closed] == '0'}"}= link_to "Active Projects", projects_path(:order => params[:order], :closed => 0)
+    %li{:class => "#{'active' if params[:closed] == '1'}"}= link_to "Closed Projects", projects_path(:order => params[:order], :closed => 1)
     .clear
 .toolbar
   %ul

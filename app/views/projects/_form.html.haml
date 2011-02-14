@@ -3,7 +3,6 @@
     = link_to "Close Project Form", projects_path, :class => 'wizardFormSwitch'
   -else
     = link_to "Open Project Form", new_project_path, :class => 'wizardFormSwitch'
-  %hr/
   .wrapper{:style => "display: #{@displayProjectForm || 'none'};"}
     -if @project.errors.any?
       #error_explanation
