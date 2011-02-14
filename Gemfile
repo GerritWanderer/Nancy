@@ -11,6 +11,7 @@ gem 'haml-rails'
 
 gem 'devise', :git => 'git://github.com/plataformatec/devise', :branch => 'master'
 #open bug when generating haml views: set @haml_tmp_root to haml_tmp_root in views generator.rb:90
+gem 'cancan'
 gem 'oa-oauth', :require => 'omniauth/oauth'
 gem 'hpricot'
 gem 'ruby_parser'
