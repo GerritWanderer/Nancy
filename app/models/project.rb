@@ -1,7 +1,7 @@
 class Project < ActiveRecord::Base
   belongs_to :customer
   belongs_to :contact
-  has_many :works
+  has_many :works, :dependent => :delete_all
 
   validates :title, :presence => true, :length => {:minimum => 3, :maximum => 254}
   validates_presence_of :description, :message => "Description can't be blank"

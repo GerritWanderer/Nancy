@@ -1,6 +1,6 @@
 class Location < ActiveRecord::Base
   belongs_to :customer
-  has_many :contacts
+  has_many :contacts, :dependent => :delete_all
   accepts_nested_attributes_for :contacts, :allow_destroy => true
   
   validates :name, :presence => true, :length => {:minimum => 3, :maximum => 254}
