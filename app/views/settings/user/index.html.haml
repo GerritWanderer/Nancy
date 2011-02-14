@@ -18,12 +18,14 @@
       %li Name 
       %li Email
       %li Hours p.Day / Holidays
+      %li Role
   - @users.each do |user|
     .user
       %ul.title
         %li= "#{user.firstname} #{user.lastname}"
         %li= mail_to user.email, user.email
         %li= "#{user.hours} / #{user.holidays}"
+        %li= user.role.humanize
         %li.actions
           = link_to image_tag("/images/icons/edit.gif"), edit_settings_user_admin_path(user)
           = link_to image_tag("/images/icons/delete.gif"), settings_user_admin_path(user), :confirm => 'Are you sure?', :method => :delete

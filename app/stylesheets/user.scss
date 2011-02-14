@@ -16,13 +16,16 @@ div#userForm form {
     dt {
       @include grid(12,0,1);
       text-align: left;
-      margin-bottom: 10px;
     }
     dd {
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       @include grid(12,0,3);
       input { width: 115px; }
       input.small { width: 50px; }
+    }
+    dd.role {
+      padding-top: 10px;
+      margin-right: 570px;
     }
   }
 }
@@ -30,7 +33,7 @@ div#users {
   div.toolbar ul li, div.user ul li { @include grid(21) }
   div.user {
     margin-bottom: 3px;
-    ul li.actions { @include grid(4,21) }
+    ul li.actions { @include grid(4) }
   }
 }
 
