@@ -2,17 +2,17 @@
 %html{ :xmlns => "http://www.w3.org/1999/xhtml", :lang => "en", "xml:lang" => "en"}
   %head
     %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}
-    %title Nancy / #{@controller.controller_name}
+    %title Nancy / #{controller.controller_name}
     = stylesheet_link_tag("compiled/screen.css")
-    = stylesheet_link_tag("compiled/#{@controller.controller_name}") if File.exist?("tmp/stylesheets/compiled/#{@controller.controller_name}.css")
+    = stylesheet_link_tag("compiled/#{controller.controller_name}") if File.exist?("tmp/stylesheets/compiled/#{controller.controller_name}.css")
     = javascript_include_tag :defaults
     = stylesheet_link_tag :all
     = csrf_meta_tag
-  %body{:id => "#{@controller.controller_name}"}
+  %body{:id => "#{controller.controller_name}"}
     #bodyGradient
       #navigation
         .container
-          = display_navigation(@controller.controller_name) if user_signed_in?
+          = display_navigation(controller.controller_name) if user_signed_in?
       .container#flash
         - flash.each do |key, value|
           %div{:class => key}= value  

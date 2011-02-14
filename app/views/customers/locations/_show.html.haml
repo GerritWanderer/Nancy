@@ -8,9 +8,9 @@
       -if (@locations.index(@location) + 1) < @locations.count
         = link_to image_tag("/images/icons/next.gif"), customer_location_path(@customer, @locations.at(@locations.index(@location) +1), :order => params[:order])
     %span.actions
-      = link_to image_tag("/images/icons/location-create.gif"), new_customer_location_path(@customer, :order => params[:order])
-      = link_to image_tag("/images/icons/edit.gif"), edit_customer_location_path(@customer, @location, :order => params[:order])
-      = link_to image_tag("/images/icons/delete.gif"), customer_location_path(@customer, @location, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete
+      = link_to image_tag("/images/icons/location-create.gif"), new_customer_location_path(@customer, :order => params[:order]) if can? :manage, Location
+      = link_to image_tag("/images/icons/edit.gif"), edit_customer_location_path(@customer, @location, :order => params[:order]) if can? :manage, Location
+      = link_to image_tag("/images/icons/delete.gif"), customer_location_path(@customer, @location, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete if can? :manage, Location
     %hr.clear/
     %ul.record
       %li= @location.name
@@ -23,4 +23,4 @@
         %br/
         = "Fax: #{@location.fax}"
       .clear
-  = render :partial => 'customers/locations/form'
+  = render :partial => 'customers/locations/form' if can? :manage, Location

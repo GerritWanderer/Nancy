@@ -1,2 +1,2 @@
-= render 'projects/form'
+= render 'projects/form' if can? :manage, Project
 = render 'projects/list'

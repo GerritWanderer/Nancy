@@ -18,8 +18,8 @@
         %li= customer.locations.count
         %li.actions
           = link_to image_tag("/images/icons/container-close.gif"), customers_path(:order => params[:order])
-          = link_to image_tag("/images/icons/edit.gif"), edit_customer_path(customer, :order => params[:order])
-          = link_to image_tag("/images/icons/delete.gif"), customer_path(customer, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete
+          = link_to image_tag("/images/icons/edit.gif"), edit_customer_path(customer, :order => params[:order]) if can? :manage, Customer
+          = link_to image_tag("/images/icons/delete.gif"), customer_path(customer, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete if can? :manage, Customer
         .clear
       .nestedRessources
         = render :partial => 'customers/locations/show'
@@ -32,7 +32,7 @@
         %li= customer.locations.count
         %li.actions
           = link_to image_tag("/images/icons/container-open.gif"), customer_path(customer, :order => params[:order])
-          = link_to image_tag("/images/icons/edit.gif"), edit_customer_path(customer, :order => params[:order])
-          = link_to image_tag("/images/icons/delete.gif"), customer_path(customer, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete
+          = link_to image_tag("/images/icons/edit.gif"), edit_customer_path(customer, :order => params[:order]) if can? :manage, Customer
+          = link_to image_tag("/images/icons/delete.gif"), customer_path(customer, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete if can? :manage, Customer
         .clear
       .clear
