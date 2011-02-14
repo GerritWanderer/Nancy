@@ -1,5 +1,6 @@
 class Customers::LocationsController < ApplicationController
   before_filter :authenticate_user!, :init_locations
+  load_and_authorize_resource :except => [:index, :show] 
   before_filter :render_filter, :only => [:show, :new, :edit]
 
   def show #empty method? I should be doing something more then in init_locations

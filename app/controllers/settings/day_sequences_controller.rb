@@ -1,4 +1,7 @@
 class Settings::DaySequencesController < ApplicationController
+  before_filter :authenticate_user!
+  load_and_authorize_resource
+  
   def index
     @day_sequence = DaySequence.new
     @holidays_current_year = DaySequence.count_holidays_by_year(Date.today.year)

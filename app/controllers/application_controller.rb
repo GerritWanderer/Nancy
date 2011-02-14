@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
   include ApplicationHelper
   
+  
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
+  
+  
   private
   def mobile_device?
     if session[:mobile_param]

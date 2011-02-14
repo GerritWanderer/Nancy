@@ -1,5 +1,6 @@
 class CustomersController < ApplicationController
   before_filter :authenticate_user!, :init_customers
+  load_and_authorize_resource :except => [:index, :show] 
   before_filter :render_filter, :only => [:index, :show, :new, :edit]
   respond_to :html, :mobile
 

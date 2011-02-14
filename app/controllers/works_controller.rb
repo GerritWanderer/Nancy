@@ -1,5 +1,6 @@
 class WorksController < ApplicationController
   before_filter :authenticate_user!, :init_works
+  load_and_authorize_resource
 	respond_to :html, :js
 	
   def index
