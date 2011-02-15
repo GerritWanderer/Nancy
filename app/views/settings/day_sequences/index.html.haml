@@ -21,7 +21,7 @@
         - unless @holidays.nil?
           = link_to image_tag("/images/icons/container-close.gif"), settings_day_sequences_path
         - else
-          = link_to image_tag("/images/icons/container-open.gif"), settings_day_sequence_path(Date.today.year)
+          = link_to image_tag("/images/icons/container-open.gif"), show_holidays_settings_day_sequences_path
       .clear
     != "#{render :partial => 'show' unless @holidays.nil?}"
   #users
@@ -36,6 +36,6 @@
             - if !@user.nil? && user.id == @user.id
               = link_to image_tag("/images/icons/container-close.gif"), settings_day_sequences_path
             - else
-              = link_to image_tag("/images/icons/container-open.gif"), settings_day_sequence_path(Date.today.year, :user_id => user.id)
+              = link_to image_tag("/images/icons/container-open.gif"), show_user_settings_day_sequences_path(:user_id => user.id)
           .clear
         != "#{render :partial => 'show' if !@user.nil? && user.id == @user.id}"
