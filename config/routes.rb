@@ -24,7 +24,8 @@ Nancy::Application.routes.draw do
   end
   resources :customers do
     collection do
-      get 'first'
+      get 'first' => 'customers#new_first_customer'
+      post 'first' => 'customers#create_first_customer', :as => :create_first
     end
     resources :locations, :controller => "customers/locations" do
       resources :contacts, :controller => "customers/contacts"

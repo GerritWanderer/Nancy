@@ -20,14 +20,8 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(params[:customer])
     if @customer.save
-      if Customer.count == 1
-        project = Project.new({:title => "Nancy: First look", :description => "Setup Nancy and try out the features", :customer_id => @customer.id, :contact_id => @customer.locations.first.contacts.first.id, :closed => 0}).save
-        flash[:notice] = 'Great, you finished the setup...Nancy is now ready for use - have phun!'
-        redirect_to :controller => 'works', :action => 'index'
-      else
-        flash[:notice] = 'Customer was successfully created.'
-        respond_with(@customer)
-      end
+      flash[:notice] = 'Customer was successfully created.'
+      respond_with(@customer)
     else
       @form_customer = @customer
       render "index"
@@ -55,11 +49,30 @@ class CustomersController < ApplicationController
     redirect_to(customers_url)
   end
   
-  def first
+  def new_first_customer
     @form_customer = Customer.new
     @form_location = @form_customer.locations.build
     @form_contact = @form_location.contacts.build
-    render :layout => "users", :action => "customers/_form_for_first"
+    render :layout => "users", :template => "customers/_form_for_first"
+  end
+  
+  def create_first_customer
+    @customer = Customer.new(params[:customer])
+    if @customer.save
+      project = Project.create!({ :title => "Nancy: First look",
+                                  :description => "Setup Nancy and try out some features",
+                                  :customer_id => @customer.id,
+                                  :contact_id => @customer.locations.first.contacts.first.id,
+                                  :closed => 0})
+      Work.create!( :start_datetime => Time.now.-(30*60).strftime('%Y-%m-%d %H:%M'),
+                    :end_datetime => Time.now.strftime('%Y-%m-%d %H:%M'),
+                    :description => "Install Nancy and create initial customer/project",
+                    :project_id => project.id,
+                    :user_id => current_user.id)
+      redirect_to works_path, :notice => 'Great, you finished the setup...Nancy is now ready for use - have phun!'
+    else
+      render :layout => "users", :template => "customers/_form_for_first", :alert => 'An error occured while saving the first Customer'
+    end
   end
   
   protected

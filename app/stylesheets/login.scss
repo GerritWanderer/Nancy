@@ -7,7 +7,7 @@
     @include rounded;
     background-color: #E5EEFB !important;
     width: 390px;
-    min-height: 300px;
+    min-height: 350px;
     margin: 100px auto 0px auto;
   }
   .customerWrapper {
@@ -24,7 +24,9 @@
     dl dt { @include grid(12,0,1); }
     dl dt label { display: block; }
     dl dd { @include grid(20); }
+    dl dd, dl dt { margin-bottom: 10px; }
     .current_password { margin-top: 20px; font-size: 12px; }
+    legend { font-weight: bold; margin-bottom: 10px;}
   }
   
   ul.links li {
@@ -36,6 +38,16 @@
   div.alert{
     background-color: #FF6F6F;
     border: 2px solid darkred;
+    clear: both;
+    color: white;
+    display: block;
+    margin: 25px 25px 0px 25px;
+    padding: 10px;
+    @include rounded;
+  }
+  div.notice{
+    background-color: #B3FFAF;
+    border: 2px solid #77FF6F;
     clear: both;
     color: white;
     display: block;
