@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
   
-  validates_inclusion_of :role, :in => %w( trainee worker admin )
+  validates_inclusion_of :role, :in => %w( trainee editor admin )
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :firstname, :lastname, :hours, :holidays, :password, :password_confirmation, :remember_me
 

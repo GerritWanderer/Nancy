@@ -14,6 +14,9 @@
     %dt= f.label :password_confirmation, "Confirmation"
     %dd= f.password_field :password_confirmation
     %dt &nbsp;
-    %dd= f.submit "Sign up", :class => "submit"
+    %dd
+      - if User.count == 0
+        = f.hidden_field :role, :value => "admin"
+      = f.submit "Sign up", :class => "submit"
   .clear
   = render :partial => "users/shared/links"

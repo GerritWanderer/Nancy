@@ -22,6 +22,6 @@
   %dd= f.password_field :password_confirmation
   %dd.role
     = f.label :role
-    = f.select(:role, options_for_select(["trainee", "worker", "admin"], @user.role))
+    = f.select(:role, options_for_select(["trainee", "editor", "admin"], @user.role))
   %dt.submit= f.submit "Save User", :class => "submit"
   .clear
