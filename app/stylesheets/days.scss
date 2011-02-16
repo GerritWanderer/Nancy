@@ -67,7 +67,7 @@ div#holidayForm form {
 }
 
 
-div#sequences {
+div#days {
   div.holidays ul.title li, div.toolbar li, div.user ul.title li { @include grid(21); }
   div.user ul.title li.actions, div.holidays ul.title li.actions {
     @include grid(4);

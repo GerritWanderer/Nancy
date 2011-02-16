@@ -1,13 +1,13 @@
 %h2 Add Holiday, Vacation and Absence
--if @day_sequence.errors.any?
+-if @day.errors.any?
   #error_explanation
-    %h2= "#{pluralize(@day_sequence.errors.count, "error")} prohibited this sequence from being saved:"
+    %h2= "#{pluralize(@day.errors.count, "error")} prohibited this day from being saved:"
     %ul
-      - @day_sequence.errors.full_messages.each do |msg|
+      - @day.errors.full_messages.each do |msg|
         %li= msg
 %dl
   %dt= f.label :date, "Sequence Type"
-  %dd= f.select(:type_of_sequence, options_for_select([["Holiday", "1"], ["User Vacation", "2"], ["User Absence", "3"]]), :class => "half")
+  %dd= f.select(:type_of_day, options_for_select([["Holiday", "1"], ["User Vacation", "2"], ["User Absence", "3"]]), :class => "half")
   %dt.small= f.label :date_from, "Date from"
   %dd.small= f.text_field :date_from
   %dt.small= f.label :date_to, "Date to"

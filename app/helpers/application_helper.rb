@@ -9,7 +9,7 @@ module ApplicationHelper
     navigation += "</li>\n<li class='small #{'active' if controller == 'registrations'}'>"
     navigation += link_to "profile", edit_user_registration_path
     if current_user.role == "admin"
-      navigation += "</li>\n<<li class='small #{'active' if controller == 'day_sequences' or controller == 'user'}'>"
+      navigation += "</li>\n<<li class='small #{'active' if controller == 'days' or controller == 'user'}'>"
       navigation += link_to "settings", settings_user_admin_index_path
     end
     navigation += "</li>\n<li class='small'>"

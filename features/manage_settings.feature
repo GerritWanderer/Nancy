@@ -74,7 +74,7 @@ Feature: Manage settings
     And 6 holidays exist
     When I go to the settings page
     And I follow "Managae Holidays"
-    And I follow "Container-open" within "div#sequences div.holidays ul.title li.actions"
+    And I follow "Container-open" within "div#days div.holidays ul.title li.actions"
     Then I should see all holidays of the current year
     #And i should be on the holidays detail page
     
@@ -113,15 +113,15 @@ Feature: Manage settings
     And I follow "Managae Holidays"
     And I fill in the holiday form with invalid values
     And I press "Save Sequence"
-    Then I should see "errors prohibited this sequence from being saved:"
+    Then I should see "errors prohibited this day from being saved:"
   
   Scenario: Delete a holiday, vacation and absence
     Given I sign up as user
     And a customer exist
-    And a day_sequence exist with type_of_sequence: 2, user_id: 1, date_from: "2011-01-01"
-    And a day_sequence exist with type_of_sequence: 2, user_id: 1, date_from: "2011-01-02"
-    And a day_sequence exist with type_of_sequence: 3, user_id: 1, date_from: "2011-02-04"
-    And a day_sequence exist with type_of_sequence: 3, user_id: 1, date_from: "2011-02-03"
+    And a day exist with type_of_day: 2, user_id: 1, date_from: "2011-01-01"
+    And a day exist with type_of_day: 2, user_id: 1, date_from: "2011-01-02"
+    And a day exist with type_of_day: 3, user_id: 1, date_from: "2011-02-04"
+    And a day exist with type_of_day: 3, user_id: 1, date_from: "2011-02-03"
     When I go to the settings page
     And I follow "Managae Holidays"
     And I follow "Container-open" in the 1st user holidays row

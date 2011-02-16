@@ -7,6 +7,6 @@ $(document).ready(function() {
 		$(this).parent().parent().parent().children("div.details, form").slideToggle();
 	});
 	
-	$("#day_sequence_date_from").datepicker({ dateFormat: "yy-mm-dd" });
-	$("#day_sequence_date_to").datepicker({ dateFormat: "yy-mm-dd" });
+	$("#day_date_from").datepicker({ dateFormat: "yy-mm-dd" });
+	$("#day_date_to").datepicker({ dateFormat: "yy-mm-dd" });
 });

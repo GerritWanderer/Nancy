@@ -57,20 +57,20 @@ Factory.define :user do |f|
 	f.password {"#{Faker::Name.first_name}#{Faker::Name.last_name}"}
 	f.sign_in_count {1}
 	f.confirmed_at {Date.today.strftime("%Y-%m-%d 09:00")}
-	f.day_sequences { [Factory.create(:day_sequence), Factory.create(:day_sequence), Factory.create(:day_sequence)] } 
+	f.days { [Factory.create(:day), Factory.create(:day), Factory.create(:day)] } 
 end
 
-Factory.define :day_sequence do |f|
+Factory.define :day do |f|
 	f.date_from { Date.parse("#{Date.today.year}-#{rand(12)+1}-#{rand(28)+1}").strftime("%Y-%m-%d") }
-	f.type_of_sequence {rand(2)+2}
-	f.after_build do |day_sequence|
-		day_sequence.date_to = day_sequence.date_from.+rand(10)
+	f.type_of_day {rand(2)+2}
+	f.after_build do |day|
+		day.date_to = day.date_from.+rand(10)
 	end
 end
 
-Factory.define :holiday, :class => DaySequence do |f|
+Factory.define :holiday, :class => Day do |f|
 	f.date_from { Date.parse("#{Date.today.year}-#{rand(12)+1}-#{rand(28)+1}").strftime("%Y-%m-%d") }
-	f.type_of_sequence 1
+	f.type_of_day 1
 	f.after_build do |holiday|
 		holiday.date_to = holiday.date_from.+rand(3)
 	end

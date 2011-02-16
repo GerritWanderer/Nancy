@@ -6,7 +6,7 @@
         %dd No record was found.
       - @holidays.each do |holiday|
         %dd
-          = link_to image_tag("/images/icons/delete.gif"), settings_day_sequence_path(holiday), :confirm => 'Are you sure?', :method => :delete
+          = link_to image_tag("/images/icons/delete.gif"), settings_day_path(holiday), :confirm => 'Are you sure?', :method => :delete
           - if holiday.date_to > holiday.date_from
             = "#{holiday.date_from} to #{holiday.date_to}"
           - else 
@@ -20,7 +20,7 @@
         %dd No record was found.
       - @vacation.each do |vacation|
         %dd
-          = link_to image_tag("/images/icons/delete.gif"), settings_day_sequence_path(vacation), :confirm => 'Are you sure?', :method => :delete
+          = link_to image_tag("/images/icons/delete.gif"), settings_day_path(vacation), :confirm => 'Are you sure?', :method => :delete
           - if vacation.date_to > vacation.date_from
             = "#{vacation.date_from} to #{vacation.date_to}"
           - else 
@@ -31,7 +31,7 @@
         %dd No record was found.
       - @absences.each do |absence|
         %dd
-          = link_to image_tag("/images/icons/delete.gif"), settings_day_sequence_path(absence), :confirm => 'Are you sure?', :method => :delete
+          = link_to image_tag("/images/icons/delete.gif"), settings_day_path(absence), :confirm => 'Are you sure?', :method => :delete
           - if absence.date_to > absence.date_from
             = "#{absence.date_from} to #{absence.date_to}"
           - else 

@@ -2,7 +2,7 @@ Nancy::Application.routes.draw do
   get "home/index"
 
   namespace "settings" do
-    resources :day_sequences, :controller => "day_sequences" do
+    resources :days, :controller => "days" do
       collection do
         get 'show_holidays'
         get 'show_user'

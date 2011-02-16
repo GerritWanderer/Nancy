@@ -1,9 +1,9 @@
-class CreateDaySequences < ActiveRecord::Migration
+class CreateDays < ActiveRecord::Migration
   def self.up
-    create_table :day_sequences do |t|
+    create_table :days do |t|
       t.date :date_from
 			t.date :date_to
-      t.integer :type_of_sequence
+      t.integer :type_of_day
       t.integer :verified
       t.references :user
 
@@ -12,6 +12,6 @@ class CreateDaySequences < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :day_sequences
+    drop_table :days
   end
 end
