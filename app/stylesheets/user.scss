@@ -1,23 +1,39 @@
 @import "partials/_base";
 
+div#content{
+div.filter ul{
+  @include roundedTop;
+  margin-left:-20px;
+  @include roundedBottom;
+  background-color: $blueMedium;
+  padding-top: 12px;
+	  }
+  li.active {margin-left:20px; background-color: $orange; a {color:white; font-weight:bold;}}   
+}
 div#userForm form {
   @include grid(88,0,0,1,1);
   @include rounded;
-  background-color: $blueLight;
+  background-color: $blueLighter;
+  border-top:5px;
+  border-color:$orange;
+  border-style:solid;
   form { background-color: transparent ;}
   padding-top: 10px;
   padding-bottom: 10px;
   margin-bottom: 20px;
   
-  h2 { color: $orange; margin-bottom: 10px;}
+  h2 {padding: 0px 0px 10px 10px; font-weight:bold;}
   label { margin-bottom: 5px; }
   dl {
-    background-color: $blueLight;
+    background-color: $blueLighter;
+	padding-left:33px;
     dt {
       @include grid(12,0,1);
       text-align: left;
       margin-bottom: 10px;
+	.submit {margin-left:-45px;margin-top:20px;}
     }
+	
     dd {
       margin-bottom: 10px;
       @include grid(12,0,3);

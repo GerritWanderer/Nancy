@@ -3,12 +3,21 @@
 body#customers, body#locations, body#contacts { 
   div.toolbar li,  ul.title li { @include grid(26); }
   ul.title li.actions {
+	/*background-color: $blueLighter;*/
     @include grid(10);
     text-align: right;
   }
 }
 
 div#customerForm {
+	
+  legend {
+	font-weight: bold;
+	padding-left: 13px;
+		  }
+  
+   a {display: block; font-weight:bold; padding: 0px 0px 15px 15px;}
+   
   dl {
     background-color: $blueLight;
     dt {
@@ -32,6 +41,7 @@ div.customer {
   color: $blueDark;
   margin-bottom: 5px;
   
+  
   div.nestedRessources {
     @include roundedBottom;
     background-color: $blueLight;
@@ -39,7 +49,7 @@ div.customer {
 
     div.location {
       @include roundedTop;
-      border-top: 5px solid $grey;
+      border-top: 2px solid grey;
       padding: 10px;
       
       .details {
@@ -47,6 +57,7 @@ div.customer {
       
       }
       form {
+	  
         padding: 0px !important;
         dl {
           dt {
@@ -54,6 +65,7 @@ div.customer {
             margin-bottom: 10px;
             text-align: right;
           }
+		   
           dd {
             @include grid(18);
             margin-bottom: 10px;
@@ -65,25 +77,28 @@ div.customer {
             margin-left: 82px;
             input.submit { margin: 0px !important; }
           }
+		 
         }
-      }
+      
+	  }
     }
     div.contacts {
       @include roundedTop;
       padding: 10px;
-      border-top: 5px solid $grey;
+      border-top: 2px solid grey;
       ul {
         li { @include grid(26); }
         li.name, li.fon {
           @include grid(28);
           span { display: block; }
         }
-        li.actions { @include grid(6);  }
+        li.actions { @include grid(6);}
       }
       ul.toolbar {
         color: grey;
         border-bottom: 2px dotted grey;
         margin-bottom: 20px;
+
       }
       ul.record { margin-bottom: 10px; }
       form {

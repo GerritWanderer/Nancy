@@ -4,19 +4,25 @@ body#projects {
   div#projectForm {
     div.wrapper {
       @include rounded;
-      background-color: $blueLight;
-    }
-  
+      background-color: $blueLighter;
+	  border-top:5px;
+	  border-color:$orange;
+	  border-style:solid;
+	  
+	      }
+		 
+	 a {display: block; font-weight:bold; padding: 0px 0px 15px 15px;}
+	
     div#createProject {
-      @include grid(52,0,2);
+      @include grid(52,2,2);
       legend 
       dl dt { text-align: left;}
       dl dd, dl dt, legend { margin-bottom: 10px;}
-      dl dt.title { @include grid(8); }
-      dl dd.title { @include grid(42);  }
-      dl dd.title input { width: 420px; }
+      dl dt.title { @include grid(8); font-weight:bold;}
+      dl dd.title { @include grid(42); }
+      dl dd.title input { width: 420px;}
 
-      dl dt.description { @include grid(10,0,40); }
+      dl dt.description { @include grid(10,0,40); font-weight:bold;}
       dl dd.description { @include grid(50);  }
       dl dd.description textarea {
         height: 60px;
@@ -31,15 +37,18 @@ body#projects {
     div#selectCustomer {
       fieldset.customer { margin-top: 27px; }
       @include grid(34);
-      dl dt { @include grid(10,0,2); }
+      dl dt { @include grid(10,1,2); }
       dl dd {@include grid(18);}
       dl dd select { width: 180px; }
     }
   } 
   
   div.toolbar li, ul.title li { @include grid(29,0,0,1,1); }
-  div.toolbar li.nr, ul.title li.nr { @include grid(6); }
-  div.toolbar li.date, ul.title li.date { @include grid(12); }
+  ul.title li.nr { @include grid(6); }
+   div.toolbar li.nr{ @include grid(7); }
+   div.toolbar li{ @include grid(30.5); }
+  ul.title li.date { @include grid(12); }
+  div.toolbar li.date{ @include grid(16); }
   ul.title li.actions {
     @include grid(8);
     text-align: right;

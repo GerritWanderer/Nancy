@@ -3,7 +3,6 @@
     = link_to "Close Customer Form", customers_path, :class => 'wizardFormSwitch'
   -else
     = link_to "Open Customer Form", new_customer_path, :class => 'wizardFormSwitch'
-  %hr/
   .wrapper{:style => "display: #{@displayCustomerForm || 'none'};"}
     -if @customer.errors.any?
       #error_explanation
@@ -14,50 +13,50 @@
     #createCustomer
       = form_for(@form_customer) do |f|
         %fieldset
-        %legend Customer Name
-        %dl
-          %dt= f.label :shortname
-          %dd= f.text_field :shortname
-          %dt= f.label :name
-          %dd= f.text_field :name
-          %dt= f.label :website
-          %dd= f.text_field :website
-        = f.fields_for :locations, @form_customer.locations.first do |l|
-          %fieldset
-            %legend Main Location
-            %dl
-              %dt= l.label :name
-              %dd= l.text_field :name
-              %dt= l.label :street
-              %dd= l.text_field :street
-              %dt= l.label :zip, "Zip / City"
-              %dd
-                = l.text_field :zip, :class => 'zip'
-                = l.text_field :city, :class => 'city'
-              %dt= l.label :fon
-              %dd= l.text_field :fon
-              %dt= l.label :fax
-              %dd= l.text_field :fax
-          = l.fields_for :contacts, @form_customer.locations.first.contacts.first do |c|
+          %legend Customer Name
+          %dl
+            %dt= f.label :shortname
+            %dd= f.text_field :shortname
+            %dt= f.label :name
+            %dd= f.text_field :name
+            %dt= f.label :website
+            %dd= f.text_field :website
+          = f.fields_for :locations, @form_customer.locations.first do |l|
             %fieldset
-              %legend Main Contact
+              %legend Main Location
               %dl
-                %dt= c.label :salutation
+                %dt= l.label :name
+                %dd= l.text_field :name
+                %dt= l.label :street
+                %dd= l.text_field :street
+                %dt= l.label :zip, "Zip / City"
                 %dd
-                  = c.select(:salutation, options_for_select(["Mr.", "Ms."]))
-                  = c.text_field :title, :class => "title"
-                %dt= c.label :firstname
-                %dd= c.text_field :firstname
-                %dt= c.label :lastname
-                %dd= c.text_field :lastname
-                %dt= c.label :department
-                %dd= c.text_field :department
-                %dt= c.label :email
-                %dd= c.text_field :email
-                %dt= c.label :fon
-                %dd= c.text_field :fon
-                %dt= c.label :fax
-                %dd= c.text_field :fax
-                %dt= c.label :mobile
-                %dd= c.text_field :mobile
+                  = l.text_field :zip, :class => 'zip'
+                  = l.text_field :city, :class => 'city'
+                %dt= l.label :fon
+                %dd= l.text_field :fon
+                %dt= l.label :fax
+                %dd= l.text_field :fax
+            = l.fields_for :contacts, @form_customer.locations.first.contacts.first do |c|
+              %fieldset
+                %legend Main Contact
+                %dl
+                  %dt= c.label :salutation
+                  %dd
+                    = c.select(:salutation, options_for_select(["Mr.", "Ms."]))
+                    = c.text_field :title, :class => "title"
+                  %dt= c.label :firstname
+                  %dd= c.text_field :firstname
+                  %dt= c.label :lastname
+                  %dd= c.text_field :lastname
+                  %dt= c.label :department
+                  %dd= c.text_field :department
+                  %dt= c.label :email
+                  %dd= c.text_field :email
+                  %dt= c.label :fon
+                  %dd= c.text_field :fon
+                  %dt= c.label :fax
+                  %dd= c.text_field :fax
+                  %dt= c.label :mobile
+                  %dd= c.text_field :mobile
         = f.submit 'Save', :class => "submit"

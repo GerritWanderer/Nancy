@@ -3,18 +3,21 @@
 div#content {
   div#calendar {
     h2#calendarYear {
-      @include grid(16,72,2);
+      @include grid(18,70,2);
       @include roundedTop;
       background-color: $blueMedium;
       font-size: 16px;
+	  font-weight: bold;
       text-align: center;
       line-height: 33px;
     }
     ul#calendarWeek {
       @include roundedTop;
+	  @include roundedBottom;
       background-color: $blueMedium;
       padding: 15px 15px 0px 15px;
-      border-bottom: 5px solid $orange;
+	        /*border-bottom: 5px solid $orange;*/
+	  
       li {
         @include grid(8,0,1,0.5,0.5);
         @include roundedTop;
@@ -22,27 +25,37 @@ div#content {
         background-color: white;
         text-align: center;
         line-height: 30px;
-        font-size: 11px;
+        font-size: 10px;
+		font-weight: bold;
+		margin-left:-3px;
+		
       }
+	  li.wday6{background-color: $grey;}
+	  li.wday0{background-color: $grey;}
       li#active {
         background-color: $orange;
         a { color: white; }
       }
       li#calendarNavigation {
-        @include grid(16);
+        @include grid(19);
         background-color: $blueMedium;
         font-size: 12px;
+		font-weight: bold;
       }
     }
   }
   
   div#formWrapper {
-    background-color: $blueLight;
+    background-color: $blueLighter;
     @include roundedBottom;
+	@include roundedTop;
+	border-top:5px;
+	  border-color:$orange;
+	  border-style:solid;
     div#createTimeWrapper {
       @include grid(56,2);
-      dl dt.time { @include grid(4); }
-      dl dd.time { @include grid(5); }
+      dl dt.time { @include grid(5);}
+      dl dd.time { @include grid(6); }
       dl dd.description textarea {
         height: 60px;
         width: 500px;
@@ -64,21 +77,33 @@ div#content {
     @include rounded;
     height: 30px;
     li { line-height: 30px; }
-    li.time { @include grid(12,0,0,1) }
-    li.duration { @include grid(7,0,0,1) }
-    li.project { @include grid(18) }
-    li.customer { @include grid(18) }
-    li.description { @include grid(30) }
-    li.actions { @include grid(2,0,0,0,1) }
+    li.time { @include grid(12,0,0,1)}
+    li.duration { @include grid(8,0,0,1)}
+    li.project { @include grid(18)}
+    li.customer { @include grid(18)}
+    li.description { @include grid(28,0,2) }
+    li.actions { @include grid(3,-2,0,0,1)}
+  }
+  ul.record {
+  li.duration {background-color: $blueMediumLight;}
+  li.customer {background-color: $blueMediumLight;}
+  
   }
   ul.toolbar {
-    background-color: $blueLight;
+    background-color: $blueLighter;
     margin: 20px 0px;
+	font-weight: bold;
+	
     
   }
   ul.record {
     height: auto;
-    background-color: $blueMedium;
+    background-color: $blueLight;
     margin-bottom: 5px;
+	
+	li.actions img {
+	margin-top: 10px;
+	margin-left: 10px;
+	}
   }
 }

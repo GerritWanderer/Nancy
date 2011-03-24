@@ -39,14 +39,16 @@ div.customer {
 
     div.location {
       @include roundedTop;
-      border-top: 5px solid $grey;
-      padding: 10px;
+      border-top: 2px solid grey;
+      padding: 0px;
       
       .details {
         ul li { @include grid(24); }
       
       }
       form {
+	  legend {padding:5px 0px 7px 15px;}
+	  a {margin-left: -25px; margin-top:5px;}
         padding: 0px !important;
         dl {
           dt {
@@ -71,7 +73,7 @@ div.customer {
     div.contacts {
       @include roundedTop;
       padding: 10px;
-      border-top: 5px solid $grey;
+      border-top: 2px solid grey;
       ul {
         li { @include grid(26); }
         li.name, li.fon {
