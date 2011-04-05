@@ -5,24 +5,25 @@ div#content {
     h2#calendarYear {
       @include grid(18,70,2);
       @include roundedTop;
-      background-color: $blueMedium;
+      background-color: $darkGrey;
+	  color: white;
       font-size: 16px;
-	  font-weight: bold;
       text-align: center;
       line-height: 33px;
     }
     ul#calendarWeek {
       @include roundedTop;
 	  @include roundedBottom;
-      background-color: $blueMedium;
+	  color: white;
+      background-color: $darkGrey;
       padding: 15px 15px 0px 15px;
-	        /*border-bottom: 5px solid $orange;*/
+	        
 	  
       li {
         @include grid(8,0,1,0.5,0.5);
         @include roundedTop;
-        a { color: $blueDark; }
-        background-color: white;
+        a { color: $darkGrey;}
+        background-color: $yellow;
         text-align: center;
         line-height: 30px;
         font-size: 10px;
@@ -30,28 +31,27 @@ div#content {
 		margin-left:-3px;
 		
       }
-	  li.wday6{background-color: $grey;}
-	  li.wday0{background-color: $grey;}
+	  li.wday6{background-color: $yellow; a { color: grey; }}
+	  li.wday0{background-color: $yellow; a { color: grey; }}
       li#active {
-        background-color: $orange;
+        background-color: $orangeRed;
         a { color: white; }
       }
       li#calendarNavigation {
+	  span {font-weight:lighter;}
         @include grid(19);
-        background-color: $blueMedium;
+        background-color: $darkGrey;
         font-size: 12px;
 		font-weight: bold;
-      }
+		      }
     }
   }
   
   div#formWrapper {
-    background-color: $blueLighter;
+    background-color: $yellow;
     @include roundedBottom;
 	@include roundedTop;
-	border-top:5px;
-	  border-color:$orange;
-	  border-style:solid;
+	border:5px solid $orangeRed;
     div#createTimeWrapper {
       @include grid(56,2);
       dl dt.time { @include grid(5);}
@@ -61,7 +61,7 @@ div#content {
         width: 500px;
       }
       dl dt input.submit {
-        margin-left: 335px;
+        margin-left: 680px;
       }
     }
     div#selectWrapper {
@@ -69,7 +69,7 @@ div#content {
       @include grid(28);
       dt { @include grid(8,0,1); margin-top: 25px; text-align: right; }
       dd { @include grid(19); margin-top: 25px; }
-      select { width: 200px; }
+      select { width: 200px;}
     }
   }
   
@@ -79,18 +79,19 @@ div#content {
     li { line-height: 30px; }
     li.time { @include grid(12,0,0,1)}
     li.duration { @include grid(8,0,0,1)}
-    li.project { @include grid(18)}
-    li.customer { @include grid(18)}
-    li.description { @include grid(28,0,2) }
+    li.project { @include grid(15,0,0,2,1)}
+    li.customer { @include grid(17,0,0,1)}
+    li.description { @include grid(26,0,2,2) }
     li.actions { @include grid(3,-2,0,0,1)}
   }
   ul.record {
-  li.duration {background-color: $blueMediumLight;}
-  li.customer {background-color: $blueMediumLight;}
+  li.duration {background-color: $darkYellow;}
+  li.customer {background-color: $darkYellow;}
   
   }
   ul.toolbar {
-    background-color: $blueLighter;
+    color: white;
+    background-color: $darkRed;
     margin: 20px 0px;
 	font-weight: bold;
 	
@@ -98,7 +99,7 @@ div#content {
   }
   ul.record {
     height: auto;
-    background-color: $blueLight;
+    background-color: $yellow;
     margin-bottom: 5px;
 	
 	li.actions img {

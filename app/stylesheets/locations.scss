@@ -10,7 +10,7 @@ body#customers, body#locations, body#contacts {
 
 div#customerForm {
   dl {
-    background-color: $blueLight;
+    
     dt {
       @include grid(12,0,1);
       text-align: right;
@@ -29,26 +29,39 @@ div#customerForm {
 }
 
 div.customer {
-  color: $blueDark;
+	legend {color: $darkRed;}
+  color: $darkGrey;
   margin-bottom: 5px;
   
   div.nestedRessources {
     @include roundedBottom;
-    background-color: $blueLight;
-    padding: 20px 0px;
+    background-color: $yellow;
+    padding: 0px 0px;
 
     div.location {
       @include roundedTop;
-      border-top: 2px solid grey;
       padding: 0px;
       
       .details {
+	    @include roundedTop;
+		@include roundedBottom;
+	    border: 1px solid grey;
+	    border-top:5px solid $darkGrey;
+	    background-color: white;
         ul li { @include grid(24); }
-      
-      }
+		h2 {color: $darkRed;}
+		padding:8px 0px 7px 10px;
+            }
+	  fieldset{
+	  @include roundedTop;
+	  @include roundedBottom;
+	  border: 1px solid grey;
+	  border-top:5px solid $orangeRed;
+	  }
       form {
-	  legend {padding:5px 0px 7px 15px;}
-	  a {margin-left: -25px; margin-top:5px;}
+	  
+	  legend {padding:5px 0px 7px 15px; color: $orangeRed;}
+	  a {margin-left: -45px; margin-top:5px;}
         padding: 0px !important;
         dl {
           dt {
@@ -71,9 +84,11 @@ div.customer {
       }
     }
     div.contacts {
+	  background-color: white;
       @include roundedTop;
-      padding: 10px;
-      border-top: 2px solid grey;
+      padding: 8px;
+      border: 1px solid grey;
+	  border-top:5px solid $darkGrey;
       ul {
         li { @include grid(26); }
         li.name, li.fon {

@@ -4,17 +4,15 @@ body#projects {
   div#projectForm {
     div.wrapper {
       @include rounded;
-      background-color: $blueLighter;
-	  border-top:5px;
-	  border-color:$orange;
-	  border-style:solid;
-	  
-	      }
+      background-color: $yellow;
+	 border: 1px solid grey;
+	border-top:5px solid $orangeRed;
+	  	      }
 		 
-	 a {display: block; font-weight:bold; padding: 0px 0px 15px 15px;}
+	 a {display: block; font-weight:bold; padding: 0px 0px 15px 15px; color: white;}
 	
     div#createProject {
-      @include grid(52,2,2);
+      @include grid(52,1,2);
       legend 
       dl dt { text-align: left;}
       dl dd, dl dt, legend { margin-bottom: 10px;}
@@ -31,7 +29,7 @@ body#projects {
       dl dt.small { @include grid(11);  }
       dl dd.small { @include grid(6); }
       dl dd.small input { width: 40px; }
-      dl dt.submit {@include grid(16)}
+      dl dt.submit {@include grid(16);}
       dl dt.submit input.submit {margin:0px;}
     }
     div#selectCustomer {
@@ -57,13 +55,17 @@ body#projects {
 
 
 div.project {
-  color: $blueDark;
+  color: $darkGrey;
   margin-bottom: 5px;
   
 
   div.content {
     @include roundedBottom;
+	@include roundedTop; 
+	border: 1px solid grey;
+	border-top:5px solid $darkGrey;
     div.main {
+	  dl 
       dl dt { font-weight: bold; }
       dl dt, dl dd { @include grid(8); }
       dl dt.description, dl dd.description { @include grid(80, 0, 14); margin-bottom: 10px; }
@@ -105,3 +107,49 @@ div.project {
     }
   }
 }
+body#report  {
+	@include gradient(white, white);
+	
+	p.sender{
+	@include grid(62,32,0); 
+	padding: 15px 0px 10px 0px; 
+	font-size: 7pt!important;
+	}
+	
+	adress {
+	@include grid(62,32,0); 
+	font-size: 8pt;
+	}
+	
+	h1 {
+	@include grid(62,32,0); 
+	margin-top: 15px; 
+	font-weight: bold; 
+	font-size:14pt;
+	}
+	h2 {
+	@include grid(62,32,0); 
+	margin-top: 15px; 
+	margin-bottom: 15px; 
+	font-weight: bold; 
+	font-size:8pt; 
+	border-bottom: 2px solid $grey;
+	}
+	
+	div#works{
+	
+	ul{ 
+	padding-bottom: 5px;
+	border-bottom: 1px dashed grey;
+		li.time{@include grid(15,32,0);	padding: 5px 0px 5px 0px;}
+		li.description{color: $orangeRed; @include grid(15,13,0);padding: 5px 0px 5px 0px;}
+		li.duration{@include grid(15,13,0); padding: 5px 0px 5px 0px;}
+		
+	}
+	/*dl{
+	border-top: 2px solid $grey;
+		dt{font-weight: bold; font-style: italic; @include grid(15,32,0);}
+		dd{@include grid(15,42,0);}
+	 }*/
+			}
+		  }

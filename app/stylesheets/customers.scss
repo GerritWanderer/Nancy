@@ -3,24 +3,33 @@
 body#customers, body#locations, body#contacts { 
   div.toolbar li,  ul.title li { @include grid(26); }
   ul.title li.actions {
-	/*background-color: $blueLighter;*/
     @include grid(10);
     text-align: right;
   }
 }
-
+ div#content{
+  div.toolbar{
+  /*border: 1px solid grey;*/
+  background-color: $darkRed;
+  color: white;
+   }
+  }
 div#customerForm {
 	
   legend {
 	font-weight: bold;
 	padding-left: 13px;
+	color: $darkGrey;
 		  }
+   div#createCustomer{
+   form{
+   border: 1px solid grey;
+	border-top:5px solid $orangeRed;}
+   }
+   a {display: block; font-weight:bold; padding: 0px 0px 15px 15px; color: white;}
   
-   a {display: block; font-weight:bold; padding: 0px 0px 15px 15px;}
-   
   dl {
-    background-color: $blueLight;
-    dt {
+        dt {
       @include grid(12,0,1);
       text-align: right;
       margin-bottom: 10px;
@@ -38,19 +47,21 @@ div#customerForm {
 }
 
 div.customer {
-  color: $blueDark;
+  color: $darkGrey;
   margin-bottom: 5px;
-  
   
   div.nestedRessources {
     @include roundedBottom;
-    background-color: $blueLight;
-    padding: 20px 0px;
+    background-color: $yellow;
+    padding: 0px 0px;
 
     div.location {
+	  background-color: white;
       @include roundedTop;
-      border-top: 2px solid grey;
-      padding: 10px;
+	  @include roundedBottom;
+      border: 1px solid grey;
+	  border-top:5px solid $darkGrey;
+      padding: 8px;
       
       .details {
         ul li { @include grid(24); }
@@ -83,9 +94,11 @@ div.customer {
 	  }
     }
     div.contacts {
+	  background-color: white;
       @include roundedTop;
-      padding: 10px;
-      border-top: 2px solid grey;
+      padding: 8px;
+      border: 1px solid grey;
+	  border-top:5px solid $darkGrey;
       ul {
         li { @include grid(26); }
         li.name, li.fon {
@@ -128,6 +141,7 @@ div.customer {
     
     div.details h2, div.details span.actions, form legend {
       font-weight: bold;
+	  color: $darkRed;
       font-size: 11px;
     }
     div.details h2, form legend { @include grid(78) }

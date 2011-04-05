@@ -9,9 +9,9 @@
 
 html { height: 100% ;}
 body {
-  background-color: white;
+  background-color: $yellow;
   letter-spacing: 0.8px;
-  @include gradient(#EFF6FF, #4A6A83);
+  @include gradient(#f2f1de, #edebda);
   min-height: 100%;
   height: 100%;
 }
@@ -23,31 +23,42 @@ body, p, ol, ul, td {
 div#navigation {
   div.container { @include container; }
   height: 50px;
-  background-color: $blueDark;
+  @include gradient(#717d7f, #272c2d);
   margin-bottom: 40px;
   ul {
-    padding-top: 10px;
+    padding-top: 9px;
     li {
+	  -moz-box-shadow: inset 1px 3px 2px #bfbbbb;
       @include grid(15,0,1);
       @include roundedTop;
-      @include gradient(#1D88D8, #005DAA);
-      a { color: white; }
+      /*@include gradient(#1D88D8, #005DAA);*/
+	  border-bottom: 1px solid black;
+      a { color: $darkGrey; font-weight: bold;}
       line-height: 40px;
       font-size: 15px;
       text-align: center;
-      background-color: #E2EBF5;
+      background-color: $yellow;
+	  a:hover {color: $darkRed;}
+	  
     }
     li.active {
+	  margin-top:0px;
       @include gradient(transparent, transparent);
-      background-color: #E2EBF5;
-      a { color: $orange; font-weight: bold;}
+      background-color: $yellow;
+	  border-color: $yellow;
+      a { color: $darkRed; font-weight: bold;}
+	
     }
     li.small {
       @include grid(8,0,1);
       font-size: 12px;
       line-height: 18px;
       margin-top: 22px;
+	  border: none;
+	  margin-right:2px;
+	 
     }
+	 li.small.active {margin-top: 22.5px;}
     li.user {
       @include gradient(transparent, transparent);
       @include grid(15,0,1);
@@ -57,6 +68,7 @@ div#navigation {
       background-color: transparent;
       color: white;
       margin-top: 18px;
+	  -moz-box-shadow: none;
     }
   }
 }
@@ -72,12 +84,12 @@ div#content {
     @include rounded;
     margin-bottom: 20px;
     padding-top: 20px;
-    background-color: $blueMedium;
-    color: $blueDark;
+    background-color: $darkGrey;
+    color: $darkGrey;
   }
   form {
  	@include rounded;
-	background-color: $blueLighter;
+	background-color: $yellow;
     padding-top: 15px;
 	padding-left: 5px;
     input.submit {
@@ -88,29 +100,35 @@ div#content {
         width: 165px;
         margin: 10px 0px;
     }
+	
 	  }
-	form#new_customer{border-top: 5px;
-	border-color: $orange;
-	border-style: solid;
+	form#new_customer{
 	padding-left: 15px;}
   
   div.toolbar {
     @include rounded();
-    background-color: $blueLighter;
-    color: blueMedium;
+    background-color: white;
+	color: $darkGrey;
+	border: 1px solid grey;
+	border-top:5px solid $darkRed;
+	/*border-bottom: 1px solid grey;*/
     padding: 0px 10px;
     margin-bottom: 5px;
     height: 30px;
 	font-weight: bold;
     li { line-height: 30px; }
   }
-  
-  ul.title, div.content {
-    background-color: $blueLight;
+    div.content{
+	background-color: white;
+	padding: 8px;
+	}
+    ul.title{
+    background-color: $yellow;
     padding: 10px;
   }
   ul.title#active {
-    background-color: $blueMedium;
+    background-color: $darkYellow;
+	color: $darkGrey;
     @include roundedTop;
     @include roundedBottom(0px);
     font-weight: bold;
@@ -123,15 +141,14 @@ div.filter {
   li {
     @include grid(15,0,1);
     @include roundedTop;
-    font-weight: bold;
-	background-color: white;
+	background-color: $yellow;
     line-height: 30px;
     text-align: center;
-	a {color: $blueDark;}
+	a {color: $darkGrey;}
 	
   }
  
- li.active { background-color: $blueLighter; }
+ li.active { background-color: $darkRed; a {color: white;}}
   
  
 }
@@ -143,7 +160,7 @@ body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif !important;
   font-size:   11px !important;
   line-height: 18px !important;
-}
+  }
 
 a { color: #000; }
 a:visited { color: #000; }
