@@ -7,11 +7,29 @@ body#customers, body#locations, body#contacts {
     text-align: right;
   }
 }
-
+ div#content{
+  div.toolbar{
+  /*border: 1px solid grey;*/
+  background-color: $darkRed;
+  color: white;
+   }
+  }
 div#customerForm {
+	
+  legend {
+	font-weight: bold;
+	padding-left: 13px;
+	color: $darkGrey;
+		  }
+   div#createCustomer{
+   form{
+   border: 1px solid grey;
+	border-top:5px solid $orangeRed;}
+   }
+   a {display: block; font-weight:bold; padding: 0px 0px 15px 15px; color: white;}
+  
   dl {
-    background-color: $blueLight;
-    dt {
+        dt {
       @include grid(12,0,1);
       text-align: right;
       margin-bottom: 10px;
@@ -29,24 +47,28 @@ div#customerForm {
 }
 
 div.customer {
-  color: $blueDark;
+  color: $darkGrey;
   margin-bottom: 5px;
   
   div.nestedRessources {
     @include roundedBottom;
-    background-color: $blueLight;
-    padding: 20px 0px;
+    background-color: $yellow;
+    padding: 0px 0px;
 
     div.location {
+	  background-color: white;
       @include roundedTop;
-      border-top: 5px solid $grey;
-      padding: 10px;
+	  @include roundedBottom;
+      border: 1px solid grey;
+	  border-top:5px solid $darkGrey;
+      padding: 8px;
       
       .details {
         ul li { @include grid(24); }
       
       }
       form {
+	  
         padding: 0px !important;
         dl {
           dt {
@@ -54,6 +76,7 @@ div.customer {
             margin-bottom: 10px;
             text-align: right;
           }
+		   
           dd {
             @include grid(18);
             margin-bottom: 10px;
@@ -65,25 +88,30 @@ div.customer {
             margin-left: 82px;
             input.submit { margin: 0px !important; }
           }
+		 
         }
-      }
+      
+	  }
     }
     div.contacts {
+	  background-color: white;
       @include roundedTop;
-      padding: 10px;
-      border-top: 5px solid $grey;
+      padding: 8px;
+      border: 1px solid grey;
+	  border-top:5px solid $darkGrey;
       ul {
         li { @include grid(26); }
         li.name, li.fon {
           @include grid(28);
           span { display: block; }
         }
-        li.actions { @include grid(6);  }
+        li.actions { @include grid(6);}
       }
       ul.toolbar {
         color: grey;
         border-bottom: 2px dotted grey;
         margin-bottom: 20px;
+
       }
       ul.record { margin-bottom: 10px; }
       form {
@@ -113,6 +141,7 @@ div.customer {
     
     div.details h2, div.details span.actions, form legend {
       font-weight: bold;
+	  color: $darkRed;
       font-size: 11px;
     }
     div.details h2, form legend { @include grid(78) }

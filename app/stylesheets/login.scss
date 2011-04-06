@@ -5,7 +5,7 @@
   width: 900px !important;
   .wrapper, .customerWrapper {
     @include rounded;
-    background-color: #E5EEFB !important;
+    background-color: $yellow !important;
     width: 390px;
     min-height: 350px;
     margin: 100px auto 0px auto;

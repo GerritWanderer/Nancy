@@ -4,19 +4,23 @@ body#projects {
   div#projectForm {
     div.wrapper {
       @include rounded;
-      background-color: $blueLight;
-    }
-  
+      background-color: $yellow;
+	 border: 1px solid grey;
+	border-top:5px solid $orangeRed;
+	  	      }
+		 
+	 a {display: block; font-weight:bold; padding: 0px 0px 15px 15px; color: white;}
+	
     div#createProject {
-      @include grid(52,0,2);
+      @include grid(52,1,2);
       legend 
       dl dt { text-align: left;}
       dl dd, dl dt, legend { margin-bottom: 10px;}
-      dl dt.title { @include grid(8); }
-      dl dd.title { @include grid(42);  }
-      dl dd.title input { width: 420px; }
+      dl dt.title { @include grid(8); font-weight:bold;}
+      dl dd.title { @include grid(42); }
+      dl dd.title input { width: 420px;}
 
-      dl dt.description { @include grid(10,0,40); }
+      dl dt.description { @include grid(10,0,40); font-weight:bold;}
       dl dd.description { @include grid(50);  }
       dl dd.description textarea {
         height: 60px;
@@ -25,21 +29,24 @@ body#projects {
       dl dt.small { @include grid(11);  }
       dl dd.small { @include grid(6); }
       dl dd.small input { width: 40px; }
-      dl dt.submit {@include grid(16)}
+      dl dt.submit {@include grid(16);}
       dl dt.submit input.submit {margin:0px;}
     }
     div#selectCustomer {
       fieldset.customer { margin-top: 27px; }
       @include grid(34);
-      dl dt { @include grid(10,0,2); }
+      dl dt { @include grid(10,1,2); }
       dl dd {@include grid(18);}
       dl dd select { width: 180px; }
     }
   } 
   
   div.toolbar li, ul.title li { @include grid(29,0,0,1,1); }
-  div.toolbar li.nr, ul.title li.nr { @include grid(6); }
-  div.toolbar li.date, ul.title li.date { @include grid(12); }
+  ul.title li.nr { @include grid(6); }
+   div.toolbar li.nr{ @include grid(7); }
+   div.toolbar li{ @include grid(30.5); }
+  ul.title li.date { @include grid(12); }
+  div.toolbar li.date{ @include grid(16); }
   ul.title li.actions {
     @include grid(8);
     text-align: right;
@@ -48,13 +55,17 @@ body#projects {
 
 
 div.project {
-  color: $blueDark;
+  color: $darkGrey;
   margin-bottom: 5px;
   
 
   div.content {
     @include roundedBottom;
+	@include roundedTop; 
+	border: 1px solid grey;
+	border-top:5px solid $darkGrey;
     div.main {
+	  dl 
       dl dt { font-weight: bold; }
       dl dt, dl dd { @include grid(8); }
       dl dt.description, dl dd.description { @include grid(80, 0, 14); margin-bottom: 10px; }
@@ -96,3 +107,49 @@ div.project {
     }
   }
 }
+body#report  {
+	@include gradient(white, white);
+	
+	p.sender{
+	@include grid(62,32,0); 
+	padding: 15px 0px 10px 0px; 
+	font-size: 7pt!important;
+	}
+	
+	adress {
+	@include grid(62,32,0); 
+	font-size: 8pt;
+	}
+	
+	h1 {
+	@include grid(62,32,0); 
+	margin-top: 15px; 
+	font-weight: bold; 
+	font-size:14pt;
+	}
+	h2 {
+	@include grid(62,32,0); 
+	margin-top: 15px; 
+	margin-bottom: 15px; 
+	font-weight: bold; 
+	font-size:8pt; 
+	border-bottom: 2px solid $grey;
+	}
+	
+	div#works{
+	
+	ul{ 
+	padding-bottom: 5px;
+	border-bottom: 1px dashed grey;
+		li.time{@include grid(15,32,0);	padding: 5px 0px 5px 0px;}
+		li.description{color: $orangeRed; @include grid(15,13,0);padding: 5px 0px 5px 0px;}
+		li.duration{@include grid(15,13,0); padding: 5px 0px 5px 0px;}
+		
+	}
+	/*dl{
+	border-top: 2px solid $grey;
+		dt{font-weight: bold; font-style: italic; @include grid(15,32,0);}
+		dd{@include grid(15,42,0);}
+	 }*/
+			}
+		  }

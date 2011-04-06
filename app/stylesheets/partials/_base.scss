@@ -4,11 +4,17 @@ $blueprint-grid-margin: 0px;
 $blueprint-grid-width: ($blueprint-container-size + $blueprint-grid-margin) / $blueprint-grid-columns - $blueprint-grid-margin;
 
 $blueLight: #C8D9F4;
+$blueLighter: #e4eeff;
+$blueMediumLight: #d4e1f5;
 $blueMedium: #94B4E6;
 $blueDark: #112363;
 $grey: #CCCCCC;
 $orange: #FF6800;
-
+$yellow: #f2f1df;/*Hintergrund*/
+$darkRed: #730303; /*oberste Navigation aktiv*/
+$darkGrey: #3a4244;/*oberste Navigation inaktiv*/
+$orangeRed: #ff4e00; /*aktiver Tab und oberer Rand*/
+$darkYellow: #e3e3d3; 
 @mixin container {
 	margin-left: auto;
 	margin-right: auto;

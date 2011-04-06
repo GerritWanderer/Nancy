@@ -10,7 +10,7 @@ body#customers, body#locations, body#contacts {
 
 div#customerForm {
   dl {
-    background-color: $blueLight;
+    
     dt {
       @include grid(12,0,1);
       text-align: right;
@@ -29,18 +29,23 @@ div#customerForm {
 }
 
 div.customer {
-  color: $blueDark;
+  legend {color: $darkRed;}
+  h2 {color: $darkRed;}
+  color: $darkGrey;
   margin-bottom: 5px;
   
   div.nestedRessources {
     @include roundedBottom;
-    background-color: $blueLight;
-    padding: 20px 0px;
+    background-color: $yellow;
+    padding: 0px 0px;
 
     div.location {
       @include roundedTop;
-      border-top: 5px solid $grey;
-      padding: 10px;
+	  @include roundedBottom;
+	  background-color: white;
+      border: 1px solid grey;
+	  border-top:5px solid $darkGrey;
+      padding: 8px;
       
       .details {
         ul li { @include grid(24); }
@@ -70,8 +75,11 @@ div.customer {
     }
     div.contacts {
       @include roundedTop;
-      padding: 10px;
-      border-top: 5px solid $grey;
+      padding: 0px;
+      border: 1px solid grey;
+	  border-top:5px solid $orangeRed;
+	  legend {padding:5px 0px 7px 15px; color: orangeRed;}
+	  a {margin-left: -45px; margin-top:5px;}
       ul {
         li { @include grid(26); }
         li.name, li.fon {
