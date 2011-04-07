@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :prepare_for_mobile
+  before_filter :set_locale
   before_filter :check_for_first_customer, :except => [:new_first_customer, :create_first_customer] 
   layout :layout_by_resource
   include ApplicationHelper
@@ -10,6 +11,12 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, :alert => exception.message
   end
   
+  def set_locale
+    I18n.locale = params[:locale]
+  end  
+  def default_url_options(options={})
+    { :locale => I18n.locale }
+  end
   
   private
   def mobile_device?
