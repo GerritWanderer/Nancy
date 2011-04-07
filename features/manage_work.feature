@@ -76,7 +76,7 @@ Feature: Manage work
     And 3 customers exist
     And 10 projects exist
     When I go to the works page  
-    When I fill in "work_start" with "09:00"
+    When I fill in "work_started_at" with "09:00"
     And I fill in "work_end" with "08:00"
     And I press "Save"
     Then I should see "End time must be higher then Start time"

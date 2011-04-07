@@ -22,12 +22,12 @@ end
 
 Then(/^I should see all my work of the current weekday$/) do
   works = find_models("work")
-  works = works.sort_by { |w| w["start"] }
+  works = works.sort_by { |w| w["started_at"] }
   Rails.logger.info works
   counter = 0
   works.each do |work|
     counter+=1
-    Then %{I should see "#{work.start.strftime('%H:%M')} to #{work.end.strftime('%H:%M')}" within "div#works ul.record:nth-child(#{counter}) li:first-child"}
+    Then %{I should see "#{work.started_at.strftime('%H:%M')} to #{work.ended_at.strftime('%H:%M')}" within "div#works ul.record:nth-child(#{counter}) li:first-child"}
     Then %{I should see "#{work.duration}" within "div#works ul.record:nth-child(#{counter}) li:nth-child(2)"}
     Then %{I should see "#{work.project.title}" within "div#works ul.record:nth-child(#{counter}) li:nth-child(3)"}
     Then %{I should see "#{work.project.customer.name}" within "div#works ul.record:nth-child(#{counter}) li:nth-child(4)"}
@@ -56,14 +56,14 @@ When /^I fill in the work form with valid values$/ do
 	end_time = start_time.+(15*60)
   work = Factory.attributes_for(:work)
   And %{I fill in "work_description" with "#{work[:description]}"}
-  And %{I fill in "work_start" with "#{start_time.strftime('%H:%M')}"}
+  And %{I fill in "work_started_at" with "#{start_time.strftime('%H:%M')}"}
   And %{I fill in "work_end" with "#{end_time.strftime('%H:%M')}"}
 end
 When /^I submit the work form with values from "([^"]*)" to "([^"]*)"$/ do |start_time, end_time|
   work_selector = "work_"
   work = Factory.attributes_for(:work)
   And %{I fill in "work_description" with "#{work[:description]}"}
-  And %{I fill in "work_start" with "#{start_time}"}
+  And %{I fill in "work_started_at" with "#{start_time}"}
   And %{I fill in "work_end" with "#{end_time}"}
   And %{I press "Save"}
 end

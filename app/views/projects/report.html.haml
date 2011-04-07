@@ -25,12 +25,12 @@
       %h2=@project.title
       %hr/
       %div#works
-        -@project.works.order("start ASC").each do |work|
+        -@project.works.order("started_at ASC").each do |work|
           %ul{:class=>"record", :id=>"work#{work.id}"}
             %li.time
-              = work.start.strftime('%Y-%m-%d')
+              = work.started_at.strftime('%Y-%m-%d')
               %br/
-              = "#{work.start.strftime('%H:%M')} to #{work.end.strftime('%H:%M')}"
+              = "#{work.started_at.strftime('%H:%M')} to #{work.ended_at.strftime('%H:%M')}"
               %br/
               = "#{User.find(work.user_id).firstname} #{User.find(work.user_id).lastname}"
             %li.description= work.description

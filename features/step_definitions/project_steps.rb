@@ -56,11 +56,11 @@ end
 
 Then(/^I should see all works for the (\d+)(?:st|nd|rd|th) project$/) do |project|
   works = find_models("work", "project_id: #{project}")
-  works = works.sort_by { |w| w["start"] }
+  works = works.sort_by { |w| w["started_at"] }
   counter = 0
   works.each do |work|
     counter+=1
-    Then %{I should see "#{work.start.strftime('%Y-%m-%d')} #{work.start.strftime('%H:%M')} to #{work.end.strftime('%H:%M')} #{User.find(work.user_id).firstname} #{User.find(work.user_id).lastname}" within "div#works ul.record:nth-child(#{counter}) li:first-child"}
+    Then %{I should see "#{work.started_at.strftime('%Y-%m-%d')} #{work.started_at.strftime('%H:%M')} to #{work.ended_at.strftime('%H:%M')} #{User.find(work.user_id).firstname} #{User.find(work.user_id).lastname}" within "div#works ul.record:nth-child(#{counter}) li:first-child"}
     Then %{I should see "#{work.description}" within "div#works ul.record:nth-child(#{counter}) li:nth-child(2)"}
     Then %{I should see "#{work.duration} min." within "div#works ul.record:nth-child(#{counter}) li:nth-child(3)"}
   end

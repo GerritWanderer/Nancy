@@ -96,8 +96,8 @@ ActiveRecord::Schema.define(:version => 20110214153648) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "works", :force => true do |t|
-    t.datetime "start"
-    t.datetime "end"
+    t.datetime "started_at"
+    t.datetime "ended_at"
     t.integer  "duration"
     t.text     "description"
     t.integer  "project_id"

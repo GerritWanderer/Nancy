@@ -1,6 +1,6 @@
 -@works.each do |work|
   %ul{:class=>"record", :id=>"work#{work.id}"}
-    %li.time= "#{work.start.strftime('%H:%M')} to #{work.end.strftime('%H:%M')}"
+    %li.time= "#{work.started_at.strftime('%H:%M')} to #{work.ended_at.strftime('%H:%M')}"
     %li.duration= "#{work.duration} min."
     %li.project= link_to work.project.title, work.project
     %li.customer= link_to work.project.customer.name, work.project.customer

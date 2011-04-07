@@ -1,12 +1,11 @@
 class CreateWorks < ActiveRecord::Migration
   def self.up
     create_table :works do |t|
-      t.datetime :start
-      t.datetime :end
+      t.datetime :started_at
+      t.datetime :ended_at
       t.integer :duration
       t.text :description
       t.references :project
-
       t.timestamps
     end
   end

@@ -9,6 +9,6 @@ class WorkValidator < ActiveModel::Validator
 		record.end_datetime > record.start_datetime ? true : false
 	end
 	def no_other_record_exist(record)
-		Work.where(:user_id => record.user_id).where("(start < '#{record.start_datetime}:59' AND end > '#{record.start_datetime}:59') OR (start > '#{record.start_datetime}:59' AND end < '#{record.end_datetime}:59') OR (start > '#{record.start_datetime}:59' AND end > '#{record.end_datetime}:59')").empty? ? true : false
+		Work.where(:user_id => record.user_id).where("(started_at > '#{record.start_datetime}:59' AND started_at < '#{record.end_datetime}:00') OR (started_at < '#{record.start_datetime}:00' AND ended_at > '#{record.end_datetime}:59') OR (ended_at > '#{record.start_datetime}:59' AND ended_at < '#{record.end_datetime}:59')").empty? ? true : false
 	end
 end

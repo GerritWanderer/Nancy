@@ -11,7 +11,7 @@
     .ui-bar.ui-bar-c
       .ui-grid-a
         .ui-block-a
-          = "#{work.start.strftime('%H:%M')} to #{work.end.strftime('%H:%M')}"
+          = "#{work.started_at.strftime('%H:%M')} to #{work.ended_at.strftime('%H:%M')}"
           %br/
           = "#{work.duration} min."
         .ui-block-b
