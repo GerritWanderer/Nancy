@@ -2,7 +2,7 @@ module ApplicationHelper
   def display_navigation(controller)
     navigation = "<ul>\n<li class='#{'active' if controller == 'works'}'>"
     navigation += link_to "Works", works_path
-    navigation += "</li>\n<li class='#{'active' if controller == 'customers'}'>"
+    navigation += "</li>\n<li class='#{'active' if controller == 'customers' or controller == 'locations' or controller == 'contacts'}'>"
     navigation += link_to "Customers", customers_path
     navigation += "</li>\n<li class='#{'active' if controller == 'projects'}'>"
     navigation += link_to "Projects", projects_path

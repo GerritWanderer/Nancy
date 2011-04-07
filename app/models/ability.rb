@@ -7,7 +7,6 @@ class Ability
     elsif user.role == "editor"
       can :manage, [Work, Customer, Location, Contact, Project]
     else user.role == "trainee"
-      Rails.logger.info "Tadaaa"
       can :manage, [Work], :user_id => user.id
       can :read, [Customer, Location, Contact, Project]
     end

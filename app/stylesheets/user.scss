@@ -4,7 +4,6 @@ div#content{
 div.filter ul{
   @include roundedTop;
   margin-left:-20px;
-  @include roundedBottom;
   background-color: $darkGrey;
   padding-top: 12px;
 	  }
@@ -12,7 +11,7 @@ div.filter ul{
 }
 div#userForm form {
   @include grid(88,0,0,1,1);
-  @include rounded;
+  @include roundedTop(0px);
   background-color: $yellow;
   border: 1px solid grey;
   border-top:5px solid $orangeRed;

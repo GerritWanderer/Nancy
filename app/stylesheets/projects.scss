@@ -109,26 +109,22 @@ div.project {
 }
 body#report  {
 	@include gradient(white, white);
-	
+	div#content { width: 620px; margin: 0px 20px;}
 	p.sender{
-	@include grid(62,32,0); 
 	padding: 15px 0px 10px 0px; 
 	font-size: 7pt!important;
 	}
 	
 	adress {
-	@include grid(62,32,0); 
 	font-size: 8pt;
 	}
 	
 	h1 {
-	@include grid(62,32,0); 
 	margin-top: 15px; 
 	font-weight: bold; 
 	font-size:14pt;
 	}
-	h2 {
-	@include grid(62,32,0); 
+	h2 { 
 	margin-top: 15px; 
 	margin-bottom: 15px; 
 	font-weight: bold; 
@@ -141,9 +137,9 @@ body#report  {
 	ul{ 
 	padding-bottom: 5px;
 	border-bottom: 1px dashed grey;
-		li.time{@include grid(15,32,0);	padding: 5px 0px 5px 0px;}
-		li.description{color: $orangeRed; @include grid(15,13,0);padding: 5px 0px 5px 0px;}
-		li.duration{@include grid(15,13,0); padding: 5px 0px 5px 0px;}
+		li.time{@include grid(15,0,1);	padding: 5px 0px 5px 0px;}
+		li.description{color: $orangeRed; @include grid(30,0,1);padding: 5px 0px 5px 0px;}
+		li.duration{@include grid(15,0,0); padding: 5px 0px 5px 0px;}
 		
 	}
 	/*dl{

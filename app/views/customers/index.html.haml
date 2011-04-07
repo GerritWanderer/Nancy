@@ -1,2 +1,2 @@
-= render 'customers/form' if can? :manage, [Customer, Location, Contact]
+= render 'customers/form' if can? :manage, Customer, Location, Contact
 = render 'customers/list'

@@ -6,19 +6,16 @@ div#content {
       @include grid(18,70,2);
       @include roundedTop;
       background-color: $darkGrey;
-	  color: white;
+	    color: white;
       font-size: 16px;
       text-align: center;
       line-height: 33px;
     }
     ul#calendarWeek {
       @include roundedTop;
-	  @include roundedBottom;
-	  color: white;
+	    color: white;
       background-color: $darkGrey;
       padding: 15px 15px 0px 15px;
-	        
-	  
       li {
         @include grid(8,0,1,0.5,0.5);
         @include roundedTop;
@@ -27,9 +24,8 @@ div#content {
         text-align: center;
         line-height: 30px;
         font-size: 10px;
-		font-weight: bold;
-		margin-left:-3px;
-		
+        font-weight: bold;
+        margin-left:-3px;
       }
 	  li.wday6{background-color: $yellow; a { color: grey; }}
 	  li.wday0{background-color: $yellow; a { color: grey; }}
@@ -50,7 +46,6 @@ div#content {
   div#formWrapper {
     background-color: $yellow;
     @include roundedBottom;
-	@include roundedTop;
 	border:5px solid $orangeRed;
     div#createTimeWrapper {
       @include grid(56,2);
@@ -72,8 +67,11 @@ div#content {
       select { width: 200px;}
     }
   }
-  
-  ul.toolbar, ul.record {
+  div.toolbar {
+    padding: 0px; 
+    margin-top: 20px;
+  }
+  div.toolbar ul, ul.record {
     @include rounded;
     height: 30px;
     li { line-height: 30px; }

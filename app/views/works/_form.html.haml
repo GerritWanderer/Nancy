@@ -5,7 +5,7 @@
       - @work.errors.full_messages.each do |msg|
         %li= msg
 #createTimeWrapper
-  = form_for(@work, :remote => true) do |f|
+  = form_for(@work, :remote => false) do |f|
     %dl
       %dt.time= f.label :start, "Start:"
       %dd.time= f.text_field :start, :size => 4, :value => "08:00"

@@ -7,13 +7,6 @@ body#customers, body#locations, body#contacts {
     text-align: right;
   }
 }
- div#content{
-  div.toolbar{
-  /*border: 1px solid grey;*/
-  background-color: $darkRed;
-  color: white;
-   }
-  }
 div#customerForm {
 	
   legend {
@@ -52,23 +45,25 @@ div.customer {
   
   div.nestedRessources {
     @include roundedBottom;
-    background-color: $yellow;
+    background-color: white;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;;
+    border-bottom: 1px solid grey;
     padding: 0px 0px;
 
     div.location {
 	  background-color: white;
       @include roundedTop;
 	  @include roundedBottom;
-      border: 1px solid grey;
 	  border-top:5px solid $darkGrey;
       padding: 8px;
       
       .details {
-        ul li { @include grid(24); }
+        ul li { @include grid(26); }
       
       }
       form {
-	  
+	      background-color: transparent !important;
         padding: 0px !important;
         dl {
           dt {
@@ -88,21 +83,18 @@ div.customer {
             margin-left: 82px;
             input.submit { margin: 0px !important; }
           }
-		 
         }
       
 	  }
     }
     div.contacts {
-	  background-color: white;
       @include roundedTop;
       padding: 8px;
-      border: 1px solid grey;
-	  border-top:5px solid $darkGrey;
+	    border-top:5px solid $darkGrey;
       ul {
         li { @include grid(26); }
-        li.name, li.fon {
-          @include grid(28);
+        li.fon {
+          @include grid(30);
           span { display: block; }
         }
         li.actions { @include grid(6);}
@@ -115,6 +107,7 @@ div.customer {
       }
       ul.record { margin-bottom: 10px; }
       form {
+        background-color: transparent !important;
         padding: 0px !important;
         dl {
           dt {

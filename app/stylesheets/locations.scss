@@ -7,11 +7,22 @@ body#customers, body#locations, body#contacts {
     text-align: right;
   }
 }
-
 div#customerForm {
+	
+  legend {
+	font-weight: bold;
+	padding-left: 13px;
+	color: $darkGrey;
+		  }
+   div#createCustomer{
+   form{
+   border: 1px solid grey;
+	border-top:5px solid $orangeRed;}
+   }
+   a {display: block; font-weight:bold; padding: 0px 0px 15px 15px; color: white;}
+  
   dl {
-    
-    dt {
+        dt {
       @include grid(12,0,1);
       text-align: right;
       margin-bottom: 10px;
@@ -29,39 +40,30 @@ div#customerForm {
 }
 
 div.customer {
-	legend {color: $darkRed;}
   color: $darkGrey;
   margin-bottom: 5px;
   
   div.nestedRessources {
     @include roundedBottom;
-    background-color: $yellow;
+    background-color: white;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;;
+    border-bottom: 1px solid grey;
     padding: 0px 0px;
 
     div.location {
+	  background-color: white;
       @include roundedTop;
-      padding: 0px;
+	  @include roundedBottom;
+	  border-top:5px solid $darkGrey;
+      padding: 8px;
       
       .details {
-	    @include roundedTop;
-		@include roundedBottom;
-	    border: 1px solid grey;
-	    border-top:5px solid $darkGrey;
-	    background-color: white;
-        ul li { @include grid(24); }
-		h2 {color: $darkRed;}
-		padding:8px 0px 7px 10px;
-            }
-	  fieldset{
-	  @include roundedTop;
-	  @include roundedBottom;
-	  border: 1px solid grey;
-	  border-top:5px solid $orangeRed;
-	  }
+        ul li { @include grid(26); }
+      
+      }
       form {
-	  
-	  legend {padding:5px 0px 7px 15px; color: $orangeRed;}
-	  a {margin-left: -45px; margin-top:5px;}
+	      background-color: transparent !important;
         padding: 0px !important;
         dl {
           dt {
@@ -69,6 +71,7 @@ div.customer {
             margin-bottom: 10px;
             text-align: right;
           }
+		   
           dd {
             @include grid(18);
             margin-bottom: 10px;
@@ -81,29 +84,30 @@ div.customer {
             input.submit { margin: 0px !important; }
           }
         }
-      }
+      
+	  }
     }
     div.contacts {
-	  background-color: white;
       @include roundedTop;
       padding: 8px;
-      border: 1px solid grey;
-	  border-top:5px solid $darkGrey;
+	    border-top:5px solid $darkGrey;
       ul {
         li { @include grid(26); }
-        li.name, li.fon {
-          @include grid(28);
+        li.fon {
+          @include grid(30);
           span { display: block; }
         }
-        li.actions { @include grid(6);  }
+        li.actions { @include grid(6);}
       }
       ul.toolbar {
         color: grey;
         border-bottom: 2px dotted grey;
         margin-bottom: 20px;
+
       }
       ul.record { margin-bottom: 10px; }
       form {
+        background-color: transparent !important;
         padding: 0px !important;
         dl {
           dt {
@@ -130,6 +134,7 @@ div.customer {
     
     div.details h2, div.details span.actions, form legend {
       font-weight: bold;
+	  color: $darkRed;
       font-size: 11px;
     }
     div.details h2, form legend { @include grid(78) }

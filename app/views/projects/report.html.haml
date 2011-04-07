@@ -1,36 +1,49 @@
-%p Wildner+Designer • Hans-Vogel-Straße 24 • 90765 Fürth
-%adress
-  =@project.contact.location.name
-  %br/
-  = "#{@project.contact.firstname} #{@project.contact.lastname}"
-  %br/
-  =@project.contact.location.street
-  %br/
-  %br/
-  = "#{@project.contact.location.zip} #{@project.contact.location.city}"
+!!!
+%html{ :xmlns => "http://www.w3.org/1999/xhtml", :lang => "en", "xml:lang" => "en"}
+  %head
+    %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}
+    %title Nancy / #{@controller.controller_name}
+    = stylesheet_link_tag("compiled/screen.css")
+    = stylesheet_link_tag("compiled/#{@controller.controller_name}") if File.exist?("tmp/stylesheets/compiled/#{@controller.controller_name}.css")
+    = javascript_include_tag :defaults
+    = stylesheet_link_tag :all
+    = csrf_meta_tag
+  %body{:id => "report"}
+    #content.container
+      %p.sender Wildner+Designer • Hans-Vogel-Straße 24 • 90765 Fürth
+      %adress
+        =@project.contact.location.name
+        %br/
+        = "#{@project.contact.firstname} #{@project.contact.lastname}"
+        %br/
+        =@project.contact.location.street
+        %br/
+        %br/
+        = "#{@project.contact.location.zip} #{@project.contact.location.city}"
 
-%h1 Project Report: #{@project.id}
-%h2=@project.title
-%hr/
-%div#works
-  -@project.works.order("start ASC").each do |work|
-    %ul{:class=>"record", :id=>"work#{work.id}"}
-      %li.time
-        = work.start.strftime('%Y-%m-%d')
-        %br/
-        = "#{work.start.strftime('%H:%M')} to #{work.end.strftime('%H:%M')}"
-        %br/
-        = "#{User.find(work.user_id).firstname} #{User.find(work.user_id).lastname}"
-      %li.description= work.description
-      %li= "#{work.duration} min."
-      .clear 
-  %hr/
-  %dl
-    %dt Duration
-    %dd
-      = @project.works.sum("duration").to_f / 60
-    hours
-    %dt Calculated
-    %dd
-      = @project.budget
-    hours
+      %h1 Project Report: #{@project.id}
+      %h2=@project.title
+      %hr/
+      %div#works
+        -@project.works.order("start ASC").each do |work|
+          %ul{:class=>"record", :id=>"work#{work.id}"}
+            %li.time
+              = work.start.strftime('%Y-%m-%d')
+              %br/
+              = "#{work.start.strftime('%H:%M')} to #{work.end.strftime('%H:%M')}"
+              %br/
+              = "#{User.find(work.user_id).firstname} #{User.find(work.user_id).lastname}"
+            %li.description= work.description
+            %li.duration= "#{work.duration} min."
+            .clear 
+        -#
+          %hr/
+          %dl
+            %dt Duration
+            %dd
+              = @project.works.sum("duration").to_f / 60
+            hours
+            %dt Calculated
+            %dd
+              = @project.budget
+            hours
