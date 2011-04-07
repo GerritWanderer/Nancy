@@ -1,6 +1,6 @@
 -if @work.errors.any?
   #error_explanation
-    %h2= "#{pluralize(@work.errors.count, "error")} prohibited this work from being saved:"
+    %h2= t('errors.template.header', :model=> @work.class.human_name, :count=> @work.errors.count)
     %ul
       - @work.errors.full_messages.each do |msg|
         %li= msg

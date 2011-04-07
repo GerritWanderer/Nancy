@@ -2,7 +2,7 @@
 .clear
 %ul#calendarWeek
   -7.times do
-    %li{:class=>"wday#{@dayCalendar.wday}", :id => "#{'active' if @daySelected == @dayCalendar}" }= link_to @dayCalendar.strftime("%a. %d.%m."), { :controller => :works, :action => :index, :date => @dayCalendar.strftime("%Y-%m-%d") }, :remote => true
+    %li{:class=>"wday#{@dayCalendar.wday}", :id => "#{'active' if @daySelected == @dayCalendar}" }= link_to l(@dayCalendar, :format => :day_with_date), { :controller => :works, :action => :index, :date => @dayCalendar.strftime("%Y-%m-%d") }, :remote => true
     -@dayCalendar = @dayCalendar.+(1)
   %li#calendarNavigation
     = link_to image_tag("/images/icons/calendarweek-prev10.gif"), works_path(:date => @jumping_links.[]("prev10")), :remote => true
