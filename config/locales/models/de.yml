@@ -1,0 +1,34 @@
+de:
+  activerecord:
+    models:
+      work: "Zeit" 
+      customer: "Kunde"
+      location: "Standort"
+      contact: "Ansprechpartner"
+      project: "Projekt"
+    attributes:
+      work:
+        start: "Start"
+        end: "Ende"
+        description: "Beschreibung"
+      customer:
+        shortname: "Kurzname"
+      location:
+        street: "Straße"
+        zip: "PLZ"
+        city: "Stadt"
+        fon: "Telefon"
+        fax: "Fax"
+      contact:
+        salutation: "Anrede"
+        title: "Titel"
+        firstname: "Vorname"
+        lastname: "Nachname"
+        department: "Abteilung"
+        fon: "Tel"
+        fax: "Fax"
+        mobile: "Mobil"
+      projects:
+        title: "Titel"
+        description: "Beschreibung"
+        discount: "Rabatt"
