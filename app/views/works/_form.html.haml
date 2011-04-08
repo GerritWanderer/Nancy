@@ -1,6 +1,6 @@
 -if @work.errors.any?
   #error_explanation
-    %h2= t('errors.template.header', :model=> @work.class.human_name, :count=> @work.errors.count)
+    %h2= t('errors.template.header', :model=> Work.model_name.human, :count=> @work.errors.count)
     %ul
       - @work.errors.full_messages.each do |msg|
         %li= msg
@@ -23,3 +23,36 @@
     %dt Project
     %dd= render :partial => "projectlist"
 .clear
+%script{:src => "http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojo/dojo.xd.js", "djConfig" => "parseOnLoad: true"}
+:javascript
+  dojo.require("dijit.form.TimeTextBox");
+  dojo.addOnLoad(function() {
+      new dijit.form.TimeTextBox({
+          name: "work[started_at]",
+          value: new Date(),
+          constraints: {
+              timePattern: 'HH:mm',
+              clickableIncrement: 'T00:15',
+              visibleIncrement: 'T00:15',
+              visibleRange: 'T02:00'
+          }
+      }, "work_started_at");
+      new dijit.form.TimeTextBox({
+          name: "work[ended_at]",
+          value: new Date(),
+          constraints: {
+              timePattern: 'HH:mm',
+              clickableIncrement: 'T00:15',
+              visibleIncrement: 'T00:15',
+              visibleRange: 'T02:00'
+          }
+      }, "work_ended_at");
+  });
+  $(document).ready(function () {
+    $('form#new_work').submit(function() {
+      startet_at = $("input[name='work[started_at]']");
+      ended_at = $("input[name='work[ended_at]']");
+      startet_at.val(startet_at.val().replace('T', ''));
+      ended_at.val(ended_at.val().replace('T', ''));
+    });
+  });

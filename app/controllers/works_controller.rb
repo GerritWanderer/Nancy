@@ -21,8 +21,6 @@ class WorksController < ApplicationController
     if @work.save
       redirect_to works_path(:date => params[:work][:day]), :notice => 'Work was successfully created.' unless request.xhr?
     else
-      @work.started_at = ""
-      @work.ended_at = ""
       params[:project_id] = params[:work][:project_id]
       params[:customer_id] = Project.find(params[:work][:project_id]).customer.id
       @customers = Customer.with_active_projects.joins(:projects).uniq

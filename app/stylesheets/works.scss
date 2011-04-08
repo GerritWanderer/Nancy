@@ -50,7 +50,9 @@ div#content {
     div#createTimeWrapper {
       @include grid(56,2);
       dl dt.time { @include grid(5);}
-      dl dd.time { @include grid(6); }
+      dl dd.time { @include grid(8);
+        .dijitTimeTextBox { width: 65px !important; }
+      }
       dl dd.description textarea {
         height: 60px;
         width: 500px;
