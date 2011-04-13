@@ -9,13 +9,12 @@ module ApplicationHelper
     navigation += "</li>\n<li class='small #{'active' if controller == 'registrations'}'>"
     navigation += link_to "profile", edit_user_registration_path
     if current_user.role == "admin"
-      navigation += "</li>\n<<li class='small #{'active' if controller == 'days' or controller == 'user'}'>"
+      navigation += "</li>\n<li class='small #{'active' if controller == 'days' or controller == 'user'}'>"
       navigation += link_to "settings", settings_user_admin_index_path
     end
     navigation += "</li>\n<li class='small'>"
-    navigation += link_to "logout", destroy_user_session_path
-    navigation += "</li>\n<li class='user'>"
-    navigation += "#{current_user.firstname} #{current_user.lastname}"
+    navigation += link_to "logout", destroy_user_session_path 
+    navigation += "</li>\n<li class='language'><div id='dropdownButtonContainer'></div></li>"
     navigation += "</li>\n</ul>\n"
     raw(navigation)
   end

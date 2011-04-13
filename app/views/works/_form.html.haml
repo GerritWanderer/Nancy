@@ -23,9 +23,8 @@
     %dt Project
     %dd= render :partial => "projectlist"
 .clear
-%script{:src => "http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojo/dojo.xd.js", "djConfig" => "parseOnLoad: true"}
+
 :javascript
-  dojo.require("dijit.form.TimeTextBox");
   dojo.addOnLoad(function() {
       new dijit.form.TimeTextBox({
           name: "work[started_at]",

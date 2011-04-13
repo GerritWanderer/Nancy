@@ -30,11 +30,11 @@ div#navigation {
   ul {
     padding-top: 9px;
     li {
-	  -moz-box-shadow: inset 1px 3px 2px #bfbbbb;
+	    -moz-box-shadow: inset 1px 3px 2px #bfbbbb;
       @include grid(15,0,1);
       @include roundedTop;
       /*@include gradient(#1D88D8, #005DAA);*/
-	  border-bottom: 1px solid black;
+	    border-bottom: 1px solid black;
       a { color: $darkGrey; font-weight: bold;}
       line-height: 40px;
       font-size: 15px;
@@ -47,20 +47,30 @@ div#navigation {
 	  margin-top:0px;
       @include gradient(transparent, transparent);
       background-color: $yellow;
-	  border-color: $yellow;
+	    border-color: $yellow;
       a { color: $darkRed; font-weight: bold;}
 	
     }
-    li.small {
+    li.small, li.language {
       @include grid(8,0,1);
       font-size: 12px;
       line-height: 18px;
       margin-top: 22px;
-	  border: none;
-	  margin-right:2px;
-	 
+	    border: none;
+	    margin-right:2px;
     }
 	 li.small.active {margin-top: 22.5px;}
+	 li.language {
+	   background-color: transparent;
+	   -moz-box-shadow: none;
+	   margin-top: 18px;
+     .dijitButtonNode {
+       padding: 0px 3px;
+       background-color: $yellow;
+       background-image: none;
+       font-weight: bold;
+      }
+	 }
     li.user {
       @include gradient(transparent, transparent);
       @include grid(15,0,1);
@@ -237,3 +247,9 @@ div#flash div.alert {
   border-right: 2px solid darkred;
   background-color: #FF6F6F;
 }
+.dijitFlagGerman, .dijitFlagEnglish {
+  width: 16px;
+  height: 16px;
+}
+.dijitFlagGerman { background: url(/images/icons/flag-german.gif) center 2px; }
+.dijitFlagEnglish { background: url(/images/icons/flag-english.gif) bottom left; }
