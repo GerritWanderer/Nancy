@@ -106,15 +106,12 @@ div#content {
   form {
  	@include rounded;
 	background-color: $yellow;
-    padding-top: 15px;
+  padding-top: 15px;
 	padding-left: 5px;
     input.submit {
-        background: url("/images/submit.gif") no-repeat scroll center top transparent;
-        border: 0 none;
-        color: white;
-        height: 22px;
-        width: 165px;
-        margin: 10px 0px;
+        @include fancy-button(#FF4E00, 13px);
+        width: 200px;
+        margin-bottom: 20px;
     }
 	
 	  }
