@@ -17,15 +17,17 @@ end
 When /^I fill in the contact form with valid values$/ do  
   contact_selector = "contact_"
   contact = Factory.attributes_for(:contact)
+  contact_ignore_keys = [:salutation]
   contact.keys.each {|key|
-    And %{I fill in "#{contact_selector}#{key}" with "#{contact[key.intern]}"} if key.to_s != "salutation"
+    And %{I fill in "#{contact_selector}#{key}" with "#{contact[key.intern]}"} unless contact_ignore_keys.index(key)
   }
 end
 
 When /^I fill in the contact form with invalid values$/ do  
   contact_selector = "contact_"
   contact = Factory.attributes_for(:contact)
+  contact_ignore_keys = [:salutation]
   contact.keys.each {|key|
-    And %{I fill in "#{contact_selector}#{key}" with ""} if key.to_s != "salutation"
+    And %{I fill in "#{contact_selector}#{key}" with ""} unless contact_ignore_keys.index(key)
   }
 end

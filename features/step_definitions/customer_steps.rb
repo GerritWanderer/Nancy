@@ -29,20 +29,23 @@ end
 When /^I fill in the customer form with valid values$/ do 
   customer_selector = "customer_"
   customer = Factory.attributes_for(:customer)
+  customer_ignore_keys = [:locations]
   customer.keys.each {|key|
-    And %{I fill in "#{customer_selector}#{key}" with "#{customer[key.intern]}"} if key.to_s != "locations"
+    And %{I fill in "#{customer_selector}#{key}" with "#{customer[key.intern]}"} unless customer_ignore_keys.index(key)
   }
   
   location_selector = "customer_locations_attributes_0_"
   location = Factory.attributes_for(:location)
+  location_ignore_keys = [:contacts]
   location.keys.each {|key|
-    And %{I fill in "#{location_selector}#{key}" with "#{location[key.intern]}"} if key.to_s != "contacts"
+    And %{I fill in "#{location_selector}#{key}" with "#{location[key.intern]}"} unless location_ignore_keys.index(key)
   }
 
   contact_selector = "customer_locations_attributes_0_contacts_attributes_0_"
   contact = Factory.attributes_for(:contact)
+  contact_ignore_keys = [:salutation]
   contact.keys.each {|key|
-    And %{I fill in "#{contact_selector}#{key}" with "#{contact[key.intern]}"} if key.to_s != "salutation"
+    And %{I fill in "#{contact_selector}#{key}" with "#{contact[key.intern]}"} unless contact_ignore_keys.index(key)
   }
 end
 
@@ -55,13 +58,15 @@ When /^I fill in the customer form with invalid values$/ do
   
   location_selector = "customer_locations_attributes_0_"
   location = Factory.attributes_for(:location)
+  location_ignore_keys = [:contacts]
   location.keys.each {|key|
-    And %{I fill in "#{location_selector}#{key}" with "#{location[key.intern]}"} if key.to_s != "contacts"
+    And %{I fill in "#{location_selector}#{key}" with "#{location[key.intern]}"} unless location_ignore_keys.index(key)
   }
 
   contact_selector = "customer_locations_attributes_0_contacts_attributes_0_"
   contact = Factory.attributes_for(:contact)
+  contact_ignore_keys = [:salutation]
   contact.keys.each {|key|
-    And %{I fill in "#{contact_selector}#{key}" with "#{contact[key.intern]}"} if key.to_s != "salutation"
+    And %{I fill in "#{contact_selector}#{key}" with "#{contact[key.intern]}"} unless contact_ignore_keys.index(key)
   }
 end

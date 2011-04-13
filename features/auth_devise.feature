@@ -20,7 +20,6 @@ Feature: Use auth. from devise
   Scenario: Visit protected Pages unsuccessfully as guest
     Given I am not authenticated
     When I go to the works page
-    Then show me the page
     Then I should see "You need to sign in or sign up before continuing."
     And I am on the login page
     When I go to the customers page

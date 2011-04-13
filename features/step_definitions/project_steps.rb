@@ -41,16 +41,18 @@ end
 When /^I fill in the project form with valid values$/ do  
   project_selector = "project_"
   project = Factory.attributes_for(:project)
+  project_ignore_keys = [:contact_id, :customer_id, :closed, :type]
   project.keys.each {|key|
-    And %{I fill in "#{project_selector}#{key}" with "#{project[key.intern]}"} if key.to_s != "contact_id" && key.to_s != "customer_id" && key.to_s != "closed" && key.to_s != "type"
+    And %{I fill in "#{project_selector}#{key}" with "#{project[key.intern]}"} unless project_ignore_keys.index(key)
   }
 end
 
 When /^I fill in the project form with invalid values$/ do  
   project_selector = "project_"
   project = Factory.attributes_for(:project)
+  project_ignore_keys = [:contact_id, :customer_id, :closed, :type, :description]
   project.keys.each {|key|
-    And %{I fill in "#{project_selector}#{key}" with ""} if key.to_s != "contact_id" && key.to_s != "customer_id" && key.to_s != "closed" && key.to_s != "type" && key.to_s != "description"
+    And %{I fill in "#{project_selector}#{key}" with ""} unless project_ignore_keys.index(key)
   }
 end
 

@@ -2,8 +2,9 @@ require 'faker'
 
 user = User.create!(:firstname => Faker::Name.first_name,
              :lastname => Faker::Name.last_name,
-             :email => "ab@cd.de",
-             :password => "test123")
+             :email => "admin@wildner-designer.de",
+             :password => "development",
+             :role => "admin")
 user.sign_in_count = 1
 user.confirmed_at = "2011-01-18 12:10:00"
 user.save
@@ -12,7 +13,7 @@ user.save
 	user = User.create!(:firstname => Faker::Name.first_name,
 	             :lastname => Faker::Name.last_name,
 	             :email => Faker::Internet.email,
-	             :password => "test123")
+	             :password => "development")
 	user.sign_in_count = 1
 	user.confirmed_at = "2011-01-18 12:10:00"
 	user.save
@@ -35,7 +36,7 @@ end
                       :title => Faker::Name.suffix,
                       :firstname => Faker::Name.first_name,
                       :lastname => Faker::Name.last_name,
-                      :department => Faker::Lorem.words,
+                      :department => Faker::Lorem.words.first,
                       :email => Faker::Internet.email,
                       :fon => Faker::PhoneNumber.phone_number,
                       :mobile => Faker::PhoneNumber.phone_number,

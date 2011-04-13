@@ -9,15 +9,17 @@ end
 When /^I fill in the location form with valid values$/ do 
   location_selector = "location_"
   location = Factory.attributes_for(:location)
+  location_ignore_keys = [:contacts]
   location.keys.each {|key|
-    And %{I fill in "#{location_selector}#{key}" with "#{location[key.intern]}"} if key.to_s != "contacts"
+    And %{I fill in "#{location_selector}#{key}" with "#{location[key.intern]}"} unless location_ignore_keys.index(key)
   }
 end
 
 When /^I fill in the location form with invalid values$/ do 
   location_selector = "location_"
   location = Factory.attributes_for(:location)
+  location_ignore_keys = [:contacts, :name]
   location.keys.each {|key|
-    And %{I fill in "#{location_selector}#{key}" with ""} if key.to_s != "contacts" && key.to_s != "name"
+    And %{I fill in "#{location_selector}#{key}" with ""} unless location_ignore_keys.index(key)
   }
 end

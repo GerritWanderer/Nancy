@@ -21,7 +21,7 @@ Factory.define :contact do |f|
 	f.title {Faker::Name.suffix}
 	f.firstname {Faker::Name.first_name}
 	f.lastname {Faker::Name.last_name}
-	f.department {Faker::Company.name}
+	f.department {Faker::Lorem.words.first}
 	f.email {Faker::Internet.email}
 	f.fon {Faker::PhoneNumber.phone_number}
 	f.mobile {Faker::PhoneNumber.phone_number}
@@ -39,7 +39,7 @@ Factory.define :project do |f|
 end
 
 Factory.define :work do |f|
-	f.sequence(:start_datetime) { |n| Time.parse("#{Date.today.strftime("%Y-%m-%d")} #{n}:00") }
+	f.sequence(:start_datetime) { |n| Time.parse("#{Date.today.strftime("%Y-%m-%d")} #{n+2}:00") }
 	f.duration {15}
 	f.description {Faker::Lorem.paragraph}
 	f.user_id {1}
