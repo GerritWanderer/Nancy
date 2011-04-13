@@ -131,7 +131,7 @@ Feature: Manage projects
     When I go to the projects page
     And I click "Container-open" in the 2nd project row
     When I follow "Project-close" within "div.project div.main span.actions"
-    Then I should see "Project status was successfully switched."
+    Then I should see "Project was successfully changed."
 
   Scenario: Open Work-Report of a project
     Given I sign up as user

@@ -18,7 +18,7 @@ class Customers::ContactsController < ApplicationController
   def create
     @contact = Contact.new(params[:contact])
     if @contact.save
-      flash.now[:notice] = 'Contact was successfully created.'
+      flash.now[:notice] = t('successes.created', :model=> Contact.model_name.human)
     else
       @form_contact = @contact
       @displayContactsRecord = 'none'
@@ -30,7 +30,7 @@ class Customers::ContactsController < ApplicationController
   def update
     @contact = Contact.find(params[:id])
     if @contact.update_attributes(params[:contact])
-      flash.now[:notice] = 'Contact was successfully updated.'
+      flash.now[:notice] = t('successes.updated', :model=> Contact.model_name.human)
     else
       @form_contact = @contact
       @displayContactsRecord = 'none'

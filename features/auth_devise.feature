@@ -39,6 +39,5 @@ Feature: Use auth. from devise
     And I fill in "user_lastname" with "Luke"
     And I fill in "user_current_password" with "test123"
     And I press "Update"
-    And I should see "Lucky Luke" within "div#navigation ul li.user"
-    And I should be on the works page
+    Then I should be on the works page
     And I should see "You updated your account successfully."

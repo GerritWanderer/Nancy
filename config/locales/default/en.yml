@@ -141,7 +141,12 @@ en:
       create: 'Create %{model}'
       update: 'Update %{model}'
       submit: 'Save %{model}'
-
+  
+  successes:
+     created: "%{model} was successfully created."
+     updated: "%{model} was successfully updated."
+     destroyed: "%{model} was successfully deleted."
+     changed: "%{model} was successfully changed."
   errors:
     format: "%{attribute} %{message}"
     template:
@@ -169,6 +174,8 @@ en:
       less_than_or_equal_to: "must be less than or equal to %{count}"
       odd: "must be odd"
       even: "must be even"
+    destroyed: "An unknown error prohibited this %{model} from being destroyed. Please try again."
+    changed: "An unknown error prohibited this %{model} from being changed. Please try again."
 
   activerecord:
     errors:

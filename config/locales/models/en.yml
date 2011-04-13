@@ -1,0 +1,8 @@
+en:
+  activerecord:
+    models:
+      work: "Work" 
+      customer: "Customer"
+      location: "Location"
+      contact: "Contact"
+      project: "Project"

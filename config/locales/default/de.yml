@@ -80,7 +80,12 @@ de:
       create: '%{model} erstellen'
       update: '%{model} aktualisieren'
       submit: '%{model} speichern'
-
+      
+  successes:
+     created: "%{model} wurde erfolgreich erstellt."
+     updated: "%{model} wurde erfolgreich aktualisiert."
+     destroyed: "%{model} wurde erfolgreich gelöscht."
+     changed: "%{model} wurde erfolgreich geändert."
   errors:
     format: "%{attribute} %{message}"
     template:
@@ -108,6 +113,8 @@ de:
       odd: "muss ungerade sein"
       even: "muss gerade sein"
       not_an_integer: "muss ganzzahlig sein"
+    destroyed: "%{model} konnte aufgrund eines unbekannten Fehlers nicht erfolgreich gelöscht werden. Bitte versuche es erneut."
+    changed: "%{model} konnte aufgrund eines unbekannten Fehlers nicht geändert werden. Bitte versuche es erneut."
       
   activerecord:
     errors:

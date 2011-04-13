@@ -20,7 +20,7 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(params[:customer])
     if @customer.save
-      flash[:notice] = 'Customer was successfully created.'
+      flash[:notice] = t('successes.created', :model=> Customer.model_name.human)
       respond_with(@customer)
     else
       @form_customer = @customer
@@ -31,7 +31,7 @@ class CustomersController < ApplicationController
   def update
     @customer = Customer.find(params[:id])
     if @customer.update_attributes(params[:customer])
-      flash[:notice] = 'Customer was successfully updated.'
+      flash[:notice] = t('successes.updated', :model=> Customer.model_name.human)
       respond_with(@customer)
     else
       @form_customer = @customer
@@ -42,9 +42,9 @@ class CustomersController < ApplicationController
   def destroy
     @customer = Customer.find(params[:id])
     if @customer.destroy
-      flash[:notice] = 'Customer was successfully deleted.'
+      flash[:notice] = t('successes.destroyed', :model=> Customer.model_name.human)
     else
-      flash[:alert] = 'Customer was not deleted.'
+      flash[:alert] = t('errors.destroyed', :model=> Customer.model_name.human)
     end
     redirect_to(customers_url)
   end

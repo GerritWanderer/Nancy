@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(params[:project])
     if @project.save
-      flash[:notice] = 'Project was successfully created.'
+      flash[:notice] = t('successes.created', :model=> Project.model_name.human)
       respond_with(@project)
     else
       render "index"
@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     if @project.update_attributes(params[:project])
-      flash[:notice] = 'Project was successfully updated.'
+      flash[:notice] = t('successes.updated', :model=> Project.model_name.human)
       respond_with(@project)
     else
       @form_project = @project
@@ -40,9 +40,9 @@ class ProjectsController < ApplicationController
   def destroy
     @project = Project.find(params[:id])
     if @project.destroy
-      flash[:notice] = 'Project was successfully deleted.'
+      flash[:notice] = t('successes.destroyed', :model=> Project.model_name.human)
     else
-      flash[:alert] = 'Project was not deleted.'
+      flash[:alert] = t('errors.destroyed', :model=> Project.model_name.human)
     end
     redirect_to(projects_url)
   end
@@ -55,9 +55,9 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @project.closed = @project.closed == 0 ? 1 :0
     if @project.save
-      flash[:notice] = 'Project status was successfully switched.'
+      flash[:notice] = t('successes.changed', :model=> Project.model_name.human)
     else
-      flash[:notice] = 'Project status could not be switched.'
+      flash[:notice] = t('errors.changed', :model=> Project.model_name.human)
     end
     redirect_to(@project)
   end

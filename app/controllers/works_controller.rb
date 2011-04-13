@@ -19,7 +19,7 @@ class WorksController < ApplicationController
     params[:work][:end_datetime] = params[:work][:day]+" "+params[:work][:ended_at]
     @work = Work.new(params[:work])
     if @work.save
-      redirect_to works_path(:date => params[:work][:day]), :notice => 'Work was successfully created.' unless request.xhr?
+      redirect_to works_path(:date => params[:work][:day]), :notice => t('successes.created', :model=> Work.model_name.human) unless request.xhr?
     else
       params[:project_id] = params[:work][:project_id]
       params[:customer_id] = Project.find(params[:work][:project_id]).customer.id
@@ -33,7 +33,7 @@ class WorksController < ApplicationController
     work = Work.find(params[:id])
     date = work.started_at.strftime("%Y-%m-%d")
     if work.destroy
-      redirect_to works_path(:date => date), :notice => 'Work was successfully deleted' unless request.xhr?
+      redirect_to works_path(:date => date), :notice => t('successes.deleted', :model=> Work.model_name.human) unless request.xhr?
     end
   end
   

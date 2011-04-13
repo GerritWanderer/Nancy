@@ -15,7 +15,7 @@ class Customers::LocationsController < ApplicationController
   def create
     @location = Location.new(params[:location])
     if @location.save
-      flash.now[:notice] = 'Location was successfully created.'
+      flash.now[:notice] = t('successes.created', :model=> Location.model_name.human)
     else
       @form_location = @location
       @location = @customer.locations.first
@@ -28,7 +28,7 @@ class Customers::LocationsController < ApplicationController
   def update
     @location = Location.find(params[:id])
     if @location.update_attributes(params[:location])
-      flash.now[:notice] = 'Location was successfully updated.'
+      flash.now[:notice] = t('successes.updated', :model=> Location.model_name.human)
     else
       @form_location = @location
       @location = @customer.locations.first
