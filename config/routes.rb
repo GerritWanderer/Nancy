@@ -12,6 +12,8 @@ Nancy::Application.routes.draw do
         end
       end
       resources :user_admin, :controller => "user"
+      resources :configurations, :controller => "configurations" do
+      end
     end
 
     devise_for :users, :skip => [:registration], :controllers => { :sessions => "sessions" } do
@@ -37,7 +39,7 @@ Nancy::Application.routes.draw do
         post 'first' => 'customers#create_first_customer', :as => :create_first
       end
       resources :locations, :controller => "customers/locations" do
-        resources :contacts, :controller => "customers/contacts"
+      resources :contacts, :controller => "customers/contacts"
       end
     end
     

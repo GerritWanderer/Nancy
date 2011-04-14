@@ -1,0 +1,7 @@
+.filter
+  %ul
+    %li= link_to "Manage Users", settings_user_admin_index_path
+    %li= link_to "Managae Holidays", settings_days_path
+    %li.active= link_to "Basic Configurations", settings_configurations_path
+    .clear
+= netzke :configurations, :class_name => "Basepack::GridPanel", :model => "Configuration", :header => true, :columns => [{:name => :key, :header => Configuration.human_attribute_name('key')},{:name => :value, :header => Configuration.human_attribute_name('value')},{:name => :label, :header => Configuration.human_attribute_name('label')}]

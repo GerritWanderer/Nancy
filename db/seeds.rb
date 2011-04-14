@@ -3,10 +3,11 @@ require 'faker'
 user = User.create!(:firstname => Faker::Name.first_name,
              :lastname => Faker::Name.last_name,
              :email => "admin@wildner-designer.de",
-             :password => "development",
-             :role => "admin")
+             :password => "development")
 user.sign_in_count = 1
 user.confirmed_at = "2011-01-18 12:10:00"
+user.save
+user.role = "admin"
 user.save
 
 3.times do

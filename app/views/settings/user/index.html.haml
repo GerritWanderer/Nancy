@@ -2,6 +2,7 @@
   %ul
     %li.active= link_to "Manage Users", settings_user_admin_index_path
     %li= link_to "Managae Holidays", settings_days_path
+    %li= link_to "Basic Configurations", settings_configurations_path
     .clear
 #userForm
   - if @user.new_record?
