@@ -6,6 +6,7 @@ de:
       location: "Standort"
       contact: "Ansprechpartner"
       project: "Projekt"
+      configuration: "Konfiguration"
     attributes:
       work:
         start: "Start"
@@ -32,3 +33,7 @@ de:
         title: "Titel"
         description: "Beschreibung"
         discount: "Rabatt"
+      configuration:
+        key: "Schlüssel"
+        value: "Wert"
+        label: "Bezeichnung"
