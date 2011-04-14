@@ -1,0 +1,23 @@
+en:
+  top_works: "Works"
+  top_customers: "Customers"
+  top_projects: "Projects"
+  top_profile: "Profile"
+  top_settings: "Settings"
+  top_logout: "Logout"
+
+  works_year: "Year"
+  works_calendarweek: "Calendarweek"
+  works_charge_with: "Charge with"
+  works_time: "Time"
+  works_error_exist: "A record already exist within your given time."
+  works_error_higher: "%{field1} must be higher then %{field2}"
+  
+  customer_form_create: "Create New Customer"
+  customer_form_close: "Close Customer Form"
+  customer_form_customer: "Customer Name"
+  customer_form_location: "Main Location"
+  customer_form_contact: "Main Contact"
+  customer_of: "of"
+  customer_contact_name: "Name"
+  customer_contact_contact: "Contact"

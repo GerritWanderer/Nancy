@@ -1,19 +1,19 @@
 #customerForm.wizard
   -if params[:action] == 'new' || params[:action] == 'edit' || params[:action] == 'create' || params[:action] == 'update'
-    = link_to "Close Customer Form", customers_path, :class => 'wizardFormSwitch'
+    = link_to t(:customer_form_close), customers_path, :class => 'wizardFormSwitch'
   -else
-    = link_to "Open Customer Form", new_customer_path, :class => 'wizardFormSwitch'
+    = link_to t(:customer_form_create), new_customer_path, :class => 'wizardFormSwitch'
   .wrapper{:style => "display: #{@displayCustomerForm || 'none'};"}
     -if @customer.errors.any?
       #error_explanation
-        %h2= "#{pluralize(@customer.errors.count, "error")} prohibited this customer from being saved:"
+        %h2= t('errors.template.header', :model=> Customer.model_name.human, :count=> @customer.errors.count)
         %ul
           - @customer.errors.full_messages.each do |msg|
             %li= msg
     #createCustomer
       = form_for(@form_customer) do |f|
         %fieldset
-          %legend Customer Name
+          %legend= t(:customer_form_customer)
           %dl
             %dt= f.label :shortname
             %dd= f.text_field :shortname
@@ -23,7 +23,7 @@
             %dd= f.text_field :website
           = f.fields_for :locations, @form_customer.locations.first do |l|
             %fieldset
-              %legend Main Location
+              %legend= t(:customer_form_location)
               %dl
                 %dt= l.label :name
                 %dd= l.text_field :name
@@ -39,7 +39,7 @@
                 %dd= l.text_field :fax
             = l.fields_for :contacts, @form_customer.locations.first.contacts.first do |c|
               %fieldset
-                %legend Main Contact
+                %legend= t(:customer_form_contact)
                 %dl
                   %dt= c.label :salutation
                   %dd
@@ -59,4 +59,4 @@
                   %dd= c.text_field :fax
                   %dt= c.label :mobile
                   %dd= c.text_field :mobile
-              = f.submit 'Save', :class => "submit"
+              = f.submit t('helpers.submit.submit', :model=> Customer.model_name.human), :class => "submit"

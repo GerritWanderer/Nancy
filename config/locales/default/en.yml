@@ -136,7 +136,7 @@ en:
   helpers:
     select:
       prompt: "Please select"
-
+    form: '%{model} form'
     submit:
       create: 'Create %{model}'
       update: 'Update %{model}'

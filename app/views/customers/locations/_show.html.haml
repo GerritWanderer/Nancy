@@ -1,10 +1,10 @@
 .location
   .details{:style => "display: #{@displayLocationRecord || 'block'};"}
     %h2
-      Location 
+      = Location.model_name.human 
       -if (@locations.index(@location) + 1) > 1
         = link_to image_tag("/images/icons-nancy/previous.gif"), customer_location_path(@customer, @locations.at(@locations.index(@location) -1), :order => params[:order])
-      = "#{@locations.index(@location) + 1} of #{@locations.count}"
+      = "#{@locations.index(@location) + 1} #{t(:customer_of)} #{@locations.count}"
       -if (@locations.index(@location) + 1) < @locations.count
         = link_to image_tag("/images/icons-nancy/next.gif"), customer_location_path(@customer, @locations.at(@locations.index(@location) +1), :order => params[:order])
     %span.actions
@@ -19,8 +19,8 @@
         %br/
         = "#{@location.zip} #{@location.city}"
       %li
-        = "Fon: #{@location.fon}"
+        = "#{Location.human_attribute_name('fon')}: #{@location.fon}"
         %br/
-        = "Fax: #{@location.fax}"
+        = "#{Location.human_attribute_name('fax')}: #{@location.fax}"
       .clear
   = render :partial => 'customers/locations/form' if can? :manage, Location

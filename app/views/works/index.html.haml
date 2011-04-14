@@ -4,10 +4,10 @@
   = render :partial => "form"
 .toolbar
   %ul
-    %li.time Time
-    %li.duration Duration
-    %li.project Project
-    %li.customer Customer
-    %li.description Description
+    %li.time= t(:works_time)
+    %li.duration= Work.human_attribute_name('duration')
+    %li.project= Project.model_name.human
+    %li.customer= Customer.model_name.human
+    %li.description= Work.human_attribute_name('description')
 #works
   = render :partial => "worklist"

@@ -6,7 +6,7 @@
         %ul
           = @form_contact.errors.full_messages.each do |msg|
             %li= msg
-    %legend Create Contact
+    %legend= t('helpers.form', :model=> Contact.model_name.human)
     = link_to image_tag("/images/icons-nancy/container-close.gif"), customer_location_path(@customer, @location, :order => params[:order])
     %hr.clear/
     %dl
@@ -30,4 +30,4 @@
       %dd= f.text_field :mobile
       %dt.submit
         = f.hidden_field :location_id, :value => @location.id
-        = f.submit 'Save Contact', :class => "submit"
+        = f.submit t('helpers.submit.submit', :model=> Contact.model_name.human), :class => "submit"

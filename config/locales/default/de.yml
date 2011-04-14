@@ -75,7 +75,7 @@ de:
   helpers:
     select:
       prompt: "Bitte wählen"
-
+    form: '%{model} Formular'
     submit:
       create: '%{model} erstellen'
       update: '%{model} aktualisieren'

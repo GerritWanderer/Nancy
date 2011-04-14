@@ -6,7 +6,7 @@
         = @form_location.errors.full_messages.each do |msg|
           %li= msg
   %fieldset
-    %legend Create Location
+    %legend= t('helpers.form', :model=> Location.model_name.human)
     = link_to image_tag("/images/icons-nancy/container-close.gif"), customer_location_path(@customer, @location, :order => params[:order])
     %hr.clear/
     %dl
@@ -22,5 +22,5 @@
       %dd= f.text_field :fon
       %dt= f.label :fax
       %dd= f.text_field :fax
-      %dt.submit= f.submit 'Save Location', :class =>"submit"
+      %dt.submit= f.submit t('helpers.submit.submit', :model=> Location.model_name.human), :class => "submit"
   = f.hidden_field :customer_id, :value => @customer.id

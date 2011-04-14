@@ -1,14 +1,14 @@
 .toolbar
   %ul
     %li
-      Name 
+      = Customer.human_attribute_name('name') 
       = link_to image_tag("/images/icons-nancy/order-up.gif"), customers_path(:order => "name asc")
       = link_to image_tag("/images/icons-nancy/order-down.gif"), customers_path(:order => "name desc")
     %li
-      Shortname
+      = Customer.human_attribute_name('shortname')
       = link_to image_tag("/images/icons-nancy/order-up.gif"), customers_path(:order => "shortname asc")
       = link_to image_tag("/images/icons-nancy/order-down.gif"), customers_path(:order => "shortname desc")
-    %li Locations
+    %li= Location.model_name.human
 -@customers.each do |customer|
   .customer
     - if customer.id == @customer.id && "#{params[:controller]}/#{params[:action]}" != 'customers/edit' 

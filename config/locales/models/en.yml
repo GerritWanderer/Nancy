@@ -7,3 +7,8 @@ en:
       contact: "Contact"
       project: "Project"
       configuration: "Configuration"
+    attributes:
+      work:
+        started_at: "Start"
+        ended_at: "End"
+        duration: "Duration"

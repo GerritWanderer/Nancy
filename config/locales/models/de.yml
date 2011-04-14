@@ -9,9 +9,10 @@ de:
       configuration: "Konfiguration"
     attributes:
       work:
-        start: "Start"
-        end: "Ende"
+        started_at: "Start"
+        ended_at: "Ende"
         description: "Beschreibung"
+        duration: "Dauer"
       customer:
         shortname: "Kurzname"
       location:
