@@ -13,7 +13,7 @@
       %dd.time= f.text_field :ended_at, :size => 4, :value => "09:00"
       %dd.description= f.text_area :description
       %dt.fees= f.label :fee
-      %dd.fees= select_tag("work[fee]", options_for_select(Configuration.find_by_key('work_fees').value.split(',').map {|x| ["#{t :works_charge_with} #{number_to_currency(x, :unit => Configuration.find_by_key('currency').value)}", "#{x}"]}))
+      %dd.fees= select_tag("work[fee]", options_for_select(@fees.map {|f| ["#{t :works_charge_with} #{number_to_currency(f, :unit => @currency)}", "#{f}"]}))
       %dt.submit
         = f.hidden_field :project_id, :value => @projects.first.id
         = f.hidden_field :day, :value => @daySelected.strftime("%Y-%m-%d")

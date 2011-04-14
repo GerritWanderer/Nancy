@@ -3,7 +3,7 @@
     %li.time
       = "#{work.started_at.strftime('%H:%M')} to #{work.ended_at.strftime('%H:%M')}"
       %br/
-      = "â #{number_to_currency(work.fee, :unit => Configuration.find_by_key('currency').value)}"
+      = "â #{number_to_currency(work.fee, :unit => @currency)}"
     %li.duration= "#{work.duration} min."
     %li.project= link_to work.project.title, work.project
     %li.customer= link_to work.project.customer.name, work.project.customer

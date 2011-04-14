@@ -42,7 +42,6 @@ Feature: Manage work
     And 10 projects exist
     And 3 works exist
     When I go to the works page
-    Then show me the page
     Then I should see all my work of the current weekday
     
   @wip
@@ -80,7 +79,7 @@ Feature: Manage work
     When I fill in "work_started_at" with "09:00"
     And I fill in "work_ended_at" with "08:00"
     And I press "Save"
-    Then I should see "End time must be higher then Start time"
+    Then I should see "End must be higher then Start"
     
   Scenario: Attemp to create a new Work with various times within a existing record
     Given I sign up as user

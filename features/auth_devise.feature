@@ -34,7 +34,7 @@ Feature: Use auth. from devise
     And 3 customers exist
     And 10 projects exist
     When I go to the works page
-    And I follow "profile" within "div#navigation ul li.small"
+    And I follow "Profile" within "div#navigation ul li.small"
     And I fill in "user_firstname" with "Lucky"
     And I fill in "user_lastname" with "Luke"
     And I fill in "user_current_password" with "test123"

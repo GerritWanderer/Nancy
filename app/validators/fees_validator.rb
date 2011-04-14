@@ -1,6 +1,6 @@
 class FeesValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    value.split(',').each do |fee|
+    value.split(';').each do |fee|
 		  begin
 			  Float(fee)
 		  rescue ArgumentError

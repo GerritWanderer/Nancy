@@ -53,7 +53,7 @@ Feature: Manage customers
     And I am on the customers page
     When I fill in the customer form with invalid values
     And I press "Save"
-    Then I should see "errors prohibited this customer from being saved:"
+    Then I should see "errors prohibited this Customer from being saved"
     And I should be on the customers page
     
   @wip
@@ -90,7 +90,7 @@ Feature: Manage customers
     And I click "Edit" in the 2nd customer row
     And I fill in the customer form with invalid values
     And I press "Save"
-    Then I should see "errors prohibited this customer from being saved:"
+    Then I should see "errors prohibited this Customer from being saved"
 
   Scenario: Delete a customer
     Given I sign up as user

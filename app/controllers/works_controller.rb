@@ -49,6 +49,8 @@ class WorksController < ApplicationController
     @dayCalendar = @daySelected.-(@daySelected.cwday - 1)
     @jumping_links = Work.selectJumpingLinks(@dayCalendar)
     
+    @fees = Configuration.find_by_key('work_fees') ? Configuration.find_by_key('work_fees').value.split(';') : [0.00]
+    @currency = Configuration.find_by_key('currency') ? Configuration.find_by_key('currency').value : '$'
     @works = Work.from_day_by_user(@daySelected.strftime("%Y-%m-%d"), current_user.id).order("started_at ASC")
     @work = Work.new
     @statistics = Work.calculateStatistics(@works, current_user.hours)
