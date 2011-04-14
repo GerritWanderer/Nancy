@@ -19,9 +19,9 @@
       %li= "Next Holiday: #{@holiday_upcoming.first.date_from unless @holiday_upcoming.empty?}"
       %li.actions
         - unless @holidays.nil?
-          = link_to image_tag("/images/icons/container-close.gif"), settings_days_path
+          = link_to image_tag("/images/icons-nancy/container-close.gif"), settings_days_path
         - else
-          = link_to image_tag("/images/icons/container-open.gif"), show_holidays_settings_days_path
+          = link_to image_tag("/images/icons-nancy/container-open.gif"), show_holidays_settings_days_path
       .clear
     != "#{render :partial => 'show' unless @holidays.nil?}"
   #users
@@ -34,8 +34,8 @@
           %li= "Days of Absence: #{Day.find_type_by_user_and_year(3, user.id, Date.today.year).count}"
           %li.actions
             - if !@user.nil? && user.id == @user.id
-              = link_to image_tag("/images/icons/container-close.gif"), settings_days_path
+              = link_to image_tag("/images/icons-nancy/container-close.gif"), settings_days_path
             - else
-              = link_to image_tag("/images/icons/container-open.gif"), show_user_settings_days_path(:user_id => user.id)
+              = link_to image_tag("/images/icons-nancy/container-open.gif"), show_user_settings_days_path(:user_id => user.id)
           .clear
         != "#{render :partial => 'show' if !@user.nil? && user.id == @user.id}"

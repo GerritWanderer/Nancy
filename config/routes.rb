@@ -1,6 +1,7 @@
 Nancy::Application.routes.draw do
   get "home/index"
   root :to => "home#index"
+  netzke
   
   scope "(:locale)", :locale => /en|de/ do
     namespace "settings" do

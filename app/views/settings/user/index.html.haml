@@ -27,6 +27,6 @@
         %li= "#{user.hours} / #{user.holidays}"
         %li= user.role.humanize
         %li.actions
-          = link_to image_tag("/images/icons/edit.gif"), edit_settings_user_admin_path(user)
-          = link_to image_tag("/images/icons/delete.gif"), settings_user_admin_path(user), :confirm => 'Are you sure?', :method => :delete
+          = link_to image_tag("/images/icons-nancy/edit.gif"), edit_settings_user_admin_path(user)
+          = link_to image_tag("/images/icons-nancy/delete.gif"), settings_user_admin_path(user), :confirm => 'Are you sure?', :method => :delete
         .clear

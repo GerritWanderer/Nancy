@@ -8,6 +8,23 @@ GIT
       orm_adapter (~> 0.0.3)
       warden (~> 1.0.3)
 
+GIT
+  remote: git://github.com/skozlov/netzke-basepack.git
+  revision: b99ef3267df0c97ca873d8dbf69e22bb418be2df
+  specs:
+    netzke-basepack (0.6.5)
+      acts_as_list
+      meta_where (>= 0.9.3)
+      netzke-core (~> 0.6.7)
+      will_paginate (~> 3.0.pre2)
+
+GIT
+  remote: git://github.com/skozlov/netzke-core.git
+  revision: 4fcea55471435ebd61e419ed57dccbfff959de3d
+  specs:
+    netzke-core (0.6.7)
+      activesupport (>= 3.0.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -39,6 +56,7 @@ GEM
       activemodel (= 3.0.6)
       activesupport (= 3.0.6)
     activesupport (3.0.6)
+    acts_as_list (0.1.2)
     addressable (2.2.5)
     arel (2.0.9)
     autotest (4.4.6)
@@ -113,6 +131,10 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    meta_where (1.0.4)
+      activerecord (~> 3.0.0)
+      activesupport (~> 3.0.0)
+      arel (~> 2.0.7)
     mime-types (1.16)
     multi_json (0.0.5)
     multipart-post (1.1.0)
@@ -211,6 +233,8 @@ DEPENDENCIES
   haml-rails
   hpricot
   launchy
+  netzke-basepack!
+  netzke-core!
   oa-oauth
   pickle
   rails (= 3.0.6)

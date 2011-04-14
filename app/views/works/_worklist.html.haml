@@ -6,7 +6,7 @@
     %li.customer= link_to work.project.customer.name, work.project.customer
     %li.description= work.description
     %li.actions
-      = link_to image_tag("/images/icons/delete.gif"), work, :method => :delete, :remote => true
+      = link_to image_tag("/images/icons-nancy/delete.gif"), work, :method => :delete, :remote => true
     .clear
 :javascript
   jQuery.each($("div#works ul"), function() { $(this).find('li').height($(this).height()); });

@@ -2,12 +2,12 @@
   %ul
     %li
       Name 
-      = link_to image_tag("/images/icons/order-up.gif"), customers_path(:order => "name asc")
-      = link_to image_tag("/images/icons/order-down.gif"), customers_path(:order => "name desc")
+      = link_to image_tag("/images/icons-nancy/order-up.gif"), customers_path(:order => "name asc")
+      = link_to image_tag("/images/icons-nancy/order-down.gif"), customers_path(:order => "name desc")
     %li
       Shortname
-      = link_to image_tag("/images/icons/order-up.gif"), customers_path(:order => "shortname asc")
-      = link_to image_tag("/images/icons/order-down.gif"), customers_path(:order => "shortname desc")
+      = link_to image_tag("/images/icons-nancy/order-up.gif"), customers_path(:order => "shortname asc")
+      = link_to image_tag("/images/icons-nancy/order-down.gif"), customers_path(:order => "shortname desc")
     %li Locations
 -@customers.each do |customer|
   .customer
@@ -17,9 +17,9 @@
         %li= customer.shortname
         %li= customer.locations.count
         %li.actions
-          = link_to image_tag("/images/icons/container-close.gif"), customers_path(:order => params[:order])
-          = link_to image_tag("/images/icons/edit.gif"), edit_customer_path(customer, :order => params[:order]) if can? :manage, Customer
-          = link_to image_tag("/images/icons/delete.gif"), customer_path(customer, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete if can? :manage, Customer
+          = link_to image_tag("/images/icons-nancy/container-close.gif"), customers_path(:order => params[:order])
+          = link_to image_tag("/images/icons-nancy/edit.gif"), edit_customer_path(customer, :order => params[:order]) if can? :manage, Customer
+          = link_to image_tag("/images/icons-nancy/delete.gif"), customer_path(customer, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete if can? :manage, Customer
         .clear
       .nestedRessources
         = render :partial => 'customers/locations/show'
@@ -31,8 +31,8 @@
         %li= customer.shortname
         %li= customer.locations.count
         %li.actions
-          = link_to image_tag("/images/icons/container-open.gif"), customer_path(customer, :order => params[:order])
-          = link_to image_tag("/images/icons/edit.gif"), edit_customer_path(customer, :order => params[:order]) if can? :manage, Customer
-          = link_to image_tag("/images/icons/delete.gif"), customer_path(customer, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete if can? :manage, Customer
+          = link_to image_tag("/images/icons-nancy/container-open.gif"), customer_path(customer, :order => params[:order])
+          = link_to image_tag("/images/icons-nancy/edit.gif"), edit_customer_path(customer, :order => params[:order]) if can? :manage, Customer
+          = link_to image_tag("/images/icons-nancy/delete.gif"), customer_path(customer, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete if can? :manage, Customer
         .clear
       .clear

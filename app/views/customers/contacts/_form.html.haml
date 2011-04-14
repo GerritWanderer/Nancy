@@ -7,7 +7,7 @@
           = @form_contact.errors.full_messages.each do |msg|
             %li= msg
     %legend Create Contact
-    = link_to image_tag("/images/icons/container-close.gif"), customer_location_path(@customer, @location, :order => params[:order])
+    = link_to image_tag("/images/icons-nancy/container-close.gif"), customer_location_path(@customer, @location, :order => params[:order])
     %hr.clear/
     %dl
       %dt= f.label :salutation
