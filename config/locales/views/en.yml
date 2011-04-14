@@ -9,7 +9,7 @@ en:
   works_year: "Year"
   works_calendarweek: "Calendarweek"
   works_charge_with: "Charge with"
-  works_time: "Time"
+  works_time: "Time / Fee"
   works_error_exist: "A record already exist within your given time."
   works_error_higher: "%{field1} must be higher then %{field2}"
   

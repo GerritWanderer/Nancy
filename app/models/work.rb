@@ -6,6 +6,7 @@ class Work < ActiveRecord::Base
   include ActiveModel::Validations
   validates :start_datetime, :datetime => true
   validates :end_datetime, :datetime => true
+  validates :fee, :numericality => true
   validates :description, :presence => true, :length => {:minimum => 3, :maximum => 1020}
   validates_with WorkValidator
   

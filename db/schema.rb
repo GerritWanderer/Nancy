@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110414073226) do
+ActiveRecord::Schema.define(:version => 20110414130613) do
 
   create_table "configurations", :force => true do |t|
     t.string   "key"
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(:version => 20110414073226) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.float    "fee",         :default => 0.0
   end
 
 end

@@ -13,6 +13,7 @@ de:
         ended_at: "Ende"
         description: "Beschreibung"
         duration: "Dauer"
+        fee: "Vergütung"
       customer:
         shortname: "Kurzname"
       location:

@@ -11,4 +11,3 @@ en:
       work:
         started_at: "Start"
         ended_at: "End"
-        duration: "Duration"

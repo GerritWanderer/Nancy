@@ -9,7 +9,7 @@ de:
   works_year: "Jahr"
   works_calendarweek: "Kalenderwoche"
   works_charge_with: "Verrechnen mit"
-  works_time: "Zeit"
+  works_time: "Zeit / Vergütung"
   works_error_exist: "Ein Eintrag existiert bereits innerhalb des gewählten Zeitraums."
   works_error_higher: "%{field1} muss größer sein als %{field2}"
   
