@@ -1,4 +1,5 @@
 require 'Faker'
+
 Factory.define :customer do |f|
 	f.name {Faker::Company.name}
 	f.shortname {Faker::Company.name}
@@ -41,6 +42,7 @@ end
 Factory.define :work do |f|
 	f.sequence(:start_datetime) { |n| Time.parse("#{Date.today.strftime("%Y-%m-%d")} #{n+2}:00") }
 	f.duration {15}
+	f.fee {50.0}
 	f.description {Faker::Lorem.paragraph}
 	f.user_id {1}
 	f.project_id {rand(10)+1}
@@ -54,7 +56,7 @@ Factory.define :user do |f|
 	f.firstname {Faker::Name.first_name}
 	f.lastname {Faker::Name.last_name}
 	f.email {Faker::Internet.email}
-	f.password {"#{Faker::Name.first_name}#{Faker::Name.last_name}"}
+	f.password {"development"}
 	f.sign_in_count {1}
 	f.confirmed_at {Date.today.strftime("%Y-%m-%d 09:00")}
 	f.days { [Factory.create(:day), Factory.create(:day), Factory.create(:day)] } 

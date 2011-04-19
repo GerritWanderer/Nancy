@@ -1,15 +1,22 @@
-require 'faker'
-
+require 'Faker'
+I18n.default_locale = :en
 user = User.create!(:firstname => Faker::Name.first_name,
              :lastname => Faker::Name.last_name,
              :email => "admin@wildner-designer.de",
              :password => "development")
 user.sign_in_count = 1
 user.confirmed_at = "2011-01-18 12:10:00"
-user.save
 user.role = "admin"
 user.save
 
+Configuration.create!(:key => 'work_fees',
+  :value => '70.00;50.00;0.00',
+  :label => "Please enter your available fees, seperated with ';'")
+Configuration.create!(:key => 'currency',
+  :value => '$',
+  :label => "Select your currency.")
+  
+  
 3.times do
 	user = User.create!(:firstname => Faker::Name.first_name,
 	             :lastname => Faker::Name.last_name,
@@ -73,6 +80,7 @@ User.all.each do |user|
 	    Work.create!(:start_datetime => timeStart.strftime('%Y-%m-%d %H:%M'),
 	                    :end_datetime => timeEnd.strftime('%Y-%m-%d %H:%M'),
 	                    :description => Faker::Lorem.sentence,
+	                    :fee => [70.00,50.00,0.00][1],
 	                    :project_id => projects.shuffle.first.id,
                       :user_id => user.id)
 	  end
