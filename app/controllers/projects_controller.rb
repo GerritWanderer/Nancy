@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
   respond_to :html, :mobile
 
   def index # see init_projects
+  end
 
   def show # see init_projects
   end
@@ -47,6 +48,16 @@ class ProjectsController < ApplicationController
   end
   
   def report
+    @currency = Configuration.find_by_key('currency').value
+    @tax = Configuration.find_by_key('tax').value.to_f
+    @net_sum = 0
+    @project.works.each do |work|
+      @net_sum += (work.duration.to_f / 60) * work.fee
+    end
+    @discount = @net_sum * (@project.discount / 100)
+    @full_net_sum = @net_sum - @discount
+    @tax_sum = @full_net_sum * (@tax / 100)
+    @full_tax_sum = @full_net_sum + @tax_sum
     render :layout => false, :template => 'projects/report'
   end
   
@@ -72,7 +83,7 @@ class ProjectsController < ApplicationController
       @form_contacts = []
     else
       @form_customer_id = @form_customers.first.id
-      @form_contacts = params[:customer_id] ? Contact.find_by_customer_id(params[:customer_id]) : Contact.find_by_customer_id(form_customer_id)
+      @form_contacts = params[:customer_id] ? Contact.find_by_customer_id(params[:customer_id]) : Contact.find_by_customer_id(@form_customer_id)
       @form_contact_id = @form_contacts.first.id
     end
     @displayProjectForm = params[:action] == 'new' || params[:action] == 'edit' || params[:action] == 'create' || params[:action] == 'update' ? 'block' : 'none'

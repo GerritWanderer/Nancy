@@ -30,20 +30,20 @@
             %li.time
               = work.started_at.strftime('%Y-%m-%d')
               %br/
-              = "#{work.started_at.strftime('%H:%M')} to #{work.ended_at.strftime('%H:%M')}"
-              %br/
               = "#{User.find(work.user_id).firstname} #{User.find(work.user_id).lastname}"
             %li.description= work.description
-            %li.duration= "#{work.duration} min."
+            %li.duration #{work.duration.to_f / 60} hours
+            %li.sum= number_to_currency((work.duration.to_f / 60 * work.fee), :unit => Configuration.find_by_key('currency').value)
             .clear 
-        -#
-          %hr/
-          %dl
-            %dt Duration
-            %dd
-              = @project.works.sum("duration").to_f / 60
-            hours
-            %dt Calculated
-            %dd
-              = @project.budget
-            hours
+        %dl#sum
+          %dt.duration Duration:
+          %dd.duration #{@project.works.sum("duration").to_f / 60} hours
+          %dd.duration #{number_to_currency(@net_sum, :unit => @currency)}
+          %dt.discount Discount (#{@project.discount}%):
+          %dd.discount #{number_to_currency(@discount, :unit => @currency)}
+          %dt.net Sum net:
+          %dd.net #{number_to_currency(@full_net_sum, :unit => @currency)}
+          %dt.tax Add #{@tax}% tax:
+          %dd.tax #{number_to_currency(@tax_sum, :unit => @currency)}
+          %dt.final Final Tax Sum:
+          %dd.final #{number_to_currency(@full_tax_sum, :unit => @currency)}
