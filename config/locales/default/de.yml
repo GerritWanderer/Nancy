@@ -28,6 +28,7 @@ de:
       short: "%d. %B, %H:%M Uhr"
       long: "%A, %d. %B %Y, %H:%M Uhr"
       time: "%H:%M"
+      date: "%d.%m.%Y"
 
   number:
     format:

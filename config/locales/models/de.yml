@@ -31,10 +31,11 @@ de:
         fon: "Tel"
         fax: "Fax"
         mobile: "Mobil"
-      projects:
+      project:
         title: "Titel"
         description: "Beschreibung"
         discount: "Rabatt"
+        created_at: "Eingetragen am"
       configuration:
         key: "Schlüssel"
         value: "Wert"

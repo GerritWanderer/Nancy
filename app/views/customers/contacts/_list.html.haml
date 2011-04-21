@@ -14,11 +14,11 @@
         %li.name= "#{contact.salutation} #{contact.title} #{contact.firstname} #{contact.lastname}"
         %li= contact.department
         %li.fon
-          -if !contact.fon.empty?
+          -unless contact.fon.empty?
             %span= "#{Contact.human_attribute_name('fon')}: #{contact.fon}"
-          -if !contact.fax.empty?
+          -unless contact.fax.empty?
             %span= "#{Contact.human_attribute_name('fax')}: #{contact.fax}"
-          -if !contact.mobile.empty?
+          -unless contact.mobile.empty?
             %span= "#{Contact.human_attribute_name('mobile')}: #{contact.mobile}"
         %li.actions
           = mail_to contact.email, image_tag("/images/icons-nancy/mail.gif")

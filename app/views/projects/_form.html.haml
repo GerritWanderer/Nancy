@@ -1,8 +1,8 @@
 #projectForm.wizard
   -if params[:action] == 'new' || params[:action] == 'edit' || params[:action] == 'create' || params[:action] == 'update'
-    = link_to "Close Project Form", projects_path, :class => 'wizardFormSwitch'
+    = link_to t(:project_form_close), projects_path, :class => 'wizardFormSwitch'
   -else
-    = link_to "Open Project Form", new_project_path, :class => 'wizardFormSwitch'
+    = link_to t(:project_form_create), new_project_path, :class => 'wizardFormSwitch'
   .wrapper{:style => "display: #{@displayProjectForm || 'none'};"}
     -if @project.errors.any?
       #error_explanation
@@ -13,18 +13,19 @@
     #createProject
       = form_for(@form_project) do |f|
         %fieldset.project
-          %legend Project information
+          %legend= t(:project_information)
           %dl
             %dt.title= f.label :title
             %dd.title= f.text_field :title
             %dt.description= f.label :description
             %dd.description= f.text_area :description
             .clear
-            %dt.small= f.label :discount, "Discount in %"
+            %dt.small= f.label :discount
             %dd.small= f.text_field :discount
-            %dt.small= f.label :budget, "Budget in h()"
+            %dt.small= f.label :budget
             %dd.small= f.text_field :budget
-            %dt.submit= f.submit 'Save', :class => "submit"
+            %dt.submit= f.submit t('helpers.submit.submit', :model=> Project.model_name.human), :class => "submit"
+           
             .clear
         = f.hidden_field :customer_id, :value => params[:customer_id] || @form_customer_id
         = f.hidden_field :contact_id, :value => @form_contact_id
@@ -32,14 +33,14 @@
       = form_tag new_project_path, :method => :get, :remote => false do
         %fieldset.customer
           %dl
-            %dt Customer
+            %dt= Customer.model_name.human
             %dd
               = select_tag(:customer_id, options_for_select(@form_customers.map {|c| [c.name, c.id]}, params[:customer_id].to_i), {:onchange => "this.form.customerSubmit.click();"})
               %input{:type=>"submit", :value=>"submit", :name=>"customerSubmit", :style=>"display:none"}
       = form_tag new_project_path, :method => :get, :remote => false do
         %fieldset.contact
           %dl
-            %dt Main Contact
+            %dt= Contact.model_name.human
             %dd
               = select_tag(:contact_id, options_for_select(@form_contacts.map {|c| [c.firstname, c.id]}), {:onchange => "$('input#project_contact_id').val(this.value)"})
             .clear

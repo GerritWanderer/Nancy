@@ -21,3 +21,10 @@ en:
   customer_of: "of"
   customer_contact_name: "Name"
   customer_contact_contact: "Contact"
+  
+  project_form_create: "Create Project Customer"
+  project_form_close: "Close Project Form"
+  project_all: "All Projects"
+  project_active: "Active Projects"
+  project_closed: "Closed Projects"
+  project_information: "Project Informationen"

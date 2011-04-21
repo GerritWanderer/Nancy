@@ -1,19 +1,19 @@
-%h2 Contacts
+%h2= Contact.model_name.human
 %hr.clear/
 %ul.toolbar
-  %li.name Name
-  %li.fon Contact
-  %li.location Location
+  %li.name= t(:customer_contact_name)
+  %li.fon= t(:customer_contact_contact)
+  %li.location= Location.model_name.human
   .clear
 %ul.record
   %li.name= "#{@project.contact.salutation} #{@project.contact.title} #{@project.contact.firstname} #{@project.contact.lastname}"
   %li.fon
-    -if !@project.contact.fon.empty?
-      %span= "Fon: #{@project.contact.fon}"
-    -if !@project.contact.fax.empty?
-      %span= "Fax: #{@project.contact.fax}"
-    -if !@project.contact.mobile.empty?
-      %span= "Mobile: #{@project.contact.mobile}"
+    -unless @project.contact.fon.empty?
+      %span= "#{Contact.human_attribute_name('fon')}: #{@project.contact.fon}"
+    -unless @project.contact.fax.empty?
+      %span= "#{Contact.human_attribute_name('fax')}: #{@project.contact.fax}"
+    -unless @project.contact.mobile.empty?
+      %span= "#{Contact.human_attribute_name('mobile')}: #{@project.contact.mobile}"
   %li.location
     %a{:href => customer_location_path(@project.customer, @project.contact.location)}
       = @project.contact.location.name

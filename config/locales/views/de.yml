@@ -22,6 +22,19 @@ de:
   customer_contact_name: "Name"
   customer_contact_contact: "Kontaktdaten"
   
+  project_form_create: "Neues Projekt eintragen"
+  project_form_close: "Projektformular schließen"
+  project_all: "Alle Projekte"
+  project_active: "Aktive Projekte"
+  project_closed: "Abgeschlossene Projekte"
+  project_information: "Projekt Informationen"
+  
+  works_calendarweek: "Kalenderwoche"
+  works_charge_with: "Verrechnen mit"
+  works_time: "Zeit / Vergütung"
+  works_error_exist: "Ein Eintrag existiert bereits innerhalb des gewählten Zeitraums."
+  works_error_higher: "%{field1} muss größer sein als %{field2}"
+  
   netzke:
     basepack:
       grid_panel:
