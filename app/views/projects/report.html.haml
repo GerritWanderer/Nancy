@@ -10,7 +10,7 @@
     = csrf_meta_tag
   %body{:id => "report"}
     #content.container
-      %p.sender Wildner+Designer • Hans-Vogel-Straße 24 • 90765 Fürth
+      %p.sender= Configuration.find_by_key('sender').value
       %adress
         =@project.contact.location.name
         %br/

@@ -32,7 +32,7 @@ module Nancy
     config.i18n.default_locale = ENV['RAILS_ENV'] == 'test' ? :en : :de
 
     # JavaScript files you want as :defaults (application.js is always included).
-    config.action_view.javascript_expansions[:defaults] = %w(jquery rails jquery-ui)
+    config.action_view.javascript_expansions[:defaults] = %w(jquery rails jquery-ui modernizr)
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"

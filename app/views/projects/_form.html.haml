@@ -26,8 +26,8 @@
             %dd.small= f.text_field :budget
             %dt.submit= f.submit 'Save', :class => "submit"
             .clear
-        = f.hidden_field :customer_id, :value => params[:customer_id] || @form_customers.first.id
-        = f.hidden_field :contact_id, :value => @form_contacts.first.id
+        = f.hidden_field :customer_id, :value => params[:customer_id] || @form_customer_id
+        = f.hidden_field :contact_id, :value => @form_contact_id
     #selectCustomer
       = form_tag new_project_path, :method => :get, :remote => false do
         %fieldset.customer

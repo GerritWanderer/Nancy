@@ -4,16 +4,15 @@ class ProjectsController < ApplicationController
   before_filter :render_filter, :only => [:index, :show, :new, :edit]
   respond_to :html, :mobile
 
-  def index #empty method? I should be doing a something more then in init_projects
+  def index # see init_projects
+
+  def show # see init_projects
   end
 
-  def show #empty method? I should be doing a something more then in init_projects
+  def new # see init_projects
   end
 
-  def new #empty method? I should be doing a something more then in init_projects
-  end
-
-  def edit #empty method? I should be doing a something more then in init_projects
+  def edit # see init_projects
   end
 
   def create
@@ -66,16 +65,16 @@ class ProjectsController < ApplicationController
   def init_projects
     @projects = params[:closed] ? Project.isClosed(params[:closed]).joins(:customer).order(params[:order]) : Project.joins(:customer).order(params[:order])
     @project = params[:id] ? Project.find(params[:id]) : Project.new
-    
     @form_project = params[:action] == 'edit' ? @project : Project.new
     @form_customers = Customer.all
-    if !@form_customers.empty?
-      @form_contacts = params[:customer_id] ? Contact.find_by_customer_id(params[:customer_id]) : Contact.find_by_customer_id(@form_customers.first.id)
+    if @form_customers.empty?
+      @form_customer_id, @form_contact_id = nil
+      @form_contacts = []
     else
-      flash.now[:notice]  = "No customers available - without a customer, this section is not view'able. Go ahead and create a Customer"
-      render :layout => 'errors', :template => "errors/show"
+      @form_customer_id = @form_customers.first.id
+      @form_contacts = params[:customer_id] ? Contact.find_by_customer_id(params[:customer_id]) : Contact.find_by_customer_id(form_customer_id)
+      @form_contact_id = @form_contacts.first.id
     end
-    
     @displayProjectForm = params[:action] == 'new' || params[:action] == 'edit' || params[:action] == 'create' || params[:action] == 'update' ? 'block' : 'none'
   end
   

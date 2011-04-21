@@ -2,15 +2,15 @@ class CustomersController < ApplicationController
   before_filter :authenticate_user!, :init_customers
   load_and_authorize_resource :except => [:index, :show] 
   before_filter :render_filter, :only => [:index, :show, :new, :edit]
-  respond_to :html, :mobile
+  respond_to :html, :js, :mobile
 
-  def index #empty method? I should be doing a something more then in init_customers
+  def index # see init_customers
   end
 
-  def show #empty method? I should be doing a something more then in init_customers
+  def show # see init_customers
   end
 
-  def new #empty method? I should be doing a something more then in init_customers
+  def new # see init_customers
   end
 
   def edit
@@ -48,41 +48,19 @@ class CustomersController < ApplicationController
     end
     redirect_to(customers_url)
   end
-  
-  def new_first_customer
-    @form_customer = Customer.new
-    @form_location = @form_customer.locations.build
-    @form_contact = @form_location.contacts.build
-    render :layout => "users", :template => "customers/_form_for_first"
-  end
-  
-  def create_first_customer
-    @customer = Customer.new(params[:customer])
-    if @customer.save
-      project = Project.create!({ :title => "Nancy: First look",
-                                  :description => "Setup Nancy and try out some features",
-                                  :customer_id => @customer.id,
-                                  :contact_id => @customer.locations.first.contacts.first.id,
-                                  :closed => 0})
-      Work.create!( :start_datetime => Time.now.-(30*60).strftime('%Y-%m-%d %H:%M'),
-                    :end_datetime => Time.now.strftime('%Y-%m-%d %H:%M'),
-                    :description => "Install Nancy and create initial customer/project",
-                    :project_id => project.id,
-                    :user_id => current_user.id)
-      redirect_to works_path, :notice => 'Great, you finished the setup...Nancy is now ready for use - have phun!'
-    else
-      render :layout => "users", :template => "customers/_form_for_first", :alert => 'An error occured while saving the first Customer'
-    end
-  end
-  
+
   protected
   def init_customers
     @customers = Customer.order(params[:order])
     if params[:id]
-      @customer = Customer.find(params[:id])
-      @locations = @customer.locations
-      @location = @locations.first
-      @contacts = @location.contacts
+      if Customer.exists?(params[:id])
+        @customer = Customer.find(params[:id])
+          @locations = @customer.locations
+          @location = @locations.first
+          @contacts = @location.contacts
+      else
+        flash.now[:alert] = 'Customer Does not exist'
+      end
     else
       @customer = Customer.new
     end
