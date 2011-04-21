@@ -15,8 +15,10 @@ Configuration.create!(:key => 'work_fees',
 Configuration.create!(:key => 'currency',
   :value => '$',
   :label => "Select your currency.")
-  
-  
+Configuration.create!(:key => 'sender',
+  :value => 'Wildner+Designer - Hans-Vogel-Strasse 24 - 90765 Fuerth',
+  :label => "Enter your sender details for your report output")
+
 3.times do
 	user = User.create!(:firstname => Faker::Name.first_name,
 	             :lastname => Faker::Name.last_name,

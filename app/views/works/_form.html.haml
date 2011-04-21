@@ -5,7 +5,7 @@
       - @work.errors.full_messages.each do |msg|
         %li= msg
 #createTimeWrapper
-  = form_for(@work, :remote => false) do |f|
+  = form_for(@work, :remote => true) do |f|
     %dl
       %dt.time= f.label :started_at
       %dd.time= f.text_field :started_at, :size => 4, :value => "08:00"
@@ -15,7 +15,7 @@
       %dt.fees= f.label :fee
       %dd.fees= select_tag("work[fee]", options_for_select(@fees.map {|f| ["#{t :works_charge_with} #{number_to_currency(f, :unit => @currency)}", "#{f}"]}))
       %dt.submit
-        = f.hidden_field :project_id, :value => @projects.first.id
+        = f.hidden_field :project_id, :value => @project_form_id
         = f.hidden_field :day, :value => @daySelected.strftime("%Y-%m-%d")
         = f.submit t('helpers.submit.submit', :model=> Work.model_name.human), :class => "submit"
 #selectWrapper

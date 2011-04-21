@@ -4,10 +4,11 @@ class Work < ActiveRecord::Base
   
   attr_accessor :day, :start_datetime, :end_datetime
   include ActiveModel::Validations
+  validates_presence_of :project
   validates :start_datetime, :datetime => true
   validates :end_datetime, :datetime => true
   validates :fee, :numericality => true
-  validates :description, :presence => true, :length => {:minimum => 3, :maximum => 1020}
+  validates :description, :length => {:minimum => 3, :maximum => 1020}
   validates_with WorkValidator
   
   scope :from_day_by_user, lambda { |day, user| where(:user_id => user).where("started_at BETWEEN ? AND ?", day+" 00:00", day+" 23:59") }
