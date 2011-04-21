@@ -53,10 +53,10 @@ div.customer {
 
     div.location {
 	  background-color: white;
-      @include roundedTop;
+    @include roundedTop;
 	  @include roundedBottom;
 	  border-top:5px solid $darkGrey;
-      padding: 8px;
+    padding: 8px;
       
       .details {
         ul li { @include grid(26); }
