@@ -59,19 +59,28 @@ div#navigation {
       margin-top: 22px;
 	    border: none;
 	    margin-right:2px;
+	    font-weight: normal;
     }
-	 li.small.active {margin-top: 22.5px;}
+	 li.small.active { margin-top: 22.5px; }
 	 li.language {
-	   background-color: transparent;
-	   -moz-box-shadow: none;
-	   margin-top: 18px;
-     .dijitButtonNode {
-       padding: 0px 3px;
+	   background: none !important;
+     a#language-button {
+       -moz-box-shadow: inset 1px 3px 2px #bfbbbb;
+       background: none;
        background-color: $yellow;
-       background-image: none;
+       font-weight: normal;
+       font-size: 13px;
+       width: 115px !important;
+       height: 18px;
+       margin-top: -6px;
+     }
+     .ui-selectmenu-status {
+       line-height: 10px;
+       font-family: verdana,arial,helvetica,sans-serif;
+       font-size: 12px;
        font-weight: bold;
-      }
-	 }
+     }
+   }
     li.user {
       @include gradient(transparent, transparent);
       @include grid(15,0,1);
@@ -245,9 +254,6 @@ div#flash div.alert {
   border-right: 2px solid darkred;
   background-color: #FF6F6F;
 }
-.dijitFlagGerman, .dijitFlagEnglish {
-  width: 16px;
-  height: 16px;
+ul#language-menu {
+  width: 115px !important;
 }
-.dijitFlagGerman { background: url(/images/icons-nancy/flag-german.gif) center 2px; }
-.dijitFlagEnglish { background: url(/images/icons-nancy/flag-english.gif) bottom left; }

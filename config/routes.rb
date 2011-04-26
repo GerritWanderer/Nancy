@@ -1,8 +1,5 @@
 Nancy::Application.routes.draw do
-  get "home/index"
-  root :to => "home#index"
   netzke
-  
   scope "(:locale)", :locale => /en|de/ do
     namespace "settings" do
       resources :days, :controller => "days" do
@@ -49,5 +46,9 @@ Nancy::Application.routes.draw do
         get 'report'
       end
     end
+    match ':path' => 'static#show'
   end
+  
+  get "home/index"
+  root :to => "home#index"
 end

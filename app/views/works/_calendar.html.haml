@@ -7,9 +7,8 @@
       
     -@dayCalendar = @dayCalendar.+(1)
   %li#calendarNavigation
-    = link_to image_tag("/images/icons-nancy/calendarweek-prev10.gif"), works_path(:date => @jumping_links.[]("prev10")), :remote => true
     = link_to image_tag("/images/icons-nancy/calendarweek-prev.gif"), works_path(:date => @jumping_links.[]("prev")), :remote => true
     %span #{t :works_calendarweek} #{@daySelected.-(1).cweek}
     = link_to image_tag("/images/icons-nancy/calendarweek-next.gif"), works_path(:date => @jumping_links.[]("next")), :remote => true
-    = link_to image_tag("/images/icons-nancy/calendarweek-next10.gif"), works_path(:date => @jumping_links.[]("next10")), :remote => true
+    %input.datepicker{:type => "text"}
   .clear

@@ -8,9 +8,9 @@
   = form_for(@work, :remote => true) do |f|
     %dl
       %dt.time= f.label :started_at
-      %dd.time= f.text_field :started_at, :size => 4, :value => "08:00"
+      %dd.time= f.text_field :started_at, :size => 4
       %dt.time= f.label :ended_at
-      %dd.time= f.text_field :ended_at, :size => 4, :value => "09:00"
+      %dd.time= f.text_field :ended_at, :size => 4
       %dd.description= f.text_area :description
       %dt.fees= f.label :fee
       %dd.fees= select_tag("work[fee]", options_for_select(@fees.map {|f| ["#{t :works_charge_with} #{number_to_currency(f, :unit => @currency)}", "#{f}"]}))
@@ -25,35 +25,3 @@
     %dt= Project.model_name.human
     %dd= render :partial => "projectlist"
 .clear
-
-:javascript
-  dojo.addOnLoad(function() {
-      new dijit.form.TimeTextBox({
-          name: "work[started_at]",
-          value: new Date(),
-          constraints: {
-              timePattern: 'HH:mm',
-              clickableIncrement: 'T00:15',
-              visibleIncrement: 'T00:15',
-              visibleRange: 'T02:00'
-          }
-      }, "work_started_at");
-      new dijit.form.TimeTextBox({
-          name: "work[ended_at]",
-          value: new Date(),
-          constraints: {
-              timePattern: 'HH:mm',
-              clickableIncrement: 'T00:15',
-              visibleIncrement: 'T00:15',
-              visibleRange: 'T02:00'
-          }
-      }, "work_ended_at");
-  });
-  $(document).ready(function () {
-    $('form#new_work').submit(function() {
-      startet_at = $("input[name='work[started_at]']");
-      ended_at = $("input[name='work[ended_at]']");
-      startet_at.val(startet_at.val().replace('T', ''));
-      ended_at.val(ended_at.val().replace('T', ''));
-    });
-  });

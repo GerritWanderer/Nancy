@@ -33,12 +33,13 @@ div#content {
         a { color: white; }
       }
       li#calendarNavigation {
-	  span {font-weight:lighter;}
+	      span {font-weight:lighter;}
         @include grid(19);
         background-color: $darkGrey;
         font-size: 12px;
-		font-weight: bold;
-		      }
+		    font-weight: bold;
+		    input.datepicker { visibility: hidden; width: 0px; }
+		  }
     }
   }
   
