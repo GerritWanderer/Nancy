@@ -14,8 +14,11 @@ module ApplicationHelper
     end
     navigation += "</li>\n<li class='small'>"
     navigation += link_to t(:top_logout), destroy_user_session_path 
-    navigation += "</li>\n<li class='language'><div id='dropdownButtonContainer'></div></li>"
-    navigation += "</li>\n</ul>\n"
+    navigation += "</li>\n<li class='language'><select name='language' id='language'>"
+    {:en=>"English", :de=>"German"}.each {|key, value|
+        navigation += "<option value='/#{key}/works' #{'selected=\'selected\'' if params[:locale] == key.to_s} class='flag' data-flagicon='/images/icons-nancy/flag-#{key}.gif'>#{value}</option>"
+    }
+    navigation += "</select></li>\n</ul>\n"
     raw(navigation)
   end
 end
