@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110414130613) do
+ActiveRecord::Schema.define(:version => 20110426154520) do
 
   create_table "configurations", :force => true do |t|
     t.string   "key"
@@ -76,6 +76,14 @@ ActiveRecord::Schema.define(:version => 20110414130613) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "projects_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "project_id"
+  end
+
+  add_index "projects_users", ["project_id"], :name => "index_projects_users_on_project_id"
+  add_index "projects_users", ["user_id"], :name => "index_projects_users_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "",       :null => false
