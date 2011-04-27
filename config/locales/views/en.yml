@@ -27,4 +27,6 @@ en:
   project_all: "All Projects"
   project_active: "Active Projects"
   project_closed: "Closed Projects"
+  project_my: "My active Projects"
   project_information: "Project Informationen"
+  project_subscribed_users: "Subscribed employees:"

@@ -1,8 +1,8 @@
 .filter
   %ul
-    %li{:class => "#{'active' if params[:closed].nil?}"}= link_to t(:project_all), projects_path(:order => params[:order])
-    %li{:class => "#{'active' if params[:closed] == '0'}"}= link_to t(:project_active), projects_path(:order => params[:order], :closed => 0)
-    %li{:class => "#{'active' if params[:closed] == '1'}"}= link_to t(:project_closed), projects_path(:order => params[:order], :closed => 1)
+    %li{:class => "#{'active' if @project_tab == 'subscribed'}"}= link_to t(:project_my), projects_path(:order => params[:order])
+    %li{:class => "#{'active' if @project_tab == 'active'}"}= link_to t(:project_active), projects_path(:order => params[:order], :closed => 0)
+    %li{:class => "#{'active' if @project_tab == 'closed'}"}= link_to t(:project_closed), projects_path(:order => params[:order], :closed => 1)
     .clear
 .toolbar
   %ul
@@ -57,6 +57,7 @@
             .clear
         .contacts
           = render :partial => 'projects/details/contacts'
+          = render :partial => 'projects/details/users'
       .clear
     - else
       %ul.title

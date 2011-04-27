@@ -72,10 +72,49 @@ class ProjectsController < ApplicationController
     redirect_to(@project)
   end
   
+  def subscribe_user
+    if request.post?
+      projectsUsers = ProjectsUsers.new(params[:projects_users])
+      if projectsUsers.save
+        flash[:notice] = t('successes.created', :model=> ProjectsUsers.model_name.human)
+      else
+        flash[:notice] = t('errors.created', :model=> ProjectsUsers.model_name.human)
+      end
+      redirect_to(@project)
+    else
+      @displaySubscriberForm =  true
+      @users_subscribeable = User.all - @project.users
+      render "index"
+    end
+  end
+  
+  def unsubscribe_user
+    user = User.find(params[:user_id])
+    if @project.users.delete(user)
+      flash[:notice] = t('successes.destroyed', :model=> ProjectsUsers.model_name.human)
+    else
+      flash[:alert] = t('errors.destroyed', :model=> ProjectsUsers.model_name.human)
+    end
+    redirect_to(@project)
+  end
+  
   protected
   def init_projects
-    @projects = params[:closed] ? Project.isClosed(params[:closed]).joins(:customer).order(params[:order]) : Project.joins(:customer).order(params[:order])
+    # Find Project / Create new behavior for project form
     @project = params[:id] ? Project.find(params[:id]) : Project.new
+    if params[:closed].to_i == 1 || @project.closed == 1
+      @projects = Project.isClosed(1).joins(:customer).order(params[:order])
+      @project_tab = 'closed'
+    else
+      if @project.users.exists?(current_user.id) || (params[:id].nil? && params[:closed].nil?)
+        @projects = Project.isClosed(0).joins(:customer, :users).where("users.id" => current_user.id).order(params[:order])
+        @project_tab = 'subscribed'
+      else
+        @projects = Project.isClosed(0).joins(:customer).order(params[:order])
+        @project_tab = 'active'
+      end
+    end
+    
     @form_project = params[:action] == 'edit' ? @project : Project.new
     @form_customers = Customer.all
     if @form_customers.empty?
@@ -86,7 +125,7 @@ class ProjectsController < ApplicationController
       @form_contacts = params[:customer_id] ? Contact.find_by_customer_id(params[:customer_id]) : Contact.find_by_customer_id(@form_customer_id)
       @form_contact_id = @form_contacts.first.id
     end
-    @displayProjectForm = params[:action] == 'new' || params[:action] == 'edit' || params[:action] == 'create' || params[:action] == 'update' ? 'block' : 'none'
+    @form_display_mode = 'block' if ['new', 'edit', 'create'].index(params[:action]) 
   end
   
   def render_filter

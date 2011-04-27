@@ -1,9 +1,9 @@
 #projectForm.wizard
-  -if params[:action] == 'new' || params[:action] == 'edit' || params[:action] == 'create' || params[:action] == 'update'
+  -if ['new', 'edit', 'create', 'update'].index(params[:action]) 
     = link_to t(:project_form_close), projects_path, :class => 'wizardFormSwitch'
   -else
     = link_to t(:project_form_create), new_project_path, :class => 'wizardFormSwitch'
-  .wrapper{:style => "display: #{@displayProjectForm || 'none'};"}
+  .wrapper{:style => "display: #{@form_display_mode || 'none'};"}
     -if @project.errors.any?
       #error_explanation
         %h2= "#{pluralize(@project.errors.count, "error")} prohibited this project from being saved:"
@@ -25,7 +25,6 @@
             %dt.small= f.label :budget
             %dd.small= f.text_field :budget
             %dt.submit= f.submit t('helpers.submit.submit', :model=> Project.model_name.human), :class => "submit"
-           
             .clear
         = f.hidden_field :customer_id, :value => params[:customer_id] || @form_customer_id
         = f.hidden_field :contact_id, :value => @form_contact_id

@@ -44,6 +44,9 @@ Nancy::Application.routes.draw do
       member do
         get 'switch'
         get 'report'
+        get 'subscribe_user'
+        post 'subscribe_user'
+        delete 'unsubscribe_user'
       end
     end
     match ':path' => 'static#show'

@@ -27,7 +27,9 @@ de:
   project_all: "Alle Projekte"
   project_active: "Aktive Projekte"
   project_closed: "Abgeschlossene Projekte"
+  project_my: "Meine aktiven Projekte"
   project_information: "Projekt Informationen"
+  project_subscribed_users: "Projektbeteiligte Mitarbeiter:"
   
   works_calendarweek: "Kalenderwoche"
   works_charge_with: "Verrechnen mit"

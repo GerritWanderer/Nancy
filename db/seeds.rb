@@ -62,7 +62,7 @@ end
 12.times do
   contact = Contact.all.shuffle.first
   customer = contact.location.customer
-  Project.create!(:title => Faker::Lorem.sentence,
+  project = Project.create!(:title => Faker::Lorem.sentence,
                   :description => Faker::Lorem.paragraph,
                   :discount => rand(20),
                   :budget => rand(500),
@@ -70,6 +70,13 @@ end
                   :closed => rand(2), 
                   :customer_id => customer.id,
                   :contact_id => contact.id)
+                  
+  users = User.all.shuffle
+  i = 0
+  (rand(2)+1).times do
+    ProjectsUsers.create!(:user_id => users[i].id, :project_id => project.id)
+    i += 1
+  end
 end
 
 projects = Project.find_all_by_closed(false)
