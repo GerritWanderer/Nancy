@@ -1,69 +1,55 @@
 class Customers::ContactsController < ApplicationController
   before_filter :authenticate_user!, :init_contacts
-  load_and_authorize_resource :except => [:index, :show] 
   before_filter :render_filter, :only => [:index, :show, :new, :edit]
   
-  def index #empty method? I should be doing something more then in init_contacts
+  def index # see init_contacts
   end
   
-  def show #empty method? I should be doing something more then in init_contacts
+  def show # see init_contacts
   end
 
-  def new #empty method? I should be doing something more then in init_contacts
+  def new # see init_contacts
   end
 
-  def edit #empty method? I should be doing something more then in init_contacts
+  def edit # see init_contacts
   end
 
   def create
-    @contact = Contact.new(params[:contact])
+    @contact = @location.contacts.build(params[:contact])
     if @contact.save
       flash.now[:notice] = t('successes.created', :model=> Contact.model_name.human)
-    else
-      @form_contact = @contact
-      @displayContactsRecord = 'none'
-      @displayContactsForm = 'block'
+      @show_contact_form = false
     end
-    render :template => 'customers/index'
+    render 'customers/index'
   end
 
   def update
-    @contact = Contact.find(params[:id])
+    begin
+      @contact = @location.contacts.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to [@customer, @location], :alert => t('errors.not_found', :model=> Contact.model_name.human)
+    end
     if @contact.update_attributes(params[:contact])
       flash.now[:notice] = t('successes.updated', :model=> Contact.model_name.human)
-    else
-      @form_contact = @contact
-      @displayContactsRecord = 'none'
-      @displayContactsForm = 'block'
+      @show_contact_form = false
     end
-    render :template => 'customers/index'
+    render 'customers/index'
   end
 
   def destroy
-    @contact = Contact.find(params[:id])
-    if @contact.destroy
-      redirect_to customer_location_path(@customer, @location)
-    end
+    flash[:notice] = t('successes.destroyed', :model=> Contact.model_name.human) if @location.contacts.find(params[:id]).destroy
+    rescue ActiveRecord::RecordNotFound
+      flash[:notice] = t('errors.destroyed', :model=> Contact.model_name.human)
+    ensure
+      redirect_to [@customer, @location]
   end
   
   protected
-  
   def init_contacts
-    @customers = Customer.order(params[:order])
-    @customer = Customer.find(params[:customer_id])
-    @locations = @customer.locations
-    @location = Location.find(params[:location_id])
-    @contacts = @location.contacts
-    @contact = params[:id] ? Contact.find(params[:id]) : Contact.new
-    
-    @form_customer = Customer.new
-    @form_location = @form_customer.locations.build
-    @form_contact = params[:action] == 'edit' ? @contact : @form_location.contacts.build
-    
-    if params[:action] == 'edit' || params[:action] == 'new'
-      @displayContactsRecord = 'none'
-      @displayContactForm = 'block'
-    end
+    @customers, @customer, @locations, @location, @contacts, @contact = Customer.get_customer_resources(params)
+    @show_customer_form, @show_location_form, @show_contact_form = Customer.get_form_visibility(params[:controller], params[:action])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to customers_path, :alert => t('errors.not_found', :model=> Location.model_name.human)
   end
   
   def render_filter

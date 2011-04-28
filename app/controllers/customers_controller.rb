@@ -16,9 +16,9 @@ class CustomersController < ApplicationController
   end
 
   def create
-    @form_customer = Customer.new(params[:customer])
-    if @form_customer.save
-      redirect_to @form_customer, :notice => t('successes.created', :model=> Customer.model_name.human)
+    @customer = Customer.new(params[:customer])
+    if @customer.save
+      redirect_to @customer, :notice => t('successes.created', :model=> Customer.model_name.human)
     else
       render 'index'
     end
@@ -26,12 +26,12 @@ class CustomersController < ApplicationController
   
   def update
     begin
-      @form_customer = Customer.find(params[:id])
+      @customer = Customer.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       redirect_to customers_path, :alert => t('errors.not_found', :model=> Customer.model_name.human)
     end
-    if @form_customer.update_attributes(params[:customer])
-      redirect_to @form_customer, :notice => t('successes.updated', :model=> Customer.model_name.human)
+    if @customer.update_attributes(params[:customer])
+      redirect_to @customer, :notice => t('successes.updated', :model=> Customer.model_name.human)
     else
       render 'index'
     end
@@ -47,10 +47,8 @@ class CustomersController < ApplicationController
 
   protected
   def init_customers
-    @customers, @customer, @locations, @location, @contacts = Customer.get_customer_records(params)
-    @form_customer, @form_location, @form_contact = Customer.get_customerform_variables(@customer)
+    @customers, @customer, @locations, @location, @contacts, @contact = Customer.get_customer_resources(params)
     @show_customer_form, @show_location_form, @show_contact_form = Customer.get_form_visibility(params[:controller], params[:action])
-    @customer = Customer.new if ['edit', 'update'].index(params[:action])
     rescue ActiveRecord::RecordNotFound
       redirect_to customers_path, :alert => t('errors.not_found', :model=> Customer.model_name.human)
   end

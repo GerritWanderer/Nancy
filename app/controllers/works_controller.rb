@@ -8,11 +8,6 @@ class WorksController < ApplicationController
     render 'index.js' if request.xhr? # rails does not render index.js.erb correct - must be set explicitly on this action
   end
 
-  def switch_customer
-    @customers, @projects, @project_form_id = Work.get_customer_and_project_records(params)
-    render 'index' unless request.xhr?
-  end
-
   def create
     @work = current_user.works.build(params[:work])
     if @work.save
@@ -35,6 +30,11 @@ class WorksController < ApplicationController
       flash[:notice] = t('errors.deleted', :model=> Work.model_name.human)
     ensure
       redirect_to works_path(:date => params[:date])
+  end
+  
+  def switch_customer
+    @customers, @projects, @project_form_id = Work.get_customer_and_project_records(params)
+    render 'index' unless request.xhr?
   end
   
   protected

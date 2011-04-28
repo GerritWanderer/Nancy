@@ -21,38 +21,37 @@ class Customer < ActiveRecord::Base
     return previous_customer
   end
   
-  def self.get_customer_records(params)
+  def self.get_customer_resources(params)
     customers = Customer.order(params[:order])
     if params[:id] || params[:customer_id]
       if params[:location_id] && params[:customer_id]
+        contact = params[:id] ? Contact.find(params[:id]) : Contact.new
         location = Location.find(params[:location_id])
         customer = location.customer
       elsif params[:customer_id]
-        location = Location.find(params[:customer_id])
-        customer = location.customer
+        location = params[:id] ? Location.find(params[:id]) : Location.new
+        customer = Customer.find(params[:customer_id])
+        contact = Contact.new
       elsif params[:id]
         customer = Customer.find(params[:id])
         location = customer.locations.first
+        contact = Contact.new
       end
       locations = customer.locations
       contacts = location.contacts
     else
       customer = Customer.new
+      location = customer.locations.build
+      contact = location.contacts.build
     end
-    return customers, customer, locations, location, contacts
-  end
-  
-  def self.get_customerform_variables(customer)
-    form_customer = customer
-    form_location = form_customer.locations.build
-    form_contact = form_location.contacts.build
-    return form_customer, form_location, form_contact
+    return customers, customer, locations, location, contacts, contact
   end
   
   def self.get_form_visibility(controller, action)
-    customer_form = controller == 'customers' && ['new', 'edit', 'create', 'update'].index(action) ? true : false
-    location_form = controller == 'customers/locations' && ['new', 'edit', 'create', 'update'].index(action) ? true : false
-    contact_form = controller == 'contacts' && ['new', 'edit', 'create', 'update'].index(action) ? true : false
+    form_actions = ['new', 'edit', 'create', 'update']
+    customer_form = controller == 'customers' && form_actions.index(action) ? true : false
+    location_form = controller == 'customers/locations' && form_actions.index(action) ? true : false
+    contact_form = controller == 'customers/contacts' && form_actions.index(action) ? true : false
     return customer_form, location_form, contact_form
   end
 end
