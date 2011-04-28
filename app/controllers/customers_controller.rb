@@ -1,6 +1,5 @@
 class CustomersController < ApplicationController
   before_filter :authenticate_user!, :init_customers
-  load_and_authorize_resource :except => [:index, :show] 
   before_filter :render_filter, :only => [:index, :show, :new, :edit]
   respond_to :html, :js, :mobile
 
@@ -13,67 +12,47 @@ class CustomersController < ApplicationController
   def new # see init_customers
   end
 
-  def edit
-    @locations = Location.where('customer_id = ?', @customer.id),order('created_at ASC')
+  def edit # see init_customers
   end
 
   def create
-    @customer = Customer.new(params[:customer])
-    if @customer.save
-      flash[:notice] = t('successes.created', :model=> Customer.model_name.human)
-      respond_with(@customer)
+    @form_customer = Customer.new(params[:customer])
+    if @form_customer.save
+      redirect_to @form_customer, :notice => t('successes.created', :model=> Customer.model_name.human)
     else
-      @form_customer = @customer
-      render "index"
+      render 'index'
     end
   end
   
   def update
-    @customer = Customer.find(params[:id])
-    if @customer.update_attributes(params[:customer])
-      flash[:notice] = t('successes.updated', :model=> Customer.model_name.human)
-      respond_with(@customer)
+    begin
+      @form_customer = Customer.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to customers_path, :alert => t('errors.not_found', :model=> Customer.model_name.human)
+    end
+    if @form_customer.update_attributes(params[:customer])
+      redirect_to @form_customer, :notice => t('successes.updated', :model=> Customer.model_name.human)
     else
-      @form_customer = @customer
-      render "index"
+      render 'index'
     end
   end
   
   def destroy
-    @customer = Customer.find(params[:id])
-    if @customer.destroy
-      flash[:notice] = t('successes.destroyed', :model=> Customer.model_name.human)
-    else
-      flash[:alert] = t('errors.destroyed', :model=> Customer.model_name.human)
-    end
-    redirect_to(customers_url)
+    flash[:notice] = t('successes.destroyed', :model=> Customer.model_name.human) if Customer.find(params[:id]).destroy
+    rescue ActiveRecord::RecordNotFound
+      flash[:notice] = t('errors.destroyed', :model=> Customer.model_name.human)
+    ensure
+      redirect_to customers_path
   end
 
   protected
   def init_customers
-    @customers = Customer.order(params[:order])
-    if params[:id]
-      if Customer.exists?(params[:id])
-        @customer = Customer.find(params[:id])
-          @locations = @customer.locations
-          @location = @locations.first
-          @contacts = @location.contacts
-      else
-        flash.now[:alert] = 'Customer Does not exist'
-      end
-    else
-      @customer = Customer.new
-    end
-    
-    if params[:action] == 'edit'
-      @form_customer = @customer
-    else
-      @form_customer = Customer.new
-      @form_location = @form_customer.locations.build
-      @form_contact = @form_location.contacts.build
-    end
-    
-    @displayCustomerForm = params[:action] == 'new' || params[:action] == 'edit' || params[:action] == 'create' || params[:action] == 'update'? 'block' : 'none'
+    @customers, @customer, @locations, @location, @contacts = Customer.get_customer_records(params)
+    @form_customer, @form_location, @form_contact = Customer.get_customerform_variables(@customer)
+    @show_customer_form, @show_location_form, @show_contact_form = Customer.get_form_visibility(params[:controller], params[:action])
+    @customer = Customer.new if ['edit', 'update'].index(params[:action])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to customers_path, :alert => t('errors.not_found', :model=> Customer.model_name.human)
   end
   
   def render_filter

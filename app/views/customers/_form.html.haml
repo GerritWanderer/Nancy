@@ -1,14 +1,14 @@
 #customerForm.wizard
-  -if params[:action] == 'new' || params[:action] == 'edit' || params[:action] == 'create' || params[:action] == 'update'
+  -if @show_customer_form
     = link_to t(:customer_form_close), customers_path, :class => 'wizardFormSwitch'
   -else
     = link_to t(:customer_form_create), new_customer_path, :class => 'wizardFormSwitch'
-  .wrapper{:style => "display: #{@displayCustomerForm || 'none'};"}
-    -if @customer.errors.any?
+  .wrapper{:style => "display: #{@show_customer_form ? 'block' : 'none'};"}
+    -if @form_customer.errors.any?
       #error_explanation
-        %h2= t('errors.template.header', :model=> Customer.model_name.human, :count=> @customer.errors.count)
+        %h2= t('errors.template.header', :model=> Customer.model_name.human, :count=> @form_customer.errors.count)
         %ul
-          - @customer.errors.full_messages.each do |msg|
+          - @form_customer.errors.full_messages.each do |msg|
             %li= msg
     #createCustomer
       = form_for(@form_customer) do |f|

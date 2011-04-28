@@ -11,7 +11,7 @@
     %li= Location.model_name.human
 -@customers.each do |customer|
   .customer
-    - if customer.id == @customer.id && "#{params[:controller]}/#{params[:action]}" != 'customers/edit' 
+    - if customer.id == @customer.id
       %ul.title#active
         %li= customer.name
         %li= customer.shortname

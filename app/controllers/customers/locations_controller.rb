@@ -1,15 +1,14 @@
 class Customers::LocationsController < ApplicationController
   before_filter :authenticate_user!, :init_locations
-  load_and_authorize_resource :except => [:index, :show] 
   before_filter :render_filter, :only => [:show, :new, :edit]
 
-  def show #empty method? I should be doing something more then in init_locations
+  def show # see init_locations
   end
 
-  def new #empty method? I should be doing something more then in init_locations
+  def new # see init_locations
   end
 
-  def edit #empty method? I should be doing something more then in init_locations
+  def edit # see init_locations
   end
 
   def create
@@ -47,20 +46,11 @@ class Customers::LocationsController < ApplicationController
   
   protected
   def init_locations
-    @customers = Customer.order(params[:order])
-    @customer = Customer.find(params[:customer_id])
-    @locations = @customer.locations
-    @location = params[:id] ? Location.find(params[:id]) : @customer.locations.first
-    @contacts = @location.contacts
-    
-    @form_customer = Customer.new
-    @form_location = params[:action] == 'edit' ? @location : @form_customer.locations.build
-    @form_location_temp = @form_customer.locations.build
-    @form_contact = @form_location_temp.contacts.build
-    if params[:action] == 'edit' || params[:action] == 'new'
-      @displayLocationRecord = 'none'
-      @displayLocationForm = 'block'
-    end
+    @customers, @customer, @locations, @location, @contacts = Customer.get_customer_records(params)
+    @form_customer, @form_location, @form_contact = Customer.get_customerform_variables(@customer)
+    @show_customer_form, @show_location_form, @show_contact_form = Customer.get_form_visibility(params[:controller], params[:action])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to customers_path, :alert => t('errors.not_found', :model=> Location.model_name.human)
   end
   
   def render_filter

@@ -1,5 +1,5 @@
 .location
-  .details{:style => "display: #{@displayLocationRecord || 'block'};"}
+  .details{:style => "display: #{!@show_location_form ? 'block' : 'none'};"}
     %h2
       = Location.model_name.human 
       -if (@locations.index(@location) + 1) > 1
