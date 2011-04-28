@@ -31,7 +31,7 @@
         %li.nr= project.id
         %li= project.title
         %li= project.customer.name
-        %li.date= l(project.created_at)
+        %li.date= l(project.created_at, :format => :date)
         %li.actions
           = link_to image_tag("/images/icons-nancy/container-close.gif"), projects_path(:order => params[:order], :closed => params[:closed])
           = link_to image_tag("/images/icons-nancy/edit.gif"), edit_project_path(project, :order => params[:order], :closed => params[:closed]) if can? :manage, Project

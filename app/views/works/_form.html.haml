@@ -5,12 +5,12 @@
       - @work.errors.full_messages.each do |msg|
         %li= msg
 #createTimeWrapper
-  = form_for(@work, :remote => true) do |f|
+  = form_for(@work, :remote => false) do |f|
     %dl
       %dt.time= f.label :started_at
-      %dd.time= f.text_field :started_at, :size => 4
+      %dd.time= f.text_field :started_at, :value => @work.started_at.strftime('%H:%M'),:size => 4
       %dt.time= f.label :ended_at
-      %dd.time= f.text_field :ended_at, :size => 4
+      %dd.time= f.text_field :ended_at, :value => @work.ended_at.strftime('%H:%M'), :size => 4
       %dd.description= f.text_area :description
       %dt.fees= f.label :fee
       %dd.fees= select_tag("work[fee]", options_for_select(@fees.map {|f| ["#{t :works_charge_with} #{number_to_currency(f, :unit => @currency)}", "#{f}"]}))
