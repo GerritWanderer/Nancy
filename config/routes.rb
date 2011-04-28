@@ -1,5 +1,4 @@
 Nancy::Application.routes.draw do
-  netzke
   scope "(:locale)", :locale => /en|de/ do
     namespace "settings" do
       resources :days, :controller => "days" do
@@ -36,7 +35,7 @@ Nancy::Application.routes.draw do
         post 'first' => 'customers#create_first_customer', :as => :create_first
       end
       resources :locations, :controller => "customers/locations" do
-      resources :contacts, :controller => "customers/contacts"
+        resources :contacts, :controller => "customers/contacts"
       end
     end
     
@@ -48,10 +47,13 @@ Nancy::Application.routes.draw do
         post 'subscribe_user'
         delete 'unsubscribe_user'
       end
+      resources :expenses, :controller => "projects/expenses"
     end
+    
     match ':path' => 'static#show'
   end
   
+  netzke
   get "home/index"
   root :to => "home#index"
 end

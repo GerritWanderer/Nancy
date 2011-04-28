@@ -1,0 +1,15 @@
+%h2= Expense.model_name.human
+%span.actions= link_to image_tag("/images/icons-nancy/project-report.gif"), new_project_expense_path(@project)
+%hr.clear/
+.details
+  %ul.toolbar
+    %li.from #{Expense.human_attribute_name('created_at')} / #{User.model_name.human}
+    %li.description= Expense.human_attribute_name('description')
+    %li.amount= Expense.human_attribute_name('amount')
+    .clear
+  %ul.record
+    %li.from am 23.03.2010 von Gerrit Wanderer
+    %li.description Lorem Ipsum
+    %li.amount 20,00€
+    %li.action= image_tag('/images/icons-nancy/delete.gif')
+= render :partial => 'projects/expenses/form'

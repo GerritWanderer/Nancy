@@ -1,12 +1,14 @@
 de:
   activerecord:
     models:
+      user: "Benutzer" 
       work: "Zeit" 
       customer: "Kunde"
       location: "Standort"
       contact: "Ansprechpartner"
       project: "Projekt"
       configuration: "Konfiguration"
+      expense: "Auslagen"
     attributes:
       work:
         started_at: "Start"
@@ -40,3 +42,7 @@ de:
         key: "Schlüssel"
         value: "Wert"
         label: "Bezeichnung"
+      expense:
+        created_at: "Eingetragen am"
+        description: "Beschreibung"
+        amount: "Summe"

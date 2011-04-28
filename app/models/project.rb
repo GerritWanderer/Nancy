@@ -2,6 +2,7 @@ class Project < ActiveRecord::Base
   belongs_to :customer
   belongs_to :contact
   has_many :works, :dependent => :delete_all
+  has_many :expenses, :dependent => :delete_all
   has_and_belongs_to_many :users
   
   validates :title, :presence => true, :length => {:minimum => 3, :maximum => 254}
