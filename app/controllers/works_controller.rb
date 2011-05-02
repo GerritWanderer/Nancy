@@ -13,14 +13,16 @@ class WorksController < ApplicationController
     if @work.save
       redirect_to works_path(:date => params[:work][:day]), :notice => t('successes.created', :model=> Work.model_name.human) unless request.xhr?
     else
-      if Project.exists?(params[:work][:project_id])
-        params[:project_id] = params[:work][:project_id]
-        params[:customer_id] = Project.find(params[:work][:project_id]).customer.id
-      else
+      begin
+        project = Project.find(params[:work][:project_id])
+        params[:project_id] = project.id
+        params[:customer_id] = project.customer.id
+      rescue ActiveRecord::RecordNotFound
         params[:project_id], params[:customer_id] = nil
+      ensure
+        @customers, @projects, @project_form_id = Work.get_customer_and_project_records(params)
+        render 'index' unless request.xhr?
       end
-      @customers, @projects, @project_form_id = Work.get_customer_and_project_records(params)
-      render 'index' unless request.xhr?
     end
   end
 

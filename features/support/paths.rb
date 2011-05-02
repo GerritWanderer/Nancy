@@ -45,6 +45,8 @@ module NavigationHelpers
         raise 'no projects' unless @projects
         nth_project = @projects[$1.to_i - 1]
         project_path(nth_project)
+      when /active projects page/
+        '/projects?closed=0'
         
       when /edit page for that contact/
         raise 'no contact' unless @contact

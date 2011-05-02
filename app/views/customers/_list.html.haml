@@ -1,22 +1,14 @@
-.toolbar
-  %ul
-    %li
-      = Customer.human_attribute_name('name') 
-      = link_to image_tag("/images/icons-nancy/order-up.gif"), customers_path(:order => "name asc")
-      = link_to image_tag("/images/icons-nancy/order-down.gif"), customers_path(:order => "name desc")
-    %li
-      = Customer.human_attribute_name('shortname')
-      = link_to image_tag("/images/icons-nancy/order-up.gif"), customers_path(:order => "shortname asc")
-      = link_to image_tag("/images/icons-nancy/order-down.gif"), customers_path(:order => "shortname desc")
-    %li= Location.model_name.human
--@customers.each do |customer|
+- @customers.each do |customer|
   .customer
     %ul.title{:id => "#{'active' if customer.id == @customer.id}"}
       %li= customer.name
       %li= customer.shortname
       %li= customer.locations.count
       %li.actions
-        = link_to image_tag("/images/icons-nancy/container-close.gif"), customers_path(:order => params[:order])
+        - if customer.id == @customer.id
+          = link_to image_tag("/images/icons-nancy/container-close.gif"), customers_path(:order => params[:order])
+        - else
+          = link_to image_tag("/images/icons-nancy/container-open.gif"), customer_path(customer, :order => params[:order])
         = link_to image_tag("/images/icons-nancy/edit.gif"), edit_customer_path(customer, :order => params[:order]) if can? :manage, Customer
         = link_to image_tag("/images/icons-nancy/delete.gif"), customer_path(customer, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete if can? :manage, Customer
       .clear
@@ -27,10 +19,10 @@
             = render :partial => 'customers/locations/show' 
           - else
             = render :partial => 'customers/locations/form'
-        .contacts
-          %h2= Contact.model_name.human
-          - if !@location.new_record? && !@show_contact_form
-            = render :partial => 'customers/contacts/list'
-          - elsif !@location.new_record? && @show_contact_form
-            = render :partial => 'customers/contacts/form'
+        - if !@location.new_record?
+          .contacts
+            - if @show_contact_form
+              = render :partial => 'customers/contacts/form'
+            - else @show_contact_form
+              = render :partial => 'customers/contacts/list'
         .clear

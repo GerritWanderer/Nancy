@@ -37,13 +37,13 @@
             .clear 
         %dl#sum
           %dt.duration Duration:
-          %dd.duration #{@project.works.sum("duration").to_f / 60} hours
-          %dd.duration #{number_to_currency(@net_sum, :unit => @currency)}
+          %dd.duration #{@project.work_sum} hours
+          %dd.duration #{number_to_currency(@project.net_sum, :unit => @currency)}
           %dt.discount Discount (#{@project.discount}%):
-          %dd.discount #{number_to_currency(@discount, :unit => @currency)}
+          %dd.discount #{number_to_currency(@project.discount_sum, :unit => @currency)}
           %dt.net Sum net:
-          %dd.net #{number_to_currency(@full_net_sum, :unit => @currency)}
-          %dt.tax Add #{@tax}% tax:
-          %dd.tax #{number_to_currency(@tax_sum, :unit => @currency)}
+          %dd.net #{number_to_currency(@project.full_net_sum, :unit => @currency)}
+          %dt.tax Add #{@project.tax}% tax:
+          %dd.tax #{number_to_currency(@project.tax_sum, :unit => @currency)}
           %dt.final Final Tax Sum:
-          %dd.final #{number_to_currency(@full_tax_sum, :unit => @currency)}
+          %dd.final #{number_to_currency(@project.full_tax_sum, :unit => @currency)}

@@ -3,13 +3,12 @@ Feature: Use auth. from devise
   As a guest
   I want to use all features for signup/signin
 
-  Scenario: Sign up successfully with confirmation and 1st customer wizard
-    Given I sign up as user with customer wizard
+  Scenario: Sign up successfully
+    Given I sign up as user
     Then I should be on the works page
-    And I should see "Nancy is now ready for use"
 
   Scenario: Sign in successfully
-    Given I sign up as user with customer wizard
+    Given I sign up as user
     And I am not authenticated
     When I go to the login page
     And I fill in "user_email" with "admin@wildner-designer.de"

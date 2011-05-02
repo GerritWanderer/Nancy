@@ -63,7 +63,6 @@ Feature: Manage contacts
     And I fill in the contact form with invalid values
     And I press "Save Contact"
     Then I should see "errors prohibited this contact from being saved:"
-    And I should see all the contacts from 2nd location and 2nd customer
     
     Scenario: Delete a contact
     Given I sign up as user

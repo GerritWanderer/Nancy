@@ -3,7 +3,7 @@
     = link_to t(:project_form_close), projects_path, :class => 'wizardFormSwitch'
   -else
     = link_to t(:project_form_create), new_project_path, :class => 'wizardFormSwitch'
-  .wrapper{:style => "display: #{@form_display_mode || 'none'};"}
+  .wrapper{:style => "display: #{@show_project_form? 'block' : 'none'};"}
     -if @project.errors.any?
       #error_explanation
         %h2= "#{pluralize(@project.errors.count, "error")} prohibited this project from being saved:"
@@ -11,7 +11,7 @@
           - @project.errors.full_messages.each do |msg|
             %li= msg
     #createProject
-      = form_for(@form_project) do |f|
+      = form_for(@project) do |f|
         %fieldset.project
           %legend= t(:project_information)
           %dl
@@ -26,21 +26,21 @@
             %dd.small= f.text_field :budget
             %dt.submit= f.submit t('helpers.submit.submit', :model=> Project.model_name.human), :class => "submit"
             .clear
-        = f.hidden_field :customer_id, :value => params[:customer_id] || @form_customer_id
-        = f.hidden_field :contact_id, :value => @form_contact_id
+        = f.hidden_field :customer_id, :value => @customer.id
+        = f.hidden_field :contact_id, :value => @contact.id
     #selectCustomer
       = form_tag new_project_path, :method => :get, :remote => false do
         %fieldset.customer
           %dl
             %dt= Customer.model_name.human
             %dd
-              = select_tag(:customer_id, options_for_select(@form_customers.map {|c| [c.name, c.id]}, params[:customer_id].to_i), {:onchange => "this.form.customerSubmit.click();"})
+              = select_tag(:customer_id, options_for_select(@customers.map {|c| [c.name, c.id]}, params[:customer_id].to_i), {:onchange => "this.form.customerSubmit.click();"})
               %input{:type=>"submit", :value=>"submit", :name=>"customerSubmit", :style=>"display:none"}
       = form_tag new_project_path, :method => :get, :remote => false do
         %fieldset.contact
           %dl
             %dt= Contact.model_name.human
             %dd
-              = select_tag(:contact_id, options_for_select(@form_contacts.map {|c| [c.firstname, c.id]}), {:onchange => "$('input#project_contact_id').val(this.value)"})
+              = select_tag(:contact_id, options_for_select(@contacts.map {|c| [c.firstname, c.id]}), {:onchange => "$('input#project_contact_id').val(this.value)"})
             .clear
     .clear

@@ -1,42 +1,19 @@
-.filter
-  %ul
-    %li{:class => "#{'active' if @project_tab == 'subscribed'}"}= link_to t(:project_my), projects_path(:order => params[:order])
-    %li{:class => "#{'active' if @project_tab == 'active'}"}= link_to t(:project_active), projects_path(:order => params[:order], :closed => 0)
-    %li{:class => "#{'active' if @project_tab == 'closed'}"}= link_to t(:project_closed), projects_path(:order => params[:order], :closed => 1)
-    .clear
-.toolbar
-  %ul
-    %li.nr
-      Nr. 
-      = link_to image_tag("/images/icons-nancy/order-up.gif"), projects_path(:order => "id asc"), :closed => params[:closed]
-      = link_to image_tag("/images/icons-nancy/order-down.gif"), projects_path(:order => "id desc", :closed => params[:closed])
-    %li
-      = Project.human_attribute_name('name')
-      = link_to image_tag("/images/icons-nancy/order-up.gif"), projects_path(:order => "title asc", :closed => params[:closed])
-      = link_to image_tag("/images/icons-nancy/order-down.gif"), projects_path(:order => "title desc", :closed => params[:closed])
-    %li
-      = Customer.model_name.human
-      = link_to image_tag("/images/icons-nancy/order-up.gif"), projects_path(:order => "name asc", :closed => params[:closed])
-      = link_to image_tag("/images/icons-nancy/order-down.gif"), projects_path(:order => "name desc", :closed => params[:closed])
-    %li.date
-      = Project.human_attribute_name('created_at')
-      = link_to image_tag("/images/icons-nancy/order-up.gif"), projects_path(:order => "created_at asc", :closed => params[:closed])
-      = link_to image_tag("/images/icons-nancy/order-down.gif"), projects_path(:order => "created_at desc", :closed => params[:closed])
-
-
--@projects.each do |project|
+- @projects.each do |project|
   .project
-    - if project.id == @project.id && "#{params[:controller]}/#{params[:action]}" != 'projects/edit' 
-      %ul.title#active
-        %li.nr= project.id
-        %li= project.title
-        %li= project.customer.name
-        %li.date= l(project.created_at, :format => :date)
-        %li.actions
+    %ul.title{:id => "#{'active' if project.id == @project.id}"}
+      %li.nr= project.id
+      %li= project.title
+      %li= project.customer.name
+      %li.date= l(project.created_at, :format => :date)
+      %li.actions
+        - if project.id == @project.id
           = link_to image_tag("/images/icons-nancy/container-close.gif"), projects_path(:order => params[:order], :closed => params[:closed])
-          = link_to image_tag("/images/icons-nancy/edit.gif"), edit_project_path(project, :order => params[:order], :closed => params[:closed]) if can? :manage, Project
-          = link_to image_tag("/images/icons-nancy/delete.gif"), project_path(project, :order => params[:order], :closed => params[:closed]), :confirm => 'Are you sure?', :method => :delete if can? :manage, Project
-        .clear
+        - else
+          = link_to image_tag("/images/icons-nancy/container-open.gif"), project_path(project, :order => params[:order], :closed => params[:closed])
+        = link_to image_tag("/images/icons-nancy/edit.gif"), edit_project_path(project, :order => params[:order], :closed => params[:closed]) if can? :manage, Project
+        = link_to image_tag("/images/icons-nancy/delete.gif"), project_path(project, :order => params[:order], :closed => params[:closed]), :confirm => 'Are you sure?', :method => :delete if can? :manage, Project
+      .clear
+    - if project.id == @project.id
       .nestedRessources
         .projectInformation
           %h2= t(:project_information)
@@ -59,14 +36,3 @@
           = render :partial => 'projects/details/contacts'
           = render :partial => 'projects/details/users'
       .clear
-    - else
-      %ul.title
-        %li.nr= project.id
-        %li= project.title
-        %li= project.customer.name
-        %li.date= l(project.created_at, :format => :date)
-        %li.actions
-          = link_to image_tag("/images/icons-nancy/container-open.gif"), project_path(project, :order => params[:order], :closed => params[:closed])
-          = link_to image_tag("/images/icons-nancy/edit.gif"), edit_project_path(project, :order => params[:order], :closed => params[:closed]) if can? :manage, Project
-          = link_to image_tag("/images/icons-nancy/delete.gif"), project_path(project, :order => params[:order], :closed => params[:closed]), :confirm => 'Are you sure?', :method => :delete if can? :manage, Project
-        .clear

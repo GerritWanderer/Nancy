@@ -1,5 +1,5 @@
-%span.actions
-  = link_to image_tag("/images/icons-nancy/contact-create.gif"), new_customer_location_contact_path(@customer, @location, :order => params[:order])
+%h2= Contact.model_name.human
+%span.actions= link_to image_tag("/images/icons-nancy/contact-create.gif"), new_customer_location_contact_path(@customer, @location, :order => params[:order])
 %hr.clear/
 %ul.toolbar
   %li.name= t(:customer_contact_name)
