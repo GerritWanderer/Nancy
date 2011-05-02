@@ -2,7 +2,7 @@ require 'Faker'
 I18n.default_locale = :en
 user = User.create!(:firstname => Faker::Name.first_name,
              :lastname => Faker::Name.last_name,
-             :email => "admin@wildner-designer.de",
+             :email => "user@example.org",
              :password => "development")
 user.sign_in_count = 1
 user.confirmed_at = "2011-01-18 12:10:00"
@@ -86,11 +86,11 @@ User.all.each do |user|
 	  timeStart = Time.parse("#{workday.strftime("%Y-%m-%d")} 08:00")
 	  timeEnd = Time.parse("#{workday.strftime("%Y-%m-%d")} 08:45")
 	  8.times do
-	    timeStart = timeEnd
+	    timeStart = timeEnd+60
 	    duration = (rand(8)+1)*15
 	    timeEnd = timeStart + (duration * 60)
-	    Work.create!(:start_datetime => timeStart.strftime('%Y-%m-%d %H:%M'),
-	                    :end_datetime => timeEnd.strftime('%Y-%m-%d %H:%M'),
+	    Work.create!(:started_at => timeStart.strftime('%Y-%m-%d %H:%M'),
+	                    :ended_at => timeEnd.strftime('%Y-%m-%d %H:%M'),
 	                    :description => Faker::Lorem.sentence,
 	                    :fee => [70.00,50.00,0.00][1],
 	                    :project_id => projects.shuffle.first.id,
