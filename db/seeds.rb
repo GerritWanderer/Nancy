@@ -88,11 +88,12 @@ User.all.each do |user|
 	  timeStart = Time.parse("#{workday.strftime("%Y-%m-%d")} 08:00")
 	  timeEnd = Time.parse("#{workday.strftime("%Y-%m-%d")} 08:45")
 	  8.times do
-	    timeStart = timeEnd+60
+	    timeStart = timeEnd
 	    duration = (rand(8)+1)*15
 	    timeEnd = timeStart + (duration * 60)
 	    Work.create!(:started_at => timeStart.strftime('%Y-%m-%d %H:%M'),
 	                    :ended_at => timeEnd.strftime('%Y-%m-%d %H:%M'),
+	                    :duration => duration,
 	                    :description => Faker::Lorem.sentence,
 	                    :fee => [70.00,50.00,0.00][1],
 	                    :project_id => projects.shuffle.first.id,
