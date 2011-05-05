@@ -46,6 +46,6 @@ module Nancy
       config.log_level = :info
     end
 
-    config.action_mailer.default_url_options = { :host => ENV['DEfAULT_URL_OPTIONS'] || 'localhost:3000' }
+    config.action_mailer.default_url_options = { :host => ENV['DEFAULT_URL_OPTIONS'] || 'localhost:3000' }
   end
 end
