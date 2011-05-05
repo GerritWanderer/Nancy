@@ -52,7 +52,7 @@ class Project < ActiveRecord::Base
     self.net_sum = 0
     self.works.each do |work|
       self.work_sum += work.duration.to_f / 60
-      self.net_sum += self.work_sum * work.fee
+      self.net_sum += (work.duration.to_f / 60) * work.fee
     end
     # add discount and tax sums
     self.discount_sum = self.net_sum * (self.discount / 100)
