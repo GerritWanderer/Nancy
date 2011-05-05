@@ -1,4 +1,4 @@
-require 'Faker'
+require 'faker'
 I18n.default_locale = :en
 user = User.create!(:firstname => Faker::Name.first_name,
              :lastname => Faker::Name.last_name,
