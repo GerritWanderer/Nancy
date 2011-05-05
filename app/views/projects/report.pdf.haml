@@ -1,0 +1,51 @@
+!!!
+%html{ :xmlns => "http://www.w3.org/1999/xhtml", :lang => "en", "xml:lang" => "en"}
+  %head
+    %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}
+    %title Nancy / #{controller.controller_name}
+    = wicked_pdf_stylesheet_link_tag "../../tmp/stylesheets/compiled/projects"
+    = csrf_meta_tag
+  %body{:id => "report"}
+    #content.container
+      %p.sender= Configuration.find_by_key('sender').value
+      %adress
+        =@project.contact.location.name
+        %br/
+        = "#{@project.contact.firstname} #{@project.contact.lastname}"
+        %br/
+        =@project.contact.location.street
+        %br/
+        %br/
+        = "#{@project.contact.location.zip} #{@project.contact.location.city}"
+
+      %h1 Project Report: #{@project.id}
+      %h2=@project.title
+      %hr/
+      %div#works
+        %table
+          -@project.works.order("started_at ASC").each do |work|
+            %tr
+              %td.time
+                = work.started_at.strftime('%Y-%m-%d')
+                %br/
+                = "#{User.find(work.user_id).firstname} #{User.find(work.user_id).lastname}"
+              %td.description= work.description
+              %td.duration #{work.duration.to_f / 60} hours
+              %td.sum= number_to_currency((work.duration.to_f / 60 * work.fee), :unit => Configuration.find_by_key('currency').value)
+        %table
+          %tr
+            %td Duration:
+            %td #{@project.work_sum} hours
+            %td #{number_to_currency(@project.net_sum, :unit => @currency)}
+          %tr
+            %td Discount (#{@project.discount}%):
+            %td #{number_to_currency(@project.discount_sum, :unit => @currency)}
+          %tr
+            %td Sum net:
+            %td #{number_to_currency(@project.full_net_sum, :unit => @currency)}
+          %tr
+            %td Add #{@project.tax}% tax:
+            %td #{number_to_currency(@project.tax_sum, :unit => @currency)}
+          %tr
+            %td Final Tax Sum:
+            %td #{number_to_currency(@project.full_tax_sum, :unit => @currency)}

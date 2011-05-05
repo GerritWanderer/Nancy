@@ -49,7 +49,12 @@ class ProjectsController < ApplicationController
   def report
     @project.set_sums
     @currency = Configuration.find_by_key('currency').value
-    render :layout => false, :template => 'projects/report'
+    respond_to do |format|
+      format.html { render :layout => false, :template => 'projects/report' }
+      format.pdf do
+        render :pdf => 'nancy_report_#{@project.id}', :template => 'projects/report', :layout => false, :page_size => 'A4'
+      end
+    end
   end
   
   def switch
