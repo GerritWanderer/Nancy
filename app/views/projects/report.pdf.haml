@@ -22,30 +22,30 @@
       %h2=@project.title
       %hr/
       %div#works
-        %table
+        %table.work
           -@project.works.order("started_at ASC").each do |work|
             %tr
               %td.time
                 = work.started_at.strftime('%Y-%m-%d')
                 %br/
                 = "#{User.find(work.user_id).firstname} #{User.find(work.user_id).lastname}"
-              %td.description= work.description
+              %td.description{"valign" => "top"}= work.description
               %td.duration #{work.duration.to_f / 60} hours
               %td.sum= number_to_currency((work.duration.to_f / 60 * work.fee), :unit => Configuration.find_by_key('currency').value)
-        %table
+        %table#sum
           %tr
-            %td Duration:
-            %td #{@project.work_sum} hours
-            %td #{number_to_currency(@project.net_sum, :unit => @currency)}
+            %td.duration Duration:
+            %td.sum #{@project.work_sum} hours
+            %td.sum #{number_to_currency(@project.net_sum, :unit => @currency)}
           %tr
-            %td Discount (#{@project.discount}%):
-            %td #{number_to_currency(@project.discount_sum, :unit => @currency)}
+            %td.title.discount{"colspan" => 2} Discount (#{@project.discount}%):
+            %td.sum.discount #{number_to_currency(@project.discount_sum, :unit => @currency)}
           %tr
-            %td Sum net:
-            %td #{number_to_currency(@project.full_net_sum, :unit => @currency)}
+            %td.title.net{"colspan" => 2} Sum net:
+            %td.sum.net #{number_to_currency(@project.full_net_sum, :unit => @currency)}
           %tr
-            %td Add #{@project.tax}% tax:
-            %td #{number_to_currency(@project.tax_sum, :unit => @currency)}
+            %td.title.tax{"colspan" => 2} Add #{@project.tax}% tax:
+            %td.sum.tax #{number_to_currency(@project.tax_sum, :unit => @currency)}
           %tr
-            %td Final Tax Sum:
-            %td #{number_to_currency(@project.full_tax_sum, :unit => @currency)}
+            %td.title.final{"colspan" => 2} Final Tax Sum:
+            %td.sum.final #{number_to_currency(@project.full_tax_sum, :unit => @currency)}

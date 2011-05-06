@@ -52,7 +52,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { render :layout => false, :template => 'projects/report' }
       format.pdf do
-        render :pdf => 'nancy_report_#{@project.id}', :template => 'projects/report', :layout => false, :page_size => 'A4'
+        render :pdf => "nancy_report_#{@project.id}", :template => 'projects/report', :layout => false, :page_size => 'A4'
       end
     end
   end

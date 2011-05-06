@@ -19,6 +19,7 @@
           %h2= t(:project_information)
           %span.actions
             = link_to image_tag("/images/icons-nancy/project-report.gif"), report_project_path(project)
+            = link_to image_tag("/images/icons-nancy/project-pdf.gif"), report_project_path(project)+".pdf"
             -if project.closed == 0
               = link_to image_tag("/images/icons-nancy/project-open.gif"), switch_project_path(project, :order => params[:order], :closed => params[:closed]) if can? :manage, Project
             -else
