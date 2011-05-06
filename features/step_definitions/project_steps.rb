@@ -19,7 +19,7 @@ Then(/^I should see all projects(?: ordered "([^"]*)" "([^"]*)")?(?: with closed
     Then %{I should see "#{project.id}" within "div.project:nth-child(#{counter+3}) ul.title li:first-child"}
     Then %{I should see "#{project.title}" within "div.project:nth-child(#{counter+3}) ul.title li:nth-child(2)"}
     Then %{I should see "#{project.customer.name}" within "div.project:nth-child(#{counter+3}) ul.title li:nth-child(3)"}
-    Then %{I should see "#{project.created_at.strftime("%Y-%m-%d")}" within "div.project:nth-child(#{counter+3}) ul.title li:nth-child(4)"}
+    Then %{I should see "#{project.created_at.strftime("%d-%m-%Y")}" within "div.project:nth-child(#{counter+3}) ul.title li:nth-child(4)"}
   end
 end
 
@@ -34,7 +34,7 @@ Then(/^I should see the (\d+)(?:st|nd|rd|th) project active$/) do |row|
   Then %{I should see "#{project.id}" within "div.project ul.title#active li:first-child"}
   Then %{I should see "#{project.title}" within "div.project ul.title#active li:nth-child(2)"}
   Then %{I should see "#{project.customer.name}" within "div.project ul.title#active li:nth-child(3)"}
-  Then %{I should see "#{project.created_at.strftime("%Y-%m-%d")}" within "div.project ul.title#active li:nth-child(4)"}
+  Then %{I should see "#{project.created_at.strftime("%d-%m-%Y")}" within "div.project ul.title#active li:nth-child(4)"}
 end
 
 

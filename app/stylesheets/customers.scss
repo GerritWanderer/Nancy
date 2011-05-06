@@ -43,7 +43,7 @@ div.customer {
   color: $darkGrey;
   margin-bottom: 5px;
   
-  div.nestedRessources {
+  div#resources {
     @include roundedBottom;
     background-color: white;
     border-left: 1px solid grey;
@@ -57,11 +57,7 @@ div.customer {
 	  @include roundedBottom;
 	  border-top:5px solid $darkGrey;
     padding: 8px;
-      
-      .details {
-        ul li { @include grid(26); }
-      
-      }
+    ul li { @include grid(26); }
       form {
 	      background-color: transparent !important;
         padding: 0px !important;
@@ -132,13 +128,13 @@ div.customer {
     }
     
     
-    div.details h2, div.details span.actions, form legend {
+    h2, span.actions, form legend {
       font-weight: bold;
 	  color: $darkRed;
       font-size: 11px;
     }
-    div.details h2, form legend { @include grid(78) }
-    div.details span.actions, form a {
+    h2, form legend { @include grid(78) }
+    span.actions, form a {
       @include grid(10);
       text-align: right;
     }

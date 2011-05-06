@@ -16,7 +16,7 @@ gem 'oa-oauth', :require => 'omniauth/oauth'
 gem 'hpricot'
 gem 'ruby_parser'
 
-gem 'netzke-core', :git => "git://github.com/skozlov/netzke-core.git"
+gem 'netzke-core', :path => "vendor/gems/netzke-core"
 gem 'netzke-basepack', :git => "git://github.com/skozlov/netzke-basepack.git"
 gem "will_paginate", "~> 3.0.pre2"
 

@@ -18,9 +18,8 @@ GIT
       netzke-core (~> 0.6.7)
       will_paginate (~> 3.0.pre2)
 
-GIT
-  remote: git://github.com/skozlov/netzke-core.git
-  revision: 4fcea55471435ebd61e419ed57dccbfff959de3d
+PATH
+  remote: vendor/gems/netzke-core
   specs:
     netzke-core (0.6.7)
       activesupport (>= 3.0.1)

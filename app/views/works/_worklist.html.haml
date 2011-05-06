@@ -9,7 +9,7 @@
     %li.customer= link_to work.project.customer.name, work.project.customer
     %li.description= work.description
     %li.actions
-      = link_to image_tag("/images/icons-nancy/delete.gif"), work, :method => :delete, :remote => false
+      = link_to image_tag("/images/icons-nancy/delete.gif"), work_path(work, :date => work.started_at.strftime("%Y-%m-%d")), :method => :delete, :remote => false
     .clear
 :javascript
   jQuery.each($("div#works ul"), function() { $(this).find('li').height($(this).height()); });

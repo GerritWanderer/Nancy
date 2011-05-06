@@ -40,14 +40,14 @@ Factory.define :project do |f|
 end
 
 Factory.define :work do |f|
-	f.sequence(:start_datetime) { |n| Time.parse("#{Date.today.strftime("%Y-%m-%d")} #{n+2}:00") }
+	f.sequence(:started_at) { |n| Time.parse("#{Date.today.strftime("%Y-%m-%d")} #{n+2}:00") }
 	f.duration {15}
 	f.fee {50.0}
 	f.description {Faker::Lorem.paragraph}
 	f.user_id {1}
 	f.project_id {rand(10)+1}
 	f.after_build do |work|
-		work.end_datetime = work.start_datetime.+(work.duration*60)
+		work.ended_at = work.started_at.+(work.duration*60)
 	end
 end
 

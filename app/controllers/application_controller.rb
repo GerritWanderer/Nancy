@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
   include ApplicationHelper
   
-  
+  # Rootingfehler beheben bei DELETE-AJAX Request im Workcontroller?
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
   end
@@ -33,10 +33,6 @@ class ApplicationController < ActionController::Base
   end
   
   def layout_by_resource
-    if devise_controller?
-      "users"
-    else
-      "application"
-    end
+    devise_controller? ? "users" : "application"
   end
 end

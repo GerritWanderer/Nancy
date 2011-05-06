@@ -1,18 +1,52 @@
 class Work < ActiveRecord::Base
   belongs_to :project
-  before_save :set_datetimes
+  belongs_to :user
+  before_validation :set_datetimes
   
-  attr_accessor :day, :start_datetime, :end_datetime
+  attr_accessor :day
+  
   include ActiveModel::Validations
   validates_presence_of :project
-  validates :start_datetime, :datetime => true
-  validates :end_datetime, :datetime => true
+  validates :started_at, :datetime => true
+  validates :ended_at, :datetime => true
   validates :fee, :numericality => true
-  validates :description, :length => {:minimum => 3, :maximum => 1020}
+  validates :description, :length => {:minimum => 3, :maximum => 999}
   validates_with WorkValidator
   
+  default_scope :order => "started_at ASC"
   scope :from_day_by_user, lambda { |day, user| where(:user_id => user).where("started_at BETWEEN ? AND ?", day+" 00:00", day+" 23:59") }
-
+  
+  def self.get_basic_view_variables
+    fees = Configuration.find_by_key('work_fees') ? Configuration.find_by_key('work_fees').value.split(';') : [0.00]
+    currency = Configuration.find_by_key('currency') ? Configuration.find_by_key('currency').value : '$'
+    work = Work.new({:started_at => Time.now, :ended_at => Time.now})
+    return work, currency, fees
+  end
+  
+  def self.get_selected_day(params)
+    if params[:date]
+      day_selected = Date.parse(params[:date])
+    elsif params[:work]
+      day_selected = Date.parse(params[:work][:day])
+    else
+      day_selected = Date.today
+    end
+    beginning_of_week = day_selected.-(day_selected.cwday - 1)
+    return day_selected, beginning_of_week
+  end
+  
+  def self.get_customer_and_project_records(params)
+    customers = Customer.with_active_projects.joins(:projects).uniq
+    if customers.empty?
+      projects = []
+      project_form_id = nil
+    else
+      projects = params[:customer_id] ? Project.by_customer_isClosed(params[:customer_id], 0) : Project.by_customer_isClosed(customers.first.id, 0)
+      project_form_id = !params[:project_id].nil? && Project.exists?(params[:project_id]) ? params[:project_id] : projects.first.id
+    end
+    return customers, projects, project_form_id
+  end
+  
   def self.selectJumpingLinks(date)
     #Return Hash with Elements (4 Dates)
     {"prev10"=>date.-(77).strftime("%Y-%m-%d"),"prev"=>date.-(7).strftime("%Y-%m-%d"),"next"=>date.+(7).strftime("%Y-%m-%d"),"next10"=>date.+(77).strftime("%Y-%m-%d")}
@@ -29,8 +63,7 @@ class Work < ActiveRecord::Base
   
   private
   def set_datetimes
-    self.started_at = self.start_datetime
-    self.ended_at = self.end_datetime
-    self.duration = (self.ended_at - self.started_at) / 60
+    self.started_at = "#{self.day} #{self.started_at}"
+    self.ended_at = "#{self.day} #{self.ended_at}"
   end
 end

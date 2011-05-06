@@ -1,9 +1,9 @@
 #customerForm.wizard
-  -if params[:action] == 'new' || params[:action] == 'edit' || params[:action] == 'create' || params[:action] == 'update'
+  -if @show_customer_form
     = link_to t(:customer_form_close), customers_path, :class => 'wizardFormSwitch'
   -else
     = link_to t(:customer_form_create), new_customer_path, :class => 'wizardFormSwitch'
-  .wrapper{:style => "display: #{@displayCustomerForm || 'none'};"}
+  .wrapper{:style => "display: #{@show_customer_form ? 'block' : 'none'};"}
     -if @customer.errors.any?
       #error_explanation
         %h2= t('errors.template.header', :model=> Customer.model_name.human, :count=> @customer.errors.count)
@@ -11,7 +11,7 @@
           - @customer.errors.full_messages.each do |msg|
             %li= msg
     #createCustomer
-      = form_for(@form_customer) do |f|
+      = form_for(@customer) do |f|
         %fieldset
           %legend= t(:customer_form_customer)
           %dl
@@ -21,7 +21,7 @@
             %dd= f.text_field :name
             %dt= f.label :website
             %dd= f.text_field :website
-          = f.fields_for :locations, @form_customer.locations.first do |l|
+          = f.fields_for :locations, @customer.locations.first do |l|
             %fieldset
               %legend= t(:customer_form_location)
               %dl
@@ -37,7 +37,7 @@
                 %dd= l.text_field :fon
                 %dt= l.label :fax
                 %dd= l.text_field :fax
-            = l.fields_for :contacts, @form_customer.locations.first.contacts.first do |c|
+            = l.fields_for :contacts, @customer.locations.first.contacts.first do |c|
               %fieldset
                 %legend= t(:customer_form_contact)
                 %dl

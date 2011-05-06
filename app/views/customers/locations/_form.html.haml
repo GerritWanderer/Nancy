@@ -1,13 +1,13 @@
-= form_for([@customer, @form_location], :html => {:style => "display: #{@displayLocationForm || 'none'};"}) do |f|
-  -if @form_location.errors.any?
+= form_for([@customer, @location]) do |f|
+  -if @location.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@form_location.errors.count, "error")} prohibited this contact from being saved:"
+      %h2= "#{pluralize(@location.errors.count, "error")} prohibited this contact from being saved:"
       %ul
-        = @form_location.errors.full_messages.each do |msg|
+        = @location.errors.full_messages.each do |msg|
           %li= msg
   %fieldset
     %legend= t('helpers.form', :model=> Location.model_name.human)
-    = link_to image_tag("/images/icons-nancy/container-close.gif"), customer_location_path(@customer, @location, :order => params[:order])
+    = link_to image_tag("/images/icons-nancy/container-close.gif"), :back
     %hr.clear/
     %dl
       %dt= f.label :name

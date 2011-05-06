@@ -1,38 +1,28 @@
-.toolbar
-  %ul
-    %li
-      = Customer.human_attribute_name('name') 
-      = link_to image_tag("/images/icons-nancy/order-up.gif"), customers_path(:order => "name asc")
-      = link_to image_tag("/images/icons-nancy/order-down.gif"), customers_path(:order => "name desc")
-    %li
-      = Customer.human_attribute_name('shortname')
-      = link_to image_tag("/images/icons-nancy/order-up.gif"), customers_path(:order => "shortname asc")
-      = link_to image_tag("/images/icons-nancy/order-down.gif"), customers_path(:order => "shortname desc")
-    %li= Location.model_name.human
--@customers.each do |customer|
+- @customers.each do |customer|
   .customer
-    - if customer.id == @customer.id && "#{params[:controller]}/#{params[:action]}" != 'customers/edit' 
-      %ul.title#active
-        %li= customer.name
-        %li= customer.shortname
-        %li= customer.locations.count
-        %li.actions
+    %ul.title{:id => "#{'active' if customer.id == @customer.id}"}
+      %li= customer.name
+      %li= customer.shortname
+      %li= customer.locations.count
+      %li.actions
+        - if customer.id == @customer.id
           = link_to image_tag("/images/icons-nancy/container-close.gif"), customers_path(:order => params[:order])
-          = link_to image_tag("/images/icons-nancy/edit.gif"), edit_customer_path(customer, :order => params[:order]) if can? :manage, Customer
-          = link_to image_tag("/images/icons-nancy/delete.gif"), customer_path(customer, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete if can? :manage, Customer
-        .clear
-      .nestedRessources
-        = render :partial => 'customers/locations/show'
-        = render :partial => 'customers/contacts/list'
-        .clear
-    - else
-      %ul.title
-        %li= customer.name
-        %li= customer.shortname
-        %li= customer.locations.count
-        %li.actions
+        - else
           = link_to image_tag("/images/icons-nancy/container-open.gif"), customer_path(customer, :order => params[:order])
-          = link_to image_tag("/images/icons-nancy/edit.gif"), edit_customer_path(customer, :order => params[:order]) if can? :manage, Customer
-          = link_to image_tag("/images/icons-nancy/delete.gif"), customer_path(customer, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete if can? :manage, Customer
-        .clear
+        = link_to image_tag("/images/icons-nancy/edit.gif"), edit_customer_path(customer, :order => params[:order]) if can? :manage, Customer
+        = link_to image_tag("/images/icons-nancy/delete.gif"), customer_path(customer, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete if can? :manage, Customer
       .clear
+    - if customer.id == @customer.id
+      #resources
+        .location
+          - if !@show_location_form
+            = render :partial => 'customers/locations/show' 
+          - else
+            = render :partial => 'customers/locations/form'
+        - if !@location.new_record?
+          .contacts
+            - if @show_contact_form
+              = render :partial => 'customers/contacts/form'
+            - else @show_contact_form
+              = render :partial => 'customers/contacts/list'
+        .clear

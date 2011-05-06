@@ -127,8 +127,8 @@ body#report  {
 	@include gradient(white, white);
 	div#content { width: 680px; margin: 0px 20px;}
 	p.sender{
-	padding: 15px 0px 10px 0px; 
-	font-size: 7pt!important;
+	  padding: 15px 0px 10px 0px; 
+	  font-size: 7pt!important;
 	}
 	
 	adress {
@@ -149,6 +149,39 @@ body#report  {
 	}
 	
 	div#works{
+	  table { font-family: "Courier New"; } 
+	  table.work {
+	    font-size: 12px;
+	    padding-bottom: 5px;
+    	td {
+    	  padding: 5px 0px;
+    	  border-bottom: 1px dashed grey;
+    	}
+    	td.time {
+    	  width: 100px;
+    	  margin-right: 10px;
+    	}
+    	td.description{
+  		  color: $orangeRed;
+  		  width: 360px;
+    	  margin-right: 10px;
+  		}
+  		td.duration, td.sum {
+  		  width: 100px;
+  		  text-align: right;
+  		}
+	  }
+	  table#sum {
+  	  td { font-size: 14px; padding: 3px 0px; }
+  	  td.title { width: 580px; }
+  	  td.durationTitle { width: 480px; }
+  	  td.sum {
+  	    text-align: right;
+  	    width: 100px;
+  	  }
+  	  .discount, .tax { border-bottom: 2px solid black;}
+  	  .tax, .net, .final { font-weight: bold; }
+  	}
   	ul{ 
   	padding-bottom: 5px;
   	border-bottom: 1px dashed grey;

@@ -19,50 +19,45 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(params[:project])
     if @project.save
-      flash[:notice] = t('successes.created', :model=> Project.model_name.human)
-      respond_with(@project)
+      redirect_to @project, :notice => t('successes.created', :model=> Project.model_name.human)
     else
       render "index"
     end
   end
 
   def update
-    @project = Project.find(params[:id])
+    begin
+      @project = Project.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to projects_path, :alert => t('errors.not_found', :model=> Project.model_name.human)
+    end
     if @project.update_attributes(params[:project])
-      flash[:notice] = t('successes.updated', :model=> Project.model_name.human)
-      respond_with(@project)
+      redirect_to @project, :notice => t('successes.updated', :model=> Project.model_name.human)
     else
-      @form_project = @project
       render "index"
     end
   end
   
   def destroy
-    @project = Project.find(params[:id])
-    if @project.destroy
-      flash[:notice] = t('successes.destroyed', :model=> Project.model_name.human)
-    else
-      flash[:alert] = t('errors.destroyed', :model=> Project.model_name.human)
-    end
-    redirect_to(projects_url)
+    flash[:notice] = t('successes.destroyed', :model=> Project.model_name.human) if Project.find(params[:id]).destroy
+    rescue ActiveRecord::RecordNotFound
+      flash[:notice] = t('errors.destroyed', :model=> Project.model_name.human)
+    ensure
+      redirect_to projects_path
   end
   
   def report
+    @project.set_sums
     @currency = Configuration.find_by_key('currency').value
-    @tax = Configuration.find_by_key('tax').value.to_f
-    @net_sum = 0
-    @project.works.each do |work|
-      @net_sum += (work.duration.to_f / 60) * work.fee
+    respond_to do |format|
+      format.html { render :layout => false, :template => 'projects/report' }
+      format.pdf do
+        render :pdf => "nancy_report_#{@project.id}", :template => 'projects/report', :layout => false, :page_size => 'A4'
+      end
     end
-    @discount = @net_sum * (@project.discount / 100)
-    @full_net_sum = @net_sum - @discount
-    @tax_sum = @full_net_sum * (@tax / 100)
-    @full_tax_sum = @full_net_sum + @tax_sum
-    render :layout => false, :template => 'projects/report'
   end
   
   def switch
-    @project = Project.find(params[:id])
     @project.closed = @project.closed == 0 ? 1 :0
     if @project.save
       flash[:notice] = t('successes.changed', :model=> Project.model_name.human)
@@ -100,34 +95,10 @@ class ProjectsController < ApplicationController
   
   protected
   def init_projects
-    # Find Project / Create new behavior for project form
-    @project = params[:id] ? Project.find(params[:id]) : Project.new
-    if params[:closed].to_i == 1 || @project.closed == 1
-      @projects = Project.isClosed(1).joins(:customer).order(params[:order])
-      @project_tab = 'closed'
-    else
-      if @project.users.exists?(current_user.id) || (params[:id].nil? && params[:closed].nil?)
-        @projects = Project.isClosed(0).joins(:customer, :users).where("users.id" => current_user.id).order(params[:order])
-        @project_tab = 'subscribed'
-      else
-        @projects = Project.isClosed(0).joins(:customer).order(params[:order])
-        @project_tab = 'active'
-      end
-    end
-    
-    @form_project = params[:action] == 'edit' ? @project : Project.new
-    @form_customers = Customer.all
-    if @form_customers.empty?
-      @form_customer_id, @form_contact_id = nil
-      @form_contacts = []
-    else
-      @form_customer_id = @form_customers.first.id
-      @form_contacts = params[:customer_id] ? Contact.find_by_customer_id(params[:customer_id]) : Contact.find_by_customer_id(@form_customer_id)
-      @form_contact_id = @form_contacts.first.id
-    end
-    @form_display_mode = 'block' if ['new', 'edit', 'create'].index(params[:action]) 
+    @projects, @project, @project_tab = Project.get_view_objects(params, current_user)
+    @customers, @customer, @contacts, @contact, @show_project_form = Project.get_form_objects(params)
   end
-  
+
   def render_filter
     respond_with(@project) do |format|
       format.html { render "index" }
