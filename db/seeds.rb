@@ -79,6 +79,14 @@ end
     ProjectsUsers.create!(:user_id => users[i].id, :project_id => project.id)
     i += 1
   end
+  
+  (rand(3)).times do
+    user = User.all.shuffle.first
+    Expense.create!(:user_id => user.id,
+                    :project_id => project.id,
+                    :description => Faker::Lorem.sentence,
+                    :amount => (rand(199) + (rand(99).to_f / 100)).to_f)
+  end
 end
 
 projects = Project.find_all_by_closed(false)
