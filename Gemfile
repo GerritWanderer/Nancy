@@ -19,6 +19,7 @@ gem 'ruby_parser'
 gem 'netzke-core', :path => "vendor/gems/netzke-core"
 gem 'netzke-basepack', :git => "git://github.com/skozlov/netzke-basepack.git"
 gem "will_paginate", "~> 3.0.pre2"
+gem 'prawn_rails'
 
 group :development, :test do
 	gem "rspec-rails"
