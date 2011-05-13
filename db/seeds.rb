@@ -1,9 +1,9 @@
 require 'faker'
 I18n.default_locale = :en
-user = User.create!(:firstname => Faker::Name.first_name,
-             :lastname => Faker::Name.last_name,
-             :email => "user@example.org",
-             :password => "development")
+user = User.create!(:firstname => ENV['ADMIN_FIRSTNAME'],
+             :lastname => ENV['ADMIN_LASTNAME'],
+             :email => ENV['ADMIN_EMAIL'],,
+             :password => ENV['ADMIN_PASWORD'],)
 user.sign_in_count = 1
 user.confirmed_at = "2011-01-18 12:10:00"
 user.role = "admin"
@@ -19,7 +19,7 @@ Configuration.create!(:key => 'tax',
   :value => '19',
   :label => "Select your tax.")
 Configuration.create!(:key => 'sender',
-  :value => 'Wildner+Designer - Hans-Vogel-Strasse 24 - 90765 Fuerth',
+  :value => 'Your Company Name - Your Street Address - ZIP and City',
   :label => "Enter your sender details for your report output")
 
 i = 2
