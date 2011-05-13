@@ -3,7 +3,7 @@ I18n.default_locale = :en
 user = User.create!(:firstname => ENV['ADMIN_FIRSTNAME'],
              :lastname => ENV['ADMIN_LASTNAME'],
              :email => ENV['ADMIN_EMAIL'],
-             :password => ENV['ADMIN_PASWORD'])
+             :password => ENV['ADMIN_PASSWORD'])
 user.sign_in_count = 1
 user.confirmed_at = "2011-01-18 12:10:00"
 user.role = "admin"
