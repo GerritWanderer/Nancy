@@ -1,27 +1,40 @@
--if @work.errors.any?
-  #error_explanation
-    %h2= t('errors.template.header', :model=> Work.model_name.human, :count=> @work.errors.count)
-    %ul
-      - @work.errors.full_messages.each do |msg|
-        %li= msg
-#createTimeWrapper
-  = form_for(@work, :remote => false) do |f|
-    %dl
-      %dt.time= f.label :started_at
-      %dd.time= f.text_field :started_at, :value => @work.started_at.strftime('%H:%M'),:size => 4
-      %dt.time= f.label :ended_at
-      %dd.time= f.text_field :ended_at, :value => @work.ended_at.strftime('%H:%M'), :size => 4
-      %dd.description= f.text_area :description
-      %dt.fees= f.label :fee
-      %dd.fees= select_tag("work[fee]", options_for_select(@fees.map {|fee| ["#{t :works_charge_with} #{number_to_currency(fee, :unit => @currency)}", "#{fee}"]}))
-      %dt.submit
-        = f.hidden_field :project_id, :value => @project_form_id
-        = f.hidden_field :day, :value => @daySelected.strftime("%Y-%m-%d")
-        = f.submit t('helpers.submit.submit', :model=> Work.model_name.human), :class => "submit"
-#selectWrapper
-  %dl
-    %dt= Customer.model_name.human
-    %dd= render :partial => "customerlist"
-    %dt= Project.model_name.human
-    %dd= render :partial => "projectlist"
-.clear
+#top_form
+  -if @work.errors.any?
+    .errors
+      %h3= t('errors.template.header', :model=> Work.model_name.human, :count=> @work.errors.count)
+      %ul
+        - @work.errors.full_messages.each do |msg|
+          %li= msg
+      .clear
+  .layout
+    = form_for(@work) do |f|
+      %fieldset.project
+        %ul
+          %li.field.half
+            = f.label :started_at, :class => 'left'
+            = f.text_field :started_at, :value => @work.started_at.strftime('%H:%M'),:size => 4, :class => 'left'
+            = f.label :ended_at, :class => 'right'
+            = f.text_field :ended_at, :value => @work.ended_at.strftime('%H:%M'), :size => 4, :class => 'right'
+          %li.field.half
+            %input.left
+            %input.right
+          %li.field.twoColumn.twoRow
+            = f.label :description
+            = f.text_area :description
+      #buttons
+        %ul
+          %li.toggle &nbsp;
+          %li.submit
+            = f.hidden_field :project_id, :value => @project_form_id
+            = f.hidden_field :day, :value => @daySelected.strftime("%Y-%m-%d")
+            = f.submit t('helpers.submit.submit', :model=> Work.model_name.human), :class => "submit"
+        .clear
+    .right_column
+      = form_tag new_project_path, :method => :get, :remote => false do
+        %ul
+          %li.field
+            = render :partial => "customerlist"
+      = form_tag new_project_path, :method => :get, :remote => false do
+        %ul
+          %li.field
+            = render :partial => "projectlist"

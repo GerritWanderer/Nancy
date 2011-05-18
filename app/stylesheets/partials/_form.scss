@@ -2,118 +2,175 @@ $blueprint_grid_columns: 90;
 $blueprint_grid_width: 10px;
 $blueprint-grid-margin: 0px;
 
-form.new_customer {
-  /* BASIC DEFINITION */
-  legend {
-    color: #730303;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 10px;
-  }
-  li.field {
-    @include column(25);
-    @include border-radius(6px);
-    @include box-shadow(inset 0px 2px 2px #B2B3B5, 0px 1px 0 #fff);
-    @include background-image(linear-gradient(top center, #E9E9E9, #D7D7D7));
-    height: 25px;
-    padding: 10px;
-    margin: 10px;
-    position: relative;
-    
-    input, textarea {
-      @include border-radius(6px);
-      @include box-shadow(0 1px 1px #9A9A9A inset);
-      @include background-image(linear-gradient(center top, #F3F3F3,  #FFFFFF));
-      height: 25px;
-      width: 230px;
-      padding: 1px 10px 0px 10px;
-      border: medium none;
-      font-size: 15px;
-    }
-    label {
-      position: absolute;
-      top: 15px;
-      left: 21px;
-      font-size: 15px;
-    }
-    
-    input.left {
-      @include border-left-radius(6px);
-      @include border-right-radius(0px);
-    }
-    input.middle {
-      @include border-left-radius(0px);
-      @include border-right-radius(0px);
-    }
-    input.right {
-      @include border-left-radius(0px);
-      @include border-right-radius(6px);
-    }
-  }
-  
-  li.half {
-    input { width: 103px; }
-    label.right { left: 147px; }
-  }
-  li.third {
-    input.left { width: 50px; }
-    input.right { width: 155px; }
-    label.right { left: 95px; }
-  }
-  li.twoColumn {
-    width: 556px;
-    input, textarea {
-      width: 536px;;
-    }
-  }
-  li.twoRow {
-    height: 85px;;
-    textarea {
-      height: 65px;
+div#top_form {
+  form {
+    /* BASIC DEFINITION */
+    legend {
+      color: #730303;
+      font-size: 14px;
+      font-weight: bold;
       padding: 10px;
     }
-  }
-
-  li.icon {
-    input {
-      @include border-left-radius(6px);
-      @include border-right-radius(0px);
-      width: 210px;
-    }
-    input.right { @include border-radius(0px); }
-    div {
-      @include border-right-radius(10px);
-      @include box-shadow(0 1px 1px #9A9A9A inset);
-      text-indent: -5000px;
-      display: block;
-      float: right;
+    li.field {
+      @include column(25);
+      @include border-radius(6px);
+      @include box-shadow(inset 0px 2px 2px #B2B3B5, 0px 1px 0 #fff);
+      @include background-image(linear-gradient(top center, #E9E9E9, #D7D7D7));
       height: 25px;
-      width: 29px;
+      padding: 10px;
+      margin: 10px;
+      position: relative;
+    
+      input, textarea {
+        @include border-radius(6px);
+        @include box-shadow(0 1px 1px #9A9A9A inset);
+        @include background-image(linear-gradient(center top, #F3F3F3,  #FFFFFF));
+        height: 25px;
+        width: 230px;
+        padding: 1px 10px 0px 10px;
+        border: medium none;
+        font-size: 15px;
+      }
+      select {
+        width: 250px;
+        height: 27px;
+        font-size: 15px;
+      }
+      label {
+        position: absolute;
+        top: 15px;
+        left: 21px;
+        font-size: 15px;
+      }
+    
+      input.left {
+        @include border-left-radius(6px);
+        @include border-right-radius(0px);
+      }
+      input.middle {
+        @include border-left-radius(0px);
+        @include border-right-radius(0px);
+      }
+      input.right {
+        @include border-left-radius(0px);
+        @include border-right-radius(6px);
+      }
     }
-    div.lock { background: url("/images/login.png") no-repeat scroll center center transparent; }
-  }
-  li.half.icon {
-    input { width: 93px; }
-    label.right { left: 136px; }
-  }
-  li.third.icon {
-    input { width: 50px; }
-    input.right { width: 137px; }
-    label.right { left: 95px; }
-  }
   
-  li.twoColumn.third {
-    input { width: 162px; }
-    label.middle { left: 205px; }
-    label.right { left: 390px; }
+    li.half {
+      input { width: 103px; }
+      select { width: 110px; }
+      label.right { left: 147px; }
+    }
+    li.third {
+      input.left { width: 50px; }
+      select { width: 70px; }
+      input.right { width: 155px; }
+      label.right { left: 95px; }
+    }
+    li.twoColumn {
+      width: 556px;
+      input, textarea {
+        width: 536px;;
+      }
+    }
+    li.twoRow {
+      height: 85px;;
+      textarea {
+        height: 65px;
+        padding: 10px;
+      }
+    }
+
+    li.icon {
+      input {
+        @include border-left-radius(6px);
+        @include border-right-radius(0px);
+        width: 210px;
+      }
+      input.right { @include border-radius(0px); }
+      div {
+        @include border-right-radius(10px);
+        @include box-shadow(0 1px 1px #9A9A9A inset);
+        text-indent: -5000px;
+        display: block;
+        float: right;
+        height: 25px;
+        width: 29px;
+      }
+      div.lock { background: url("/images/login.png") no-repeat scroll center center transparent; }
+    }
+    li.half.icon {
+      input { width: 93px; }
+      label.right { left: 136px; }
+    }
+    li.third.icon {
+      input { width: 50px; }
+      input.right { width: 137px; }
+      label.right { left: 95px; }
+    }
+  
+    li.twoColumn.third {
+      input { width: 162px; }
+      label.middle { left: 205px; }
+      label.right { left: 390px; }
+    }
   }
 }
 
-form.new_customer {
+
+
+div#top_form {
   @include border-radius(6px);
+  background-color: $yellow;
   border: 1px solid #3A4244;
   margin-bottom: 25px;
-  div.form { padding: 10px 0px 10px 10px !important; }
+  .layout {
+    position: relative;
+    div.right_column {
+      position: absolute;
+      top: 0px;
+      left: 610px;
+    }
+    form {
+      div.full_column, div.right_column { padding: 10px 0px 10px 10px !important; }
+      li.field div.field_with_errors {
+        input, textarea {
+          @include background-image(linear-gradient(center top, #fc7878,  #fc3a3a));
+          color: white;
+        }
+        label { color: white; }
+      }
+      div#buttons {
+        @include border-radius(6px);
+        border-top: 5px solid $orange;
+        padding: 20px;
+        background-color: #3A4244;
+        li.toggle {
+          @include column(28);
+          margin-right: 300px;
+          a {
+            padding-top: 6px !important;
+            width: 252px !important;
+            height: 20px !important;
+            text-align: center;
+          }
+          a.active { @include fancy-button($orange, 12px); }
+          a.inactive { @include fancy-button(#ccc, 12px); }
+        }
+        li.submit {
+          @include column(28);
+          input {
+            float: right;
+            margin: 0px !important;
+            width: 280px;
+            height: 30px;
+          }
+        }
+      }
+    }
+  }
+  
   div.errors {
     @include background-image(linear-gradient(center top, #fc7878,  #fc3a3a));
     @include border-top-radius(6px);
@@ -131,38 +188,6 @@ form.new_customer {
       color: white;
       font-size: 13px;
       line-height: 20px;
-    }
-  }
-  li.field div.field_with_errors {
-    input {
-      @include background-image(linear-gradient(center top, #fc7878,  #fc3a3a));
-      color: white;
-    }
-    label { color: white; }
-  }
-  div#buttons {
-    @include border-radius(6px);
-    border-top: 5px solid $orange;
-    padding: 20px;
-    background-color: #3A4244;
-    li.toggle {
-      @include column(28);
-      margin-right: 300px;
-      a {
-        color: white;
-        font-size: 14px;
-        font-weight: bold;
-        line-height: 30px;
-      }
-    }
-    li.submit {
-      @include column(28);
-      input {
-        float: right;
-        margin: 0px !important;
-        width: 280px;
-        height: 30px;
-      }
     }
   }
 }

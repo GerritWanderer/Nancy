@@ -1,46 +1,54 @@
-#projectForm.wizard
-  -if ['new', 'edit', 'create', 'update'].index(params[:action]) 
-    = link_to t(:project_form_close), projects_path, :class => 'wizardFormSwitch'
-  -else
-    = link_to t(:project_form_create), new_project_path, :class => 'wizardFormSwitch'
-  .wrapper{:style => "display: #{@show_project_form? 'block' : 'none'};"}
-    -if @project.errors.any?
-      #error_explanation
-        %h2= "#{pluralize(@project.errors.count, "error")} prohibited this project from being saved:"
-        %ul
-          - @project.errors.full_messages.each do |msg|
-            %li= msg
-    #createProject
-      = form_for(@project) do |f|
+#top_form
+  -if @project.errors.any?
+    .errors
+      %h3= t('errors.template.header', :model=> Project.model_name.human, :count=> @project.errors.count)
+      %ul
+        - @project.errors.full_messages.each do |msg|
+          %li= msg
+      .clear
+  .layout
+    = form_for(@project) do |f|
+      %div{:style => "display: #{'none' unless @show_project_form}"}
         %fieldset.project
           %legend= t(:project_information)
-          %dl
-            %dt.title= f.label :title
-            %dd.title= f.text_field :title
-            %dt.description= f.label :description
-            %dd.description= f.text_area :description
+          %ul
+            %li.field.twoColumn
+              = f.label :title
+              = f.text_field :title
+            %li.field.twoColumn.twoRow
+              = f.label :description
+              = f.text_area :description
             .clear
-            %dt.small= f.label :discount
-            %dd.small= f.text_field :discount
-            %dt.small= f.label :budget
-            %dd.small= f.text_field :budget
-            %dt.submit= f.submit t('helpers.submit.submit', :model=> Project.model_name.human), :class => "submit"
-            .clear
-        = f.hidden_field :customer_id, :value => @customer.id
-        = f.hidden_field :contact_id, :value => @contact.id
-    #selectCustomer
+            %li.field.half
+              = f.label :discount, :class => 'left'
+              = f.text_field :discount, :class => 'left'
+              = f.label :budget, :class => 'right'
+              = f.text_field :budget, :class => 'right'
+            %li.field.half
+              %input.left
+              %input.right
+      #buttons
+        %ul
+          %li.toggle
+            -if @show_project_form
+              = link_to t(:project_form_close), projects_path, :class => 'inactive'
+            -else
+              = link_to t(:project_form_create), new_project_path, :class => 'active'
+          -if @show_project_form
+            %li.submit
+              = f.hidden_field :customer_id, :value => @customer.id
+              = f.hidden_field :contact_id, :value => @contact.id
+              = f.submit t('helpers.submit.submit', :model=> Project.model_name.human), :class => "submit"
+        .clear
+    .right_column{:style => "display: #{'none' unless @show_project_form}"}
       = form_tag new_project_path, :method => :get, :remote => false do
         %fieldset.customer
-          %dl
-            %dt= Customer.model_name.human
-            %dd
+          %legend #{Customer.model_name.human} & #{Contact.model_name.human}
+          %ul
+            %li.field
               = select_tag(:customer_id, options_for_select(@customers.map {|c| [c.name, c.id]}, params[:customer_id].to_i), {:onchange => "this.form.customerSubmit.click();"})
-              %input{:type=>"submit", :value=>"submit", :name=>"customerSubmit", :style=>"display:none"}
+              - # %input{:type=>"submit", :value=>"submit", :name=>"customerSubmit", :style=>"display:none"}
       = form_tag new_project_path, :method => :get, :remote => false do
         %fieldset.contact
-          %dl
-            %dt= Contact.model_name.human
-            %dd
-              = select_tag(:contact_id, options_for_select(@contacts.map {|c| [c.firstname, c.id]}), {:onchange => "$('input#project_contact_id').val(this.value)"})
-            .clear
-    .clear
+          %ul
+            %li.field= select_tag(:contact_id, options_for_select(@contacts.map {|c| [c.firstname, c.id]}), {:onchange => "$('input#project_contact_id').val(this.value)"})
