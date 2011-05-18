@@ -4,7 +4,7 @@ gem 'rails', '3.0.6'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem "builder", "~> 2.1.2"
 
-gem "compass"
+gem "compass", '0.11.1'
 gem 'fancy-buttons'
 gem 'haml'
 gem 'haml-rails'

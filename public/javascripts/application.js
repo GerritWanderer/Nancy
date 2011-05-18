@@ -36,4 +36,6 @@ $(document).ready(function() {
   
 	$("#day_date_from").datepicker({ dateFormat: "yy-mm-dd" });
 	$("#day_date_to").datepicker({ dateFormat: "yy-mm-dd" });
+	
+  $("form li.field label").inFieldLabels();
 });

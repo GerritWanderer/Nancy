@@ -1,62 +1,77 @@
-#customerForm.wizard
-  -if @show_customer_form
-    = link_to t(:customer_form_close), customers_path, :class => 'wizardFormSwitch'
-  -else
-    = link_to t(:customer_form_create), new_customer_path, :class => 'wizardFormSwitch'
-  .wrapper{:style => "display: #{@show_customer_form ? 'block' : 'none'};"}
-    -if @customer.errors.any?
-      #error_explanation
-        %h2= t('errors.template.header', :model=> Customer.model_name.human, :count=> @customer.errors.count)
+= form_for(@customer) do |f|
+  -if @customer.errors.any?
+    .errors
+      %h3= t('errors.template.header', :model=> Customer.model_name.human, :count=> @customer.errors.count)
+      %ul
+        - @customer.errors.full_messages.each do |msg|
+          %li= msg
+      .clear
+  .form{:style => "display: #{'none' unless @show_customer_form}"}
+    %fieldset
+      %legend= t(:customer_form_customer)
+      %ul
+        %li.field
+          = f.label :shortname
+          = f.text_field :shortname
+        %li.field
+          = f.label :name
+          = f.text_field :name
+        %li.field
+          = f.label :website
+          = f.text_field :website
+    = f.fields_for :locations, @customer.locations.first do |l|
+      %fieldset
+        %legend= t(:customer_form_location)
         %ul
-          - @customer.errors.full_messages.each do |msg|
-            %li= msg
-    #createCustomer
-      = form_for(@customer) do |f|
+          %li.field
+            = l.label :name
+            =l.text_field :name
+          %li.field
+            = l.label :street
+            = l.text_field :street
+          %li.field.third
+            = l.label :zip
+            = l.text_field :zip, :class => 'left'
+            = l.label :city, :class => 'right'
+            = l.text_field :city, :class => 'right'
+          %li.field
+            = l.label :fon
+            = l.text_field :fon
+          %li.field
+            = l.label :fax
+            = l.text_field :fax
+      = l.fields_for :contacts, @customer.locations.first.contacts.first do |c|
         %fieldset
-          %legend= t(:customer_form_customer)
-          %dl
-            %dt= f.label :shortname
-            %dd= f.text_field :shortname
-            %dt= f.label :name
-            %dd= f.text_field :name
-            %dt= f.label :website
-            %dd= f.text_field :website
-          = f.fields_for :locations, @customer.locations.first do |l|
-            %fieldset
-              %legend= t(:customer_form_location)
-              %dl
-                %dt= l.label :name
-                %dd= l.text_field :name
-                %dt= l.label :street
-                %dd= l.text_field :street
-                %dt= l.label :zip, "Zip / City"
-                %dd
-                  = l.text_field :zip, :class => 'zip'
-                  = l.text_field :city, :class => 'city'
-                %dt= l.label :fon
-                %dd= l.text_field :fon
-                %dt= l.label :fax
-                %dd= l.text_field :fax
-            = l.fields_for :contacts, @customer.locations.first.contacts.first do |c|
-              %fieldset
-                %legend= t(:customer_form_contact)
-                %dl
-                  %dt= c.label :salutation
-                  %dd
-                    = c.select(:salutation, options_for_select(["Mr.", "Ms."]))
-                    = c.text_field :title, :class => "title"
-                  %dt= c.label :firstname
-                  %dd= c.text_field :firstname
-                  %dt= c.label :lastname
-                  %dd= c.text_field :lastname
-                  %dt= c.label :department
-                  %dd= c.text_field :department
-                  %dt= c.label :email
-                  %dd= c.text_field :email
-                  %dt= c.label :fon
-                  %dd= c.text_field :fon
-                  %dt= c.label :fax
-                  %dd= c.text_field :fax
-                  %dt= c.label :mobile
-                  %dd= c.text_field :mobile
-              = f.submit t('helpers.submit.submit', :model=> Customer.model_name.human), :class => "submit"
+          %legend= t(:customer_form_contact)
+          %ul
+            %li.field.third
+              = c.select(:salutation, options_for_select(["Mr.", "Ms."]))
+              = c.label :title, :class => 'right'
+              = c.text_field :title, :class => "right"
+            %li.field.half
+              = c.label :firstname, :class => 'left'
+              = c.text_field :firstname, :class => 'left'
+              = c.label :lastname, :class => 'right'
+              = c.text_field :lastname, :class => 'right'
+            %li.field
+              = c.label :department
+              = c.text_field :department
+            %li.field.half
+              = c.label :fon, :class => 'left'
+              = c.text_field :fon, :class => 'left'
+              = c.label :mobile, :class => 'right'
+              = c.text_field :mobile, :class => 'right'
+            %li.field
+              = c.label :email
+              = c.text_field :email
+  #buttons
+    %ul
+      %li.toggle
+        -if @show_customer_form
+          = link_to t(:customer_form_close), customers_path
+        -else
+          = link_to t(:customer_form_create), new_customer_path
+      -if @show_customer_form
+        %li.submit
+          = f.submit t('helpers.submit.submit', :model=> Customer.model_name.human), :class => "submit"
+    .clear

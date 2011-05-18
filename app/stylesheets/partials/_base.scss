@@ -53,10 +53,7 @@ $darkYellow: #e3e3d3;
 }
 
 @mixin gradient ($from: #ffffff, $to: #000000) {
-	background: $from;
-	background: -webkit-gradient(linear, 0 0, 0 bottom, from($from), to($to));
-	background: -moz-linear-gradient($from, $to);
-	background: linear-gradient($from, $to);
+
 }
 @mixin shadow($color: #000000, $blur: 5px, $x: 0, $y: 0) {
 	-webkit-box-shadow: $x $y $blur $color;
