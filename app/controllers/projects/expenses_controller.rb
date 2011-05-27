@@ -23,13 +23,6 @@ class Projects::ExpensesController < ApplicationController
     end
     render 'projects/index'
   end
-
-  def destroy
-    @expense = Expense.find(params[:id])
-    if @expense.destroy
-      redirect_to project_path(@expense.project)
-    end
-  end
   
   def update
     begin
@@ -44,9 +37,16 @@ class Projects::ExpensesController < ApplicationController
     end
   end
   
+  def destroy
+    @expense = Expense.find(params[:id])
+    if @expense.destroy
+      redirect_to project_path(@expense.project)
+    end
+  end
+  
   def init_expenses
     @projects, @project, @customers, @customer, @contacts, @contact, @project_tab = Project.get_resources(params, current_user)
-    @show_project_form, @show_expense_form = Project.get_visibility_options(params[:controller], params[:action])
+    @show_project_form, @show_expense_form, @show_invoice_form = Project.get_visibility_options(params[:controller], params[:action])
     @expense = params[:id] ? Expense.find(params[:id]) : Expense.new
     rescue ActiveRecord::RecordNotFound
       redirect_to projects_path, :alert => t('errors.not_found', :model=> Project.model_name.human)

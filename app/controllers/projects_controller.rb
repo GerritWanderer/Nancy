@@ -47,7 +47,8 @@ class ProjectsController < ApplicationController
   end
   
   def report
-    @project.set_sums
+    @works = params[:started_at] && params[:ended_at] ? @project.works.in_range(params[:started_at], params[:ended_at]) : @project.works
+    @project.set_sums(@works)
     @currency = Configuration.find_by_key('currency').value
     respond_to do |format|
       format.html { render :layout => false, :template => 'projects/report' }
@@ -94,8 +95,7 @@ class ProjectsController < ApplicationController
   protected
   def init_projects
     @projects, @project, @customers, @customer, @contacts, @contact, @project_tab = Project.get_resources(params, current_user)
-    @show_project_form, @show_expense_form = Project.get_visibility_options(params[:controller], params[:action])
-    @expense = Expense.new
+    @show_project_form, @show_expense_form, @show_invoice_form = Project.get_visibility_options(params[:controller], params[:action])
     rescue ActiveRecord::RecordNotFound
       redirect_to projects_path, :alert => t('errors.not_found', :model=> Project.model_name.human)
   end

@@ -1,0 +1,25 @@
+= form_for([@project, @invoice]) do |f|
+  %fieldset
+    %legend= t('helpers.form', :model=> Invoice.model_name.human)
+    -if @invoice.errors.any?
+      .errors
+        %h3= t('errors.template.header', :model=> Invoice.model_name.human, :count=> @invoice.errors.count)
+        %ul
+          - @invoice.errors.full_messages.each do |msg|
+            %li= msg
+        .clear
+    %ul
+      %li.field.threeColumn
+        = f.label :title
+        = f.text_field :title
+      %li.field.half
+        = f.label :started_at, :class => 'left'
+        = f.text_field :started_at, :class => 'left'
+        = f.label :ended_at, :class => 'right'
+        = f.text_field :ended_at, :class => 'right'
+  .buttons
+    %ul
+      %li.toggle= link_to 'Abbrechen', @project
+      %li.submit
+        = f.submit t('helpers.submit.submit', :model=> Invoice.model_name.human), :class => "submit"
+    .clear

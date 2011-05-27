@@ -25,7 +25,7 @@
       %h2=@project.title
       %hr/
       %div#works
-        -@project.works.order("started_at ASC").each do |work|
+        -@works.order("started_at ASC").each do |work|
           %ul{:class=>"record", :id=>"work#{work.id}"}
             %li.time
               = work.started_at.strftime('%Y-%m-%d')

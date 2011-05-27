@@ -1,6 +1,6 @@
 @import "partials/base";
 
-body#projects, body#expenses { 
+body#projects, body#expenses, body#invoices { 
   div#projectForm {
     div.wrapper {
       @include rounded;
@@ -67,7 +67,7 @@ div.project {
     }
     span.formAction {
       text-align: right;
-      @include grid(30);
+      @include grid(10);
       form {
         display: inline;
         padding: 0px !important;
@@ -77,9 +77,18 @@ div.project {
   }
   div.expenses {
     ul.toolbar, ul.record {
-      li.from { @include grid(27) }
-      li.description { @include grid(47) }
-      li.amount { @include grid(7) }
+      li.from { @include grid(24) }
+      li.description { @include grid(48) }
+      li.amount { @include grid(9) }
+      li.actions { @include grid(7) }
+      li.actions { text-align: right; }
+    }
+  }
+  div.invoices {
+    ul.toolbar, ul.record {
+      li.from { @include grid(24) }
+      li.description { @include grid(48) }
+      li.range { @include grid(9) }
       li.actions { @include grid(7) }
       li.actions { text-align: right; }
     }
@@ -98,7 +107,7 @@ div.project {
     border-bottom: 1px solid grey;
     padding: 0px 0px;
     
-    div.projectInformation, div.contacts, div.expenses {
+    div.projectInformation, div.contacts, div.expenses, div.invoices {
       background-color: white;
       @include roundedTop;
   	  @include roundedBottom;

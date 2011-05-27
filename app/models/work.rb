@@ -15,6 +15,7 @@ class Work < ActiveRecord::Base
   
   default_scope :order => "started_at ASC"
   scope :from_day_by_user, lambda { |day, user| where(:user_id => user).where("started_at BETWEEN ? AND ?", day+" 00:00", day+" 23:59") }
+  scope :in_range, lambda { |started_at, ended_at| where("started_at BETWEEN ? AND ?", started_at+" 00:00", ended_at+" 23:59") }
   
   def self.get_basic_view_variables
     fees = Configuration.find_by_key('work_fees') ? Configuration.find_by_key('work_fees').value.split(';') : [0.00]

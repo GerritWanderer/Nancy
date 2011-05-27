@@ -11,5 +11,10 @@ class User < ActiveRecord::Base
   has_many :days
   has_many :works
   has_many :expenses
+  has_many :invoices
   has_and_belongs_to_many :projects
+  
+  def to_s
+    "#{firstname} #{lastname}"
+  end
 end

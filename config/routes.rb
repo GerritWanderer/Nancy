@@ -43,13 +43,14 @@ Nancy::Application.routes.draw do
       member do
         get 'switch'
         get 'report'
+        match 'report/:started_at/:ended_at' => "projects#report", :as => :report_range
         get 'subscribe_user'
         post 'subscribe_user'
         delete 'unsubscribe_user'
       end
       resources :expenses, :controller => "projects/expenses"
+      resources :invoices, :controller => "projects/invoices"
     end
-    
     match ':path' => 'static#show'
   end
   

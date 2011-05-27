@@ -31,7 +31,7 @@ prawn_document(:filename=>"report_#{@project.id}.pdf", :page_layout => :portrait
     pdf.horizontal_line 0, 530
   end
 
-  data = @project.works.map do |work|
+  data = @works.map do |work|
     ["#{work.started_at.strftime('%Y-%m-%d')}\n#{work.user.firstname} #{work.user.lastname}",
       work.description,
       "#{(work.duration / 60).to_f * work.fee} h",

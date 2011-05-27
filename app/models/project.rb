@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
   belongs_to :contact
   has_many :works, :dependent => :delete_all
   has_many :expenses, :dependent => :delete_all
+  has_many :invoices, :dependent => :delete_all
   has_and_belongs_to_many :users
   
   validates :title, :presence => true, :length => {:minimum => 3, :maximum => 254}
@@ -51,15 +52,22 @@ class Project < ActiveRecord::Base
     form_actions = ['new', 'edit', 'create']
     project_form = controller == 'projects' && form_actions.index(action) ? true : false
     expense_form = controller == 'projects/expenses' && form_actions.index(action) ? true : false
-    return project_form, expense_form
+    invoice_form = controller == 'projects/invoices' && form_actions.index(action) ? true : false
+    return project_form, expense_form, invoice_form
   end
   
-  def set_sums
+  def get_invoice_dates
+    started_at = self.invoices.empty? ? self.works.first.started_at : self.invoices.last.ended_at
+    ended_at = self.works.last.ended_at
+    return started_at, ended_at
+  end
+  
+  def set_sums(works)
     self.tax = Configuration.find_by_key('tax').value.to_f
     # Sum each work with duration and fee
     self.work_sum = 0
     self.net_sum = 0
-    self.works.each do |work|
+    works.each do |work|
       self.work_sum += work.duration.to_f / 60
       self.net_sum += (work.duration.to_f / 60) * work.fee
     end
