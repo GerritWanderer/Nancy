@@ -1,6 +1,6 @@
 @import "partials/base";
 
-body#projects { 
+body#projects, body#expenses { 
   div#projectForm {
     div.wrapper {
       @include rounded;
@@ -78,9 +78,10 @@ div.project {
   div.expenses {
     ul.toolbar, ul.record {
       li.from { @include grid(27) }
-      li.description { @include grid(50) }
+      li.description { @include grid(47) }
       li.amount { @include grid(7) }
       li.actions { @include grid(7) }
+      li.actions { text-align: right; }
     }
   }
 }
@@ -89,7 +90,7 @@ div.project {
 div.project {
   color: $darkGrey;
   margin-bottom: 5px;
-  div.nestedRessources {
+  div#resources {
     @include roundedBottom;
     background-color: white;
     border-left: 1px solid grey;

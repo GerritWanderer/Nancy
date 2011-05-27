@@ -13,8 +13,13 @@ class Project < ActiveRecord::Base
   scope :by_customer_isClosed, proc {|customer, status| where(:customer_id => customer, :closed => status).order('title ASC') }
   scope :isClosed, lambda {|status| {:conditions => {:closed => status}}}
   
-  def self.get_view_objects(params, current_user)
-    project = params[:id] ? Project.find(params[:id]) : Project.new
+  
+  def self.get_resources(params, current_user)  
+    if params[:project_id]
+      project = Project.find(params[:project_id])
+    else
+      project = params[:id] ? Project.find(params[:id]) : Project.new
+    end
     
     if params[:closed].to_i == 1 || project.closed == 1
       projects = Project.isClosed(1).joins(:customer).order(params[:order])
@@ -28,10 +33,7 @@ class Project < ActiveRecord::Base
         project_tab = 'active'
       end
     end
-    return projects, project, project_tab
-  end
-  
-  def self.get_form_objects(params)
+    
     customers = Customer.all
     contacts = []
     if customers.empty?
@@ -42,8 +44,14 @@ class Project < ActiveRecord::Base
       contact = params[:contact_id] ? Contacts.find(params[:contact_id]) : customer.locations.first.contacts.first
       customer.locations.each {|location| location.contacts.each {|contact| contacts.push(contact)}}
     end
-    show_project_form = ['new', 'edit', 'create'].index(params[:action]) ? true : false
-    return customers, customer, contacts, contact, show_project_form
+    return projects, project, customers, customer, contacts, contact, project_tab
+  end
+  
+  def self.get_visibility_options(controller, action)
+    form_actions = ['new', 'edit', 'create']
+    project_form = controller == 'projects' && form_actions.index(action) ? true : false
+    expense_form = controller == 'projects/expenses' && form_actions.index(action) ? true : false
+    return project_form, expense_form
   end
   
   def set_sums

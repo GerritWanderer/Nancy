@@ -11,9 +11,7 @@
       %fieldset.project
         %ul
           %li.field.half
-            = f.label :started_at, :class => 'left'
             = f.text_field :started_at, :value => @work.started_at.strftime('%H:%M'),:size => 4, :class => 'left'
-            = f.label :ended_at, :class => 'right'
             = f.text_field :ended_at, :value => @work.ended_at.strftime('%H:%M'), :size => 4, :class => 'right'
           %li.field.half
             %input.left
@@ -21,7 +19,7 @@
           %li.field.twoColumn.twoRow
             = f.label :description
             = f.text_area :description
-      #buttons
+      .buttons
         %ul
           %li.toggle &nbsp;
           %li.submit

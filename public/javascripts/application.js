@@ -13,7 +13,7 @@ $(document).ready(function() {
 		bgImage: function() { return 'url(' + $(this).attr("data-flagicon") + ')'; }
 	});
 	
-	$('dd.time input').live('click', function() {
+	$('input#work_started_at, input#work_ended_at').live('click', function() {
   	$(this).timepicker({
       showPeriod: false,
       showPeriodLabels: false,

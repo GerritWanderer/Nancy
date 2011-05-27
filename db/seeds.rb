@@ -1,9 +1,9 @@
 require 'faker'
 I18n.default_locale = :en
-user = User.create!(:firstname => ENV['ADMIN_FIRSTNAME'],
-             :lastname => ENV['ADMIN_LASTNAME'],
-             :email => ENV['ADMIN_EMAIL'],
-             :password => ENV['ADMIN_PASSWORD'])
+user = User.create!(:firstname => ENV['ADMIN_FIRSTNAME'] || Faker::Name.first_name,
+             :lastname => ENV['ADMIN_LASTNAME'] || Faker::Name.last_name,
+             :email => ENV['ADMIN_EMAIL'] || 'user@example.org',
+             :password => ENV['ADMIN_PASSWORD'] || 'development')
 user.sign_in_count = 1
 user.confirmed_at = "2011-01-18 12:10:00"
 user.role = "admin"

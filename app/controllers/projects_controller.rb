@@ -93,10 +93,13 @@ class ProjectsController < ApplicationController
   
   protected
   def init_projects
-    @projects, @project, @project_tab = Project.get_view_objects(params, current_user)
-    @customers, @customer, @contacts, @contact, @show_project_form = Project.get_form_objects(params)
+    @projects, @project, @customers, @customer, @contacts, @contact, @project_tab = Project.get_resources(params, current_user)
+    @show_project_form, @show_expense_form = Project.get_visibility_options(params[:controller], params[:action])
+    @expense = Expense.new
+    rescue ActiveRecord::RecordNotFound
+      redirect_to projects_path, :alert => t('errors.not_found', :model=> Project.model_name.human)
   end
-
+  
   def render_filter
     respond_with(@project) do |format|
       format.html { render "index" }

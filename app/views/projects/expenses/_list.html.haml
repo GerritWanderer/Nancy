@@ -7,9 +7,12 @@
     %li.description= Expense.human_attribute_name('description')
     %li.amount= Expense.human_attribute_name('amount')
     .clear
-  %ul.record
-    - @project.expenses.each do |expense|
+  - @project.expenses.each do |expense|
+    %ul.record
       %li.from am #{expense.created_at}
       %li.description= expense.description
       %li.amount= expense.amount
-= render :partial => 'projects/expenses/form'
+      %li.actions
+        = link_to image_tag("/images/icons-nancy/edit.gif"), edit_project_expense_path(@project.id, expense.id)
+        = link_to image_tag("/images/icons-nancy/delete.gif"), project_expense_path(@project.id, expense.id), :method => "delete"
+      .clear

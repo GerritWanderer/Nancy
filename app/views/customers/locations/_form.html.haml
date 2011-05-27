@@ -1,26 +1,33 @@
 = form_for([@customer, @location]) do |f|
-  -if @location.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@location.errors.count, "error")} prohibited this contact from being saved:"
-      %ul
-        = @location.errors.full_messages.each do |msg|
-          %li= msg
   %fieldset
     %legend= t('helpers.form', :model=> Location.model_name.human)
-    = link_to image_tag("/images/icons-nancy/container-close.gif"), :back
-    %hr.clear/
-    %dl
-      %dt= f.label :name
-      %dd= f.text_field :name
-      %dt= f.label :street
-      %dd= f.text_field :street
-      %dt= f.label :zip
-      %dd
-        = f.text_field :zip, :class => 'zip'
-        = f.text_field :city, :class => 'city'
-      %dt= f.label :fon
-      %dd= f.text_field :fon
-      %dt= f.label :fax
-      %dd= f.text_field :fax
-      %dt.submit= f.submit t('helpers.submit.submit', :model=> Location.model_name.human), :class => "submit"
-  = f.hidden_field :customer_id, :value => @customer.id
+    -if @location.errors.any?
+      .errors
+        %h3= t('errors.template.header', :model=> Location.model_name.human, :count=> @location.errors.count)
+        %ul
+          - @location.errors.full_messages.each do |msg|
+            %li= msg
+        .clear
+    %ul
+      %li.field.half
+        = f.label :name, :class => 'left'
+        = f.text_field :name, :class => 'left'
+        = f.label :street, :class => 'right'
+        = f.text_field :street, :class => 'right'
+      %li.field.third
+        = f.label :zip
+        = f.text_field :zip, :class => 'left'
+        = f.label :city, :class => 'right'
+        = f.text_field :city, :class => 'right'
+      %li.field.half
+        = f.label :fon, :class => 'left'
+        = f.text_field :fon, :class => 'left'
+        = f.label :fax, :class => 'right'
+        = f.text_field :fax, :class => 'right'
+  .buttons
+    %ul
+      %li.toggle= link_to 'Abbrechen', [@customer, @location]
+      %li.submit
+        = f.hidden_field :customer_id, :value => @customer.id
+        = f.submit t('helpers.submit.submit', :model=> Location.model_name.human), :class => "submit"
+    .clear

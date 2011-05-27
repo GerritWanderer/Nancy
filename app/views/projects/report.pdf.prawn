@@ -37,7 +37,7 @@ prawn_document(:filename=>"report_#{@project.id}.pdf", :page_layout => :portrait
       "#{(work.duration / 60).to_f * work.fee} h",
       number_to_currency((work.duration.to_f / 60 * work.fee), :unit => @currency)]
   end
-  pdf.table(data, :column_widths => {0 => 100, 1 => 325, 2 => 50, 3 => 50}, :width => 525) do
+  pdf.table(data, :column_widths => {0 => 100, 1 => 310, 2 => 50, 3 => 65}, :width => 525) do
     column(2..3).align = :right 
     cells.style do |c|
       c.border_width = 1.0
@@ -49,6 +49,27 @@ prawn_document(:filename=>"report_#{@project.id}.pdf", :page_layout => :portrait
   end
   # :row_colors => %w[cccccc ffffff]
   
+  pdf.text "\n\n"
+  
+  summary = [["Working hours / Total sum", "#{@project.work_sum} hrs", number_to_currency(@project.net_sum, :unit => @currency)],
+          ["Working hours / Total sum to pay", "53.5 hrs", "99.999,99 $"],
+          ["Sum net", "", number_to_currency(@project.full_net_sum, :unit => @currency)],
+          ["Add #{@project.tax}% tax", "", number_to_currency(@project.tax_sum, :unit => @currency)],
+          ["Sum total", "", number_to_currency(@project.full_tax_sum, :unit => @currency)]]
+          
+  pdf.table(summary, :column_widths => {0 => 410, 1 => 50, 2 => 65}, :width => 525) do
+    column(1..2).align = :right
+    cells.style do |c|
+      c.border_width = 1.0
+      c.size = 10
+      c.border_color = "b3b3b3"
+      c.borders=[:bottom]
+      c.padding_bottom = 3
+    end
+    rows(2..4).style do |r|
+      r.style(:font_style => :bold)
+    end
+  end
   
   pdf.page_count.times do |i|
      pdf.go_to_page(i)

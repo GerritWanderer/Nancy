@@ -7,37 +7,6 @@ body#customers, body#locations, body#contacts {
     text-align: right;
   }
 }
-div#customerForm {
-	
-  legend {
-	font-weight: bold;
-	padding-left: 13px;
-	color: $darkGrey;
-		  }
-   div#createCustomer{
-   form{
-   border: 1px solid grey;
-	border-top:5px solid $orangeRed;}
-   }
-   a {display: block; font-weight:bold; padding: 0px 0px 15px 15px; color: white;}
-  
-  dl {
-        dt {
-      @include grid(12,0,1);
-      text-align: right;
-      margin-bottom: 10px;
-    }
-    dd {
-      margin-bottom: 10px;
-      @include grid(15);
-      input { width: 150px; }
-      input.zip { width: 40px; }
-      input.city { width: 90px; }
-      input.title { width: 82px; }
-    }
-  }
-  input.submit { margin-left: 650px !important; }
-}
 
 div.customer {
   color: $darkGrey;
@@ -52,42 +21,18 @@ div.customer {
     padding: 0px 0px;
 
     div.location {
-	  background-color: white;
-    @include roundedTop;
-	  @include roundedBottom;
-	  border-top:5px solid $darkGrey;
-    padding: 8px;
-    ul li { @include grid(26); }
-      form {
-	      background-color: transparent !important;
-        padding: 0px !important;
-        dl {
-          dt {
-            @include grid(10);
-            margin-bottom: 10px;
-            text-align: right;
-          }
-		   
-          dd {
-            @include grid(18);
-            margin-bottom: 10px;
-            input { width: 150px; }
-            input.zip { width: 40px; }
-            input.city { width: 90px; }
-          }
-          dt.submit {
-            margin-left: 82px;
-            input.submit { margin: 0px !important; }
-          }
-        }
-      
-	  }
+      background-color: white;
+      @include roundedTop;
+      @include roundedBottom;
+      border-top:5px solid $darkGrey;
+      padding: 8px;
+      ul.record li { @include grid(26); }
     }
     div.contacts {
       @include roundedTop;
       padding: 8px;
 	    border-top:5px solid $darkGrey;
-      ul {
+      ul.record {
         li { @include grid(26); }
         li.fon {
           @include grid(30);
@@ -102,29 +47,6 @@ div.customer {
 
       }
       ul.record { margin-bottom: 10px; }
-      form {
-        background-color: transparent !important;
-        padding: 0px !important;
-        dl {
-          dt {
-            @include grid(9);
-            margin-bottom: 10px;
-            text-align: right;
-          }
-          dd {
-            @include grid(20);
-            margin-bottom: 10px;
-            input { width: 150px; }
-            input.title { width: 89px; }
-            input.zip { width: 40px; }
-            input.city { width: 90px; }
-          }
-          dt.submit {
-            margin-left: 82px;
-            input.submit { margin: 0px !important; }
-          }
-        }
-      }
     }
     
     

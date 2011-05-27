@@ -27,18 +27,20 @@
             %li.field.half
               %input.left
               %input.right
-      #buttons
+      .buttons
         %ul
           %li.toggle
             -if @show_project_form
               = link_to t(:project_form_close), projects_path, :class => 'inactive'
             -else
-              = link_to t(:project_form_create), new_project_path, :class => 'active'
-          -if @show_project_form
+              &nbsp;
             %li.submit
-              = f.hidden_field :customer_id, :value => @customer.id
-              = f.hidden_field :contact_id, :value => @contact.id
-              = f.submit t('helpers.submit.submit', :model=> Project.model_name.human), :class => "submit"
+              - if @show_project_form
+                = f.hidden_field :customer_id, :value => @customer.id
+                = f.hidden_field :contact_id, :value => @contact.id
+                = f.submit t('helpers.submit.submit', :model=> Project.model_name.human), :class => "submit"
+              - else
+                = link_to t(:project_form_create), new_project_path, :class => 'active'
         .clear
     .right_column{:style => "display: #{'none' unless @show_project_form}"}
       = form_tag new_project_path, :method => :get, :remote => false do

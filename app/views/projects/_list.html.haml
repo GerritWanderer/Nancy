@@ -14,7 +14,7 @@
         = link_to image_tag("/images/icons-nancy/delete.gif"), project_path(project, :order => params[:order], :closed => params[:closed]), :confirm => 'Are you sure?', :method => :delete if can? :manage, Project
       .clear
     - if project.id == @project.id
-      .nestedRessources
+      #resources
         .projectInformation
           %h2= t(:project_information)
           %span.actions
@@ -37,5 +37,8 @@
           = render :partial => 'projects/details/contacts'
           = render :partial => 'projects/details/users'
         .expenses
-          = render :partial => 'projects/expenses/list'
+          - if !@show_expense_form
+            = render :partial => 'projects/expenses/list' 
+          - else
+            = render :partial => 'projects/expenses/form'
       .clear

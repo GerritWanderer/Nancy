@@ -25,23 +25,21 @@
           %fieldset
             %legend= t(:customer_form_location)
             %ul
-              %li.field
-                = l.label :name
-                =l.text_field :name
-              %li.field
-                = l.label :street
-                = l.text_field :street
+              %li.field.half
+                = l.label :name, :class => 'left'
+                =l.text_field :name, :class => 'left'
+                = l.label :street, :class => 'right'
+                = l.text_field :street, :class => 'right'
               %li.field.third
                 = l.label :zip
                 = l.text_field :zip, :class => 'left'
                 = l.label :city, :class => 'right'
                 = l.text_field :city, :class => 'right'
-              %li.field
-                = l.label :fon
-                = l.text_field :fon
-              %li.field
-                = l.label :fax
-                = l.text_field :fax
+              %li.field.half
+                = l.label :fon, :class => 'left'
+                = l.text_field :fon, :class => 'left'
+                = l.label :fax, :class => 'right'
+                = l.text_field :fax, :class => 'right'
           = l.fields_for :contacts, @customer.locations.first.contacts.first do |c|
             %fieldset
               %legend= t(:customer_form_contact)
@@ -66,14 +64,16 @@
                 %li.field
                   = c.label :email
                   = c.text_field :email
-      #buttons
+      .buttons
         %ul
           %li.toggle
             -if @show_customer_form
               = link_to t(:customer_form_close), customers_path, :class => 'inactive'
+            - else
+              &nbsp;
+          %li.submit
+            -if @show_customer_form
+              = f.submit t('helpers.submit.submit', :model=> Customer.model_name.human), :class => "submit"
             -else
               = link_to t(:customer_form_create), new_customer_path, :class => 'active'
-          -if @show_customer_form
-            %li.submit
-              = f.submit t('helpers.submit.submit', :model=> Customer.model_name.human), :class => "submit"
         .clear
