@@ -13,7 +13,7 @@
       %li.description= invoice.title
       %li.range #{l(invoice.started_at, :format => :date)} to #{l(invoice.ended_at, :format => :date)}
       %li.actions
-        = link_to image_tag("/images/icons-nancy/project-report.gif"), report_project_path(@project.id, :started_at => invoice.started_at.strftime("%Y-%m-%d"), :ended_at => invoice.ended_at.strftime("%Y-%m-%d"))
+        = link_to image_tag("/images/icons-nancy/project-report.gif"), report_range_project_path(@project.id, invoice.started_at.strftime("%Y-%m-%d"), invoice.ended_at.strftime("%Y-%m-%d"))
         = link_to image_tag("/images/icons-nancy/project-pdf.gif"), report_range_project_path(@project.id, invoice.started_at.strftime("%Y-%m-%d"), invoice.ended_at.strftime("%Y-%m-%d"))+".pdf"
         %br/
         = link_to image_tag("/images/icons-nancy/edit.gif"), edit_project_invoice_path(@project.id, invoice.id)

@@ -23,27 +23,51 @@
 
       %h1 Project Report: #{@project.id}
       %h2=@project.title
+      %p
+        %strong Auf das Projekt gebuchte Zeiten
       %hr/
-      %div#works
-        -@works.order("started_at ASC").each do |work|
+      #works
+        -@works.each do |work|
           %ul{:class=>"record", :id=>"work#{work.id}"}
             %li.time
               = work.started_at.strftime('%Y-%m-%d')
               %br/
-              = "#{User.find(work.user_id).firstname} #{User.find(work.user_id).lastname}"
+              = work.user
             %li.description= work.description
             %li.duration #{work.duration.to_f / 60} hours
-            %li.sum= number_to_currency((work.duration.to_f / 60 * work.fee), :unit => Configuration.find_by_key('currency').value)
-            .clear 
-        %dl#sum
-          %dt.duration Duration:
-          %dd.duration #{@project.work_sum} hours
-          %dd.duration #{number_to_currency(@project.net_sum, :unit => @currency)}
+            %li.sum= number_to_currency((work.duration.to_f / 60 * work.fee), :unit => @currency)
+            .clear
+      #expenses
+        %p
+          %strong Auf das Projekt gebuchte Auslagen
+        -@expenses.each do |expense|
+          %ul{:class=>"record", :id=>"expense#{expense.id}"}
+            %li.time
+              = expense.created_at.strftime('%Y-%m-%d')
+              %br/
+              = expense.user
+            %li.description= expense.description
+            %li.sum= number_to_currency(expense.amount, :unit => @currency)
+            .clear
+      %dl.sum
+        %dt.duration Duration:
+        %dd.duration #{@project.work_hour_sum} hours
+        %dd.duration #{number_to_currency(@project.work_net_sum, :unit => @currency)}
+        -if @project.discount > 0
           %dt.discount Discount (#{@project.discount}%):
-          %dd.discount #{number_to_currency(@project.discount_sum, :unit => @currency)}
-          %dt.net Sum net:
-          %dd.net #{number_to_currency(@project.full_net_sum, :unit => @currency)}
-          %dt.tax Add #{@project.tax}% tax:
-          %dd.tax #{number_to_currency(@project.tax_sum, :unit => @currency)}
-          %dt.final Final Tax Sum:
-          %dd.final #{number_to_currency(@project.full_tax_sum, :unit => @currency)}
+          %dd.discount #{number_to_currency(@project.work_discount_sum, :unit => @currency)}
+        -unless @expenses.empty?
+          %dt.expenses Expenses:
+          %dd.expenses #{number_to_currency(@project.expense_sum, :unit => @currency)}
+        .clear
+      %dl.sum
+        %dt.net Sum net:
+        %dd.net #{number_to_currency(@project.full_net_sum, :unit => @currency)}
+        %dt.tax Add #{@project.tax}% tax:
+        %dd.tax #{number_to_currency(@project.tax_sum, :unit => @currency)}
+        .clear
+      %dl.sum.final
+        %dt.final Final Tax Sum:
+        %dd.final #{number_to_currency(@project.full_tax_sum, :unit => @currency)}
+        .clear
+      

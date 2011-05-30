@@ -50,13 +50,20 @@ prawn_document(:filename=>"report_#{@project.id}.pdf", :page_layout => :portrait
   # :row_colors => %w[cccccc ffffff]
   
   pdf.text "\n\n"
+  pdf.text "Stored Expenses, ordered by month",
+    :size => 10,
+    :style => :bold
+  pdf.horizontal_line 0, 530
+  pdf.text "\n\n"
   
-  summary = [["Working hours / Total sum", "#{@project.work_sum} hrs", number_to_currency(@project.net_sum, :unit => @currency)],
-          ["Working hours / Total sum to pay", "53.5 hrs", "99.999,99 $"],
-          ["Sum net", "", number_to_currency(@project.full_net_sum, :unit => @currency)],
-          ["Add #{@project.tax}% tax", "", number_to_currency(@project.tax_sum, :unit => @currency)],
-          ["Sum total", "", number_to_currency(@project.full_tax_sum, :unit => @currency)]]
-          
+  summary = [["Working hours / Total sum", "#{@project.work_hour_sum} hrs", number_to_currency(@project.work_net_sum, :unit => @currency)],
+    ["Working hours / Total sum to pay", "#{@project.work_hour_sum} hrs", number_to_currency(@project.work_net_sum, :unit => @currency)]]
+  summary.push(["Discount", "", number_to_currency(@project.work_discount_sum, :unit => @currency)]) if @project.discount > 0
+  summary.push(["Expenses", "", number_to_currency(@project.expense_sum, :unit => @currency)]) unless @project.expenses.empty?
+  summary.push(["Sum net", "", number_to_currency(@project.full_net_sum, :unit => @currency)],
+    ["Add #{@project.tax}% tax", "", number_to_currency(@project.tax_sum, :unit => @currency)],
+    ["Sum total", "", number_to_currency(@project.full_tax_sum, :unit => @currency)])
+  
   pdf.table(summary, :column_widths => {0 => 410, 1 => 50, 2 => 65}, :width => 525) do
     column(1..2).align = :right
     cells.style do |c|
@@ -66,11 +73,11 @@ prawn_document(:filename=>"report_#{@project.id}.pdf", :page_layout => :portrait
       c.borders=[:bottom]
       c.padding_bottom = 3
     end
-    rows(2..4).style do |r|
+    rows(4..6).style do |r|
       r.style(:font_style => :bold)
     end
   end
-  
+    
   pdf.page_count.times do |i|
      pdf.go_to_page(i)
      pdf.text_box("Page #{pdf.page_count - i} of #{pdf.page_count}",

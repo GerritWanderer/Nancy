@@ -6,36 +6,48 @@ $(document).ready(function() {
   // $("a.recordFormSwitch").click(function() {
   //  $(this).parent().parent().parent().children("div.details, form").slideToggle();
   // });
-  
-	$('select#language').selectmenu({
+
+  $('select#language').selectmenu({
     icons: [ {find: '.flag'} ],
     change: function(e, object) { window.location.href = object.value; },
-		bgImage: function() { return 'url(' + $(this).attr("data-flagicon") + ')'; }
-	});
-	
-	$('input#work_started_at, input#work_ended_at').live('click', function() {
-  	$(this).timepicker({
+    bgImage: function() { return 'url(' + $(this).attr("data-flagicon") + ')'; }
+  });
+
+  $('input#work_started_at, input#work_ended_at').live('click', function() {
+    $(this).timepicker({
       showPeriod: false,
       showPeriodLabels: false,
       hourText: 'Hour',
       minuteText: 'Minute'
     }).timepicker('show');
   });
-  
+
   $('li#calendarNavigation span').live('click', function() {
     $('li#calendarNavigation input.datepicker').datepicker({
-  	  dateFormat: "yy-mm-dd",
-  	  onSelect: function(dateText, inst) { window.location.href = window.location.pathname+"?date="+dateText; } 
-  	}).datepicker('show');
-	});
-	
-	$('a.lightbox').click(function() {
-	  $.colorbox({href:$(this).attr('href')});
-	  return false;
-	});
+      dateFormat: "yy-mm-dd",
+      onSelect: function(dateText, inst) { window.location.href = window.location.pathname+"?date="+dateText; } 
+    }).datepicker('show');
+  });
+
+  $('a.lightbox').click(function() {
+    $.colorbox({href:$(this).attr('href')});
+    return false;
+  });
+
+  $("#day_date_from").datepicker({ dateFormat: "yy-mm-dd" });
+  $("#day_date_to").datepicker({ dateFormat: "yy-mm-dd" });
   
-	$("#day_date_from").datepicker({ dateFormat: "yy-mm-dd" });
-	$("#day_date_to").datepicker({ dateFormat: "yy-mm-dd" });
-	
+  $("#invoice_started_at").datepicker({
+    dateFormat: "yy-mm-dd",
+    minDate: new Date($('input#invoice_started_at').val()),
+    maxDate: new Date($('input#invoice_started_at').val())
+  });
+  $("#invoice_ended_at").datepicker({
+    dateFormat: "yy-mm-dd",
+    minDate: new Date($('input#invoice_started_at').val()),
+    maxDate: new Date($('input#invoice_ended_at').val())
+  });
+  
+
   $("form li.field label").inFieldLabels();
 });

@@ -47,8 +47,8 @@ class ProjectsController < ApplicationController
   end
   
   def report
-    @works = params[:started_at] && params[:ended_at] ? @project.works.in_range(params[:started_at], params[:ended_at]) : @project.works
-    @project.set_sums(@works)
+    @works, @expenses = @project.get_childs_range(params[:started_at], params[:ended_at])
+    @project.set_sums(@works, @expenses)
     @currency = Configuration.find_by_key('currency').value
     respond_to do |format|
       format.html { render :layout => false, :template => 'projects/report' }

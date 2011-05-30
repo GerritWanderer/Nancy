@@ -9,7 +9,7 @@ class Project < ActiveRecord::Base
   validates :title, :presence => true, :length => {:minimum => 3, :maximum => 254}
   validates_presence_of :description, :message => "Description can't be blank"
   
-  attr_accessor :tax, :work_sum, :net_sum, :discount_sum, :full_net_sum, :tax_sum, :full_tax_sum
+  attr_accessor :tax, :work_net_sum, :work_hour_sum, :work_discount_sum, :expense_sum, :full_net_sum, :tax_sum, :full_tax_sum
   
   scope :by_customer_isClosed, proc {|customer, status| where(:customer_id => customer, :closed => status).order('title ASC') }
   scope :isClosed, lambda {|status| {:conditions => {:closed => status}}}
@@ -62,18 +62,35 @@ class Project < ActiveRecord::Base
     return started_at, ended_at
   end
   
-  def set_sums(works)
+  def get_childs_range(started_at, ended_at)
+    if started_at && ended_at
+      works = self.works.in_range(started_at, ended_at) 
+      expenses = self.expenses.in_range(started_at, ended_at)
+    else
+      works = self.works.find(:all, :include => :user)
+      expenses = self.expenses.find(:all, :include => :user)
+    end
+    return works, expenses
+  end
+
+  def set_sums(works, expenses)
     self.tax = Configuration.find_by_key('tax').value.to_f
     # Sum each work with duration and fee
-    self.work_sum = 0
-    self.net_sum = 0
+    self.work_net_sum = 0
+    self.work_hour_sum = 0
+    self.expense_sum = 0
     works.each do |work|
-      self.work_sum += work.duration.to_f / 60
-      self.net_sum += (work.duration.to_f / 60) * work.fee
+      self.work_hour_sum += work.duration.to_f / 60
+      self.work_net_sum += (work.duration.to_f / 60) * work.fee
     end
+    self.work_discount_sum = 0 - (self.work_net_sum * (self.discount / 100))
+    
+    expenses.each do |expense|
+      self.expense_sum += expense.amount
+    end
+    
     # add discount and tax sums
-    self.discount_sum = self.net_sum * (self.discount / 100)
-    self.full_net_sum = self.net_sum - self.discount_sum
+    self.full_net_sum = self.work_net_sum + self.work_discount_sum + self.expense_sum
     self.tax_sum = self.full_net_sum * (self.tax / 100)
     self.full_tax_sum = self.full_net_sum + self.tax_sum
   end
