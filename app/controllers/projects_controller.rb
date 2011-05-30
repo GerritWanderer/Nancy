@@ -95,7 +95,7 @@ class ProjectsController < ApplicationController
   protected
   def init_projects
     @projects, @project, @customers, @customer, @contacts, @contact, @project_tab = Project.get_resources(params, current_user)
-    @show_project_form, @show_expense_form, @show_invoice_form = Project.get_visibility_options(params[:controller], params[:action])
+    @show_project_form, @show_expense_form, @show_invoice_form, show_status_message_form = Project.get_visibility_options(params[:controller], params[:action])
     rescue ActiveRecord::RecordNotFound
       redirect_to projects_path, :alert => t('errors.not_found', :model=> Project.model_name.human)
   end

@@ -1,0 +1,18 @@
+%h2= StatusMessage.model_name.human
+%span.actions= link_to image_tag("/images/icons-nancy/project-report.gif"), new_project_status_message_path(@project)
+%hr.clear/
+.details
+  %ul.toolbar
+    %li.from #{StatusMessage.human_attribute_name('created_at')} / #{User.model_name.human}
+    %li.title= StatusMessage.human_attribute_name('title')
+    %li.attachment= StatusMessage.human_attribute_name('attachment')
+    .clear
+  - @project.status_messages.each do |status_message|
+    %ul.record
+      %li.from am #{status_message.created_at}
+      %li.title= status_message.title
+      %li.attachment= link_to 'Download', status_message.attachment.url
+      %li.actions
+        = link_to image_tag("/images/icons-nancy/edit.gif"), edit_project_status_message_path(@project.id, status_message.id)
+        = link_to image_tag("/images/icons-nancy/delete.gif"), project_status_message_path(@project.id, status_message.id), :method => "delete"
+      .clear

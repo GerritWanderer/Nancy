@@ -4,6 +4,7 @@ class Project < ActiveRecord::Base
   has_many :works, :dependent => :delete_all
   has_many :expenses, :dependent => :delete_all
   has_many :invoices, :dependent => :delete_all
+  has_many :status_messages, :dependent => :delete_all
   has_and_belongs_to_many :users
   
   validates :title, :presence => true, :length => {:minimum => 3, :maximum => 254}
@@ -53,7 +54,8 @@ class Project < ActiveRecord::Base
     project_form = controller == 'projects' && form_actions.index(action) ? true : false
     expense_form = controller == 'projects/expenses' && form_actions.index(action) ? true : false
     invoice_form = controller == 'projects/invoices' && form_actions.index(action) ? true : false
-    return project_form, expense_form, invoice_form
+    status_message_form = controller == 'projects/status_messages' && form_actions.index(action) ? true : false
+    return project_form, expense_form, invoice_form, status_message_form
   end
   
   def get_invoice_dates

@@ -46,4 +46,9 @@
             = render :partial => 'projects/invoices/list' 
           - else
             = render :partial => 'projects/invoices/form'
+        .status_messages
+          - if !@show_status_message_form
+            = render :partial => 'projects/status_messages/list'
+          - else
+            = render :partial => 'projects/status_messages/form'
       .clear

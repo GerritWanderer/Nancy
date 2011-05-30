@@ -113,6 +113,9 @@ div#resources form {
       input.right { width: 185px; }
       label.right { left: 90px; }
     }
+    &.file {
+      input { width: 100px; }
+    }
   }
   li.field.threeColumn {
     width: 580px;

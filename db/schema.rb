@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110527083903) do
+ActiveRecord::Schema.define(:version => 20110530134453) do
 
   create_table "configurations", :force => true do |t|
     t.string   "key"
@@ -103,6 +103,18 @@ ActiveRecord::Schema.define(:version => 20110527083903) do
 
   add_index "projects_users", ["project_id"], :name => "index_projects_users_on_project_id"
   add_index "projects_users", ["user_id"], :name => "index_projects_users_on_user_id"
+
+  create_table "status_messages", :force => true do |t|
+    t.string   "title"
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "",       :null => false
