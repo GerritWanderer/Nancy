@@ -142,8 +142,8 @@ body#report  {
   		li.time{ padding: 5px 0px; @include grid(10,0,1);	}
   		li.description{
   		  padding: 5px 0px;
-  		  color: $orangeRed;
   		  @include grid(36,0,1);
+  		  h3 { font-weight: bold; }
   		}
   		li.duration, li.sum {
   		  @include grid(10,0,0);

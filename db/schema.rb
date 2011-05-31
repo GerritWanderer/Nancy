@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110531103105) do
+ActiveRecord::Schema.define(:version => 20110531125756) do
 
   create_table "configurations", :force => true do |t|
     t.string   "key"
@@ -117,6 +117,15 @@ ActiveRecord::Schema.define(:version => 20110531103105) do
     t.datetime "updated_at"
   end
 
+  create_table "text_templates", :force => true do |t|
+    t.string   "kind"
+    t.string   "title"
+    t.integer  "parent_id"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "",       :null => false
     t.string   "encrypted_password",   :limit => 128, :default => "",       :null => false
@@ -152,7 +161,8 @@ ActiveRecord::Schema.define(:version => 20110531103105) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.float    "fee",         :default => 0.0
+    t.float    "fee",              :default => 0.0
+    t.integer  "text_template_id"
   end
 
 end

@@ -33,7 +33,9 @@
               = work.started_at.strftime('%Y-%m-%d')
               %br/
               = work.user
-            %li.description= work.description
+            %li.description
+              %h3= work.text_template.title unless work.text_template.nil?
+              = work.description
             %li.duration #{work.duration.to_f / 60} hours
             %li.sum= number_to_currency((work.duration.to_f / 60 * work.fee), :unit => @currency)
             .clear

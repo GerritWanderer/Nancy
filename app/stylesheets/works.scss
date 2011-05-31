@@ -1,5 +1,6 @@
 @import "partials/base";
 div#content {
+  div#top_form ul li.templates { margin: 70px 0px 0px 22px; }
   div#calendar {
     h2#calendarYear {
       @include grid(18,70,2);
@@ -42,33 +43,6 @@ div#content {
 		  }
     }
   }
-  
-  div#formWrapper {
-    background-color: $yellow;
-    @include roundedBottom;
-	border:5px solid $orangeRed;
-    div#createTimeWrapper {
-      @include grid(56,2);
-      dl dt.time { @include grid(5);}
-      dl dd.time { @include grid(8);
-        .dijitTimeTextBox { width: 65px !important; }
-      }
-      dl dd.description textarea {
-        height: 60px;
-        width: 500px;
-      }
-      dl dt input.submit {
-        margin-left: 645px;
-      }
-    }
-    div#selectWrapper {
-      form { padding: 0px; }
-      @include grid(28);
-      dt { @include grid(8,0,1); margin-top: 25px; text-align: right; }
-      dd { @include grid(19); margin-top: 25px; }
-      select { width: 200px;}
-    }
-  }
   div.toolbar {
     padding: 0px; 
     margin-top: 20px;
@@ -85,8 +59,8 @@ div#content {
     li.actions { @include grid(3,-2,0,0,1)}
   }
   ul.record {
-  li.duration {background-color: $darkYellow;}
-  li.customer {background-color: $darkYellow;}
+    li.duration {background-color: $darkYellow;}
+    li.customer {background-color: $darkYellow;}
   
   }
   ul.toolbar {
@@ -101,10 +75,12 @@ div#content {
     height: auto;
     background-color: $yellow;
     margin-bottom: 5px;
-	
-	li.actions img {
-	margin-top: 10px;
-	margin-left: 10px;
-	}
+  	li.actions img {
+  	  margin-top: 10px;
+  	  margin-left: 10px;
+  	}
+  	li.description h3 {
+  	  font-weight: bold;
+  	}
   }
 }

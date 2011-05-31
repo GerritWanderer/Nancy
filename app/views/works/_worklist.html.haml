@@ -7,7 +7,9 @@
     %li.duration= "#{work.duration} min."
     %li.project= link_to work.project.title, work.project
     %li.customer= link_to work.project.customer.name, work.project.customer
-    %li.description= work.description
+    %li.description
+      %h3= work.text_template.title unless work.text_template.nil?
+      = work.description
     %li.actions
       = link_to image_tag("/images/icons-nancy/delete.gif"), work_path(work, :date => work.started_at.strftime("%Y-%m-%d")), :method => :delete, :remote => false
     .clear

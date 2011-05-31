@@ -13,6 +13,7 @@ gem 'devise', :git => 'git://github.com/plataformatec/devise', :branch => 'maste
 #open bug when generating haml views: set @haml_tmp_root to haml_tmp_root in views generator.rb:90
 gem 'cancan'
 gem "paperclip"
+gem "will_paginate", "~> 3.0.pre2"
 
 gem 'netzke-core', :path => "vendor/gems/netzke-core"
 gem 'netzke-basepack', :git => "git://github.com/skozlov/netzke-basepack.git"

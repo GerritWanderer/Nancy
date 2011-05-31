@@ -1,6 +1,7 @@
 class Work < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
+  belongs_to :text_template
   before_validation :set_datetimes
   
   attr_accessor :day
@@ -21,7 +22,9 @@ class Work < ActiveRecord::Base
     fees = Configuration.find_by_key('work_fees') ? Configuration.find_by_key('work_fees').value.split(';') : [0.00]
     currency = Configuration.find_by_key('currency') ? Configuration.find_by_key('currency').value : '$'
     work = Work.new({:started_at => Time.now, :ended_at => Time.now})
-    return work, currency, fees
+    work_titles = TextTemplate.find_all_by_kind('work_title')
+    work_descriptions = TextTemplate.find_all_by_kind('work_description')
+    return work, currency, fees, work_titles, work_descriptions
   end
   
   def self.get_selected_day(params)

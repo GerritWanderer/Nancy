@@ -234,3 +234,4 @@ DEPENDENCIES
   rails (= 3.0.6)
   rspec-rails
   sqlite3-ruby
+  will_paginate (~> 3.0.pre2)

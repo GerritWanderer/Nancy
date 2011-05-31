@@ -33,7 +33,7 @@ prawn_document(:filename=>"report_#{@project.id}.pdf", :page_layout => :portrait
 
   data = @works.map do |work|
     ["#{work.started_at.strftime('%Y-%m-%d')}\n#{work.user.firstname} #{work.user.lastname}",
-      work.description,
+      work.text_template.title+"\n"+work.description,
       "#{(work.duration / 60).to_f * work.fee} h",
       number_to_currency((work.duration.to_f / 60 * work.fee), :unit => @currency)]
   end

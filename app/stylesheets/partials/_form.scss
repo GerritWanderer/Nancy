@@ -65,6 +65,10 @@ div#top_form form {
   li.twoColumn {
     width: 556px;
     input, textarea { width: 536px; }
+    select { width: 555px; }
+  }
+  li.twoColumn.half {
+    select { width: 275px; }
   }
   li.twoRow {
     height: 85px;;

@@ -21,6 +21,10 @@ Configuration.create!(:key => 'tax',
 Configuration.create!(:key => 'sender',
   :value => 'Your Company Name - Your Street Address - ZIP and City',
   :label => "Enter your sender details for your report output")
+TextTemplate.create!(:kind => 'work_title', :title => 'Blumen giessen')
+TextTemplate.create!(:kind => 'work_title', :title => 'Abstimmung mit Projektbeteiligten')
+TextTemplate.create!(:kind => 'work_description', :title => 'Lorem Ipsum ... ')
+TextTemplate.create!(:kind => 'work_description', :title => 'Dolor sit amet ...')
 
 i = 2
 3.times do
@@ -104,6 +108,7 @@ User.all.each do |user|
 	                    :duration => duration,
 	                    :description => Faker::Lorem.sentence,
 	                    :fee => [70.00,50.00,0.00][1],
+	                    :text_template_id => rand(2)+1,
 	                    :project_id => projects.shuffle.first.id,
                       :user_id => user.id)
 	  end

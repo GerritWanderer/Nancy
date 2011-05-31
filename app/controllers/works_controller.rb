@@ -44,7 +44,7 @@ class WorksController < ApplicationController
     @daySelected, @dayCalendar = Work.get_selected_day(params)
     @jumping_links = Work.selectJumpingLinks(@dayCalendar)
     @works = Work.from_day_by_user(@daySelected.strftime("%Y-%m-%d"), current_user.id)
-    @work, @currency, @fees = Work.get_basic_view_variables
+    @work, @currency, @fees, @work_titles, @work_descriptions = Work.get_basic_view_variables
     @statistics = Work.calculateStatistics(@works, current_user.hours)
   end
 end
