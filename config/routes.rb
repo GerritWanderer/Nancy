@@ -49,7 +49,12 @@ Nancy::Application.routes.draw do
         delete 'unsubscribe_user'
       end
       resources :expenses, :controller => "projects/expenses"
-      resources :invoices, :controller => "projects/invoices"
+      resources :invoices, :controller => "projects/invoices" do
+        member do
+          get 'switch'
+        end
+      end
+      resources :status_messages, :controller => "projects/status_messages"
     end
     match ':path' => 'static#show'
   end

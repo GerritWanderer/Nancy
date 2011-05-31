@@ -4,18 +4,18 @@ class Projects::InvoicesController < ApplicationController
   
   def index # see init_invoices
   end
-
+  
   def show # see init_invoices
   end
-
+  
   def new
     @invoice.started_at, @invoice.ended_at = @project.get_invoice_dates
     render 'projects/index'
   end
-
+  
   def edit # see init_invoices
   end
-
+  
   def create
     params[:invoice][:user_id] = current_user.id
     @invoice = @project.invoices.build(params[:invoice])
@@ -25,7 +25,7 @@ class Projects::InvoicesController < ApplicationController
     end
     render 'projects/index'
   end
-
+  
   def update
     begin
       @invoice = @project.invoices.find(params[:id])
@@ -47,6 +47,15 @@ class Projects::InvoicesController < ApplicationController
       redirect_to @project
   end
   
+  def switch
+    @invoice.closed = @invoice.closed == 0 ? 1 : 0
+    if @invoice.save
+      flash[:notice] = t('successes.changed', :model=> Invoice.model_name.human)
+    else
+      flash[:notice] = t('errors.changed', :model=> Invoice.model_name.human)
+    end
+    redirect_to(@project)
+  end
   
   def init_invoices
     @projects, @project, @customers, @customer, @contacts, @contact, @project_tab = Project.get_resources(params, current_user)

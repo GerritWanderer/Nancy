@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110530134453) do
+ActiveRecord::Schema.define(:version => 20110531103105) do
 
   create_table "configurations", :force => true do |t|
     t.string   "key"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20110530134453) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "closed",     :default => 0
   end
 
   create_table "locations", :force => true do |t|

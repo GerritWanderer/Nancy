@@ -1,5 +1,5 @@
 %h2= Invoice.model_name.human
-%span.actions= link_to image_tag("/images/icons-nancy/project-report.gif"), new_project_invoice_path(@project)
+%span.actions= link_to image_tag("/images/icons-nancy/expense-create.gif"), new_project_invoice_path(@project) if @project.closed == 0
 %hr.clear/
 .details
   %ul.toolbar
@@ -15,7 +15,12 @@
       %li.actions
         = link_to image_tag("/images/icons-nancy/project-report.gif"), report_range_project_path(@project.id, invoice.started_at.strftime("%Y-%m-%d"), invoice.ended_at.strftime("%Y-%m-%d"))
         = link_to image_tag("/images/icons-nancy/project-pdf.gif"), report_range_project_path(@project.id, invoice.started_at.strftime("%Y-%m-%d"), invoice.ended_at.strftime("%Y-%m-%d"))+".pdf"
-        %br/
-        = link_to image_tag("/images/icons-nancy/edit.gif"), edit_project_invoice_path(@project.id, invoice.id)
-        = link_to image_tag("/images/icons-nancy/delete.gif"), project_invoice_path(@project.id, invoice.id), :method => "delete"
+        - if @project.closed == 0
+          %br/
+          -if invoice.closed == 0
+            = link_to image_tag("/images/icons-nancy/project-open.gif"), switch_project_invoice_path(@project.id, invoice.id, :order => params[:order], :closed => params[:closed])
+            = link_to image_tag("/images/icons-nancy/edit.gif"), edit_project_invoice_path(@project.id, invoice.id)
+            = link_to image_tag("/images/icons-nancy/delete.gif"), project_invoice_path(@project.id, invoice.id), :method => "delete"
+          -else
+            = link_to image_tag("/images/icons-nancy/project-close.gif"), switch_project_invoice_path(@project.id, invoice.id, :order => params[:order], :closed => params[:closed])
       .clear

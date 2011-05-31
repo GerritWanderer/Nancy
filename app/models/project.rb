@@ -96,4 +96,18 @@ class Project < ActiveRecord::Base
     self.tax_sum = self.full_net_sum * (self.tax / 100)
     self.full_tax_sum = self.full_net_sum + self.tax_sum
   end
+  
+  def has_nothing_invoiced
+    status = false
+    unless self.invoices.empty? || self.works.empty? || !self.invoices.find_by_closed(0).nil?
+      invoice = self.invoices.order('ended_at DESC').first
+      work = self.works.order('ended_at DESC').first
+      
+      status = true if invoice.ended_at >= work.ended_at
+      unless self.expenses.last.nil?
+        status = true if invoice.ended_at >= self.expenses.last.created_at
+      end
+    end
+    status
+  end
 end
