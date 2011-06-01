@@ -25,11 +25,6 @@ class CustomersController < ApplicationController
   end
   
   def update
-    begin
-      @customer = Customer.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      redirect_to customers_path, :alert => t('errors.not_found', :model=> Customer.model_name.human)
-    end
     if @customer.update_attributes(params[:customer])
       redirect_to @customer, :notice => t('successes.updated', :model=> Customer.model_name.human)
     else
@@ -38,13 +33,13 @@ class CustomersController < ApplicationController
   end
   
   def destroy
-    flash[:notice] = t('successes.destroyed', :model=> Customer.model_name.human) if Customer.find(params[:id]).destroy
-    rescue ActiveRecord::RecordNotFound
-      flash[:notice] = t('errors.destroyed', :model=> Customer.model_name.human)
+    flash[:notice] = t('successes.destroyed', :model=> Customer.model_name.human) if @customer.destroy
+    rescue
+      flash[:alert] = t('errors.destroyed', :model => Customer.model_name.human)
     ensure
       redirect_to customers_path
   end
-
+  
   protected
   def init_customers
     @customers, @customer, @locations, @location, @contacts, @contact = Customer.get_customer_resources(params)

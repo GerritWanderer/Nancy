@@ -1,7 +1,7 @@
 class Customers::LocationsController < ApplicationController
   before_filter :authenticate_user!, :init_locations
   before_filter :render_filter, :only => [:show, :new, :edit]
-
+  
   def index # see init_locations
     redirect_to @customer
   end
@@ -11,10 +11,10 @@ class Customers::LocationsController < ApplicationController
   
   def new # see init_locations
   end
-
+  
   def edit # see init_locations
   end
-
+  
   def create
     @location = @customer.locations.build(params[:location])
     if @location.save
@@ -23,26 +23,22 @@ class Customers::LocationsController < ApplicationController
       render 'customers/index'
     end
   end
-
+  
   def update
-    begin
-      @location = @customer.locations.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      redirect_to @customer, :alert => t('errors.not_found', :model=> Location.model_name.human)
-    end
     if @location.update_attributes(params[:location])
       redirect_to [@customer, @location], :notice => t('successes.updated', :model=> Location.model_name.human)
     else
       render 'customers/index'
     end
   end
-
+  
   def destroy
-    flash[:notice] = t('successes.destroyed', :model=> Location.model_name.human) if @customer.locations.find(params[:id]).destroy
-    rescue ActiveRecord::RecordNotFound
+    if @customer.locations.delete(@location)
+      flash[:notice] = t('successes.destroyed', :model=> Location.model_name.human)
+    else
       flash[:notice] = t('errors.destroyed', :model=> Location.model_name.human)
-    ensure
-      redirect_to @customer
+    end
+    redirect_to @customer
   end
   
   protected

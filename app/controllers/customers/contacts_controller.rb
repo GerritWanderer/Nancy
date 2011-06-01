@@ -17,31 +17,27 @@ class Customers::ContactsController < ApplicationController
   def create
     @contact = @location.contacts.build(params[:contact])
     if @contact.save
-      flash.now[:notice] = t('successes.created', :model=> Contact.model_name.human)
-      @show_contact_form = false
+      redirect_to [@customer, @location], :notice => t('successes.created', :model => Contact.model_name.human)
+    else
+      render 'customers/index'
     end
-    render 'customers/index'
   end
 
   def update
-    begin
-      @contact = @location.contacts.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      redirect_to [@customer, @location], :alert => t('errors.not_found', :model=> Contact.model_name.human)
-    end
     if @contact.update_attributes(params[:contact])
-      flash.now[:notice] = t('successes.updated', :model=> Contact.model_name.human)
-      @show_contact_form = false
+      redirect_to [@customer, @location], :notice => t('successes.updated', :model => Contact.model_name.human)
+    else
+      render 'customers/index'
     end
-    render 'customers/index'
   end
 
   def destroy
-    flash[:notice] = t('successes.destroyed', :model=> Contact.model_name.human) if @location.contacts.find(params[:id]).destroy
-    rescue ActiveRecord::RecordNotFound
-      flash[:notice] = t('errors.destroyed', :model=> Contact.model_name.human)
-    ensure
-      redirect_to [@customer, @location]
+    if @location.contacts.delete(@contact)
+      flash[:notice] = t('successes.destroyed', :model => Contact.model_name.human)
+    else
+      flash[:alert] = t('errors.destroyed', :model => Contact.model_name.human)
+    end
+    redirect_to [@customer, @location]
   end
   
   protected

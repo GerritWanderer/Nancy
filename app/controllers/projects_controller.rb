@@ -34,7 +34,7 @@ class ProjectsController < ApplicationController
   
   def destroy
     flash[:notice] = t('successes.destroyed', :model => Project.model_name.human) if @project.destroy
-    rescue ActiveRecord::RecordNotFound
+    rescue
       flash[:alert] = t('errors.destroyed', :model => Project.model_name.human)
     ensure
       redirect_to projects_path
