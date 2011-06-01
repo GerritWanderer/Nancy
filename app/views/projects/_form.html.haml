@@ -7,7 +7,7 @@
           %li= msg
       .clear
   .layout
-    = form_for(@project) do |f|
+    = form_for(@project, :builder => TippedFormBuilder) do |f|
       %div{:style => "display: #{'none' unless @show_project_form}"}
         %fieldset.project
           %legend= t(:project_information)
