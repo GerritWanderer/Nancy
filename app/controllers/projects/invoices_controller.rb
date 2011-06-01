@@ -1,6 +1,7 @@
 class Projects::InvoicesController < ApplicationController
-  before_filter :init_invoices
-  before_filter :render_filter, :only => ['index', 'show', 'edit']
+  before_filter :authenticate_user!, :init_invoices
+  before_filter :render_filter, :only => [:index, :show, :edit]
+  respond_to :html, :mobile
   
   def index # see init_invoices
   end
@@ -20,18 +21,13 @@ class Projects::InvoicesController < ApplicationController
     params[:invoice][:user_id] = current_user.id
     @invoice = @project.invoices.build(params[:invoice])
     if @invoice.save
-      flash.now[:notice] = t('successes.created', :model=> Invoice.model_name.human)
-      @show_invoice_form = false
+      redirect_to @project, :notice  => t('successes.created', :model=> Invoice.model_name.human)
+    else
+      render 'projects/index'
     end
-    render 'projects/index'
   end
   
   def update
-    begin
-      @invoice = @project.invoices.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      redirect_to projects_path, :alert => t('errors.not_found', :model=> Invoice.model_name.human)
-    end
     if @invoice.update_attributes(params[:invoice])
       redirect_to @project, :notice  => t('successes.updated', :model=> Invoice.model_name.human)
     else
@@ -40,11 +36,12 @@ class Projects::InvoicesController < ApplicationController
   end
   
   def destroy
-    flash[:notice] = t('successes.destroyed', :model=> Invoice.model_name.human) if @project.invoices.find(params[:id]).destroy
-    rescue ActiveRecord::RecordNotFound
-      flash[:notice] = t('errors.destroyed', :model=> Invoice.model_name.human)
-    ensure
-      redirect_to @project
+    if @project.invoices.delete(@invoice)
+      flash[:notice] = t('successes.destroyed', :model=> Invoice.model_name.human)
+    else
+      flash[:alert] = t('errors.destroyed', :model=> Invoice.model_name.human)
+    end
+    redirect_to @project
   end
   
   def switch
@@ -52,15 +49,15 @@ class Projects::InvoicesController < ApplicationController
     if @invoice.save
       flash[:notice] = t('successes.changed', :model=> Invoice.model_name.human)
     else
-      flash[:notice] = t('errors.changed', :model=> Invoice.model_name.human)
+      flash[:alert] = t('errors.changed', :model=> Invoice.model_name.human)
     end
-    redirect_to(@project)
+    redirect_to @project
   end
   
   def init_invoices
     @projects, @project, @customers, @customer, @contacts, @contact, @project_tab = Project.get_resources(params, current_user)
     @show_project_form, @show_expense_form, @show_invoice_form, show_status_message_form = Project.get_visibility_options(params[:controller], params[:action])
-    @invoice = params[:id] ? Invoice.find(params[:id]) : Invoice.new
+    @invoice = params[:id] ? @project.invoices.find(params[:id]) : Invoice.new
     rescue ActiveRecord::RecordNotFound
       redirect_to projects_path, :alert => t('errors.not_found', :model=> Project.model_name.human)
   end

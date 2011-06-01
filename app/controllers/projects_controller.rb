@@ -1,6 +1,5 @@
 class ProjectsController < ApplicationController
   before_filter :authenticate_user!, :init_projects
-  load_and_authorize_resource :except => [:index, :show] 
   before_filter :render_filter, :only => [:index, :show, :new, :edit]
   respond_to :html, :mobile
 
@@ -19,29 +18,24 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(params[:project])
     if @project.save
-      redirect_to @project, :notice => t('successes.created', :model=> Project.model_name.human)
+      redirect_to @project, :notice => t('successes.created', :model => Project.model_name.human)
     else
       render "index"
     end
   end
 
   def update
-    begin
-      @project = Project.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      redirect_to projects_path, :alert => t('errors.not_found', :model=> Project.model_name.human)
-    end
     if @project.update_attributes(params[:project])
-      redirect_to @project, :notice => t('successes.updated', :model=> Project.model_name.human)
+      redirect_to @project, :notice => t('successes.updated', :model => Project.model_name.human)
     else
       render "index"
     end
   end
   
   def destroy
-    flash[:notice] = t('successes.destroyed', :model=> Project.model_name.human) if Project.find(params[:id]).destroy
+    flash[:notice] = t('successes.destroyed', :model => Project.model_name.human) if @project.destroy
     rescue ActiveRecord::RecordNotFound
-      flash[:notice] = t('errors.destroyed', :model=> Project.model_name.human)
+      flash[:alert] = t('errors.destroyed', :model => Project.model_name.human)
     ensure
       redirect_to projects_path
   end
@@ -57,13 +51,13 @@ class ProjectsController < ApplicationController
   end
   
   def switch
-    @project.closed = @project.closed == 0 ? 1 :0
+    @project.closed = @project.closed == 0 ? 1 : 0
     if @project.save
       flash[:notice] = t('successes.changed', :model=> Project.model_name.human)
     else
-      flash[:notice] = t('errors.changed', :model=> Project.model_name.human)
+      flash[:alert] = t('errors.changed', :model=> Project.model_name.human)
     end
-    redirect_to(@project)
+    redirect_to @project
   end
   
   def subscribe_user
@@ -72,11 +66,10 @@ class ProjectsController < ApplicationController
       if projectsUsers.save
         flash[:notice] = t('successes.created', :model=> ProjectsUsers.model_name.human)
       else
-        flash[:notice] = t('errors.created', :model=> ProjectsUsers.model_name.human)
+        flash[:alert] = t('errors.created', :model=> ProjectsUsers.model_name.human)
       end
-      redirect_to(@project)
+      redirect_to @project
     else
-      @displaySubscriberForm =  true
       @users_subscribeable = User.all - @project.users
       render "index"
     end
@@ -89,7 +82,7 @@ class ProjectsController < ApplicationController
     else
       flash[:alert] = t('errors.destroyed', :model=> ProjectsUsers.model_name.human)
     end
-    redirect_to(@project)
+    redirect_to @project
   end
   
   protected
