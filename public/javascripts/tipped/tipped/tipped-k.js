@@ -1,0 +1,1 @@
+(function(a){var b=/tipped-k.js\?g=(.*)&f=(.*)&k=(.*)/;a.$$("script[src]").each(function(a){var c=a.source.src,d=c.match(b);d&&d[1]&&d[2]&&d[3]&&window[d[1]][d[2]][d[3]]()})})(Bridge);

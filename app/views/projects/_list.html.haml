@@ -5,8 +5,8 @@
       %li= project.title
       %li= project.customer.name
       %li.date= l(project.created_at, :format => :date)
-      %li.actions
-        = image_tag("/images/icons-nancy/invoice-flag.gif") unless project.invoices.find_by_closed(0).nil?
+      %li.actions.tipped
+        = image_tag("/images/icons-nancy/invoice-flag.gif", 'data-tipped' => 'hello world') unless project.invoices.find_by_closed(0).nil?
         - if project.id == @project.id
           = link_to image_tag("/images/icons-nancy/container-close.gif"), projects_path(:order => params[:order], :closed => params[:closed])
         - else
@@ -18,7 +18,7 @@
       #resources
         .projectInformation
           %h2= t(:project_information)
-          %span.actions
+          %span.actions.tipped
             = link_to image_tag("/images/icons-nancy/project-report.gif"), report_project_path(project)
             = link_to image_tag("/images/icons-nancy/project-pdf.gif"), report_project_path(project)+".pdf"
             - if project.has_nothing_invoiced

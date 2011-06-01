@@ -1,5 +1,5 @@
 %h2= Invoice.model_name.human
-%span.actions= link_to image_tag("/images/icons-nancy/expense-create.gif"), new_project_invoice_path(@project) if @project.closed == 0
+%span.actions.tipped= link_to image_tag("/images/icons-nancy/expense-create.gif"), new_project_invoice_path(@project) if @project.closed == 0
 %hr.clear/
 .details
   %ul.toolbar
@@ -12,7 +12,7 @@
       %li.from #{l(invoice.created_at, :format => :date)} / #{current_user}
       %li.description= invoice.title
       %li.range #{l(invoice.started_at, :format => :date)} to #{l(invoice.ended_at, :format => :date)}
-      %li.actions
+      %li.actions.tipped
         = link_to image_tag("/images/icons-nancy/project-report.gif"), report_range_project_path(@project.id, invoice.started_at.strftime("%Y-%m-%d"), invoice.ended_at.strftime("%Y-%m-%d"))
         = link_to image_tag("/images/icons-nancy/project-pdf.gif"), report_range_project_path(@project.id, invoice.started_at.strftime("%Y-%m-%d"), invoice.ended_at.strftime("%Y-%m-%d"))+".pdf"
         - if @project.closed == 0

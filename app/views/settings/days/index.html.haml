@@ -18,7 +18,7 @@
     %ul.title
       %li= "Holidays this year: #{@holidays_current_year}"
       %li= "Next Holiday: #{@holiday_upcoming.first.date_from unless @holiday_upcoming.empty?}"
-      %li.actions
+      %li.actions.tipped
         - unless @holidays.nil?
           = link_to image_tag("/images/icons-nancy/container-close.gif"), settings_days_path
         - else
@@ -33,7 +33,7 @@
           %li= "Vacation available: #{user.holidays}"
           %li= "Vacation taken: #{Day.find_type_by_user_and_year(2, user.id, Date.today.year).count}"
           %li= "Days of Absence: #{Day.find_type_by_user_and_year(3, user.id, Date.today.year).count}"
-          %li.actions
+          %li.actions.tipped
             - if !@user.nil? && user.id == @user.id
               = link_to image_tag("/images/icons-nancy/container-close.gif"), settings_days_path
             - else

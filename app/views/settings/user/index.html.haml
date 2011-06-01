@@ -27,7 +27,7 @@
         %li= mail_to user.email, user.email
         %li= "#{user.hours} / #{user.holidays}"
         %li= user.role.humanize
-        %li.actions
+        %li.actions.tipped
           = link_to image_tag("/images/icons-nancy/edit.gif"), edit_settings_user_admin_path(user)
           = link_to image_tag("/images/icons-nancy/delete.gif"), settings_user_admin_path(user), :confirm => 'Are you sure?', :method => :delete
         .clear

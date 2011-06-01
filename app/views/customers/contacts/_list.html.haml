@@ -1,5 +1,5 @@
 %h2= Contact.model_name.human
-%span.actions= link_to image_tag("/images/icons-nancy/contact-create.gif"), new_customer_location_contact_path(@customer, @location, :order => params[:order])
+%span.actions.tipped= link_to image_tag("/images/icons-nancy/contact-create.gif"), new_customer_location_contact_path(@customer, @location, :order => params[:order])
 %hr.clear/
 %ul.toolbar
   %li.name= t(:customer_contact_name)
@@ -17,7 +17,7 @@
         %span= "#{Contact.human_attribute_name('fax')}: #{contact.fax}"
       -unless contact.mobile.empty?
         %span= "#{Contact.human_attribute_name('mobile')}: #{contact.mobile}"
-    %li.actions
+    %li.actions.tipped
       = mail_to contact.email, image_tag("/images/icons-nancy/mail.gif")
       = link_to image_tag("/images/icons-nancy/edit.gif"), edit_customer_location_contact_path(@customer, @location, contact, :order => params[:order]) if can? :manage, Contact
       = link_to image_tag("/images/icons-nancy/delete.gif"), customer_location_contact_path(@customer, @location, contact, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete if can? :manage, Contact

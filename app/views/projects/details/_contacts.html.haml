@@ -21,6 +21,6 @@
       = @project.contact.location.street
       %br/
       = "#{@project.contact.location.zip} #{@project.contact.location.city}"
-  %li.actions
+  %li.actions.tipped
     = mail_to @project.contact.email, image_tag("/images/icons-nancy/mail.gif")
   .clear

@@ -4,7 +4,7 @@
       %li= customer.name
       %li= customer.shortname
       %li= customer.locations.count
-      %li.actions
+      %li.actions.tipped
         - if customer.id == @customer.id
           = link_to image_tag("/images/icons-nancy/container-close.gif"), customers_path(:order => params[:order])
         - else

@@ -14,7 +14,7 @@
     %li.name= "#{user.firstname} #{user.lastname}"
     %li.fon &nbsp;
     %li.location &nbsp;
-    %li.actions
+    %li.actions.tipped
       = mail_to user.email, image_tag("/images/icons-nancy/mail.gif")
       = link_to image_tag("/images/icons-nancy/delete.gif"), unsubscribe_user_project_path(@project.id, :user_id => user.id), :method => "delete"
     .clear
