@@ -1,3 +1,0 @@
-$("div#calendar").html("<%= escape_javascript(render(:partial => "calendar")) %>");
-$("div#works").html("<%= escape_javascript(render(:partial => "worklist")) %>");
-$("input#work_day").attr("value", "<%= @daySelected.strftime("%Y-%m-%d") %>");
