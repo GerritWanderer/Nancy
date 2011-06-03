@@ -14,6 +14,9 @@
 
 /* Font styling for all skins in skins.js */
 .t_Content_black,
+.t_Content_blackForm,
+.t_Content_blackFormHalfRight,
+.t_Content_blackFormThirdRight,
 .t_Content_blackonblack,
 .t_Content_cloud,
 .t_Content_dark,
@@ -32,6 +35,9 @@
 
 /* Skins with a different font color */
 .t_Content_black,
+.t_Content_blackForm,
+.t_Content_blackFormHalfRight,
+.t_Content_blackFormThirdRight,
 .t_Content_blackonblack,
 .t_Content_dark,
 .t_Content_lavender,
@@ -46,6 +52,9 @@
 
 /* Styling links for convenience so they are visible */
 .t_Content_black a,
+.t_Content_blackForm a,
+.t_Content_blackFormHalfRight a,
+.t_Content_blackFormThirdRight a,
 .t_Content_blackonblack a,
 .t_Content_cloud a,
 .t_Content_dark a,
@@ -62,6 +71,9 @@
   border: 0;
 }
 .t_Content_black a:hover,
+.t_Content_blackForm a:hover,
+.t_Content_blackFormHalfRight a:hover,
+.t_Content_blackFormThirdRight a:hover,
 .t_Content_blackonblack a:hover,
 .t_Content_cloud a:hover,
 .t_Content_dark a:hover,
@@ -81,6 +93,12 @@
 /* Links with a different color */
 .t_Content_black a,
 .t_Content_black a:hover,
+.t_Content_blackForm a,
+.t_Content_blackFormHalfRight a,
+.t_Content_blackFormThirdRight a,
+.t_Content_blackForm a:hover,
+.t_Content_blackFormHalfRight a:hover,
+.t_Content_blackFormThirdRight a:hover,
 .t_Content_blackonblack a,
 .t_Content_blackonblack a:hover { color: #57a1d6; }
 .t_Content_dark a,

@@ -1,4 +1,4 @@
-= form_for([@project, @invoice]) do |f|
+= form_for([@project, @invoice], :builder => TippedFormBuilder) do |f|
   %fieldset
     %legend= t('helpers.form', :model=> Invoice.model_name.human)
     -if @invoice.errors.any?
@@ -9,10 +9,10 @@
             %li= msg
         .clear
     %ul
-      %li.field.threeColumn
+      %li.field.threeColumn.tipped
         = f.label :title
         = f.text_field :title
-      %li.field.half
+      %li.field.half.tipped
         = f.label :started_at, :class => 'left'
         = f.text_field :started_at, :class => 'left'
         = f.label :ended_at, :class => 'right'

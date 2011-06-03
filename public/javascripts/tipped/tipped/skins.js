@@ -30,7 +30,60 @@ Bridge.Object.extend(Tipped.Skins || (Tipped.Skins = {}), {
     },
     spinner: { color: '#fff' }
   },
-
+  'blackForm': {
+    hook: {
+      target:  'topleft',
+      tooltip: 'bottomleft'
+    },
+    containment: false,
+    offset: { x: 10, y: 16},
+    border: 0,
+    background: {
+      color: '#000',
+      opacity: 0.8
+    },
+    shadow: {
+      opacity: .14,
+      offset: { x: 1, y: 1 }
+    },
+    spinner: { color: '#fff' }
+  },
+  'blackFormHalfRight': {
+    hook: {
+      target:  'topleft',
+      tooltip: 'bottomleft'
+    },
+    containment: false,
+    offset: { x: 137, y: 16},
+    border: 0,
+    background: {
+      color: '#000',
+      opacity: 0.8
+    },
+    shadow: {
+      opacity: .14,
+      offset: { x: 1, y: 1 }
+    },
+    spinner: { color: '#fff' }
+  },
+  'blackFormThirdRight': {
+    hook: {
+      target:  'topleft',
+      tooltip: 'bottomleft'
+    },
+    containment: false,
+    offset: { x: 90, y: 16},
+    border: 0,
+    background: {
+      color: '#000',
+      opacity: 0.8
+    },
+    shadow: {
+      opacity: .14,
+      offset: { x: 1, y: 1 }
+    },
+    spinner: { color: '#fff' }
+  },
   'blackonblack': {
     border: {
       size: 1,

@@ -12,14 +12,14 @@
         %fieldset.project
           %legend= t(:project_information)
           %ul
-            %li.field.twoColumn
+            %li.field.twoColumn.tipped
               = f.label :title
               = f.text_field :title
-            %li.field.twoColumn.twoRow
+            %li.field.twoColumn.twoRow.tipped
               = f.label :description
               = f.text_area :description
             .clear
-            %li.field.half
+            %li.field.half.tipped
               = f.label :discount, :class => 'left'
               = f.text_field :discount, :class => 'left'
               = f.label :budget, :class => 'right'

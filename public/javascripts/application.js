@@ -71,4 +71,13 @@ $(document).ready(function() {
     else if (alt == 'Project-open') { msg = 'Projekt aktivieren'; }
     if (msg != '') { Tipped.show($(this).parents('.actions.tipped').attr('data-tipped', msg)); }
   });
+  $("form li.field.tipped *").mouseover(function() {
+    if ($(this).is('.right')) {
+      if ($(this).parents('.field.tipped').is('.half')) { options = "skin: 'blackFormHalfRight'"; }
+      else if ($(this).parents('.field.tipped').is('.third')) { options = "skin: 'blackFormThirdRight'"; }
+    } else {
+      options = "skin: 'blackForm'";
+    }
+    Tipped.show($(this).parents('.field.tipped').attr('data-tipped-options', options).attr('data-tipped', $(this).attr('title')));
+  });
 });

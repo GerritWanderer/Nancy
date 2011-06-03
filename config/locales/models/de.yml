@@ -38,6 +38,10 @@ de:
         description: "Beschreibung"
         discount: "Rabatt"
         created_at: "Eingetragen am"
+        title_tooltip: "Projekttitel"
+        description_tooltip: "Ausführliche Projektbeschreibung"
+        discount_tooltip: "Projekt-Rabat in %"
+        budget_tooltip: "Projekt-Budget in Stunden"
       configuration:
         key: "Schlüssel"
         value: "Wert"
@@ -46,3 +50,28 @@ de:
         created_at: "Eingetragen am"
         description: "Beschreibung"
         amount: "Summe"
+    tooltips:
+      customer:
+        shortname: "Kundenkürzel für Projektitel"
+        name: "Vollständiger Kundenname"
+        website: "Website-URL des Kunden<br />z.B.: www.google.de"
+      location:
+        name: "Name der Standort-Niederlassung"
+        street: "Straße des Standorts"
+        zip: "PLZ des STandorts"
+        city: "Ort des Standorts"
+        fon: "Telefonnummer des Standorts"
+        fax: "Faxnummer des Standorts"
+      contact:
+        title: "Titel des Ansprechpartners (Dr., Prof.)"
+        firstname: "Vorname des Ansprechpartners"
+        lastname: "Nachname des Ansprechpartners"
+        department: "Abteilung des Ansprechpartners"
+        fon: "Telefonnummer des Ansprechpartners"
+        mobile: "Alternative Nummmer des Ansprechpartners"
+        email: "E-Mail Adresse des Ansprechpartners"
+      project:
+        title: "Projekttitel<br/>z.B.: Nov_1234_Web_Admin"
+        description: "Ausführliche Projektbeschreibung"
+        discount: "Projekt-Rabat in %"
+        budget: "Projekt-Budget in Stunden"

@@ -1,4 +1,4 @@
-= form_for [@project, @status_message], :html => { :multipart => true } do |f|
+= form_for([@project, @status_message], :html => { :multipart => true }, :builder => TippedFormBuilder) do |f|
   %fieldset
     %legend= t('helpers.form', :model=> StatusMessage.model_name.human)
     -if @status_message.errors.any?
@@ -9,10 +9,10 @@
             %li= msg
         .clear
     %ul
-      %li.field.threeColumn
+      %li.field.threeColumn.tipped
         = f.label :title
         = f.text_field :title
-      %li.field.file
+      %li.field.file.tipped
         = f.file_field :attachment
   .buttons
     %ul
