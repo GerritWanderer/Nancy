@@ -1,6 +1,7 @@
-%h2= Expense.model_name.human
-%span.actions.tipped= link_to image_tag("/images/icons-nancy/expense-create.gif"), new_project_expense_path(@project) if @project.closed == 0
-%hr.clear/
+.title
+  %h2
+    = Expense.model_name.human
+    %span.actions.tipped= link_to image_tag("/images/icons-nancy/expense-create.gif"), new_project_expense_path(@project) if @project.closed == 0
 .details
   %ul.toolbar
     %li.from #{Expense.human_attribute_name('created_at')} / #{User.model_name.human}

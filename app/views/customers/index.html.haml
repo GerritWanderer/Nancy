@@ -1,4 +1,8 @@
 = render 'customers/form' if can? :manage, Customer, Location, Contact
+.filter
+  %ul
+    %li= link_to t(:customer_form_create), new_customer_path
+    .clear
 .toolbar
   %ul
     %li

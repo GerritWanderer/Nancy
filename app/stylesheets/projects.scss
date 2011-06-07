@@ -18,29 +18,18 @@ body#projects, body#expenses, body#invoices, body#status_messages {
 
 
 div.project {
-  div.projectInformation {
+  div.details {
     dl dt { font-weight: bold; }
     dl dt, dl dd { @include grid(8); }
     dl dt.description, dl dd.description { @include grid(80, 0, 14); margin-bottom: 10px; }
   }
-  ul.record { margin-top: 10px; }
   div.contacts {
-    margin-top: 20px;
     ul.record li span { display: block; }
     li.actions { text-align: right; }
     ul.toolbar, ul.record {
       li { @include grid(27) }
       li.actions { @include grid(7) }
     }
-    span.formAction {
-      text-align: right;
-      @include grid(10);
-      form {
-        display: inline;
-        padding: 0px !important;
-      }
-    }
-    h2.formAction { @include grid(58); }
   }
   div.expenses {
     ul.toolbar, ul.record {
@@ -81,29 +70,32 @@ div.project {
     border-left: 1px solid grey;
     border-right: 1px solid grey;;
     border-bottom: 1px solid grey;
-    padding: 0px 0px;
-    
-    div.projectInformation, div.contacts, div.expenses, div.invoices, div.status_messages {
-      background-color: white;
-      @include roundedTop;
-  	  @include roundedBottom;
-  	  border-top:5px solid $darkGrey;
-      padding: 8px;
-    }
-    hr { width: 100%; visibility: visible; }
-    h2, div.details span.actions, form legend {
+    padding: 0px;
+
+    div.title {
+      background-color: #F2F1DF;
+      @include rounded(6px);
+      padding: 4px 10px;
       font-weight: bold;
 	    color: $darkRed;
       font-size: 11px;
+      &.active {
+        padding-bottom: 10px;
+        border-top: 5px solid $orange;
+        border-bottom: 5px solid $orange;
+        margin-bottom: 20px;
+      }
+      h2 span.actions {
+        @include grid(10);
+        float: right;
+        text-align: right;
+      }
     }
-    h2, form legend { @include grid(78) }
-    span.actions, form a {
-      @include grid(10);
-      text-align: right;
-    }
+    div.details { padding: 10px; }
     ul.toolbar {
+      padding-bottom: 2px;
       border-bottom: 2px dotted grey;
-      li { color: grey; }
+      color: grey;
     }
   }
 }

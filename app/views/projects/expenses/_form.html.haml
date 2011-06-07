@@ -1,25 +1,28 @@
-= form_for([@project, @expense], :builder => TippedFormBuilder) do |f|
-  %fieldset
-    %legend= t('helpers.form', :model=> Expense.model_name.human)
-    -if @expense.errors.any?
-      .errors
-        %h3= t('errors.template.header', :model=> Expense.model_name.human, :count=> @expense.errors.count)
+.title.active
+  %h2= t('helpers.form', :model=> Expense.model_name.human)
+  .clear
+  = form_for([@project, @expense], :builder => TippedFormBuilder) do |f|
+    %fieldset
+      -if @expense.errors.any?
+        .errors
+          %h3= t('errors.template.header', :model=> Expense.model_name.human, :count=> @expense.errors.count)
+          %ul
+            - @expense.errors.full_messages.each do |msg|
+              %li= msg
+          .clear
+      %ul
+        %li.field.threeColumn.tipped
+          = f.label :description
+          = f.text_field :description
+        %li.field.half.tipped
+          = f.label :amount, :class => 'left'
+          = f.text_field :amount, :class => 'left'
+          = f.label :amount, :class => 'right'
+          = f.text_field :amount, :class => 'right'
+      .clear
+      .buttons
         %ul
-          - @expense.errors.full_messages.each do |msg|
-            %li= msg
+          %li.toggle= link_to 'Abbrechen', @project
+          %li.submit
+            = f.submit t('helpers.submit.submit', :model=> Expense.model_name.human), :class => "submit"
         .clear
-    %ul
-      %li.field.threeColumn.tipped
-        = f.label :description
-        = f.text_field :description
-      %li.field.half.tipped
-        = f.label :amount, :class => 'left'
-        = f.text_field :amount, :class => 'left'
-        = f.label :amount, :class => 'right'
-        = f.text_field :amount, :class => 'right'
-  .buttons
-    %ul
-      %li.toggle= link_to 'Abbrechen', @project
-      %li.submit
-        = f.submit t('helpers.submit.submit', :model=> Expense.model_name.human), :class => "submit"
-    .clear

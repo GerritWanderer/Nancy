@@ -89,16 +89,12 @@ div#navigation {
       background-color: transparent;
       color: white;
       margin-top: 18px;
-	  -moz-box-shadow: none;
+      -moz-box-shadow: none;
     }
   }
 }
 
 // ALLGEMEINE CONTENT ELEMENTE //
-a.wizardFormSwitch {
-  font-weight: bold;
-  display: block;
-}
 div#content {
   @include container;
   @include rounded;
@@ -115,14 +111,13 @@ div#content {
   div.toolbar {
     @include rounded();
     background-color: white;
-	color: $darkGrey;
-	border: 1px solid grey;
-	border-top:5px solid $darkRed;
-	/*border-bottom: 1px solid grey;*/
+    color: $darkGrey;
+    border-top:5px solid $darkRed;
+    /*border-bottom: 1px solid grey;*/
     padding: 0px 10px;
     margin-bottom: 5px;
     height: 30px;
-	font-weight: bold;
+    font-weight: bold;
     li { line-height: 30px; }
   }
     div.content{
@@ -134,8 +129,9 @@ div#content {
     padding: 10px;
   }
   ul.title#active {
-    background-color: $darkYellow;
-	color: $darkGrey;
+    background-color: $darkGrey;
+    
+	  color: white;
     @include roundedTop;
     @include roundedBottom(0px);
     font-weight: bold;

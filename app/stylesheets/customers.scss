@@ -9,61 +9,53 @@ body#customers, body#locations, body#contacts {
 }
 
 div.customer {
+  div.location, div.contacts {
+    ul.toolbar li, ul.record li { @include grid(26); }
+    ul.toolbar li.actions, ul.record li.actions { @include grid(10); }
+    li.fon span { display: block; }
+  }
+  div.pagination {
+    display: inline;
+    * { display: none; }
+    span.previous_page, a.previous_page, span.next_page, a.next_page { display: inline; }
+  }
+}
+
+div.project, div.customer {
   color: $darkGrey;
   margin-bottom: 5px;
-  
   div#resources {
     @include roundedBottom;
     background-color: white;
     border-left: 1px solid grey;
     border-right: 1px solid grey;;
     border-bottom: 1px solid grey;
-    padding: 0px 0px;
+    padding: 0px;
 
-    div.location {
-      background-color: white;
-      @include roundedTop;
-      @include roundedBottom;
-      border-top:5px solid $darkGrey;
-      padding: 8px;
-      ul.record li { @include grid(26); }
-    }
-    div.contacts {
-      @include roundedTop;
-      padding: 8px;
-	    border-top:5px solid $darkGrey;
-      ul.record {
-        li { @include grid(26); }
-        li.fon {
-          @include grid(30);
-          span { display: block; }
-        }
-        li.actions { @include grid(6);}
-      }
-      ul.toolbar {
-        color: grey;
-        border-bottom: 2px dotted grey;
-        margin-bottom: 20px;
-
-      }
-      ul.record { margin-bottom: 10px; }
-    }
-    
-    
-    h2, span.actions, form legend {
+    div.title {
+      background-color: #F2F1DF;
+      @include rounded(6px);
+      padding: 4px 10px;
       font-weight: bold;
-	  color: $darkRed;
+	    color: $darkRed;
       font-size: 11px;
+      &.active {
+        padding-bottom: 10px;
+        border-top: 5px solid $orange;
+        border-bottom: 5px solid $orange;
+        margin-bottom: 20px;
+      }
+      h2 span.actions {
+        @include grid(10);
+        float: right;
+        text-align: right;
+      }
     }
-    h2, form legend { @include grid(78) }
-    span.actions, form a {
-      @include grid(10);
-      text-align: right;
-    }
-    div.pagination {
-      display: inline;
-      * { display: none; }
-      span.previous_page, a.previous_page, span.next_page, a.next_page { display: inline; }
+    div.details { padding: 10px; }
+    ul.toolbar {
+      padding-bottom: 2px;
+      border-bottom: 2px dotted grey;
+      color: grey;
     }
   }
 }

@@ -1,24 +1,26 @@
-%h2= Contact.model_name.human
-%span.actions.tipped= link_to image_tag("/images/icons-nancy/contact-create.gif"), new_customer_location_contact_path(@customer, @location, :order => params[:order])
-%hr.clear/
-%ul.toolbar
-  %li.name= t(:customer_contact_name)
-  %li= Contact.human_attribute_name('department')
-  %li.fon= t(:customer_contact_contact)
-  .clear
-- @contacts.each do |contact|
-  %ul.record
-    %li.name= "#{contact.salutation} #{contact.title} #{contact.firstname} #{contact.lastname}"
-    %li= contact.department
-    %li.fon
-      -unless contact.fon.empty?
-        %span= "#{Contact.human_attribute_name('fon')}: #{contact.fon}"
-      -unless contact.fax.empty?
-        %span= "#{Contact.human_attribute_name('fax')}: #{contact.fax}"
-      -unless contact.mobile.empty?
-        %span= "#{Contact.human_attribute_name('mobile')}: #{contact.mobile}"
-    %li.actions.tipped
-      = mail_to contact.email, image_tag("/images/icons-nancy/mail.gif")
-      = link_to image_tag("/images/icons-nancy/edit.gif"), edit_customer_location_contact_path(@customer, @location, contact, :order => params[:order]) if can? :manage, Contact
-      = link_to image_tag("/images/icons-nancy/delete.gif"), customer_location_contact_path(@customer, @location, contact, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete if can? :manage, Contact
+.title
+  %h2
+    = Contact.model_name.human
+    %span.actions.tipped= link_to image_tag("/images/icons-nancy/contact-create.gif"), new_customer_location_contact_path(@customer, @location, :order => params[:order])
+.details
+  %ul.toolbar
+    %li.name= t(:customer_contact_name)
+    %li= Contact.human_attribute_name('department')
+    %li.fon= t(:customer_contact_contact)
     .clear
+  - @contacts.each do |contact|
+    %ul.record
+      %li.name= "#{contact.salutation} #{contact.title} #{contact.firstname} #{contact.lastname}"
+      %li= contact.department
+      %li.fon
+        -unless contact.fon.empty?
+          %span= "#{Contact.human_attribute_name('fon')}: #{contact.fon}"
+        -unless contact.fax.empty?
+          %span= "#{Contact.human_attribute_name('fax')}: #{contact.fax}"
+        -unless contact.mobile.empty?
+          %span= "#{Contact.human_attribute_name('mobile')}: #{contact.mobile}"
+      %li.actions.tipped
+        = mail_to contact.email, image_tag("/images/icons-nancy/mail.gif")
+        = link_to image_tag("/images/icons-nancy/edit.gif"), edit_customer_location_contact_path(@customer, @location, contact, :order => params[:order]) if can? :manage, Contact
+        = link_to image_tag("/images/icons-nancy/delete.gif"), customer_location_contact_path(@customer, @location, contact, :order => params[:order]), :confirm => 'Are you sure?', :method => :delete if can? :manage, Contact
+      .clear

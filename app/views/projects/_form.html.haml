@@ -1,5 +1,7 @@
-#top_form
-  -if @project.errors.any?
+#top_form{:style => "display: #{'none' unless @show_project_form}"}
+  .title
+    %h3= t(:project_form_create)
+  - if @project.errors.any?
     .errors
       %h3= t('errors.template.header', :model=> Project.model_name.human, :count=> @project.errors.count)
       %ul
@@ -8,25 +10,24 @@
       .clear
   .layout
     = form_for(@project, :builder => TippedFormBuilder) do |f|
-      %div{:style => "display: #{'none' unless @show_project_form}"}
-        %fieldset.project
-          %legend= t(:project_information)
-          %ul
-            %li.field.twoColumn.tipped
-              = f.label :title
-              = f.text_field :title
-            %li.field.twoColumn.twoRow.tipped
-              = f.label :description
-              = f.text_area :description
-            .clear
-            %li.field.half.tipped
-              = f.label :discount, :class => 'left'
-              = f.text_field :discount, :class => 'left'
-              = f.label :budget, :class => 'right'
-              = f.text_field :budget, :class => 'right'
-            %li.field.half
-              %input.left
-              %input.right
+      %fieldset.project
+        %legend= t(:project_information)
+        %ul
+          %li.field.twoColumn.tipped
+            = f.label :title
+            = f.text_field :title
+          %li.field.twoColumn.twoRow.tipped
+            = f.label :description
+            = f.text_area :description
+          .clear
+          %li.field.half.tipped
+            = f.label :discount, :class => 'left'
+            = f.text_field :discount, :class => 'left'
+            = f.label :budget, :class => 'right'
+            = f.text_field :budget, :class => 'right'
+          %li.field.half
+            %input.left
+            %input.right
       .buttons
         %ul
           %li.toggle

@@ -85,6 +85,7 @@ div#resources form {
     margin: 6px 4px 6px 0px;
     padding: 5px;
     &:last-child { margin-right: 0px; };
+    &:nth-child(3), &:nth-child(6), &:nth-child(9) { margin-right: 0px; };
     
     input, textarea {
       @include border-radius(6px);
@@ -122,17 +123,13 @@ div#resources form {
     }
   }
   li.field.threeColumn {
-    width: 580px;
-    input, textarea { width: 560px; }
+    width: 575px;
+    input, textarea { width: 555px; }
   }
   div.buttons {
-    @include border-radius(6px);
-    border-top: 5px solid $orange;
-    padding: 10px;
-    background-color: #3A4244;
     li { @include column(26); }
     li.toggle {
-      margin-right: 342px;
+      margin-right: 360px;
       a {
         @include fancy-button(#ccc, 12px);
         &.active { @include fancy-button($orange, 12px); }
@@ -151,7 +148,7 @@ div#top_form{
   background-color: $yellow;
   border: 1px solid #3A4244;
   margin-bottom: 25px;
-  .layout {
+  div.layout {
     position: relative;
     div.right_column {
       position: absolute;
@@ -166,11 +163,19 @@ div#top_form{
     font-weight: bold;
     padding: 10px;
   }
-  
+  div.title {
+    border-bottom: 5px solid $orange;
+    padding: 10px;
+    background-color: #3A4244;
+    h3 {
+      color: white;
+      font-size: 14px;
+    }
+  }
   form {
     div.full_column, div.right_column { padding: 10px 0px 10px 10px !important; }
     div.buttons {
-      @include border-radius(6px);
+      @include border-bottom-radius(6px);
       border-top: 5px solid $orange;
       padding: 10px;
       background-color: #3A4244;
@@ -195,9 +200,8 @@ div#top_form{
 /* DISPLAY ERRORS */
 div#top_form {
   div.errors {
-    @include background-image(linear-gradient(center top, #fc7878,  #fc3a3a));
-    @include border-top-radius(6px);
-    padding: 20px;
+    @include background-image(linear-gradient(center top, $orange,  #fc3a3a));
+    padding: 10px;
     h3 {
       color: white;
       font-size: 15px;
@@ -214,7 +218,7 @@ div#top_form {
     }
   }
   form li.field div.field_with_errors {
-    input, textarea { @include background-image(linear-gradient(center top, #fc7878,  #fc3a3a)); }
+    input, textarea { @include background-image(linear-gradient(center top, $orange,  #fc3a3a)); }
     input, textarea, label { color: white; }
   }
 }

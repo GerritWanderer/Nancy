@@ -16,9 +16,9 @@
       #resources
         .location
           - if !@show_location_form
-            = render :partial => 'customers/locations/show' 
+            = render :partial => 'customers/location/show' 
           - else
-            = render :partial => 'customers/locations/form'
+            = render :partial => 'customers/location/form'
         - if !@location.new_record?
           .contacts
             - if @show_contact_form

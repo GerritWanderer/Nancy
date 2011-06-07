@@ -1,0 +1,35 @@
+.title.active
+  %h2= t('helpers.form', :model=> Location.model_name.human)
+  .clear
+  = form_for([@customer, @location]) do |f|
+    %fieldset
+      -if @location.errors.any?
+        .errors
+          %h3= t('errors.template.header', :model=> Location.model_name.human, :count=> @location.errors.count)
+          %ul
+            - @location.errors.full_messages.each do |msg|
+              %li= msg
+          .clear
+      %ul
+        %li.field.half
+          = f.label :name, :class => 'left'
+          = f.text_field :name, :class => 'left'
+          = f.label :street, :class => 'right'
+          = f.text_field :street, :class => 'right'
+        %li.field.third
+          = f.label :zip
+          = f.text_field :zip, :class => 'left'
+          = f.label :city, :class => 'right'
+          = f.text_field :city, :class => 'right'
+        %li.field.half
+          = f.label :fon, :class => 'left'
+          = f.text_field :fon, :class => 'left'
+          = f.label :fax, :class => 'right'
+          = f.text_field :fax, :class => 'right'
+    .buttons
+      %ul
+        %li.toggle= link_to 'Abbrechen', [@customer, @location]
+        %li.submit
+          = f.hidden_field :customer_id, :value => @customer.id
+          = f.submit t('helpers.submit.submit', :model=> Location.model_name.human), :class => "submit"
+      .clear

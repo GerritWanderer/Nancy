@@ -1,0 +1,22 @@
+.title
+  %h2
+    = t(:project_information)
+    %span.actions.tipped
+      = link_to image_tag("/images/icons-nancy/project-report.gif"), report_project_path(@project)
+      = link_to image_tag("/images/icons-nancy/project-pdf.gif"), report_project_path(@project)+".pdf"
+      - if @project.has_nothing_invoiced
+        - if @project.closed == 0
+          = link_to image_tag("/images/icons-nancy/project-open.gif"), switch_project_path(@project, :order => params[:order], :closed => params[:closed]) if can? :manage, Project
+        - else
+          = link_to image_tag("/images/icons-nancy/project-close.gif"), switch_project_path(@project, :order => params[:order], :closed => params[:closed]) if can? :manage, Project
+      - else
+        = image_tag("/images/icons-nancy/project-inactive.gif")
+.details
+  %dl
+    %dt.description= Project.human_attribute_name('description')
+    %dd.description= @project.description
+    %dt= Project.human_attribute_name('budget')
+    %dd= "#{@project.budget} (h)"
+    %dt= Project.human_attribute_name('discount')
+    %dd= "#{@project.discount} %"
+  .clear
