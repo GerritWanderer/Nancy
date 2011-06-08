@@ -3,12 +3,12 @@
 %ul#calendarWeek
   -7.times do
     %li{:class=>"wday#{@dayCalendar.wday}", :id => "#{'active' if @daySelected == @dayCalendar}" }
-      = link_to l(@dayCalendar, :format => :day_with_date), works_path(:date => @dayCalendar.strftime("%Y-%m-%d")), :remote => true
+      = link_to l(@dayCalendar, :format => :day_with_date), date_works_path(:date => @dayCalendar.strftime("%Y-%m-%d")), :remote => true
       
     -@dayCalendar = @dayCalendar.+(1)
   %li#calendarNavigation
-    = link_to image_tag("/images/icons-nancy/calendarweek-prev.gif"), works_path(:date => @jumping_links.[]("prev")), :remote => true
+    = link_to image_tag("/images/icons-nancy/calendarweek-prev.gif"), date_works_path(:date => @jumping_links.[]("prev")), :remote => true
     %span #{t :works_calendarweek} #{@daySelected.-(1).cweek}
-    = link_to image_tag("/images/icons-nancy/calendarweek-next.gif"), works_path(:date => @jumping_links.[]("next")), :remote => true
+    = link_to image_tag("/images/icons-nancy/calendarweek-next.gif"), date_works_path(:date => @jumping_links.[]("next")), :remote => true
     %input.datepicker{:type => "text"}
   .clear

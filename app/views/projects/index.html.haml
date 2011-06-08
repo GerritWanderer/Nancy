@@ -4,7 +4,7 @@
     %li{:class => "#{'active' if @project_tab == 'subscribed'}"}= link_to t(:project_my), projects_path(:order => params[:order])
     %li{:class => "#{'active' if @project_tab == 'active'}"}= link_to t(:project_active), projects_path(:order => params[:order], :closed => 0)
     %li{:class => "#{'active' if @project_tab == 'closed'}"}= link_to t(:project_closed), projects_path(:order => params[:order], :closed => 1)
-    %li= link_to t(:project_form_create), new_project_path
+    %li.right= link_to t(:project_form_create), new_project_path
     .clear
 .toolbar
   %ul

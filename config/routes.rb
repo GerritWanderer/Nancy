@@ -26,6 +26,7 @@ Nancy::Application.routes.draw do
     resources :works do
       collection do
         post 'switch_customer'
+        match ':date' => "works#index", :as => :date
       end
     end
     
@@ -56,7 +57,7 @@ Nancy::Application.routes.draw do
       end
       resources :status_messages, :controller => "projects/status_messages"
     end
-    match ':path' => 'static#show'
+    # match ':path' => 'static#show'
   end
   
   netzke

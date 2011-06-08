@@ -1,3 +1,3 @@
 = form_tag switch_customer_works_path, :method => :post, :remote => true do
-  = select_tag(:customer_id, options_for_select(@customers.map {|c| [c.name, c.id]}, params[:customer_id].to_i), {:onchange => "this.form.customerSubmit.click();"})
+  = select_tag(:customer_id, options_for_select(@customers.map {|c| [c.name, c.id]}, params[:customer_id].to_i), {:onchange => "this.form.customerSubmit.click();", :title => "Kunde wählen"})
   %input.hide_nojs{:type=>"submit", :value=>"submit", :name=>"customerSubmit"}

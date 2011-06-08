@@ -1,19 +1,10 @@
 @import "partials/base";
 
-body#customers, body#locations, body#contacts { 
-  div.toolbar li,  ul.title li { @include grid(26); }
-  ul.title li.actions {
-    @include grid(10);
-    text-align: right;
-  }
-}
+body#customers, body#locations, body#contacts { div.toolbar li { @include grid(26); } }
 
 div.customer {
-  div.location, div.contacts {
-    ul.toolbar li, ul.record li { @include grid(26); }
-    ul.toolbar li.actions, ul.record li.actions { @include grid(10); }
-    li.fon span { display: block; }
-  }
+  ul.title li, ul.toolbar li, ul.record li { @include grid(26); }
+  ul li.fon span { display: block; }
   div.pagination {
     display: inline;
     * { display: none; }
@@ -21,9 +12,16 @@ div.customer {
   }
 }
 
+
+
+div#content h2 span.actions, div#content ul li.actions {
+  @include grid(10);
+  text-align: right;
+}
 div.project, div.customer {
   color: $darkGrey;
   margin-bottom: 5px;
+  
   div#resources {
     @include roundedBottom;
     background-color: white;
@@ -45,11 +43,7 @@ div.project, div.customer {
         border-bottom: 5px solid $orange;
         margin-bottom: 20px;
       }
-      h2 span.actions {
-        @include grid(10);
-        float: right;
-        text-align: right;
-      }
+      h2 span.actions { float: right; }
     }
     div.details { padding: 10px; }
     ul.toolbar {

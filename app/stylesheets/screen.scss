@@ -33,63 +33,36 @@ div#navigation {
   ul {
     padding-top: 9px;
     li {
-	    -moz-box-shadow: inset 1px 3px 2px #bfbbbb;
       @include grid(15,0,1);
       @include roundedTop;
-	    border-bottom: 1px solid black;
-      a { color: $darkGrey; font-weight: bold;}
+      border-bottom: 1px solid black;
+      a { color: $darkGrey; font-weight: bold; }
       line-height: 40px;
       font-size: 15px;
       text-align: center;
       background-color: $yellow;
-	  a:hover {color: $darkRed;}
-	  
+      a:hover {color: $darkRed;}
     }
     li.active {
-	  margin-top:0px;
+      margin-top:0px;
       background-color: $yellow;
-	    border-color: $yellow;
+      border-color: $yellow;
       a { color: $darkRed; font-weight: bold;}
-	
     }
-    li.small, li.language {
-      @include grid(8,0,1);
-      font-size: 12px;
-      line-height: 18px;
-      margin-top: 22px;
-	    border: none;
-	    margin-right:2px;
-	    font-weight: normal;
-    }
-	 li.small.active { margin-top: 22.5px; }
-	 li.language {
-	   background: none !important;
-     a#language-button {
-       -moz-box-shadow: inset 1px 3px 2px #bfbbbb;
-       background: none;
-       background-color: $yellow;
-       font-weight: normal;
-       font-size: 13px;
-       width: 115px !important;
-       height: 18px;
-       margin-top: -6px;
-     }
-     .ui-selectmenu-status {
-       line-height: 10px;
-       font-family: verdana,arial,helvetica,sans-serif;
-       font-size: 12px;
-       font-weight: bold;
-     }
-   }
-    li.user {
-      @include grid(15,0,1);
-      border: none;
-      font-size: 12px;
-      line-height: 22px;
+    li.small {
       background-color: transparent;
+      width: auto;
       color: white;
-      margin-top: 18px;
-      -moz-box-shadow: none;
+      a { color: white; font-weight: normal; }
+      font-size: 13px;
+      line-height: 16px;
+      border: none;
+      margin: 15px 16px 0px 0px;
+    }
+    li.right {
+      margin-top: 0px;
+      text-align: right;
+      float: right;
     }
   }
 }
@@ -144,16 +117,13 @@ div.filter {
   li {
     @include grid(15,0,1);
     @include roundedTop;
-	background-color: $yellow;
+    background-color: $yellow;
     line-height: 30px;
     text-align: center;
-	a {color: $darkGrey;}
-	
+    a {color: $darkGrey;}
+    &.right { float: right; }
+    &.active, &.right { background-color: $darkRed; a {color: white;}}
   }
- 
- li.active { background-color: $darkRed; a {color: white;}}
-  
- 
 }
 
 

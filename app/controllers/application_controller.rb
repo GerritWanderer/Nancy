@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :prepare_for_mobile
   before_filter :set_locale
+  before_filter :set_admin_flag
   layout :layout_by_resource
   include ApplicationHelper
   
@@ -12,7 +13,10 @@ class ApplicationController < ActionController::Base
   
   def set_locale
     I18n.locale = params[:locale]
-  end  
+  end
+  def set_admin_flag
+    session[:admin] = true if current_user && current_user.role == "admin" && session[:admin].nil?
+  end
   def default_url_options(options={})
     { :locale => I18n.locale }
   end

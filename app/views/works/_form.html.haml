@@ -7,19 +7,20 @@
           %li= msg
       .clear
   .layout
-    = form_for(@work) do |f|
+    = form_for(@work, :builder => TippedFormBuilder) do |f|
       %fieldset.project
         %ul
-          %li.field.half
+          %li.field.half.tipped
             = f.text_field :started_at, :value => @work.started_at.strftime('%H:%M'),:size => 4, :class => 'left'
             = f.text_field :ended_at, :value => @work.ended_at.strftime('%H:%M'), :size => 4, :class => 'right'
-          %li.field
+          %li.field.tipped
             = select_tag("work[fee]", options_for_select(@fees.map {|f| ["#{t :works_charge_with} #{number_to_currency(f, :unit => @currency)}", "#{f}"]}))
-          %li.field.twoColumn.twoRow
+          %li.field.twoColumn.twoRow.tipped
             = f.label :description
             = f.text_area :description
-          %li.field.twoColumn.half
+          %li.field.tipped.templates
             = select_tag("work[text_template_id]", options_for_select(@work_titles.map {|t| [t.title, t.id]}))
+          %li.field.twoColumn.tipped
             = select_tag("work[text_template_id]", options_for_select(@work_descriptions.map {|t| t.title}), {:onchange => "$('textarea#work_description').text(this.value);"})
       .buttons
         %ul
@@ -32,9 +33,9 @@
     .right_column
       = form_tag new_project_path, :method => :get, :remote => false do
         %ul
-          %li.field
+          %li.field.tipped
             = render :partial => "customerlist"
       = form_tag new_project_path, :method => :get, :remote => false do
         %ul
-          %li.field
+          %li.field.tipped
             = render :partial => "projectlist"

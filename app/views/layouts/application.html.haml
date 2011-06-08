@@ -2,7 +2,7 @@
 %html{ :xmlns => "http://www.w3.org/1999/xhtml", :lang => "en", "xml:lang" => "en", :class => "no-js"}
   %head
     %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}
-    %title Nancy / #{controller.controller_name} / #{t :hello}
+    %title Nancy / #{controller.controller_name}
     = stylesheet_link_tag("compiled/screen.css")
     = stylesheet_link_tag("compiled/#{controller.controller_name}") if File.exist?("tmp/stylesheets/compiled/#{controller.controller_name}.css")
     %script{:src => "http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojo/dojo.xd.js", "djConfig" => "parseOnLoad: true"}

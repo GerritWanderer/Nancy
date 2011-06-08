@@ -1,4 +1,4 @@
 = form_tag works_path, :method => :get, :remote => true, :id => "projects", :name => "projects" do
-  = select_tag(:project_id, options_for_select(@projects.map {|p| [p.title, p.id]}, params[:project_id].to_i), {:onchange => "$('input#work_project_id').val(this.value);"})
+  = select_tag(:project_id, options_for_select(@projects.map {|p| [p.title, p.id]}, params[:project_id].to_i), {:onchange => "$('input#work_project_id').val(this.value);", :title => "Projekt wählen"})
   %input.hide_nojs{:type=>"hidden", :value=>params[:customer_id], :name => "customer_id"}
   %input.hide_nojs{:type=>"submit", :value=>"submit"}

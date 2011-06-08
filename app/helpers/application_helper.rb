@@ -8,17 +8,24 @@ module ApplicationHelper
     navigation += link_to t(:top_projects), projects_path
     navigation += "</li>\n<li class='small #{'active' if controller == 'registrations'}'>"
     navigation += link_to t(:top_profile), edit_user_registration_path
-    if current_user.role == "admin"
+    if current_user.role == "admin" || session[:admin]
       navigation += "</li>\n<li class='small #{'active' if controller == 'days' or controller == 'user'}'>"
       navigation += link_to t(:top_settings), settings_user_admin_index_path
     end
-    navigation += "</li>\n<li class='small'>"
-    navigation += link_to t(:top_logout), destroy_user_session_path 
-    navigation += "</li>\n<li class='language'><select name='language' id='language'>"
-    {:en=>"English", :de=>"German"}.each {|key, value|
-        navigation += "<option value='/#{key}/works' #{'selected=\'selected\'' if params[:locale] == key.to_s} class='flag' data-flagicon='/images/icons-nancy/flag-#{key}.gif'>#{value}</option>"
-    }
-    navigation += "</select></li>\n</ul>\n"
+    navigation += "</li>\n<li class='small right'>"
+    navigation += link_to image_tag("/images/icons-nancy/flag-de.gif"), works_path('locale' => 'de')
+    navigation += "<br />"
+    navigation += link_to image_tag("/images/icons-nancy/flag-en.gif"), works_path('locale' => 'en')
+    navigation += "</li>\n<li class='small right'>"
+    if current_user.role == "admin" || session[:admin]
+      navigation += "#{switch_user_select}<br />"
+    else
+      navigation += "#{current_user}<br />"
+    end
+    navigation += link_to t(:top_logout), destroy_user_session_path
+    navigation += "</li>\n</ul>\n"
     raw(navigation)
   end
 end
+
+

@@ -193,6 +193,7 @@ GEM
     sqlite3 (1.3.3)
     sqlite3-ruby (1.3.3)
       sqlite3 (>= 1.3.3)
+    switch_user (0.6.0)
     term-ansicolor (1.0.5)
     thor (0.14.6)
     treetop (1.4.9)
@@ -234,4 +235,5 @@ DEPENDENCIES
   rails (= 3.0.6)
   rspec-rails
   sqlite3-ruby
+  switch_user
   will_paginate (~> 3.0.pre2)
