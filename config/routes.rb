@@ -58,6 +58,7 @@ Nancy::Application.routes.draw do
       resources :status_messages, :controller => "projects/status_messages"
     end
     # match ':path' => 'static#show'
+    resources :profiles
   end
   
   netzke

@@ -4,7 +4,6 @@
   -7.times do
     %li{:class=>"wday#{@dayCalendar.wday}", :id => "#{'active' if @daySelected == @dayCalendar}" }
       = link_to l(@dayCalendar, :format => :day_with_date), date_works_path(:date => @dayCalendar.strftime("%Y-%m-%d")), :remote => true
-      
     -@dayCalendar = @dayCalendar.+(1)
   %li#calendarNavigation
     = link_to image_tag("/images/icons-nancy/calendarweek-prev.gif"), date_works_path(:date => @jumping_links.[]("prev")), :remote => true

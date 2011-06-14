@@ -1,0 +1,17 @@
+- (@works.first.started_at.year..@works.last.started_at.year).each do |year|
+  .year
+    %ul.title#active
+      %li.year= year
+      %li.sum Stunden
+      .clear
+    %h3
+    - (1..12).each do |month|
+      %ul.month
+        %li.month= l(Date.civil(year,month,1), :format => :only_month)
+        - unless current_user.works.in_range("#{year}-#{"%02d" % month}-01", "#{year}-#{"%02d" % month}-31").empty?
+          %li.days
+            #{Day.working_days_of_month(year, month).length} Werktage /
+            #{current_user.days.by_type_within_month(2,year, month).length}x Urlaub /
+            #{current_user.days.by_type_within_month(3,year, month).length}x Krankheit
+          %li.sum= (current_user.works.in_range("#{year}-#{"%02d" % month}-01", "#{year}-#{"%02d" % month}-31").sum("duration").to_f / 60) - ((Day.working_days_of_month(year, month).length - current_user.days.within_month(year, month).length - Day.by_type_within_month(1, year, month).length) * current_user.hours)
+        .clear

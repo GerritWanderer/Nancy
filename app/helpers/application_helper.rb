@@ -7,7 +7,7 @@ module ApplicationHelper
     navigation += "</li>\n<li class='#{'active' if controller == 'projects'}'>"
     navigation += link_to t(:top_projects), projects_path
     navigation += "</li>\n<li class='small #{'active' if controller == 'registrations'}'>"
-    navigation += link_to t(:top_profile), edit_user_registration_path
+    navigation += link_to t(:top_profile), profiles_path
     if current_user.role == "admin" || session[:admin]
       navigation += "</li>\n<li class='small #{'active' if controller == 'days' or controller == 'user'}'>"
       navigation += link_to t(:top_settings), settings_user_admin_index_path

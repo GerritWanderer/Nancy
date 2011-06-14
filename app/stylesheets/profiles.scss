@@ -1,0 +1,20 @@
+@import "partials/base";
+
+div.year{
+  @include grid(44,0,2);
+  height: 440px;
+  margin-bottom: 20px;
+  background-color: $yellow;
+  &:nth-child(even) { margin-right: 0px; }
+  ul.title, ul.month  {
+    li.year { @include grid(30); }
+    li.sum { @include grid(12);}
+  }
+  ul.month {
+    padding: 7px 10px;
+    border-bottom: 1px dotted silver;
+    li.month { @include grid(4); }
+    li.days { @include grid(26); }
+    li.sum { @include grid(12);}
+  }
+}

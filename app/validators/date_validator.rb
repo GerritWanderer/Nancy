@@ -3,7 +3,7 @@ class DateValidator < ActiveModel::EachValidator
 		begin
 			Date.parse(value.to_s)
 		rescue ArgumentError
-			record.errors[attribute] << (options[:message] || t('errors.messages.invalid'))
+			record.errors[attribute] << (options[:message] || I18n.t('errors.messages.invalid'))
 		end
 	end
 end
