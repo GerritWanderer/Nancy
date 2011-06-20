@@ -21,10 +21,9 @@ class Work < ActiveRecord::Base
   def self.get_basic_view_variables
     fees = Configuration.find_by_key('work_fees') ? Configuration.find_by_key('work_fees').value.split(';') : [0.00]
     currency = Configuration.find_by_key('currency') ? Configuration.find_by_key('currency').value : '$'
-    work = Work.new({:started_at => Time.now, :ended_at => Time.now})
     work_titles = TextTemplate.find_all_by_kind('work_title')
     work_descriptions = TextTemplate.find_all_by_kind('work_description')
-    return work, currency, fees, work_titles, work_descriptions
+    return currency, fees, work_titles, work_descriptions
   end
   
   def self.get_selected_day(params)

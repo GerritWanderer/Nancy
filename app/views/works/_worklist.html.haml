@@ -12,6 +12,7 @@
       = work.description
     %li.actions.tipped
       = link_to image_tag("/images/icons-nancy/delete.gif"), work_path(work, :date => work.started_at.strftime("%Y-%m-%d")), :method => :delete, :remote => false
+      = link_to image_tag("/images/icons-nancy/edit.gif"), edit_work_path(work, :date => work.started_at.strftime("%Y-%m-%d"))
     .clear
 :javascript
   jQuery.each($("div#works ul"), function() { $(this).find('li').height($(this).height()); });

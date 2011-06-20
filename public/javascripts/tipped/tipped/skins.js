@@ -54,7 +54,7 @@ Bridge.Object.extend(Tipped.Skins || (Tipped.Skins = {}), {
       tooltip: 'bottomleft'
     },
     containment: false,
-    offset: { x: 137, y: 16},
+    offset: { x: 137, y: 10},
     border: 0,
     background: {
       color: '#000',

@@ -26,18 +26,6 @@ TextTemplate.create!(:kind => 'work_title', :title => 'Abstimmung mit Projektbet
 TextTemplate.create!(:kind => 'work_description', :title => 'Lorem Ipsum ... ')
 TextTemplate.create!(:kind => 'work_description', :title => 'Dolor sit amet ...')
 
-i = 2
-3.times do
-	user = User.create!(:firstname => Faker::Name.first_name,
-	             :lastname => Faker::Name.last_name,
-	             :email => "user#{i}@example.org",
-	             :password => "development")
-	user.sign_in_count = 1
-	user.confirmed_at = "2011-01-18 12:10:00"
-	user.save
-	i += 1
-end
-
 6.times do
   new_customer = Customer.create!(:name => Faker::Company.name,
                                   :shortname => Faker::Company.name,
@@ -76,27 +64,17 @@ end
                   :closed => rand(2), 
                   :customer_id => customer.id,
                   :contact_id => contact.id)
-                  
-  users = User.all.shuffle
-  i = 0
-  (rand(2)+1).times do
-    ProjectsUsers.create!(:user_id => users[i].id, :project_id => project.id)
-    i += 1
-  end
-  
-  (rand(3)).times do
-    user = User.all.shuffle.first
-    Expense.create!(:user_id => user.id,
-                    :project_id => project.id,
-                    :description => Faker::Lorem.sentence,
-                    :amount => (rand(199) + (rand(99).to_f / 100)).to_f)
-  end
+   ProjectsUsers.create!(:user_id => user.id, :project_id => project.id)
+   Expense.create!(:user_id => user.id,
+                  :project_id => project.id,
+                  :description => Faker::Lorem.sentence,
+                  :amount => (rand(199) + (rand(99).to_f / 100)).to_f)
 end
 
 projects = Project.find_all_by_closed(false)
 User.all.each do |user|
-	workday = Date.today.-(Date.today.cwday - 1)
-	5.times do
+	workday = Date.today.-(Date.today.cwday - 1).-365
+	600.times do
 	  timeStart = Time.parse("#{workday.strftime("%Y-%m-%d")} 08:00")
 	  timeEnd = Time.parse("#{workday.strftime("%Y-%m-%d")} 08:45")
 	  8.times do

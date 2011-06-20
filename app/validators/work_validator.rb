@@ -10,10 +10,10 @@ class WorkValidator < ActiveModel::Validator
   end
   def no_other_record_exist(record)
     # 15:00 to 15:30 // 14:45 to 15:15
-    no_other_record_exist = Work.where(:user_id => record.user_id).where("started_at > '#{record.started_at}' AND started_at < '#{record.ended_at}'").empty? ? true : false
+    no_other_record_exist = Work.where(:user_id => record.user_id).where("started_at > '#{record.started_at}' AND started_at < '#{record.ended_at}' AND id != #{record.id}").empty? ? true : false
     if no_other_record_exist
       # 15:00 to 15:45 // 15:15 to 15:30
-      no_other_record_exist = Work.where(:user_id => record.user_id).where("started_at < '#{record.ended_at}' AND ended_at > '#{record.ended_at}'").empty? ? true : false
+      no_other_record_exist = Work.where(:user_id => record.user_id).where("started_at < '#{record.ended_at}' AND ended_at > '#{record.ended_at}' AND id != #{record.id}").empty? ? true : false
       if no_other_record_exist
         # 15:00 to 15:30 // 15:15 to 15:45
         # no_other_record_exist = Work.where(:user_id => record.user_id).where("started_at < '#{record.started_at.strftime('%Y-%m-%d %H:%M')}' AND ended_at < '#{record.ended_at.strftime('%Y-%m-%d %H:%M:00')}'").empty? ? true : false

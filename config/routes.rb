@@ -26,7 +26,7 @@ Nancy::Application.routes.draw do
     resources :works do
       collection do
         post 'switch_customer'
-        match ':date' => "works#index", :as => :date
+        match 'date/:date' => "works#index", :as => :date
       end
     end
     
